@@ -82,7 +82,7 @@ Goodbye,
 Norbert
 
 BTW. What I find much more fascinating than above described cruelsome
- GUI, is the engine with it's database agnostic API, usable from any
+ GUI, is the __engine__ with it's database agnostic API, usable from any
  other .NET program.
 
 So if the customer for your latest cool business application is asking
@@ -91,8 +91,6 @@ So if the customer for your latest cool business application is asking
 
 *2018-August-19*
 
-<p style="color:gray;">
 *eof*
-</p>
 
 <!-- [pg 20180819°0331] -->
