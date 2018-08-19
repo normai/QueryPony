@@ -8,7 +8,7 @@
 
 ## Quickstart
 
-Aloha, folks, it goes like follows.
+Aloha folks, it goes like follows.
 
 [Download](http://downtown.trilo.de/svn/queryponydev/downloads/) the executable and start it.
 
@@ -46,22 +46,22 @@ To edit the table, write/mark/execute an appropriate SQL update statement. E.g.:
  UPDATE addresses SET name1 = "Mister" WHERE name2 = "Joe Jackson";
 ```
 
-Of course you also want inspect the humble offline User Guide, which show up in your default browser.
+Of course you also want inspect the humble offline User Guide, which will show up in your default browser.
 
 [![View the result](./QueryPonyGui/docs/img/20180819o0216.querypony-helpmenu.png)](./QueryPonyGui/docs/img/20180819o0216.querypony-helpmenu.png)
 
-Holla, where do those pages 20180819o0216.querypony-helpmenu.png from? How can the browser show files which did not even exist?
+Holla, where do those pages come from? How can the browser show HTML files which did not even exist?
 
-To resolve this riddle, seek some hint from the 'About' dialog.
+To resolve this riddle, seek some hint from the 'About' dialog. Open the User Settings folder, and you will see.
 
 [![View the result](./QueryPonyGui/docs/img/20180819o0217.querypony-aboutbox.png)](./QueryPonyGui/docs/img/20180819o0217.querypony-aboutbox.png)
 
-Yep, here you have also found the two folders you must delete,
+Yep, and now you have also found the two folders, you must delete,
 once you get tired of QueryPony and want purge it from your machine without any residues.
 
 Try, play, explore, have fun, get mad!
 
-Please always mind: it is a beta version — have no expectations.
+Please always mind: This is a beta version — have no expectations.
 
 Otherwise you are welcome to study the code and contribute.
 
@@ -69,15 +69,14 @@ Sincerely,
 
 Norbert
 
-BTW. What I find much more fascinating than the above described cruelsome GUI,
-and what is the reason, that I haven't already thrown it into the trash can,
+BTW. What I find much more fascinating than above described cruelsome GUI,
+and what is the reason, that I haven't thrown it into the trash can yet,
 is the following.
 
-The interesting part is not the above described cruelsome GUI,
-but the engine with it's database agnostic API for any .NET program.
+It is the engine with it's database agnostic API for any other .NET program.
 
 If the customer for my (or your) new business application is asking
-'Which database does that application need?', the answer is __'Just any'__.
+'Which database does that application need?', the answer is perplexing: __'Just any'__.
 
 *2018-August-19*
 
