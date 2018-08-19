@@ -1,0 +1,102 @@
+﻿
+   Third party products
+
+   Many thanks go to the people and organisations, who provide
+   their products under licenses, allowing them to be integrated
+   into QueryPony. Those products are:
+
+
+   title       : Genghis v0.8 (some files from it)
+   slogan      : A set of .NET extensions to provide application-level services
+   homepage    : http://genghis.codeplex.com
+   download    : http://genghis.codeplex.com/releases/view/4954
+   license     : Custom License (http://genghis.codeplex.com/license)
+   copyright   : (C) 2002 - 2004 The Genghis Group
+   authors     : Shawn Wildermuth and 'The Genghis Project'
+   usage       : For the 'Recent Files' functionality in the Files menu.
+
+
+   title       : ADO.NET Data Provider for SQLite ('System.Data.SQLite')
+   slogan      : An ADO.NET adapter for SQLite
+   homepage    : http://www.sqlite.org and
+                  http://system.data.sqlite.org/index.html/doc/trunk/www/index.wiki
+   download    : http://system.data.sqlite.org/index.html/doc/trunk/www/downloads.wiki
+                  - sqlite-netFx35-binary-bundle-Win32-2008-1.0.109.0 (binaries)
+   license     : Public Domain ("Released to the public domain, use at your own risk.")
+   copyright   : None
+   authors     : The SQLite Consortium for ADO.NET Data Provider for SQLite,
+                  originally written by Robert Simpson
+   note        : Downloads v1.0.85.0 20130513°0911, v1.0.109.0 20180815°0221
+
+
+   title       : ADO.NET Data Provider for PostgreSQL ('Npgsql')
+   slogan      : A .Net Data Provider for Postgresql
+   homepage    : http://npgsql.projects.pgfoundry.org
+   download    : http://pgfoundry.org/frs/?group_id=1000140
+                  - Npgsql2.0.12.0-bin-ms.net3.5sp1.zip (binaries)
+                  - Npgsql2.0.12.0.src.zip (sources)
+   license     : BSD License
+   copyright   : (C) 2002-2009 The Npgsql Development Team
+   authors     : The Npgsql Development Team for ADO.NET Data Provider for PostgreSQL
+
+
+   title       : MySQL .NET Connector 'mysql.data.dll'
+   slogan      : A fully-managed ADO.NET driver for MySQL
+   homepage    : http://dev.mysql.com/downloads/connector/net
+   download    : on the homepage the following files:
+                  - mysql-connector-net-6.6.5-noinstall.zip (binaries)
+                     from the extraction, use the binary /v2/mysql.data.dll
+                  - mysql-connector-net-6.6.5-src.zip (sources)
+   license     : GNU GPL v2
+   copyright   : Copyright (c) 2004, 2011, Oracle and/or its affiliates
+   authors     :
+   note        : This library is not always part of QueryPony. If your version
+                 of QueryPony is missing mysql.data.dll, please dowonload it
+                 on your own and put it in the same directory as QueryPony
+                 Then QueryPony will attempt to talk to it
+
+
+   title       : The QueryPony Logo
+   slogan      : Chess Horse
+   homepage    : http://openclipart.org/detail/6163/chess-horse-by-mcol
+   download    : http://openclipart.org/detail/6163/chess-horse-by-mcol
+   license     : 'Free'
+   copyright   : (none)
+   authors     : mcol
+   note        : The QueryPony logo is based on this SVG file by mcol.
+
+
+   title       : Divan (2012-Nov-11)
+   slogan      : A C# library for CouchDB
+   homepage    : https://github.com/foretagsplatsen/Divan
+   download    : https://github.com/foretagsplatsen/Divan
+   license     : MIT License
+   copyright   : Företagsplatsen AB
+   authors     : Företagsplatsen AB
+   usage       : Support CouchDB access
+
+
+   title       : Json.NET 5.0 Release 6
+   slogan      : Json.NET is a popular high-performance JSON framework for .NET
+   homepage    : http://json.codeplex.com
+   download    : http://json.codeplex.com
+   license     : The MIT License
+   copyright   : Copyright (c) 2007 James Newton-King
+   authors     : James Newton-King and contributors
+
+
+   title       : The CustomTabControl Class
+   slogan      : Painting Your Own Tabs
+   homepage    : http://www.codeproject.com/Articles/13305/Painting-Your-Own-Tabs
+   download    : http://www.codeproject.com/Articles/13305/Painting-Your-Own-Tabs
+   license     : The Code Project Open License (CPOL) 1.02
+                  (http://www.codeproject.com/info/cpol10.aspx)
+   copyright   : Mark Jackson
+   authors     : Mark Jackson (The Man from U.N.C.L.E.)
+
+
+   Thanks again,
+   Norbert
+
+   ———————————————————————
+   [file 20130615°1557] ʘΩ

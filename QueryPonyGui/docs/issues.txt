@@ -1,0 +1,261 @@
+﻿
+   **********************
+   Issues, Bugs and Todos
+   **********************
+
+   issue 20180815°0211 'sqlite mismatch'
+   symptom : Connection to SQLite database fails
+   ref : http://downtown.trilo.de/svn/stacks3dev/trunk/querypony/20180815o0212.querypony--sqlite-error.png
+   status : finished
+   ʘ
+
+   issue 20130828°1531 'restoring connections works only partially'
+   title : Restoring connections on startup works only partially
+   symptom : Restoring connections on startup via ConnStatus.Connected property
+      works only partially. I cannot see the logic of this behaviour.
+   location : Method MainForm() sequence 20130828°1524
+   note : It looks like the identification of the connections, and/or the
+      translation between the ConnSettingsGui and ConnSettingsLib is leaky.
+      This were not astonishing, because this whole topic is quite a mess.
+      The chaos starts with the naming of the treeview nodes and the
+      connection tabpages, and continues to the identification of connections
+      inside the ServerList.
+   todo : [todo 20130828°1533] Collect the connection identifying sequences
+      all over the code and try to make a simpler schema out of it. Here some
+      first entries for such list:
+      - line 20130620°1135 'find index' in ConnectForm.DoConnect()
+      - method 20130623°1121 ConnectForm.findConnectionInConnectionCombobox()
+      - method 20130623°1011 ConnectForm.getConnectionIdFromTabpage()
+      - method 20130729°1531 MainTv.searchTreenodeByConnSettings()
+      - method 20130703°0933 MainTv.searchCorrespondingQueryform()
+      -
+   workaround : None. Live with only some connections being restored.
+   status : Open
+   ʘ
+
+   issue 20130819°0822 'InvokeEx() in IOBusProvider for WinForms'
+   title : InvokeEx() with lambda expression not possible in WinForm class.
+   symptom : The original lines from IOBusProvider.cs developed inside a WPF
+      window, causes compiler error "The type 'QueryPonyGui.MainForm' cannot
+      be used as type parameter 'T' in the generic type or method
+     'IOBus.IOBus_ISynchronizeInvokeExtensions.InvokeEx<T>(T, System.Action<T>)'.
+      There is no implicit reference conversion from 'QueryPonyGui.MainForm'
+      to 'System.Windows.Threading.DispatcherObject'."
+   location : Sequence 20121215°2112 in IOBusProvider.cs::webreaderguiWriteLineDelegateImplementation()
+   todo : Find out, what exactly this means. Find a replacement.
+   workaround :
+   solution :
+   status : Open
+   priority :
+   ʘ
+
+   issue 20130819°0821 'ScrollToEnd() in IOBusProvider for WinForms'
+   title : 'TextBox.ScrollToEnd() does not exist in WinForms'
+   location : Sequence 20121215°2112 in IOBusProvider.cs::webreaderguiWriteLineDelegateImplementation()
+   todo : For IOBusProvider usage inside WinForm, find a replacement.
+   workaround : The issue seems not to be a problem anyway.
+   status : Open but no real problem
+   priority : Low
+   ʘ
+
+   issue 20130816°0601
+   title : TreeView Tables node not actualized
+   symptom : If on a database connection you create a new table e.g. with an SQL
+      command 'CREATE TABLE `TMPTBL`', that table may be created successfully,
+      but it is not shown under the Tables treeview node.
+   note : This is perhaps a general feature missing like 'Actualize View'.
+   workaround : Close the connection and connect newly.
+   status : Open
+   priority :
+   ʘ
+
+   issue 20130812°1321 'start with exception OnConfigRemoved'
+   title : Program starts with ConfigurationErrorsException exception after
+      an OnConfigRemoved event and finishes.
+   note : See screenshots 20130812°1322 through 20130812°1325
+   note : I saw this exception first time ever. I think that before it happened,
+      I manually renamed the path to the configuration file. The user will probably
+      never face this issue. Nevertheless, it were nice, if the code were robust
+      enough, not to start the program with a runtime exception, but pop a graceful
+      and informative error message.
+   note : This reminds me on another topic. After deleting the settings, the program
+      mostly remembers the old settings anyway, although the old settings file is gone
+      and a new one is created. Where does this information come from? This question
+      seems to have to do with this issue.
+   note : Curiously, the identical file downloaded from the SourceForge repository
+      did run fine.
+   note : Curiously, the identical file, when it had a QueryPony.exe.config beside
+      it, run also fine (file 20130812°1326).
+   workaround : Do not rename the settings path.
+   solution : I have wrapped the very first Settings access in a try loop (sequence
+       20130812°1331 in Program.cs. But that is not tested, because after inserting
+       the sequence, the config path was different, and the issue gone (see details
+       there in Program.cs).
+   priority : Low
+   status : Open
+   ʘ
+
+   issue 20130811°0901 'No context menu'
+   title : Context menu Edit items not always available
+   symptoms : In some situations, the main menu items do work, but the corresponding context
+      menu is not available. This is the opposite of issue 20130624°1011 'menu items gray'.
+   descript :
+   finding :
+   workaround : Use the keyboard.
+   solution :
+   status : Open
+   note :
+   ʘ
+
+   issue 20130810°1901 'edit menu items fail'
+   title : ToolStripMenuItem 'Edit' submenu items do not work
+   symptoms : In many situations the Edit submenu items are correctly available,
+      but just do not work. Interestingly, the corresponding context menu does work.
+   note : This is the continuation of issue 20130624°1011 'menu items gray', which
+      was solved 20130810°1621. The menu items are available now, but fail working.
+   finding : (finding 20130810°1955) Debugging the Windows message pipe (see partial
+      classes 20130810°1922 and 20130810°1931) did not yield much insight. The
+      wanted messages WM_COPY, WM_CUT, WM_PASTE were just not trapped by the hook.
+      Why not? Is the context menu on the Connect Form somehow a self-defined one?
+      I give up for now.
+   workaround : Use mouse rightclick context menu.
+   solution :
+   status : Open
+   note :
+   ʘ
+
+   issue 20130702°1502 'Best way to tag objects for interconnection'
+   title : What were the best way to tag various objects for their interconnection?
+   location : E.g. Method 20130618°0412 MainForm() line 20130724°0814.
+   situation : Here we tag the TabPage with the ConnectionSettingsLib object,
+      so a TreeNode with a database connection can find it's corresponding
+      TabPage. But this is perhaps not the best solution. Considerations are:
+      (1) We could also tag the QueryForm, not the TabPage. Or the both of them.
+      (2) The TreeNode is tagged not with a ConnectionSettingsLib, but with a
+      Server.Database object. It might be more handy, if the TabPages and the
+      TreeNodes were tagged with the same types.
+   status : For now, leave it as it grew. But if later any masterplan becomes
+      apparent, then refactor.
+   note :
+   ʘ
+
+   issue 20130624°1011 'menu items gray'
+   title : Keyboard Shortcuts broken, e.g. CTRL-C grayed out
+   symptoms : E.g. in an edit field, CTRL-V will not insert the clipboard content,
+      but context menu Rightclick-Paste works. In some situations, the context menu
+      works, but the corresponding main menu items are not active.
+   descript :
+   note : Mark involved lines with " //// (debug 20130810°1602 'menu items gray')"
+   finding : (finding 20130810°1603)
+     (1) A first method to inspect seems to be 20130604°0532 EnableControls().
+     (2) On program start, the 'Copy' menu item runs through the same procedurs
+          as the 'Undo' and 'SelectAll' menu items. But that are not grayed out.
+     (3) Method 20130604°0425 EditManager.cs::EnableSubMenus() seems to play a
+          key roll in the issue.
+     (4) The culprit seems to be method 20130619°0511 EditManager.cs::GetActiveControl()
+          which does not return the active control correctly.
+   workaround : Use the mouse.
+   solution : (solution 20130810°1621) (1) New algorithm 20130810°1622
+      to detect the active control in EditManager.GetActiveControl() and
+      (2) Additional control processed with sequence 20130810°1623 in
+      EditManager.CanEdit().
+      (3) Additional control processed with sequence 20130810°1624 in
+      EditManager.CanEdit().
+   status : Finished. (But continuation is issue 20130810°1901 'edit menu items fail'.)
+   note : Possibly, solution 20130810°1621 is not finally finishing the topic,
+      but just a partial solution. It solved the exact situation I was debugging now.
+      Let's see what remained.
+   note : In case of re-introducing the MDI feature, the issue has to be touched again.
+   note :
+   ʘ
+
+   issue 20130620°1411
+   title : Broken Up/Down-Key in combobox 'Server'
+   location : On the Connect-Tab in the Server-ComboBox
+   symptom : When attempting to select a Server with the Up-/Down-Keys, the
+               focus jumps out of the combobox into the Connection Tab.
+   priority :
+   status : Unsolved
+   workaround : Use the mouse
+   note :
+   ʘ
+
+   todo 20130619°0431 'About dialogbox closes after any button usage'
+   symptom : In the About Form, in the Machine Textbox, when opening a settings
+      folder in WindowsExplorer with one of the Open Buttons, the About Dialogbox
+      immediately closes, what it shouldn't do. Why is this so? Repair it.
+   location : Method 20130619°0411 AboutForm.cs::buttons_OpenSettingsFolder_Click().
+   status : open
+   priority : low
+   ʘ
+
+   issue 20130616°1711 'TabControl DrawItem border missing black line'
+   descript : Method tabcontrol_ServerTypes_DrawItem() works fine except one
+      detail. The borders of the tab title area looks a bit 3D, means the left
+      side of the selected tab is white instead a black line as seen when using
+      the DrawMode = Normal. But I just didn't find out what that is and give
+      up now. You can see the difference also in the designer when switching
+      the DrawMode.
+   ref : 20130616°1702, 20130616°1704, 20130723°1041, 20130723°1042
+          20130723°1043, 20130723°1044, 20130723°1045
+   location : Method 20130616°1703 ConnectForm.cs::tabcontrol_ServerTypes_DrawItem()
+   workaround : Live with it.
+   status : Open
+   prioritiy : Low
+   estimation : Unknown
+   note :
+   ʘ
+
+   issue 20130607°1311 'the connection InfoMessage event availability'
+   subject : Sorrily, unlike all the other connections, SQLiteConnection seems not
+      to have an InfoMessage event. So this line cannot be translated to SQLite:
+      'con.InfoMessage += new OleDbInfoMessageEventHandler(con_InfoMessage);'
+   location : SqliteDbClient.cs::GetDbConnection() and others
+   note : MSDN tells, the event "Occurs when SQL Server returns a warning or
+      informational message."
+   note : But e.g. the Devart.Data.SQLite SQLiteConnection has an 'Error' event.
+   question: What alternative error messaging system is possible?
+   workaround : We just leave the line outcommented and see what will happen.
+   status : Open
+   priority : Medium
+   note :
+   ʘ
+
+   todo 20101004°1236
+   title : Export Result to xml beside Export to csv
+   note : Entry from QueryExPlus-ReadMe.txt v2.0.3.1 (r75)
+   status : Open
+   ʘ
+
+   todo 20101004°1235
+   title : Cmdline options visible in Messagebox
+   note : Entry from QueryExPlus-ReadMe.txt v2.0.3.1 (r75)
+   status : Open
+   ʘ
+
+   todo 20101004°1234
+   title : Document known file-extensions *.udl, ???
+   note : Entry from QueryExPlus-ReadMe.txt v2.0.3.1 (r75)
+   status : Open
+   ʘ
+
+   todo 20101004°1233
+   title : Provide templates for *.mdb (oledb-msaccess), *.db/*.db3 (odbc-sqlight)
+   note : Entry from QueryExPlus-ReadMe.txt v2.0.3.1 (r75)
+   status : Open
+   ʘ
+
+   todo 20101004°1232
+   title : Add more tree-context-menue-items
+   note : Entry from QueryExPlus-ReadMe.txt v2.0.3.1 (r75)
+   status : Open
+   ʘ
+
+   todo 20101004°1231
+   title : Allow ";" or "go" as SQL-command-seperator
+   note : Entry from QueryExPlus-ReadMe.txt v2.0.3.1 (r75)
+   status : Open
+   ʘ
+
+   ——————————————————————
+   [file 20130615°1553] Ω

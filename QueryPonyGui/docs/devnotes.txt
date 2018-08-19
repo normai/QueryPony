@@ -1,0 +1,555 @@
+﻿   **************************************************
+   Developer Notes (lines quickly typed while coding)
+   **************************************************
+
+   debug 20130727°0811 solving issue 20130716°1231
+   title : About the exact earliest moment to access a single-file-delivery lib.
+   note : After solving issue 20130716°1231 with provisory class 20130726°1442
+      QueryPonyGui.UtilsLib, that class is successively destroyed again, to find
+      which line accessing it exactly was the culprit for.
+   finding : Restore line by line (all marked as 'debug 20130726°1441')
+      (1) Access IOBus.Utils.Resofile[] and IOBus.Utils.provideResourceFiles()
+           from class ConnSettingsGui.fillTheList() were innocent.
+      (2) Access IOBus.Utils.Resofile[] and IOBus.Utils.provideResourceFiles()
+           from class MenuItems.main_help_viewDocInBrowser() were innocent.
+      (3) By 1 and 2, the provisory class can be eliminated, an only the use
+           of constants from IOBus remained (which were replaced by immediates).
+      (4) Access IOBus const in ConnectForm (3 occurrences) -- innocent.
+      (5) Access IOBus const in CustomTabControl (1 occurrence) -- innocent.
+      (6) Access IOBus const in MainForm.MainForm_FormClosed() (3 occurrences) -- innocent.
+      (7) Access IOBus const in MainForm.outputStatusLine() (1 occurrence) -- innocent.
+      (8) Access IOBus const in provideSingleFileDeployment() (1 occurrence) -- the culprit!
+   solution : Accessing IOBus can be very early, but definitely not from
+      inside provideSingleFileDeployment(). This is obvious. How could I
+      have overlooked this. Tiny mistake, biggest implications.
+   ʘ
+
+   note 20130720.1411
+   About nested single-file-delivery
+   *
+   With the single-file-delivery feature (described already elsewhere), there
+   is a special nesting aspect, I want drop a dedicated note about.
+   *
+   The general pattern is: One assembly incorporates the assemblies it depends
+   on (as opposed to having them as separate files beside itself). The prize
+   for that comfort is, that at runtime, before the first access on the
+   dependency, that has to made available by some special unfolding mechanism.
+   *
+   The tangible situation with QueryPony is:
+   *
+   (1) The QueryPonyGui depends on QueryPonyLib. So it incorporates it as a
+   resource and unfolds it available at runtime before the first access with
+   help of the special unfolding-method.
+   *
+   (2) QueryPonyLib depends on several third-party libraries, so it incorporates
+   them and unfolds them available on runtime with the special unfolding-method.
+   *
+   So above you see described a nested two-fold unfolding: First QueryPonyGui
+   unfolds QueryPonyLib, then QueryPonyLib unfolds it's third-party libraries.
+   *
+   This two-fold unfolding thing was a bit tricky on the first attempt, or
+   at least it looked a bit mysterious to me. So I decided to follow an easier
+   way to start with:
+   *
+   Only QueryPonyGui incorporates and unfolds. Means the resources are all
+   in the Gui, not in the Lib as depicted in the original idea above.
+   *
+   I am sure, the original idea will work as well, just it takes some more
+   sessions to line it up. And since it has no priority, I postpone it.
+   *
+   As of the usage of the Gui (QueryPony.exe), this makes no difference anyway.
+   *
+   But for the usage of the pure library QueryPonyLib.dll it has the
+   consequence, that this library is not self-sufficient (no single-file-
+   delivery). So in case you want use QueryPonyLib.dll indeed from any other
+   .NET program, you have to manually provide it the necessary (about five)
+   libraries the old-fashioned style as 'file-beside DLLs'.
+   ʘ
+
+   note 20130717°1141
+   *
+   About third-party-options for CouchDB
+   *
+   Researching for '.NET adapter for CouchDB', the following interesting projects
+   show up.
+   *
+   (1) 'SharpCouch/couchbrowse' by Ciaran Gultnieks on http://code.google.com/p/couchbrowse.
+   This is a small code with the basic access features. Very nice and simple.
+   The project was active only about one year, the last commit was 2008-Aug-05.
+   It uses a small library LitJSON from Leonardo B. at http://lbv.github.io/litjson.
+   *
+   (2) 'NCouch .NET adapter for CouchDB' by Rinat Abdullin on http://www.ohloh.net/p/ncouch.
+   This is a much more comprehensive attempt with many classes. The project seems
+   no more active, the last commit was 2009-Aug-28. The project requires the more
+   comprehensive JSON library Jayrock by Atif Aziz on http://jayrock.berlios.de.
+   *
+   (3) 'Divan' ...
+   *
+   (4) ...?
+   *
+   Bottom line: None of the inspected projects looks suited for for QueryPony,
+   but all of them have highly interesting properties. None of them seems to
+   provide access via the wanted .NET native System.Data.Common interfaces
+   (to have CouchDB access in the same style as the other database access to
+   maximally utilize the existing abstract classes structure and minimally
+   deviate for specific implementation).
+   *
+   Proposal: Explore LitJSON inside QueryPony, using it while as the first step
+   retrieving the list of databases from a server via existing method 'public
+   string[] GetDatabases()'.
+   ʘ
+
+   issue 20130717°1131
+   *
+   About new class CouchDBDataAdapter
+   *
+   The class is derrived from System.Data.Common.DbDataAdapter. When doubleclicking
+   the CS file in VS, the Designer complains (screenshot 20130717°1132):
+   *
+   (1) The class CouchDBDataAdapter can be designed, but is not the first class in
+       the file. Visual Studio requires that designers use the first class in the
+       file. Move the class code so that it is the first class in the file and try
+       loading the designer again.
+   *
+   This was easy to be fixed, but then comes (screenshot 20130717°1133):
+   *
+   (2) The designer must create an instance of type 'System.Data.Common.DbDataAdapter'
+       but cannot because the type is declared as abstract.
+   *
+   Hm ... after all, the classes build fine, it seems to be a sole designer issue,
+   which I can avoid just by opening the file with 'View Code' instead doubleclicking.
+   Researching the internet about this topic revealed no pointed information
+   (see references 20130717°1134/°1135/°1136).
+   *
+   So I decide to postpone the issue, until I have collected some experiences with
+   the new classes in general.
+   *
+   ...
+   ʘ
+
+   note 20130717°1121
+   *
+   About the CouchDB classes
+   *
+   Accessing CouchDB via it's HTTP REST interface is pretty simple. There are
+   some libraries out there with C# classes to access CouchDB.
+   *
+   But I want the access in a specific way: as far as possible with (more or less)
+   exactly the methods the other databases are accessed with. Means, with methods
+   having implemented the native .NET interfaces like 'CouchDBDataAdapter',
+   'CouchDBCommand', 'CouchDBConnection'. And this do the already existing libraries
+   not offer. (Or haven't I looked not sharp enough at them?)
+   *
+   So I started with writing the first CouchDB access lines just parallel to
+   the lines from the SQLite implementation, e.g.
+   - CouchDBConnection con = new CouchDBConnection();
+   instead of the already settled line
+   - SQLiteConnection con = new SQLiteConnection();
+   and looked what happende. This way I successively supplemented stubs for the
+   necessary CouchDB classes to fulfill all access jobs via the native interfaces.
+   *
+   The interesting thing about the outcome is, that it obviously represents the
+   minimal infrastructure for .NET native CouchDB access. Although I had used this
+   interfaces already for the other databases, be it with the .NET built in classes
+   (for MS-SQL, ODBC, OleDb, Oracle) or with the third party libraries (for MySQL,
+   PostgreSQL, SQLite), with those very complete libraries, I could not see the
+   core of the thing. In CouchDbClient.cs, I see it. (But it is far from working,
+   just satisfying the syntax so far.)
+   ʘ
+
+   note 20130711°0931
+   *
+   About the Project Propery 'Icon'
+   *
+   (1) The icon file 20130705o081202.mcol-chess-horse.ico resides in project
+        folder \querypony\QueryPonyGui\docs\img.
+   (2) In the project settings Application Tab, with the File Browser, I select
+        this file as the wanted Icon Resource.
+   (3) Without feedback, VS copies the file into the project root folder,
+        and the entry for the icon is left whithout the subfolders where
+        the original file resides.
+   (4) I don't like the icon file duplicated into the root folder. But
+        nothing can persuade the Settings, not to copy it there.
+   (5) In the QueryPonyGui.csproj, two new entries are created
+        "<ApplicationIcon>20130705o081202.mcol-chess-horse.ico</ApplicationIcon>"
+        and "<Content Include="20130705o081202.mcol-chess-horse.ico" />".
+   (6) A bit violence can help here. In QueryPonyGui.csproj, I edit entry one to
+        "<ApplicationIcon>docs\img\20130705o081202.mcol-chess-horse.ico</ApplicationIcon>"
+        and entry two to
+        "<!-- Content Include="20130705o081202.mcol-chess-horse.ico" / -->".
+   (7) And voilà, VS is satisfied and everything looks like I want and sticks
+       (screenshots 20130711°0932/°0933/°0934).
+   (8) Only with the next icon change, the game starts from the beginning.
+        But here we have the recipe for the game.
+   ʘ
+
+   note 20130614°1441
+   *
+   Presumptions about the Browser/DbClient/QOptions implementations.
+   *
+   It looks like we can distinguish two different poles of method sets
+   plus one intermediate method set:
+   *
+   (1) The OleDb set. From that we derived the SQLite implementation,
+   what looks like the right choice, since it worked pretty straight forward.
+   *
+   (2) The MS-SQL/Oracle method set. From that we derived the MySQL
+   implementation. This was perhaps a somewhat unlucky choice, since the
+   adjustion was more complicated than from OleDb to SQLite.
+   *
+   (3) The ODBC method set might be homed between the MS-SQL and the
+   OleDb poles.
+   *
+   Question: Is it useful to attempt to refactor the implementations
+   so they all look as similar as possible? The starting point for doing
+   this seems the *Browser.GetObjectHierarchy() method. E.g. to retrieve
+   the basic schema information, for all databases exist several different
+   ways, mainly SQL statements versus .NET methods.
+   *
+   The Gretchenfrage (vital question) is: Are the MS-SQL and the OleDb
+   implementations so different because they *must* be so different, or
+   just because they were initially written by different people (or by
+   the same people just in different mood)?
+   ʘ
+
+   note 20130614°1452
+   *
+   Browser implementation difference 1
+   *
+   The constructors of the Browser TreeNode classes:
+   - public MssqlNode(string text) : base(text)
+   - public OleDbNode(string text, int type) : base(text)
+   *
+   Those two are different because the OleDbNode type is based just on
+   the counter of the node generation (means it's location in the tree),
+   whereas the MssqlNode node type is based on schema-given type values
+   (CO/FN/P/S/U/V).
+   *
+   This is a difference which should be possible to eliminate. What
+   should prevent me from just using a counter for the MS-SQL nodes
+   as well?
+   *
+   Or have the MS-SQL schema-given values any advantages balancing out
+   the disadvantage of having different node type stlyes?
+   ʘ
+
+   note 20130614°1453
+   *
+   Browser  implementation difference 2
+   *
+   Connection 'getter'
+   *
+   The OleDbClient has this:
+   - public OleDbConnection Connection - used from the helper GetOleDbBrowserValues()
+   - protected override IDbConnection GetDbConnection() - used from DoConnect()
+   *
+   The MssqlDbClient has only this:
+   - protected override IDbConnection GetDbConnection() - used from DoConnect()
+   *
+   The MS-SQL implementation has no implementation helpers like GetMssqlBrowserValues().
+   Why not? What schema-retrieval methods does it use instead? More comfortable ones?
+   ʘ
+
+   note 20130615°1141
+   *
+   Browser implementation difference 3
+   *
+   Only OleDb has a Connection.GetOleDbSchemaTable(), used in GetOleDbBrowserValues().
+   OleDb has also a method Connection.GetSchema(), but that is not used so far.
+   *
+   The other databases only have a Connection.Schema() method.
+   *
+   Find out the exact differences between those two methods. If Connection
+   .GetSchema() suffices even for OleDb, we can refactor GetOleDbBrowserValues()
+   to be pretty identical in all the MySQL/OleDB/SQLite implementations.
+   *
+   Find out, whether GetOleDbSchemaTable() has any advantages over GetSchema(),
+   and what those are.
+   ʘ
+
+   note 20130618°0441
+   *
+   About switching Connection Forms from MDI windows to Forms-on-Tabs
+   *
+   - A mechanism had to be introduced to manage Tabs progammatically, and
+      to put Forms on them (method 20130618°0401).
+   *
+   - To get the events attached to newly created Connection Forms working,
+      some delegates had to be introduced (e.g. method 20130618°0412).
+   *
+   - Some keys were broken then, e.g. F5. To fix this a new call to ...
+      had to be introduced in ...
+   ʘ
+
+   note 20130622°0731
+   *
+   About Refactoring
+   *
+   This two overal topics are identified so far:
+   *
+   (1) Split the whole thing into separate projects for GUI and Engine (this is finished)
+   *
+   The reason for wanting this is to have the engine available separately to use
+   it in any other database program which want database agnositc connections.
+   *
+   The nice side effect of such split is, that it is also welcome from the code
+   maintenance point of view. The design objective of separation has already been
+   targeted by the original code (subfolder DatabaseApi), but was not consequently
+   pushed through in the calling directions (only the GUI references the engine,
+   never vice versa).
+   *
+   (2) Simplify database implementations and settings (this remains to be finished)
+   *
+   With now 8 implementations, one can see the redundancies. There is room for
+   simplification. Then it will be easier to supplement still more implementations.
+   *
+   The Connect Form has individual tabs for each database type. This means,
+   each new implementation has to add a new tab with still more controls.
+   This were not necessary, if we can eliminate individual tabs, but have all
+   database types furnished with one and the same control set.
+   ʘ
+
+   note 20130619°1351
+   *
+   About Refactor 'Split Engine Library off the GUI' (20130619°1351)
+   *
+   Project QueryPonyLib was split off project QueryPonyGui. Now
+   this are two distinct projects, one is the DbApi, and one the GUI.
+   *
+   In the process, I encountered two main resistors:
+   *
+   (1) Refactor 'The QueryOptions' (20130619°1311)
+   *
+   (2) Refactor 'Split Settings GUI and Lib' (20130620°0211)
+   *
+   Then come a final cleanup:
+   *
+   (3) Refactor 'Divide Namespaces' (20130620°1011)
+   *
+   And one more as an unexpected latecomer:
+   *
+   (4) 'The Connection/Application Settings' (20130621°0751)
+   ʘ
+
+   issue 20130621°0751
+   *
+   About 'The Connection/Application Settings'
+   *
+   After refactor 'Split Engine Library off the GUI' (20130619°1351) had
+   recovered, and connecting to databases worked, I wanted utilize the Settings,
+   notably ServerList.
+   *
+   It turned out, that ServerList was not stored to file, and much debugging
+   did not help. Hm .. did it work before at all? I think yes, because in the
+   collection of several hundred user.config files (each debugger start is a
+   new assembly version, thus a new config folder), there were some bigger ones
+   (5 KB) which contained ServerList XML. How did they get there?
+   *
+   ... issue 'unable to select custom type from setting' [20130621°0932] ...
+   *
+   Curiously, I was able to select types from the other project QueryPonyLib,
+   but not from the one the Settings were in, means QueryPonyGui. ...
+   (... I heard, the VS Settings GUI has issues ...)
+   *
+   So this have been two hard issues:
+   *
+   (1) How to introduce complex custom class ServerList into the Settings Designer?
+   *
+       Helpfull for this problem was reference 20130621°0933
+       http://blog.coretech.dk/jgs/add-custom-data-type-structure-to-mysettings-in-vbnet-wpf
+       where Jakob describes how he manually introduced custom types with VB.
+       Similar then it worked here.
+   *
+       After this problem was solved, the new settings type shined out of the
+       Settings Designer, but still just refuses to be saved.
+   *
+   (2) Why does Properties.Settings.Default.Save() just not work as expected with
+       the custom type?
+   *
+       The solution came with Tom's trivially looking statement "make sure it
+       has a default constructor" in reference 20130621°0934 on
+       http://stackoverflow.com/questions/603501/using-settings-with-complex-types.
+   *
+       Yes, after introducing the otherwise superfluous empty unparameterized
+       constructor 'public ServerList()', all of a sudden, the ServerList
+       was written to the users.config.
+   ʘ
+
+   note 20130619°1352
+   *
+   About Refactor 'The QueryOptions' (refactor 20130619°1311)
+   *
+   Resistance number one was class QueryOptionsForm and it's relatives.
+   *
+   - QueryOptionsForm is a GUI class, showing a Dialog Form. But it was
+      also called directly from some DbApi classes.
+   - The DbApi class QueryOptions was calling methods from QueryOptionsForm.
+      But it is not allowed, that the library call it's client (if the
+      relation shall be clean).
+   *
+   So what to do? Good luck, the issue boiled down to two arenas, which were
+   not readily implemented yet anyway:
+   - Method ApplyQueryOptions(), which was implemented for MS-SQL only.
+      In MssqlDbClient, it is not even called.
+   - Method showDialog(). That was a curious candidate already earlier, with
+      unclear overrides.
+   *
+   I left all calls from library to client (almost) as they originally were,
+   and replaced the callees with dummy classes (in the library project).
+   *
+   So the existing germ structures of the QueryOptions are conserved, and it
+   should be easy to later resume the feature. The now 'dummy' classes can be
+   refined to serve as mediator classes between the engine and the UI.
+   ʘ
+
+   note 20130619°1353
+   *
+   About Refactor 'Split GUI and Lib Settings' (refactor 20130620°0211)
+   *
+   Resistance number two when splitting off the Engine Library was the Settings.
+   First, the problem was quickly solved with shifting ConnectionSettings.cs
+   from the GUI project to the Engine project. Only after the build had recovered
+   from the cut, and I attempted to create independend settings for the library,
+   the following uncovered:
+   *
+   There were many 'setting' files, some manual and some automatic. And I had
+   spread the partial class ServerList over two projects. This is dirty.
+   *
+   Here the involved files:
+   (1) QueryPonyGui/ApplicationSettings.cs
+   (2) QueryPonyGui/ConnectionSettings.cs
+   (3) QueryPonyGui/Properties/Settings.cs
+   (4) QueryPonyGui/Properties/Settings.Designer.cs
+   (5) QueryPonyGui/Properties/Settings.settings
+   (7) (more?)
+   *
+   I had shifted ConnectionSettings.cs from QueryPonyGui to QueryPonyLib, and
+   that worked unobtrusively. Only when I then attempted to create automatic
+   Settings for QueryPonyLib from scratch (because I wanted a pristine
+   starting point), I noticed the curiosity:
+   *
+   Class ServerList was divided into two partial classes in the automatically
+   generated ApplicationSettings.cs and the manually written ConnectionSettings.cs.
+   And those somehow cooperated with the Settings from the Properties folder. The
+   partial classes worked fine, even if they were spread over two separate projects.
+   *
+   But even if comfortably building, I disfavoured the idea having a partial
+   class spread over two projects, and shifted ConnectionSettings.cs back
+   to it's original GUI location. Even if then loomed harder refactoring work
+   with the ServerList class.
+   *
+   ...
+   ʘ
+
+   note 20130619°1231
+   *
+   What about Mono?
+   *
+   Is Mono allergic to WPF?
+   *
+   Can Mono transpose the actually implemented Settings features?
+   *
+   Check the used third-party-libraries, what they speak about Mono.
+   *
+   ...
+   *
+   ʘ
+
+   note 20130619°1232
+   *
+   What about WPF?
+   *
+   Were WPF contraproductive to the Mono idea?
+   *
+   ...
+   ʘ
+
+   note 20130619°0911
+   *
+   About the technical term 'implement'
+   *
+   In the documentation for the classes *DbClient and *Browser, the classes
+   summaries tell 'This class constitutes an implementation of IBroswer ...'
+   and 'This class constitutes an implementation of DbClient ...'.
+   *
+   This sounds, as if the both cases were the same. But they are not.
+   *
+   (1) IBrowser is an interface. E.g. first we have any arbitrary class
+   and then we implement the interface. The class is not an implementation of
+   the interface, but it just 'incorporates' the interface, obeys it's rules
+   *
+   (2) DbClient is an abstract class. Any *DbClient class inherits from it.
+   Means we have first the inherited class, and then maybe expand it. This
+   is chronologically the opposite of the order as with an interface.
+   *
+   By the way, an interface is historically something like a replacement for
+   multiple inheritance, which exists e.g. in C++, but was discarded in C#. So
+   the both are of course functionally much related. But syntactically, they
+   are clearly distinct.
+   *
+   So it were nice, if this difference were reflected by the documentation's
+   summary text for the classes. (Is that splitting hairs? Not in my opinion.)
+   *
+   Question: What were two nice phrases, expressing the differences between
+   the two 'implements', but as well reflecting the relationship?
+   ʘ
+
+   note 20130620°1511
+   *
+   Which techniques can a developer find in QueryPony?
+   *
+   The initial Query Express by Joseph Albahari sports the following techniques:
+   - Abstract classes
+   - Interfaces
+   - Delegates
+   - Utilization of the .NET Settings
+   - Full blown Windows Forms GUI
+   - MDI (Multiple Document Interface)
+   - ...
+   *
+   Since QueryPony, this techniques come additionally:
+   - Separation of GUI and engine
+   - (More) Delegates
+   - Forms-on-Tabs (the MDI was sorrily sacrificed for that)
+   - Single-file-delivery
+   - Resource files usage
+   - Conditional compiling
+   - ...
+   *
+   Note about 'Separation of GUI and engine': It remains to be examined,
+   how far the actual realization is away from official patterns like MVC
+   or MVVM. And whether it might pay off to make this a dedicated topic.
+   ʘ
+
+   note 20130621°0341
+   *
+   About Roadmap Item 'More Implementations'
+   *
+   With now 8 database implementations, the code structures are still dry to
+   handle. But there come 3 or 4 files per database, and pretty much methods.
+   If the number will grow e.g. to 20 databases, the files will grow too much.
+   *
+   But there is room for miniaturisation. The implementatios have much in common
+   (compare topic 20130614°1441 'Presumptions about implementations').
+   *
+   It seems possible to refacture many redundant structures away. If this were
+   done consequently, then a new implementation could be easy and small, and
+   there were no limit in their number.
+   ʘ
+
+   note 20130621°0342
+   *
+   About Roadmap Item 'Restore MDI'
+   *
+   With the introduction of Forms-on-Tabs, the MDI Connection Windows are
+   no more available.
+   *
+   But perhaps it were nice to restore the MDI feature.
+   *
+   One example of a program sporting the both Tabs plus MDI is UltraEdit.
+   *
+   Just that is a not so trivial task. Hm .. like two days? Priority low.
+   ʘ
+
+   ——————————————————————
+   [file 20130614°1431] Ω

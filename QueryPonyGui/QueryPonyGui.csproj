@@ -1,0 +1,372 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E202E278-E89F-4EB9-B4AA-77D71B76A102}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>QueryPonyGui</RootNamespace>
+    <AssemblyName>QueryPony</AssemblyName>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <ApplicationIcon>docs\img\20130705o081203.mcol-chess-horse.ico</ApplicationIcon>
+    <NoWin32Manifest>True</NoWin32Manifest>
+    <TargetFrameworkProfile />
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;MYSQL20130619YES</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <!-- GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies -->
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>PdbOnly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <BaseAddress>4194304</BaseAddress>
+    <PlatformTarget>x86</PlatformTarget>
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;MYSQL20130619YES</DefineConstants>
+    <FileAlignment>4096</FileAlignment>
+    <DebugType>Full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Optimize>false</Optimize>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <FileAlignment>4096</FileAlignment>
+    <DebugType>PdbOnly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ConnSettingsGui.cs" />
+    <Compile Include="Globs.cs" />
+    <Compile Include="Gui\AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\CustomTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Gui\MainForm_Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\MainForm_WndProc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\MainTv.cs">
+    </Compile>
+    <Compile Include="Gui\QueryOptionsFormMssql.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\QueryOptionsFormMssql.Designer.cs">
+      <DependentUpon>QueryOptionsFormMssql.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\QueryOptionsFormMysql.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\QueryOptionsFormMysql.Designer.cs">
+      <DependentUpon>QueryOptionsFormMysql.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\SplashConnecting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\SplashConnecting.Designer.cs">
+      <DependentUpon>SplashConnecting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\ThemedColors.cs" />
+    <Compile Include="InitGui.cs" />
+    <Compile Include="IOBusProvider.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuItems.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="CommandLine.cs" />
+    <Compile Include="Gui\ConnectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\ConnectForm.Designer.cs">
+      <DependentUpon>ConnectForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\EditManager.cs">
+    </Compile>
+    <Compile Include="Gui\FindReplaceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\FindReplaceForm.Designer.cs">
+      <DependentUpon>FindReplaceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\IQueryForm.cs" />
+    <Compile Include="MostRecentlyUsed\IMruMenuListRenderer.cs" />
+    <Compile Include="MostRecentlyUsed\InMenuMruRenderer.cs" />
+    <Compile Include="MostRecentlyUsed\InSubMenuMruRenderer.cs" />
+    <Compile Include="MostRecentlyUsed\MruDisplayMode.cs" />
+    <Compile Include="MostRecentlyUsed\MruListDisplayStyle.cs" />
+    <Compile Include="MostRecentlyUsed\MruMenuItemClickEventArgs.cs" />
+    <Compile Include="MostRecentlyUsed\MruMenuItemClickEventHandler.cs" />
+    <Compile Include="MostRecentlyUsed\MruMenuItemFileMissingEventArgs.cs" />
+    <Compile Include="MostRecentlyUsed\MruMenuItemFileMissingEventHandler.cs" />
+    <Compile Include="MostRecentlyUsed\MruMenuListItems.cs" />
+    <Compile Include="MostRecentlyUsed\MruMenuManager.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MostRecentlyUsed\MruMenuManagerSettings.cs" />
+    <Compile Include="MostRecentlyUsed\MruToolStripMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Gui\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Gui\AboutForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\ConnectForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ConnectForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\FindReplaceForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FindReplaceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\MainForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\SplashConnecting.resx">
+      <DependentUpon>SplashConnecting.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\QueryForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>QueryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\QueryOptionsForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>QueryOptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Gui\QueryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\QueryForm.Designer.cs">
+      <DependentUpon>QueryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\QueryOptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\QueryOptionsForm.Designer.cs">
+      <DependentUpon>QueryOptionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.cs" />
+    <Compile Include="Settings_ServerList.cs" />
+    <Compile Include="SingleFileDeployment.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="docs\changelog.txt" />
+    <EmbeddedResource Include="docs\devnotes.txt" />
+    <EmbeddedResource Include="docs\summary.txt" />
+    <EmbeddedResource Include="docs\issues.txt" />
+    <EmbeddedResource Include="Gui\QueryOptionsFormMssql.resx">
+      <DependentUpon>QueryOptionsFormMssql.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="docs\index.html" />
+    <EmbeddedResource Include="docs\agpl-3.0.txt" />
+    <EmbeddedResource Include="docs\license.txt" />
+    <EmbeddedResource Include="docs\img\20141115o1731.extern.png" />
+    <EmbeddedResource Include="docs\img\20110826o111902.transparent.png" />
+    <EmbeddedResource Include="docs\img\20130705o0812.mcol-chess-horse.v0.x0200y0200.png" />
+    <EmbeddedResource Include="docs\img\20130705o081203.mcol-chess-horse.ico" />
+    <Content Include="libs\mysql.data.dll" />
+    <EmbeddedResource Include="libs\Npgsql.dll" />
+    <EmbeddedResource Include="libs\QueryPonyLib.dll" />
+    <EmbeddedResource Include="libs\System.Data.SQLite.dll" />
+    <EmbeddedResource Include="libs\iobus.dll" />
+    <None Include="prebuild.bat" />
+    <EmbeddedResource Include="docs\joesgarage.sqlite3" />
+    <EmbeddedResource Include="Gui\QueryOptionsFormMysql.resx">
+      <DependentUpon>QueryOptionsFormMysql.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IOBus\IOBus.csproj">
+      <Project>{00C8285B-1109-4D69-ABEF-153DDDDD5B93}</Project>
+      <Name>IOBus</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\QueryPonyLib\QueryPonyLib.csproj">
+      <Project>{6895D15C-4AC8-4D77-A77B-B599F73DAB38}</Project>
+      <Name>QueryPonyLib</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="docs\img\20130705o081202.mcol-chess-horse.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="docs\img\20081114o1721.left.png.gif" />
+    <EmbeddedResource Include="docs\img\20081114o1722.right.png.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="docs\img\20081114o172303.up.png.gif" />
+    <EmbeddedResource Include="docs\img\20081114o172611.up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="libs\Mono.Security.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="libs\Newtonsoft.Json.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="docs\20140127o0511.mstcp.html" />
+    <EmbeddedResource Include="docs\about.html" />
+    <EmbeddedResource Include="docs\connect.html" />
+    <EmbeddedResource Include="docs\options.html" />
+    <EmbeddedResource Include="docs\query.html" />
+    <EmbeddedResource Include="docs\settings.html" />
+    <EmbeddedResource Include="docs\thirdparty.txt" />
+    <EmbeddedResource Include="docs\treeview.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="docs\img\20130724o1621.querypony-connect.png" />
+    <EmbeddedResource Include="docs\img\20130724o162102.querypony-connect.png" />
+    <EmbeddedResource Include="docs\img\20130724o1622.querypony-connected.png" />
+    <EmbeddedResource Include="docs\img\20130724o1623.querypony-query-options.png" />
+    <EmbeddedResource Include="docs\img\20130724o1624.querypony-query-settings.png" />
+    <EmbeddedResource Include="docs\img\20130724o1625.querypony-overview.png" />
+    <EmbeddedResource Include="docs\authors.txt" />
+    <Content Include="docs\drafts.txt" />
+    <Content Include="docs\20140124o1441.issue.txt" />
+    <Content Include="docs\20130902o0627.issues.txt" />
+    <Content Include="docs\20130614o1432.linesdump.txt" />
+    <Content Include="docs\references.txt" />
+    <EmbeddedResource Include="docs\daftari.css" />
+    <EmbeddedResource Include="docs\styleslocal.css" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" Condition=" '$(Configuration)' == 'Release' " />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets. -->
+  <Target Name="BeforeBuild" Condition=" '$(Configuration)' == 'Release' ">
+    <Version VersionFile="version.txt" RevisionType="">
+      <Output TaskParameter="Major" PropertyName="Major" />
+      <Output TaskParameter="Minor" PropertyName="Minor" />
+      <Output TaskParameter="Build" PropertyName="Build" />
+      <Output TaskParameter="Revision" PropertyName="Revision" />
+    </Version>
+    <AssemblyInfo CodeLanguage="CS" OutputFile="AssemblyVersion.cs" AssemblyVersion="$(Major).$(Minor).$(Build).$(Revision)" AssemblyFileVersion="$(Major).$(Minor).$(Build).$(Revision)" />
+  </Target>
+  <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Release' ">
+    <Zip Files="$(TargetDir)/$(TargetFileName)" ZipFileName="$(TargetFileName)_$(Major)_$(Minor)_$(Build)_$(Revision).zip" Flatten="true" Condition=" '$(Configuration)' == 'Release' " />
+    <Zip Files="@(Compile);@(None);@(EmbeddedResource);@(Content);$(ProjectFileName);$(SolutionFileName)" ZipFileName="$(TargetName)_Source_$(Major)_$(Minor)_$(Build)_$(Revision).zip" Condition=" '$(Configuration)' == 'Release' " />
+  </Target>
+  <PropertyGroup>
+    <PreBuildEvent>$(ProjectDir)prebuild.bat</PreBuildEvent>
+  </PropertyGroup>
+</Project>

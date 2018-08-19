@@ -1,0 +1,35 @@
+
+
+   **************************************
+   Issues, Bugs and Todos in QueryPonyLib
+   **************************************
+
+
+   issue # 20131201.0833 'Find a DateTime null value for SQLite'
+   descript : System.DateTime is a non-nullable value. To find some 'zero'
+      datetime, use DateTime.MinValue, yielding '0001-01-01 00:00:00.000'.
+      Or use '1970-01-01 00:00:00' UTC, the begin of UNIX time, which
+      translates to zero for the SQLite Integer storage flavour.
+   location : Method # 20130823.1552 getSqlValueFromObject()
+   solution :
+   status :
+   note :
+
+
+   issue # 20131201.0811 'SQLite String not recognized as DateTime'
+   symptoms : When reading a table containing a Data row datatable.Load(datarow) throws
+      a System.FormatException telling "String was not recognized as a valid DateTime.".
+   note : The same table can be opened by Firefox SQLite Manager without problem,
+      just those Date fields show funny values like "36471.0576388889".
+   note : This table was cloned from a OleDb/Paradox table.
+   location : The place where the corrupt entry is produced: method # 20130823.1552
+      getSqlValueFromObject() seq # 20130823.1611.
+   location : A place where the System.FormatException is thrown when trying to read such
+      record: e.g. method # 20130604.2121 DisplayGrid() line # 20130604.2311 "dt.Load(dr);".
+   locatation : A place which can read such corrupt entry anyway: Firefox SQLite Manager.
+   question : What can be done, that with the C# System.Data.SQLite library such
+      record can be read anyway?
+   workaround :
+   solution : Write field value properly formattet (like with seq # 20131201.0831).
+   status : Finished (seq # 20131201.0831)
+   note :

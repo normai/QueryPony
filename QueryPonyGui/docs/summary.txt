@@ -1,0 +1,58 @@
+﻿
+   QueryPony is a Simple Generic Database Query Tool and API.
+
+   With QueryPony, you can connect to various databases and list and view
+   their tables (provided you have some basic SQL language knowledge).
+
+   QueryPony runs on Windows XP/SP3 .NET 3.5. It should also run on the
+   higher Windows flavours, but this is not tested yet.
+
+   Version QueryPony 0.3.0 is the Alpha Release.
+
+   Here some quick notes about the addressed databases:
+
+   - MS-SQL      This should work.
+
+   - MySQL       This should work.
+                 But the connector for MySQL may not always be part of QueryPony.
+                 If you have a QueryPony without that, please provide the file
+                 v2/mysql.data.dll from mysql-connector-net-6.6.5-noinstall.zip
+                 on your own mission in the same folder as QueryPony.exe,
+                 then QueryPony will attempt to talk to it.
+
+   - ODBC        This should work.
+                 What exactly you can access via this connection depends on
+                 what connections you have provided in your machines 'ODBC
+                 Data Source Administrator'.
+
+   - OleDb       This should work.
+                 What exactly you can access via this connection depends on
+                 which drivers are installed on your machine. During development,
+                 I worked with a Paradox/BDE OleDb connecton.
+
+   - Oracle      This should work.
+
+   - PostgreSQL  This should work.
+                 This feature should work independend on the drivers installed
+                 on your machine.
+
+   - SQLite      This should work.
+                 This feature should work independend on the drivers installed
+                 installed on your machine.
+
+   - CouchDB     This can only list the databases on the given server, nothing
+                 more yet. This shall become an experimental feature. CouchDB
+                 is a NoSQL database and does not align smoothly with SQL databases.
+
+   ----------------------------------------------------
+
+   Background:
+
+   QueryPony is a derivative of Query ExPlus 2.0.3.1 from
+   http://sourceforge.net/projects/queryexplus.
+
+   Query ExPlus is the continuation of Query Express 3.9 from
+   http://www.albahari.com/queryexpress.html.
+
+   ———————————————————————
+   [file 20130615°1556] ʘΩ

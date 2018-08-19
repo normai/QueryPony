@@ -1,0 +1,728 @@
+﻿/**
+ * file : http://downtown.trilo.de/svn/daftaridev/trunk/htdocs/daftari/css/daftari.css
+ * id : 20080710°2301
+ * version : 20180801°0753
+ * license : The MIT/X11 License
+ * copyright : © 2008 - 2018 Norbert C. Maier (http://www.trilo.de)
+ * authors : ncm
+ * encoding : UTF-8-with-BOM
+ * note : The following workarounds are applied:
+ *    (1) 'text-align:center' in the body makes tables center work in IE This must be
+ *        counteracted by 'text-align:left;' in p/li/.. tags then [workaround 20090208°2301]
+ *    (2) Make tables centered in Firefox and Opera with 'margin-left:auto; margin-right:auto;'
+ *        (workaround 20110323°2141), see also ref 20150303°1631
+ *    (3) IE does not understand max-width, so as a compromise we give it a width.
+ *        The matter seems no really fixed, just mitigated [workaround 20100822°1323]
+ *    (4) Workaround 20140128°1331 'monospace size'. Monospace fonts too small in some browsers.
+ *        See http://code.stephenmorley.org/html-and-css/fixing-browsers-broken-monospace-font-handling
+ *        [ref 20140128°1332]. The fix is to use 'font-family:monospace,monospace; font-size:1em;'
+ * note : <!-- If doctype is missing, IE will not recognize the css hoover selector [20130725°1311]. -->
+ * note : About validations done with http://csslint.net see note 20180620°0421
+ * ref 20150303°1631 : http://www.granneman.com/webdev/coding/css/centertables
+ * ref 20141028°1231 : http://stackoverflow.com/questions/6107522/is-element-specific-css-selector-bad
+ * ref 20150223°1321 : http://stackoverflow.com/questions/2091168/disable-a-link-using-css
+ * note :
+ */
+
+/* --------------------------------------------------- */
+/* (X) Provide custom font 'ComicJens' (seq 20140324°0731) */
+/* note : Remember issue 20160611°0111 'something wrong with @font-face'.
+/* ref : Sequence after http://www.netzallee.de/extra/comic-jens (ws 20140324°0711) */
+/* ref : Homepage https://www.kutilek.de/comic-jens/free (ws 20170306°0313) */
+/* (X.1) Erst für IE, er kennt nur das EOT-Format */
+@font-face {
+   font-family: ComicJensWeb;
+   /* src: url(http://fonts.netzallee.de/comicjens/comicjenspro-regular.eot); */
+   src: url(comicjenspro-regular.eot);
+}
+/* (X.2) Dann die TrueType-Datei für andere Browser */
+@font-face {
+   font-family: ComicJensWeb;
+   /* src: url(http://fonts.netzallee.de/comicjens/comicjenspro-regular.ttf) format('opentype'); */
+   src: url(comicjenspro-regular.ttf) format('opentype');
+}
+/* (X.3) Nun das neue WOFF-Format für Firefox */
+@font-face {
+   font-family: ComicJensWeb;
+   /* src: url(http://fonts.netzallee.de/comicjens/comicjenspro-regular.woff) format('woff'); */
+   src: url(comicjenspro-regular.woff) format('woff');
+}
+/* (X.4) Nun kann man die Schrift ganz normal per CSS ansprechen: */
+/*         body { font-family: ComicJensWeb, sans-serif; } */
+/*--------------------------------------------------- */
+
+
+/* rule 20080710°2311 — basic body */
+body {
+       background-color:#fafafa;
+       font-family:verdana,sans-serif; /* font-family:arial,helvetica,sans-serif; */
+       text-align:center; /* workaround 20090208°2301 'make tables center work in IE' */
+}
+
+/* some predefined body colors */
+body.BodyFaceAquamarine    { background-color:Aquamarine; }            /* rule 20140128°0512 (is #7fffd4) */
+body.BodyFaceGrayBright    { background-color:#eaeaea; }               /* rule 20111225°1532 *formerl 'downtown' */
+body.BodyFaceGreenSqueakLight  { background-color:#c0ffd0; }           /* rule 20150303°1511 (formerly 'epslightsalmon') */
+body.BodyFaceGreenSqueakMedium { background-color:#80ffb0; }           /* rule 20111225°1522 (formerly 'epsinside') */
+body.BodyFaceLavender      { background-color:Lavender; }              /* rule 20140502°1911 (is #e6e6fa) */
+body.BodyFaceLightgreen    { background-color:#c0ffc0; }               /* rule 20110424°0112 */
+body.BodyFaceLightergreen  { background-color:#d8ffd8; }               /* rule 20120814°1551 */
+body.BodyFaceNormal        { background-color:#a4e4ec; }               /* rule 20170925°0321 (is #d4d4d4) */
+body.BodyFaceEpsPinkMedium { background-color:#f8c8e8; }               /* rule 20111225°1523 (formerly 'epsmediumpink') */
+body.BodyFaceSalmonLight   { background-color:#ffd4f4; }               /* rule 20111225°1521 */
+body.BodyFaceStatus404     { background-color:Magenta; }               /* rule 20180512°0531 */
+body.BodyFaceTurkwoise     { background-color:#a4e4ec; }               /* rule 20111225°1524 */
+body.BodyFaceTurkwoiseSky  { background-color:#cceaf4; }               /* rule 20150303°1511 */
+body.BodyFaceWafailiGreen  { background-color:#80ff80; }               /* rule 20111225°1533 */
+
+/*
+ rule 20160617°0211
+ note : IE does not understand max-width, so as a compromise, apply
+         the elements a width as well (after workaround 20100822°1323).
+*/
+div.ChapterFaceNormal { margin:0 auto; max-width:780px; width:84%;
+                         background-color:#fcfcfc; padding:0.9em; /* #f8f8f8; */
+                          margin-top:0.9em; margin-bottom:1.1em;
+                         }
+
+/* ref 20170306°0411 http://stackoverflow.com/questions/1250973/css-style-inheritance */
+/* note : 'margin:0 auto;' seems wanted to have the div centered instead of leftside */
+div.ChapterFaceDarker { margin:0 auto; max-width:780px; width:84%; background-color:#d8d8d8; padding:0.9em; margin-top:0.6em; margin-bottom:0.6em; } /* (rule 20170306°0351 inheriting 20160617°0211) */
+div.ChapterFaceLogin { margin:0 auto; max-width:780px; width:84%; background-color:#f8f8f8; padding:0.9em; margin-top:0.6em; margin-bottom:0.6em; } /* (rule 20120827°0133 inheriting 20160617°0211) */
+div.chapterlog  { margin:0 auto; max-width:780px; width:80%; padding:1em; margin-top:1em; border:1px solid; } /* (rule 20100822°1334) */
+div.cptwide     { width:99%; } /* rule 20150209°1621 expand above class one */
+div.chapterwide { margin:1em; padding:1em; background-color:#f8f8f8; } /* turquoise */ /* ELIMINATE? (20120827°0133) for Daftari Login Form only */
+
+
+/* ~~~~~~~~~~~~~~~~~ Globals ~~~~~~~~~~~~~~~~~ */
+
+/* rule set 20080711°0511 general header cascade */
+h1 { text-align:center; color:#0000f0; font-size:2.10em; margin-top:0; }               /* (rule 20080711°0512) */
+h2 { text-align:center; color:#3000c0; font-size:1.85em; margin-top:0; }               /* (rule 20080711°0513) */
+h3 { text-align:center; color:#600090; font-size:1.60em; margin-top:0; }               /* (rule 20080711°0514) */
+h4 { text-align:center; color:#900060; font-size:1.35em; margin-top:0; }               /* (rule 20080711°0515) */
+
+/*  (seq 20140302°0621 for workaround 20090208°2301) counteract 'text-align:center' for IE in body */
+li     { text-align:left; }                                            /* (rule 20140302°0622) */
+p      { text-align:left; }                                            /* (rule 20140302°0623) */
+td     { text-align:left; }                                            /* (rule 20140302°0624) */
+
+/* (seqence 20100826°2131) */
+ol     { text-indent:0.0; text-align:left; }                           /* (rule 20100826°2131) */ /* cssling.net tells not to use units with zero, so instead of '0.0em' use '0.0' */
+ul     { text-indent:0.0; text-align:left; }                           /* (rule 20100826°2132) */
+li     { margin-top:0.4em; margin-bottom:0.4em; }                      /* (rule 20100826°2133) */
+
+/* ruleset 20140302°0631 — for workaround 20140128°1331 'monospace size' */
+/* note : 'text-align:left' counteracts 'text-align:center' for IE in body (workaround 20090208°2301) */
+pre    { font-family:monospace,monospace; font-size:1.0em; text-align:left; padding:0.5em; } /* (rule 20090208°0511) */
+tt     { font-family:monospace,monospace; font-size:1.0em; }                  /* (rule 20140131°0911) note: tidy.exe complains <tt> as obsolete, so better use class="typewrite" */
+
+/* ~~~~~~~~~~~~~~~~~ end Globals ~~~~~~~~~~~~~~~~~ */
+
+/* Some navigation elements */
+
+/* paragraphs for navigation header (do not use 'p.topnavi1' but just '.topnavi1', otherwise LINT will complain 'overqualified' */
+.topnavi1 { border-bottom:0 solid gray; padding-bottom:0; margin-top:0; margin-bottom:0; border-top:transparent; } /* (rule 20080711°0531) */
+.topnavi2 { border-bottom:0 solid white; padding-bottom:0; margin-top:0; margin-bottom:0; font-size:0.88em; } /* (rule 20080711°0532) */
+.topnavi3 { border-bottom:1px solid white; padding-bottom:0; margin-top:0; margin-bottom:0; font-size:0.77em; } /* (rule 20080711°0533) */
+
+/* rule set 20141129°0521 Not used, but keep it for planned 'bake' feature */
+/* note : Compare rule 20141129°0521 'topNaviBox*' and  */
+div.topNaviBox { border:1px solid white; padding:0.3em; } /* ELIMINATE */
+div.TopNaviBox1Norm { border:1px solid white; padding:0.3em; } /* prototype in http://www.trekta.biz/svn/demoscs/trunk/htdocs/arrays.html */
+div.TopNaviBox2Gray { border:1px solid white; padding:0.3em; background-color:#f8f8e0; }
+div.TopNaviBox3None { border:1px solid white; padding:0.3em; display:none; }
+
+.topNaviLine { color:Green; border:0.01em solid transparent; padding:0.01em; margin:0.01em; } /* (rule 20141117°0511 (20080711°0531) */
+.topNaviLineSmall { color:Green; border:0.01em solid transparent; padding:0.01em; margin:0.01em; font-size:small; } /* rule 20150304°1111 */
+td.topNaviArrows { text-align:left; width:136px; } /* 134px seems minimum */ /* rule 20150215°1711 (used e.g. with breadcrumbsmanu) */
+p.topNaviArrowsBox { position:absolute; top:0.6em; right:0.6em; width:131px; height:25px; z-index:1; margin-top:0.1em; text-align:left; } /* rule 20141119°0431 */
+
+/* rule set 20150302°1531 for cakecrumbs */
+a.topNaviLinkActive { color:Green; border:0.01em solid transparent; padding:0.1em;                        margin-bottom:0.1em; margin-top:0.1em; margin-right:0.2em; margin-left:0.2em; } /* (rule 20141117°0512) */
+a.topNaviLinkChild  { color:Green; border:0.1em solid transparent; padding:0.1em; margin:0.1em; } /* (rule 20150814°0751) */
+a.topNaviLinkGrandpa { color:Turquoise; border:0.1em solid transparent; margin:0.1em 0.02em 0.1em 0.02em; font-size:0.88em; } /* (rule 20150814°0711) */
+a.topNaviLinkPale   { color:Lightgray; border:0.01em solid transparent; padding:0.01em; margin:0.01em; } /* (rule 20150221°0631) */
+a.topNaviLinkParent { color:Green; border:0.1em solid transparent; padding:0.1em;      margin-bottom:0.1em; margin-top:0.1em; margin-right:0.2em; margin-left:0.2em; font-weight:bold; } /* (rule 20150302°1533) */
+a.topNaviLinkPending { color:LightGreen; border:0.1em solid transparent; padding:0.1em;     margin-bottom:0.1em; margin-top:0.1em; margin-right:0.2em; margin-left:0.2em; font-style:italic; pointer-events:none; cursor:default; text-decoration:none; } /* (id20150302°1534) */
+a.topNaviLinkSelf   { color:Green; border:0.1em solid transparent; padding:0.1em;       margin-bottom:0.1em; margin-top:0.1em; margin-right:0.2em; margin-left:0.2em; font-weight:bold; pointer-events:none; cursor:default; text-decoration:none; } /* (id20150302°1534) */
+
+/* rule set 20150221°0621 'general more or less solid links' */
+a.crumbActive { padding-left:0.25em; padding-right:0.25em; }                   /* (rule 20150221°0622) */
+a.crumbPassive { color:#c8c8c8; padding-left:0.25em; padding-right:0.25em; }   /* (rule 20150221°0623) */
+a.crumbSelf { text-decoration:none; font-weight:bold; padding-left:0.25em; padding-right:0.25em; } /* (rule 20150221°0624) */
+a.crumbuncle { color:#c0c0c0; }                                                /* (rule 20100828.1423) ELIMINATE THIS? */
+
+/* rule set 20150304°1211 */
+p.topLogoRightPlain { clear:right; } /* rule 20150304°1212 */
+p.topLogoRightPlain canvas { float:right; padding-right:0.6em; } /* rule 20150304°1213 */
+p.topLogoRightPlain img { float:right; padding-right:0.6em; } /* rule 20150304°1214 */
+
+/* rule set 20150321°0431 (alternative one for topTitle) */
+p.topTitleCrumbs { text-align:center; font-size:1.2em; margin:0.2em 0 0.2em 0; } /* rule 20150321°0432 */
+p.topTitleCrumbs a  { color:Green; margin-left:0.6em; margin-right:0.6em; } /* rule 20150321°0433 */
+h1.topTitleCaption { margin-top:0.2em; } /* rule 20171226°1041) */
+
+
+/**
+ ruleset 20150313°1411
+ summary : Alternative two for topTitle. The box holds three elements :
+  - The breadcrumbs in a <p>, the contained link is also decorated
+  - The title in a <h1>
+  - The logo, it may be a img or a canvas, it may be inside a div or not
+ note : Reference chapter e.g. www.axtwerfen.de/Thr_0800.html
+*/
+div.topTitleBox > p            { color:Blue; font-size:large; margin:-0.1em 0 0.7em 0; text-align:center; } /* rule 20150313°1412 */
+div.topTitleBox > p > a        { color:Blue; margin:0 0.4em 0 0.4em; } /* rule 20150313°1413 */
+div.topTitleBox > p > span > a { }                                     /* rule 20150313°1414 */
+div.topTitleBox > img          { float:right; padding:0.1em;}           /* rule 20150313°1415 */
+div.topTitleBox > canvas       { float:right; padding:0.1em; }         /* rule 20150313°1416 */
+div.topTitleBox > div > img    { float:right; padding:0.1em;}          /* rule 20180801°0231 (the logo might be inside a div, e.g. in www.axtwerfen.de */
+div.topTitleBox > div > canvas { float:right; padding:0.1em; }         /* rule 20180801°0232 (the canvas may be inside a div, e.g. in www.axtwerfen.de/Thr_F_tec.html */
+div.topTitleBox > h1  { color:Blue; margin-top:0.1em; }                /* rule 20150313°1417 */
+
+
+/* rules for manual breadcrumbs like in features.html (note 20150211°1433) */
+p.breadcrumbscentered { text-align:center;margin-top:0.1em; } /* rule 20150211°1411 */
+p.breadcrumbsmanu1 { font-size:100%; margin-bottom:0.1em; margin-top:-0.1em; border:1px; } /* border:1px solid lightgray; */ /* rule 20150211°1431 breadcrumbs.html */
+p.breadcrumbsmanu2 { font-size:87%; margin-bottom:0.1em; margin-top:0.1em; } /* border:1px solid lightgray; */ /* rule 20150211°1432 breadcrumbs.html */
+p.breadcrumbsmanu3 { font-size:87%; margin-bottom:0.1em; margin-top:0.1em; border-top:1px dashed Gray; } /* border:1px solid lightgray; */ /* rule 20150211°1432 breadcrumbs.html */
+
+/* rule set 20150209°0821 page header line for fileprotocol views, can be manually filled or from js */
+/* note : Compare rules 20141129°0521 'topNaviBox*' and 20150209°0821 'toptitlecrumstatic' */
+div.toptitlecrumstatic {
+   /* outline:1px solid invert; */
+   background-color:PaleGreen; /* */
+   font-family: ComicJensWeb, Arial; /* always watch whether the font is working */
+   font-size:83%;
+   margin:2px;
+   padding:2px;
+   text-align:left;
+}
+
+
+/* +++++++++++++++ Simple Rules +++++++++++++++ */
+/* For ubiquitous usage like for spans and characters. */
+
+/* Flashy monospace with workaround 20140128°1331 applied */
+.attention    { font-family:monospace,monospace; font-weight:bold; color:Crimson; font-size:1.20em; } /* (rule 20100826°2101) */
+.attentionSmall { font-family:monospace,monospace; font-weight:bold; color:Crimson; font-size:0.9em; } /* (rule 20100826°2102) */
+
+/* rule set 20140128°1341 */
+/* note : Padding is not 0.1em but 0.9 em, otherwise e.g. an underline in the line above will be covered means invisible (20140209°0551) */
+/* .code       { font-family:monospace,monospace; font-size:1.00em; padding:0.09em; background:#fff0f0; } */ /* ELIMINATE (rule 20140128°134202)
+/* .codeMedium { font-family:monospace,monospace; font-size:1.00em; padding:0.09em; background:#fff0f0; } */ /* (rule 20140128°1341)
+.codeNormal { font-family:monospace,monospace; font-size:1.00em; padding:0.09em; background:#fff0f0; } /* (rule 20140128°1341) (after http://code.stephenmorley.org/html-and-css/fixing-browsers-broken-monospace-font-handling 20140128°1332) */
+/* .codesmall  { font-family:monospace,monospace; font-size:0.88em; padding:0.09em; background:#fff0f0; } */ /* ELIMINATE (rule 20140128°134302) */
+.codeSmall  { font-family:monospace,monospace; font-size:0.88em; padding:0.09em; background:#fff0f0; } /* (rule 20140128°1343) */
+/* .codetiny   { font-family:monospace,monospace; font-size:0.77em; padding:0.09em; background:#fff0f0; } */ /* ELIMINATE (rule 20140128°134402) */
+.codeTiny   { font-family:monospace,monospace; font-size:0.77em; padding:0.09em; background:#fff0f0; } /* (rule 20140128°1344) */
+/* .codemicro  { font-family:monospace,monospace; font-size:0.66em; padding:0.09em; background:#fff0f0; } */ /* ELIMINATE (rule 20140128°134502) */
+.codeMicro  { font-family:monospace,monospace; font-size:0.66em; padding:0.09em; background:#fff0f0; } /* (rule 20140128°1345) */
+
+/* rule set 20150321°0341 general font properties */
+.fontFat { font-weight:bold; } /* 20180518°1042 */
+.fontItalic { font-style:italic; } /* 20180518°1043 */
+.fontLarge { font-size:large; } /* 20150321°0342 */
+.fontLarger { font-size:x-large; } /* 20150321°0344 */
+/*.fontLargest { font-size:x-large; } */ /* ELIMINATE 20150321°034402 */
+.fontSmall { font-size:small; } /* 20150321°0346 */
+.fontSmaller { font-size:x-small; } /* 20150321°0347 */
+/* .fontSmallest { font-size:x-small; } */ /* ELIMINATE 20150321°034702 */
+
+/* rule 20150209°1351 e.g. for obsolete paragraphs */
+.invisible { display:none; }
+
+/* links to empty chapters */
+.NotYetFilled { color:LightGray; }                                              /* (rule 20141124°1731) */
+a.NotYetFilled { color:LightGray; }                                             /* (rule 20141119°1313) */
+
+.Outcommented  { color:LightGray; font-style:italic; } /* color:Gainsboro; */   /* (rule 20141116°0912) note : May already exists in other file */
+a.Outcommented  { color:LightGray; font-style:italic; }                                            /* (rule 20141116°0913) */
+
+.OutcommentedPale  { color:#e8e8e8; font-style:italic; }                        /* (rule 20141116°0921) */
+a.OutcommentedPale  { color:#e8e8e8;  font-style:italic; }                      /* (rule 20141116°0922) */
+
+.OutcommentedSolid  { color:Gray; font-style:italic; }                          /* (rule 20141116°0931) */
+a.OutcommentedSolid { color:Gray; font-style:italic; }                         /* (rule 20141116°0932) */
+
+.phraseBelowIs { color:DarkCyan; font-size:0.83em; } /* Blue (rule 20170306°0332) */
+.phraseReferTo { color:DeepSkyBlue; font-size:0.83em; } /* SlateBlue (rule 20170306°0331) */
+
+.qnaanswer     { text-indent:1em; color:#004040; margin-top:0; }    /* OBSOLET 20170306°0321 */ /* (rule 20100826°212302) */
+.qnaquestion   { color:#006000; margin-bottom:0; font-weight:bold; } /* OBSOLET 20170306°0322 */ /* (rule 20100826°212202) */
+.qnaQuestion   { color:#006000; margin-bottom:0; font-weight:bold; }           /* (rule 20100826°2122) */
+.qnaAnswer     { text-indent:1em; color:#004040; margin-top:0; }                /* (rule 20100826°2123) */
+
+.timestamp     { color:PowderBlue; font-size:x-small; font-family: ComicJensWeb, sans-serif; } /* PowderBlue Turquoise */ /* (rule 20100826°2121) */
+
+.todo          { color:Red; font-size:0.77em; } /* ELIMINATE (rule 20110924°132102) */
+.fontTodo      { color:Red; font-size:0.77em; } /* (rule 20110924°1321) */
+
+/* rule set 20140217°0611 replacements for '<tt>', which tidy.exe complains as obsolet. */
+/* Note, this has applied workaround 20140128°1331 'Monospace size' */
+.typewrite           { font-family:monospace,monospace; padding:0 0.2em 0 0.2em; font-size:1.00em; }   /* ELIMINATE rule 20140217°061202 */
+.fontTty       { font-family:monospace,monospace; padding:0 0.2em 0 0.2em; }                     /* rule 20140217°0612 */
+.fontTtySmall  { font-family:monospace,monospace; padding:0 0.2em 0 0.2em; font-size:small; }    /* rule 20140217°0613 */
+.fontTtyMedium { font-family:monospace,monospace; padding:0 0.2em 0 0.2em; font-size:medium; }   /* rule 20140217°0614 */
+.fontTtyLarge  { font-family:monospace,monospace; padding:0 0.2em 0 0.2em; font-size:large; }    /* rule 20140217°0615 */
+.fontTypewrite       { font-family:monospace,monospace; padding:0 0.2em 0 0.2em; }                     /* ELIMINATE rule 20140217°061202 */
+.fontTypewriteSmall  { font-family:monospace,monospace; padding:0 0.2em 0 0.2em; font-size:small; }    /* ELIMINATE rule 20140217°061302 */
+.fontTypewriteMedium { font-family:monospace,monospace; padding:0 0.2em 0 0.2em; font-size:medium; }   /* ELIMINATE rule 20140217°061402 */
+.fontTypewriteLarge  { font-family:monospace,monospace; padding:0 0.2em 0 0.2em; font-size:large; }    /* ELIMINATE rule 20140217°061502 */
+
+.ttyFilename   { font-family:monospace,monospace; font-size:1.10em; padding-left:0.2em; padding-right:0.2em; }   /* (rule 20150304°1411) */
+.ttySmall      { font-family:monospace,monospace; font-size:small; padding-left:0.2em; padding-right:0.2em; }      /* (rule 20150304°1412) */
+
+.ttyLogEntry   { color:Green; font-size:small; } /* ELIMINATE behind bye, Green like in the faq */ /* 20150304°142102 recoverd from 'typewrite-logentry'*/
+.fontLogEntry  { color:Green; font-size:small; } /* rule 20150304°1421 */
+
+/* +++++++++++++++ end Simple Rules +++++++++++++++ */
+
+
+/* rule 20150318°0511 experimental (after 20100826°2121 and 20150313°1421) */
+/* summary : This style shall provide an unobtrusive timestamp display. */
+/* todo 20150318°0521 : Provide this class via JS as bubble.. */
+/* todo 20150318°0531 : On mouseover switch font to size large. */
+.stampTimestampBlock {
+
+   /* fontstyle 20100826°2121 */
+   color:Turquoise;
+   font-size:xx-small;
+   font-family: ComicJensWeb, sans-serif;
+
+   /* compress 20150313°1421 (This does not work with IE8.) */
+   /* span.loFontStretch { */
+   display:inline-block;
+   transform:scale(0.11,1);          /* W3C */
+   -webkit-transform:scale(0.11,1);  /* Safari and Chrome */
+   -moz-transform:scale(0.11,1);     /* Firefox */
+   -ms-transform:scale(0.11,1);      /* IE9 */
+   -o-transform:scale(0.11,1);       /* Opera */
+}
+
+
+/* ********************************************************* */
+/* specific flowtext paragraphs                              */
+/* ********************************************************* */
+
+
+/* (ruleset 20100826°2113) usage e.g. : <p class="imagecenter" style="max-width:444px;"> */
+p.imageCenter  { text-align:center; margin-left:auto; margin-right:auto; color:Green; } /* (rule 20100826°2111) */
+p.imageSelf  { text-align:center; text-indent:1em; color:DarkGreen; margin-bottom:0; } /* (rule 20080711°0541) */
+p.imageSub   { text-align:center; text-indent:1em; margin-top:0; }           /* (rule 20080711°0542) */
+
+/* some specific paragraphs [ruleset 20080711°0621] */
+p.session      { text-align:right; font-size:0.77em; font-style:italic; color:#808080; } /* (rule 20100826°2112) */
+p.textfileobject { background-color:#fefefe; margin-left:6%; margin-right:6%;  width:100%; }  /* (rule 20080711°0622) only for active-x textfile include */
+p.ParaSmallGreen { font-size:0.77em; color:DarkGreen; }                        /* rule 20160611o0231 after obsolete style 'notez' */
+p.answer       { text-indent:1em; margin-top:0; }                                   /* (rule 20080711°0552) */
+p.question     { text-indent:1em; color:#00B000; margin-bottom:0; }             /* (rule 20080711°0551) */
+p.phperror     { background-color:Red; font-size:1.35em; font-weight:bold; padding:0.6em; } /* for php echo lines in Daftari debug mode (rule 20111002°1951) */
+
+/* footer paragraphs [ruleset 20150211°0511] */
+p.goodbye      { font-family: ComicJensWeb, sans-serif; margin-top:2.1em; font-size:small; clear:both; } /* (rule 20080710°2314) */
+p.footerUpdate { color:Green; font-size:small; margin-bottom:-3.7em; margin-left:1.1em; margin-top:2.4em; text-align:left; font-family:ComicJensWeb, sans-serif; } /* rule 20180511°1541 optional */
+p.footerImprint    { color:#808080; font-size:small; margin-bottom:-0.3em; margin-right:1.9em; margin-top:2.4em; text-align:right; } /* (rule 20080710°2313) */
+p.footerImprint a  { color:#505050; padding-left:0.6em; padding-right:0.6em; }         /* (rule 20141129°0511) */
+p.footerReferer { border-top:1px solid; color:#505050; font-size:small; margin-bottom:2.1em; padding-top:0.2em; } /* (rule 20080710°2312) */
+span.footerCopyright { margin-left:0.6em; }                                           /* (rule 20141116°0512) */
+span.footerFileUrl    { margin-left:0.6em; }                                          /* (rule 20141116°0511) */
+span.footerFileUrl a  { color:#505050; }                                               /* (rule 20141129°0512) */
+span.footerLastUpdate  { font-family:ComicJensWeb, sans-serif; font-size:1.11em; margin-left:1.1em; margin-right:1.1em; color:green; } /* (rule 20150210°1611) */
+span.footerLicense { margin-left:0.6em; }                                              /* (rule 20150211°0513) */
+span.footerLicense a { color:#505050; }                                                /* (rule 20150211°0514) */
+span.footerTimestamp   { font-family: ComicJensWeb, sans-serif; font-size:x-small; margin-left:0.9em; } /* (rule 20141116°0513) */
+span.footerVersions { display:none; font-size:small; margin-left:0.9em; } /* (rule 20150409°1921) */
+
+/* rule set 20180814°1511 */
+/* same like footerTimestamp, just prepend and append the brackets */
+span.footerPageId   { font-family: ComicJensWeb, sans-serif; font-size:x-small; margin-left:0.9em; }
+span.footerPageId:before { content:'[page\00A0'; }
+span.footerPageId:after { content:']'; }
+
+
+/* rule 20110323°2141 — table appearance */
+/* note : Make tables centered in Firefox and Opera with     */
+/*    "margin-left:auto; margin-right:auto;" */
+table.zenter       { margin-left:auto; margin-right:auto; border-collapse:collapse; }  /* (rule 20110323°2153) table for a block with links */
+table.zenter80p    { width:80%; margin-left:10%; margin-right:10%; border-collapse:collapse; border:0; } /* (rule 20110323°2154) two-column-table for a block with links, pretty similar to the chapters-table */
+
+
+/* rule set 20140726°1131 for link lists being bulleted with logos */
+/* usage prototype on page 20170924°0911 http://www.trekta.biz/svn/demosps/trunk/pages/links.html */
+p.iconFloatLeft { clear:left; margin-left:48px; text-align:left; padding:0.1em; }  /* rule 20140726°1132 */
+p.iconFloatLeft img { float:left; margin:0 20px 20px 0; margin-left:-56px; }         /* rule 20140726°1133 */
+p.iconFloatLeft canvas { float:left; margin:0 20px 20px 0; margin-left:-56px; }      /* rule 20140726°1134 */
+
+/* (feature 20150223°1921) Link lists with icons on the left, working equally with ordinary images and with CanvasGear */
+/* note : See CanvasGear issue 20150223°1821 'canvas inside paragraph does not work with IE' */
+/* todo 20150223°1923 : Make a div containing the both of them, working like columns, without hardcoding the icon width here. */
+div.iconFloatLeft { float:left; padding:0.4em; } /* border:1px solid gray; */  /* (rule 20150223°1841) */
+p.iconFloatLeft2 { margin-left:4em; padding:0.4em; } /* border:1px solid gray; */ /* ELIMINATE!? rule 20150223°1922 */
+
+/* rule set 20180518°0111 */
+/* (prototype on http://downtown.trilo.de/svn/daftaridev/trunk/htdocs/daftari/moon/quests.html) */
+div.iconFloatLeft31 { border:1px solid transparent; min-height:69px; clear:both; }
+div.iconFloatLeft31 > img { float:left; padding:7px; }
+div.iconFloatLeft31 > a > img { float:left; padding:7px; }
+div.iconFloatLeft31 > canvas { float:left; padding:7px; }
+div.iconFloatLeft31 > p   { margin:5px 0 0 72px; text-align:left; padding:0.1em; }
+div.iconFloatLeft31 > pre { margin-left:72px; text-align:left; padding:0.1em; } /* */
+div.iconFloatLeft31 > ul  { margin:-0.1em 0 0 101px; text-align:left; padding:0.1em; }
+
+/**
+ * rule set 20111006°1151
+ * summary : This provides a list with individual item images
+ * ref 20111006`1146 : https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type (section 'Accessibility concerns') (logo 20180511o0333)
+ * usage : See ./../daftari/help/styles.html
+ */
+ul.Bullet22Icons { list-style-type:none; padding:0 0 0 0; margin:0 0 0 1.7em; }
+ul.Bullet22Icons > li { min-height:48px; padding:1px 1px 1px 67px; display:table; border:1px solid transparent; }
+ul.Bullet22Icons > li::before { content: "\200B"; } /* Zero-Width-Space, reason see ref 20111006`1146 section 'Accessibility concerns' */
+
+/* rule set 20150317°0751 'provide div for reference with icon' */
+/* used e.g. in Thr_0800.html */
+div.listIconFloatLeft1 { float:left; padding:0.4em; }
+div.listIconFloatLeft1 > img { float:left; margin:1px 20px 20px 1px; } /* top right bottom left*/
+div.listIconFloatLeft1 > a > img { float:left; margin:1px 20px 20px 1px; } /* top right bottom left*/
+div.listIconFloatLeft1 > p { margin-left:48px; text-align:left; /* background-color:Pink; */ }
+
+/* rule set 20150317°0811 'provide p for reference with icon' */
+/* note : A paragraph seems easiest for this purpose, but then a div is more universal */
+p.listIconFloatLeft2 { padding:0.4em; background-color:Pink; }
+p.listIconFloatLeft2 > img { float:left; margin:1px 20px 20px 1px; } /* top right bottom left*/
+p.listIconFloatLeft2 > a > img { float:left; margin:1px 20px 20px 1px; } /* top right bottom left*/
+
+
+/*
+ * For the Tigra Tree Menu, a class for 'td' seems not work,
+ *  The table generator seems not to transport any style. So just
+ *  keep the plain td suitable for the Tigra Tree Menue!
+ */
+td             { text-align:left; vertical-align:top; padding:0.2em; } /* (rule 20111227°0125) */
+td.treemenu    { text-align:left; vertical-align:top; border:0; padding:0; font-size:11px; font-family:Tahoma,Verdana; } /* counteract default borders (rule 20120826°1222) */
+
+/* ruleset 20080711°0631 */
+td.folie       { text-align:center; border:0; padding:0.4em; }                  /* (rule 20080711°0632) */
+td.linklogo    { padding:0.6em; vertical-align:top;            background:#e0ffff; border-bottom:0.1em solid #fafafa; } /* (rule 20080711°0641) */
+td.linkdescr   { padding:0.6em; vertical-align:top;            background:#e0ffff; border-bottom:0.1em solid #fafafa; } /* (rule 20080711°0643) */
+td.linkstatus  { padding:0.6em; vertical-align:top;            background:#e0ffff; border-bottom:0.1em solid #fafafa; } /* (rule 20080711°0644) */
+td.zenter      { text-align:center; vertical-align:top; border:1px solid gray; padding:0.4em; } /* (rule 20080711°0633) */
+td.zenternoborder { text-align:center; vertical-align:top; border:0; padding:0.4em; padding-bottom:2em; } /* (rule 20080711°0634) */
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++ */
+/* Styles for the subchapter listing pane, typically used on frontpages */
+
+/**
+ * rule set 20180512°0441
+ * summary : Subchapter list with logos on the left for each, either image or canvas
+ * note : Example usages are
+ *    - http://downtown.trilo.de/svn/app.gipsydrive/trunk/pages/editors.html
+ *    - http://downtown.trilo.de/svn/forest/trunk/pages/index.html (with <ul>)
+ *    - http://www.trekta.biz/svn/demomatrix/trunk/pages/asm/1000basics.html
+ * note : Perhaps locally overwrite h2 width to adjust the partition
+ */
+div.Subchaps3List { }
+div.Subchaps3List > div {
+               padding-top:0.2em; padding-bottom:0.2em;
+               border:1px solid transparent;
+}
+div.Subchaps3List > div > canvas {
+               float:left;
+}
+div.Subchaps3List > div > img {
+               float:left;
+}
+div.Subchaps3List > div > h2 {
+               float:left; width:27%;
+               font-size:1.4em; text-align:right;
+               padding-right:0.7em; margin-top:-0.1em;
+               border:1px solid transparent;
+}
+div.Subchaps3List > div > p {
+               display:table-cell; /* width:72%; */
+               padding-right:0.4em;
+               border:1px solid transparent;
+}
+div.Subchaps3List > div > ul {
+               /* remember issue 20180620°0541 'element snapping left side' */
+               /* remember workaround 20180620°0542 'avoid list snapping left side' */
+               float:left;
+               margin-top:0;
+               max-width:44%;
+}
+div.Subchaps3List > div:after { content:''; display:block; clear:both; }
+
+/*
+   todo 2018062°0621 'merge rule sets'
+   do : Merge rule sets 20180512°0441 Subchaps3List and 20180412°1811
+      'subchaps4Panel' into one.
+   status : open
+   ʘ
+*/
+
+/* ruleset 20180412°1811 experimental (after ruleset 20170306°2021) */
+/* note : Alternative for div.Subchaps3List? Has it any advantages? */
+/* note : Only use so far on page 20140518°0511 samssql/index.html */
+div.subchaps4Panel {                                                   /* rule 20180412°1812 */
+                border:1px solid lightgray;
+                 margin-left:3%; margin-right:3%;
+}
+div.subchaps4Panel div {                                               /* rule 20180412°1813 */
+               background-color:transparent;
+                border:1px solid transparent;
+                 clear:both;
+}
+div.subchaps4Panel div img {                                           /* rule 20180412°1814 */
+               float:left;
+                padding:0.1em;
+                 border:1px solid transparent;
+                  /*  width:111px; */
+}
+div.subchaps4Panel div h2 {                                            /* rule 20170306°2024 */
+                float:left;
+                 /* font-size:1.4em; font-weight: bold; */
+                  /* color:DarkViolet; */
+                   width:24%; background-color:transparent;            /* Transparent LightGray width:32%; */
+                    text-align:right; padding-right:0.6em;
+                     margin-top:0.4em;
+                      /* line-height:1.2em; */
+                       }
+div.subchaps4Panel div p {                                             /* rule 20170306°2025 (after 20160515°0355) */
+               color:#3000c0;
+                background-color:transparent;                          /* DarkGreen Lavender color:#3000c0; */
+}
+
+/* new style names (20141115°1741) */
+table.subchapsTable { margin-left:5%; margin-right:5%; border:1px;}                                                  /* (rule 20080711°0711) */
+td.subchapsTabTitle { font-size:1.35em; font-weight:bold; text-align:right; width:40%; padding:0.7em; border:0; }  /* (rule 20080711°0712) */
+td.subchapsTabText  { border:40px red; padding:0.7em; vertical-align:top; }                                        /* (rule 20080711°0715) */
+td.subchapsTabLogo  { border:40px transparent; text-align:center; vertical-align:top; padding-top:0.7em; }         /* (rule 20080711°0716) */
+
+/* ruleset 20170901°1431 (just new names for 20141115°1742) */
+/* note : Prototype see ... */
+table.CptTblChapters { margin-left:5%; margin-right:5%; border:0;}                   /* (rule 20080711°0711) */
+td.CptTblCellLogo   { border:40px transparent; text-align:center; vertical-align:top; padding-top:0.7em; }            /* (rule 20080711°0716) */
+td.CptTblCellTitle  { font-size:1.35em; font-weight:bold; text-align:right; width:40%; padding:0.7em; border:0; }     /* (rule 20080711°0712) */
+td.CptTblCellText   { border:40px red; padding:0.7em; vertical-align:top; }                                           /* (rule 20080711°0715) */
+
+/**
+   rule set 20150213°0311 (yet another) chapter overview
+   prototypes :
+      - http://downtown.trilo.de/svn/daftaridev/trunk/htdocs/daftari/help/features.html [pg 20150210°0311]
+      - http://www.trekta.biz/svn/demomatrix/trunk/pages/cpp/cpp3072.html [pg 20151114°1011]
+*/
+p.chapTab1Chapter { float:left; font-size:155%; margin:0.1em 0.6em 0.6em 1.6em; width:27%; /*width:7.1em; */ } /* rule 20150213°0312 */
+p.chapTab2Summary { margin:0.9em 0.6em 0.6em 0.6em; }     /* rule 20150213°0313 */
+p.chapTab3Clear   { clear:left; }  /* rule 20150213°0314 °/
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++ */
+/* *** Rules for links *** */
+
+/**
+ * title : 'link-with-target-blank' (rule 20120725°1151)
+ * ref : http://www.peterkroener.de/links-mit-target_blank-gesondert-markieren (20120725°1141)
+ * note : This style eliminates the need for class 'extern', the target
+ *     attribute in the link is sufficient. But it is complained 'slow' by LINT.
+ * note : Find out, whether it is slow only if really used on a page,
+ *         or even if it just exists in the stylesheet here.
+ */
+a[target^="_blank"] {
+   padding-left:11px;
+   background-image:url(./img/20141115o1731.extern.png);
+   background-position:left center;
+   background-repeat:no-repeat;
+   color:DarkViolet;                                           /* background-color:#ffffa0; */
+}
+
+a[target^="_blank"]:hover {                                    /* (rule 20120725°1152) */
+   background-color:Yellow;                                    /* #ffd0a0 */
+}
+
+/* rule 20100315°1943 'extern link with icon' */
+a.extern {
+   padding-left:13px; /* 12px; */
+   background-image:url(./img/20141115o1731.extern.png);
+   background-position:left center;
+   background-repeat:no-repeat;
+}
+
+/* extern link without icon (rule 20100315°1944) */
+a.extern:hover {
+   background-color:LemonChiffon; /* fffacd */
+}
+
+/* ruleset 20150326°0311 for idiom 20150308°0951 */
+/* usage prototype on page 20150302°1511 http://www.trekta.biz/svn/demoscs/trunk/htdocs/books.html */
+/* experiment 20180428°0311 on http://www.trekta.biz/svn/demoshtml/trunk/pages/characters.html */
+/* note : Goldenrod Moccasin PowderBlue Silver SkyBlue */
+p.pageMark11Text { clear:both; float:right; margin:-0.9em 0 -0.9em 0; padding-right:0.1em; }
+p.pageMark11Text > a { color:PowderBlue; font-family: ComicJensWeb, sans-serif; font-size:small; text-decoration:none; }
+
+/* rule set 20180615°0411 — works without wrapper paragraph; to be used e.g. from inside a div of class iconFloatLeft31 */
+/* prototype page 20180615`0311 http://www.trekta.biz/svn/demomatrix/trunk/pages/html/markdown.html */
+/* reference : https://css-tricks.com/css-content/ [20180615°0422] */
+a.pageMark21Hand { clear:both; float:right; margin:-0.3em -1.4em 0 0; color:Goldenrod; font-size:xx-large; text-decoration:none; } /* rule 20180615°0412 */
+a.pageMark21Hand:before { content:'\261C'; } /* &#9756; White Left Pointing Index */  /* rule 20180615°0413 */
+
+/* ELIMINATE? (rule 20111012°1221) in demos.html */
+a.noborder img { border:none; }
+
+/* rule 20150303°1611 this is to remove the blue borders in IE8 */
+a img.imgNoBorder { border:0; }
+
+a.extern2:hover { background-color:#ffd0d0; }                  /* (rule 20100325°1741) */
+a.intern:hover { background-color:LightGreen; }                /* (rule 20100325°1742) */
+
+/* +++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+/* ruleset 20100923°1101 prototype on http://localhost/downtown/licenses.html */
+p.onthispage   { text-align:center; color:#0000f0; line-height:1.5em; border: solid transparent 1px; } /* (rule 20100923°1102) */
+p.onthispage > a  { color:Maroon; margin-left:0.3em; margin-right:0.3em; border: solid transparent 1px; } /* (rule 20100923°1103) */
+
+
+/* alternative for normal h1 header lines (rule 20101104°1611) */
+p.headerbar    { border-bottom:0; border-top:0; margin-top:0; margin-bottom:0; padding-top:.9em; padding-bottom:0.9em; background-color:#a4e4ec; text-align:center; font-size:1.75em; font-weight:bold; color:Blue; }
+div.headerbar  { border-bottom:0; border-top:0; margin-top:0; margin-bottom:0; padding-top:0; padding-bottom:0; background-color:#c4f8fc; text-align:center; } /* rule 20140712°2011 */
+
+table.topNaviTable { width:100%; margin:0.3em; } /* (20150304°1141) prototypical in Downtown */
+table.breadcrumbs { width:100%; margin:0.3em; font-size:118%; } /* ELIMINATE (20120827°0135) for Daftari Login Form */
+table.topNaviTableBig { width:100%; margin:0.3em; font-size:118%; } /* (20120827°0135) for Daftari Login Form */
+
+td.login { border:none; } /* (20120827°0136) for Daftari Login Form */
+
+
+/**
+ * Styles for the Page Menu and the Element Menus (seq 20110810°1611)
+ * ref 20110810°1542 : http://javascript-array.com/scripts/simple_drop_down_menu
+ *    only much simplyfied, most definitions there are no more wanted here
+ */
+#sddm {
+   margin: 0;
+   padding: 0;
+   z-index: 30;
+}
+
+#sddm div {
+   position: absolute;
+   visibility: hidden;
+   margin: 0;
+   padding: 0;
+   background: #EAEBD8;
+   border: 1px solid #5970B2;
+}
+
+#sddm div a {
+   position: relative;
+   display: block;
+   margin: 0;
+   padding: 5px 10px;
+   width: auto;
+   white-space: nowrap;
+   text-align: left;
+   text-decoration: none;
+   background: #EAEBD8;
+   color: #2875DE;
+   font: 11px arial;
+}
+
+#sddm div a:hover {
+   background: #49A3FF;
+   color: #FFF;
+}
+
+/**
+   The lingos styles (seq 20110810°1612)
+   note : This rules are wanted be written here just to avoid
+      NetBeans complaining 'class not found'. Otherwise, this
+      styles are maintained by Daftari JavaScript.
+ */
+.langeng { } /* color:Green; */
+.langara { }
+.langchi { }
+.langcze { }
+.langdan { }
+.langfin { }
+.langfre { } /* color:Red; */
+.langger { } /* color:Blue; */
+.langgre { }
+.langhin { }
+.langita { }
+.langjpn { }
+.langnep { }
+.langpol { }
+.langrus { } /* color:DarkOrange; */
+.langspa { }
+.langswa { }
+.langtur { }
+.langall { }
+
+/* rule set 20150317°1211 for generating html portions */
+/* div.jsiOutputDebugMessage { border:3px solid Magenta; margin-top:0.1em; font-size:small; color:Magenta; } */ /* rule 20150317°1214 */
+p.jsiSitemap { border:3px solid Pink; color:green; font-weight:bold; margin-bottom:1%; /* margin-bottom:1.6em; */ margin-top:0.1%; } /* rule 20150317°1215 */
+div.jsiSitemap { border:3px solid Pink; } /* rule 20150317°1212 */
+div.jsiSitemap > p { border:3px solid Yellow; margin-top:0.1em; } /* rule 20150317°1213 */
+
+
+/* rule set 20150317°1431 */
+div.boxWhatsNew { background-color:#ffff80; /* Yellow */
+                 display:table;                                /* make background-color over complete hight */
+                 margin-left:10%;
+                  margin-top:0; margin-bottom:0;
+                   width:80%;
+                    }
+div.boxWhatsNew > p { text-align:left;
+                     margin-bottom:0.4em; margin-top:0.4em;
+                      }
+
+/* rule set 20150315°0511 */
+/* used e.g. in file 20150313°1611 */
+div.boxImageFloat { display:block; float:left; padding:0.3em; background-color:white; margin:0.3em; } /* rule 20150315°0512 */
+div.boxImageFloat > p { text-align:center; margin:0.1em; } /* rule 20150315°0513 */
+
+/* rule set 20150318°1211 */
+/* used e.g. in file 20150313°1611 */
+div.boxImageFloat8em { display:block; float:left; padding:0.3em; background-color:white; margin:0.3em; max-width:8em; min-width:2em; /* border:1px solid LightGray; */ } /* rule 20150318°1212 */
+div.boxImageFloat8em > p { text-align:center; margin:0.1em; } /* rule 20150318°1213 */
+
+/* rule set 20150320°0421 */
+/* note : Copied from rule style boxChapterTwo */
+div.loBoxFloatingLeftParagraphs { float:left; padding:0.3em; margin:0.3em; margin-right:10%; } /* background-color:#ffe0e0; */ /* border:3px solid HotPink; */ /* rule 20150317°1445 */
+div.loBoxFloatingLeftParagraphs > div { float:left; border:1px solid HotPink; } /* border:1px solid HotPink; */ /* rule 20150318°0352 */
+div.loBoxFloatingLeftParagraphs > p { float:left; text-align:left; margin-top:0.2em; margin-bottom:0.2em; } /* background-color:Gold; */ /* border:1px solid LightGray; */ /* rule  */
+div.loBoxFloatingLeftParagraphs > div > canvas { float:right; } /* rule 20150320°0551 */
+
+/* rule 20150321°0241 debug output box */
+/* used in dafstart.js seq 20150325°0311 standard output console */
+/* div.boxDebugOutput { */
+div.dafBoxDebugOutput {
+   background-color:LemonChiffon;
+   font-family:monospace,monospace;
+   /* font-size:1.0em; */
+   font-size:small;
+   text-align:left;
+   border:2px solid Gold;
+}
+
+/* rule set 20150321°0351 (after rule 20150221°0327 matrixLinkUndefined) */
+a.linkDead { pointer-events:none; text-decoration:none; cursor:default; } /* rule 20150321°0353 */
+a.linkDeadGray { pointer-events:none; cursor:default; text-decoration:none; color:Gray; } /* rule 20150321°0352 */
+
+/* rule set 20171226°1031 */
+/* note : above a.linkDead does deactivate the link for the user, but not */
+/*     for the link tester like XenuLink. Thus I want some other earmark, */
+/*     one to place a small sized manual comment about the situation. */
+span.TextDeadLinkSmall { font-size:small; color:FireBrick;} /* rule 20171226°1032 */
+span.TextDeadLinkMedium { color:FireBrick;} /* rule 20171226°1033 */
+
+/* ------------------------- */
+/* ruleset 20160621°0331 for the breadcrumbs area */
+div.DafFurnitureCakecrumbs_Bag { } /* rule 20160621°0332 */
+div.DafSitmapCake_Arrows_Div { color:Gray; } /* formerly with 'float:right;' (rule 20160620°0212) for var sCAKE_ARROWS_DIV_CLASSNAME */
+/* ------------------------- */
+
+div.DafFurnitureShowAlertBox { border:6px solid Red; background-color:Yellow; text-align:center; } /* rule 20160622°0251 */
+
+/* eof */

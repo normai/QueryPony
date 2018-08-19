@@ -1,0 +1,41 @@
+﻿
+   Authors
+
+   The starting point for QueryPony was Query ExPlus 2.0.3.1
+   by Joseph Albahari and Timor Fanshteyn.
+
+   The code making the difference from Query ExPlus 2.0.3.1 to
+   QueryPony is written by Norbert C. Maier.
+
+   Big thanks go to the authors and contributors of Query ExPlus:
+
+   - Joseph Albahari   has originally written Query Express and published
+                       it on www.albahari.com/queryexpress.html. Special
+                       thanks go to him for publishing Query Express and
+                       Query ExPlus under a permissive license.
+
+   - Klaus Evers       has written the OleDb Browser in Query Express
+                       and contributed otherwise to Query ExPlus.
+
+   - Timor Fanshteyn   developed and maintained Query ExPlus on
+                       http://sourceforge.net/projects/queryexplus.
+
+   - Christian S.      develops and maintains Query ExPlus today on
+                       http://sourceforge.net/projects/queryexplus.
+
+   - Andreas Kleffel   contributed Query ExPlus.
+
+   - dl3bak            contributed to Query ExPlus.
+
+   - emonk72           contributed to Query ExPlus.
+
+   Big thanks go as well to the authors and contributors of the third
+   party products, QueryPony has incorporated. You find them listed in
+   file thirdparty.txt.
+
+   Thanks again,
+   Norbert
+
+
+   ———————————————————————
+   [file 20130618°1821] ʘΩ

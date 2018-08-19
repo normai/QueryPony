@@ -1,0 +1,68 @@
+﻿
+
+   build 2018-08-19`01:33 QueryPony 0.3.4 Refresh
+   - Executable for Windows 32-bit .NET 3.5
+   - Build on Windows 10 with SharpDevelop 5.1
+   ʘ
+
+   build 20180817°1717 QueryPony 0.3.3.0 Refresh
+   - Build on Windows 10, .NET 3.5 with SharpDevelop 5.1
+   ʘ
+
+   build 20160318°1311 QueryPony 0.3.2.2 Beta intermediate
+   - Implement 'DbClone' from OleDb to SQLite
+   - Implement 'DbCreate' for SQLite
+   - Minor changes
+   - Remove trailing spaces
+   ʘ
+
+   build 2013-08-11 QueryPony 0.3.1 Alpha
+   - Settings saving fixed
+   - Edit menu issues partially fixed
+   - Miscellaneous minor bugs fixed
+   ʘ
+
+   build 2013-07-26 QueryPony 0.3.0 Alpha Release
+   - Outlined database types shall all be accessible
+   - Missing treeview nodes labeling supplemented
+   - Divan for CouchDB integrated (not much utilized yet)
+   - Various bugs fixed
+   ʘ
+
+   build 2013-07-10 QueryPony 0.2.0 Crashtest Version
+   This are the differences as compared with Query ExPlus 2.0.3.1:
+   Feature changes (from the user's point of view)
+   - It requires .NET 3.5, no more .NET 2
+   - Added implementations for MySQL, PostgreSQL, SQLite, CouchDB (not all applicable yet)
+   - The Connect Dialog is on a permanent Tab, no more in a modal dialog
+   - The Connection Forms are 'forms-on-tabs', no more MDI-Windows (Multiple Document Interface)
+   - Only one centralized treeview anymore, no separate treeviews per connection
+   - Revamped the About Form
+   - Added menu item 'View Documentation in Browser'
+   - Added two demo SQLite demo databases
+   - The executable is no more 200 KB size but 2.3 MB
+   Code changes (from the developer's point of view)
+   - Solution file downgraded from VS-2010 to VS-2008
+   - Solution file for SharpDevelop 4.1 added
+   - Split the one project in two: GUI and Lib (engine)
+   - Simplified ConnectionSettings properties
+   - Third party libraries integrated (for MySQL, PostgreSQL, SQLite)
+   - Some file and folder renamings
+   - Some new files and folders
+   - Additional helper project 'IOBus'
+   - Shake up code formatting (sorry for this)
+   - License changed from Public Domain to GNU AGPL v3
+   ʘ
+
+   log 2013-06-04 Spawn project QueryPony from Query ExPlus 2.0.3.1 (r75)
+   This are the history entries from QueryExPlus-ReadMe.txt :
+   ⁞
+   2010-10-04  k3b         Created this Readme; Upgrade from vs2005 to vs2010.  Compiled for dotnet2.0
+   2008-01-12  guessmann   Version 2.0.2.8
+   2008-11-27  k3b         Added OleDB-Browsing support
+   2006-10-14  guessmann   Version 2.0
+   2006-09-14  guessmann   Version 1.01 Created fork from www.albahari.com/queryexpress.html
+   ʘ
+
+   ———————————————————————
+   [file 20130615°1551] ʘΩ

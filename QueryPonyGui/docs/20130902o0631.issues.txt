@@ -1,0 +1,494 @@
+﻿
+   ************************
+   Finished Issues Archives
+   ************************
+
+
+   issue 20130902°0621 'Properties left unset if started from a host'
+   symptoms : E.g menu item 'Open Help in Browser' will open the help files
+      in the program's drive root folder instead in the Settings folder.
+   descript : If QueryPony is started not standalone but from inside a host
+      program, the Program properties are left unset.
+   location : Class 20130604°1912 QueryPonyGui.Program
+   workaround : The host program has to care about.
+   todo : Consider, what were a state-of-the-art solution for that situation?
+   proposal : Outsource the 'host-must-care-about' lines to a dedicated
+      method which can easily be called with a single call.
+   status : Finished so far
+   note :
+   ʘ
+
+   todo 20130823°1223 'Class DbClone parameterization'
+   title : Class 20130818°1532 DbClone parameterization
+   description : So far, the two important parameters for the DbClone class, the
+      source DbClient and the target ConnSettings, are passed in the constructor
+      and stored as private properties. This may be not the clearest handling.
+      The parameter usage were more clear, if they were not properties but normal
+      parameters passed with the Clone() call.
+   location : Class 20130818°1533 DbClone
+   status : Done (20130824°0901)
+   priority : Low
+   note :
+   ʘ
+
+   issue 20130821°1131 'clone query error: operation is not implemented'
+   symptom : Query execution does not work. It throws exception and finishes
+      with error message "The method or operation is not implemented.".
+   location : Method 20130818°1537 DbClone.cs::cloneTable()
+   solution : The offending line was sequence 20130714°1745 in DbClient.DoConnect()
+      'this.Database = _connSettings.DatabaseName;'. The SQLite database is always
+      'main'. Only, until now this line was also executed with the usual connection
+      making, and there it did not strike so hard.
+   status : Solved (20130821°1132)
+   note :
+   ʘ
+
+   issue 20130808°1552 'settings type with library call fails'
+   title : Complex type setting (ServerList) silently fails if this type
+      contains calls to a resource-based library.
+   symptom : Below line works fine if QueryPonyLib.dll is available as
+      file. If not, it throws execption:
+      "InvalidOperationException - Unable to generate a temporary class (result=1).
+      error CS0012: The type 'QueryPonyLib.ConnSettings.ConnectionType' is defined in
+      an assembly that is not referenced. You must add a reference to assembly
+      'QueryPonyLib, Version=0.3.1.2190, Culture=neutral, PublicKeyToken=null'.
+      error Cs0266: Cannot implicitly convert type 'object' to
+      QueryPonyLib.ConnSettings.ConnectionType'. An explicit conversion exists
+      (are you missing a cast?)"
+   location : Method 20130604°0627 MainForm.cs::LoadServerList()
+   ref : exception/screenshot 20130808°1552
+   question : I am sure QueryPonyLib is referenced. By whom exactly is that
+      not recognized? What object exeactly could be supplemented with a case?
+   answer : The sequence generating the XmlSerializer does not see the
+      resource-based assembly, it only sees real file assemblies. The
+      type which shall be serialized must not contain calls to a
+      resource-based assembly, but must be self-contained.
+   solution : Remove the reference to QueryPonyGui from the ServerList.
+   ref : Solution 20130809°1221
+   status : Solved
+   note :
+   ʘ
+
+   issue 20130731°0131 'ServerList settings silently fail'
+   title : Settings with a reference to a resourced library silently fail.
+   symptom : Settings.Default.Save() does save all except ServerList
+   location : Method 20130604°0627 LoadServerList()
+   note : It seems to have to do with XmlSerializers.dll. In provideSingleFileDeployment(),
+      there are already some special processings for this assembly. I
+      remember, that formerly in the config dir, a XmlSerializers.dll
+      of 0 bytes size was found. This is no more the case. And formerly,
+      the Settings.Default.Save() did work, perhaps this was at the time
+      when the zero-bytes XmlSerializers.dll was saved.
+   note : The XmlSerializers.dll is only for performance boost. It should have
+      nothing to do with save or not save. (ref 20130731°0112/°0113)
+   note : Not sure, but it looks as if the last version which had a zero-bytes
+      XmlSerializers.dll in it's config dir, was 0.3.0.20800, which was the
+      withdrawn 0.3.0 release with the single-file-delivery problem. During
+      fixing this, I touched the Settings somehow. So what were the exact
+      changes after 0.3.0.20800?
+   finding : The debugger shows Settings.Default withh ServerList properly
+      filled. In user.conf, ServerList appears as
+      '<setting name="ServerList" serializeAs="Xml"><value /></setting>'.
+   finding : When stepping into line 'QueryPonyGui.Properties.Settings.Default.Save();',
+      the next line is provideSingleFileDeployment(), wanting to load an assembly
+      'QueryPony.XmlSerializers.dll'. Failing to do this should not be so bad, it's
+      just for performance.
+   finding : When manipulating user.conf by manually inserting a filled ServerList from
+      a former user.conf, on program start, that is not recognized.
+   note : Compare issue 20130621°0751, which was solved by supplementing the
+      constructor for class ServerList.
+   finding : (20130808°1511) If in project QueryPonyGui I set reference QueryPonyLib
+      'Copy Local = True', and QueryPonyLib.dll is present beside QueryPony.exe, then the
+      Settings work. Since QueryPonyLib.dll is available as resource as well, QueryPony.exe
+      runs fine also if I then delete QueryPonyLib.dll, only the Settings will then silentyl
+      fail. So which roll does QueryPonyLib.dll play regarding the Settings?
+   finding : (20130808°1512) The logfile shows, the difference between the two situations
+      is, that if the library is present, an additional assembly with a random name is loaded
+      after library initialisation and before loading iobus.dll. This assembly looks like e.g.
+      'asawi7zp, Version=0.3.1.36839, Culture=neutral, PublicKeyToken=null'. Names seen are
+      e.g.: yin_nan0, vshqnqoe, asawi7zp, rzidpfpp, bmiqljyl. It's revision number is the same
+      as the QueryPony.exe.
+   finding : (20130808°1513) The random named library is loaded inside LoadServerList()
+   finding : (20130808°1514) The ServerList is loaded on program start, even if the
+      settings folder is deleted before program start. WHERE DOES THIS SERVERLIST COME FROM?
+   finding : (20130808°1515) How is it possible, that the random named assemblies 'loaded'
+      logfile message is written, but the breakpoint in the writing sequence did not fire?
+   finding : (20130808°1516) The exact moment, when the random named assembly is loaded,
+      is in method LoadServerList() before the line 'ServerList_ = Settings.Default.ServerList;'.
+      This is curious, because this is the first line in the method. How should this
+      method know that it wants the random named assembly? It must be the complier,
+      knowing that the next line being executed needs that assembly!
+   finding : (20130808°1516) The key seems to be the random named assembly.
+      Whether it exists or not seems to decide whether the ServerLists is
+      read/written or not. So how can I force it's loading? Has it to do with
+      the Build Option 'Generate serialization assembly = Off/On/Auto'?
+      Curiously, this Build Option seems to be pretty indifferent.
+   finding : (20130808°1555) If in ConnSettingsGui.cs property
+      'ConnSettings.ConnectionType Type' were prefixed with attribute '[XmlIgnore]',
+      the issue were gone. Only we want that type, so we have to provide it otherwise.
+   solution : [solution 20130809°1221 'remove library reference from Setting types']
+      (1) I accept, there is no way to tell the XmlSerializer generator how
+          to find the QueryPonyLib.dll extracted from the resource. Thus we
+          need Settings containing only elements beeing self-sufficient inside
+          QueryPonyGui.
+      (2) How possibly to learn the XmlSerializer to use a resource-extracted
+          reference is left for future sessions. Perhaps this will be indeed
+          too complicated to be realized.
+      (3) Set property 20130604°0139 'ConnSettings.ConnectionType Type'
+          attributed '[XmlIgnore]'. Now it does not make the XmlSerializer
+          assembly generation silently fail, but as well we have no more
+          storage for this property in the Settings.
+      (4) Create an intermediate Settings helper property for the storage
+          (see property 20130809°1222).
+      (5) Care for translating the intermediate storage property to the live
+          property on all accesses. This sounds more complicated than finally is.
+          It can be achieved with a pair of 'self-synchronizing' properties.
+      (6) Voilà, it works.
+   ref : 20130731°0112 'thread: the purpose of XmlSerializers.dll'
+   ref : 20130731°0113 'MSDN: boost performance with pre-generated XmlSerializers'
+   note :
+   ʘ
+
+   bug 20130729°1543 'ArgumentOutOfRangeException when clicking tabs/nodes'
+   symptom : ArgumentOutOfRangeException when clicking a connection
+      tab after removing tabs/nodes in an unlucky order. This unluckily
+      seems to be e.g. with two SQLite connections, removing that on the
+      left tab of them, then trying to select the remaining (right) of them.
+   location : Method 20130619°0512 GetQueryChild().
+   finding : Somehow the SelectedTab is that containing no more QueryForm.
+   note : I cannot see the reason behind that easily, so I first resort
+      to a quick'n'dirty condition envelop for the sensible line. (For
+      a try envelop it's not unclear enough.)
+   status : Seems fixed with sequence 20130729°1544 in DoDisconnect().
+   note :
+   ʘ
+
+   findings 20130726°1423 'canary library access' about issue 20130726°1231'
+   title : 'watch access behaviour if DLLs are deleted on program start'
+   location : Before line 20130706°1053 'provideSingleFileDeployment();'
+   finding : Canary line 'string sDbg = IOBus.Globals.sCrlf;' is peacefully
+      executed without fireing AppDomain.CurrentDomain.AssemblyLoad event.
+      Obviously, having a constant fetched from the lib, is not an issue.
+   finding : This line causes exception even before program entry point:
+      'string sDbg2 = IOBus.Utils.Strings.ShortenDisplayString(sDbg, 2);'
+   finding : The calling ShortenDisplayString() yields this conclusions:
+      (1) If having the reference to IOBus set to 'copy local = tru', it will
+           appear in the binaries folder, but cannot be deleted on program
+           start, because it is locked.
+      (2) If having the reference to IOBus set to 'copy local = false', the
+           exception 'file missing' pops up in the debugger, even before the
+           program entry point was reached.
+      (3) Conclusion: Access that early is not possible, even though
+           AppDomain.CurrentDomain.AssemblyResolve is already attached. Accessing
+           the library is allowed only later in another class or so. Now I think
+           to remember this finding already seen in an earlier session, perhaps
+           documented somehow.
+      (4) The point seems to be to find the exact earliest moment when an
+           AssemblyResolve-loaded library may be accessed.
+      (5) The earliest moment seems to be after Application.Run(), means
+           inside MainForm.cs
+   note :
+   ʘ
+
+   issue 20130726°1411 'what exactly is AppDomain.CurrentDomain'
+   title : Question is AppDomain.CurrentDomain the same in executing and in library?
+   about : The AppDomain.CurrentDomain in executable versus library
+   question : The AppDomain.CurrentDomain, is it the same for the executable's
+      assembly and for the libraries assembly, which is called from the executable,
+      or is that different? If it is the same for the both, it makes sense, to
+      attatch the AssemblyResolve eventhandler to only one of the two, and it
+      will not matter whether to make the attatchment in the executable or in
+      the library.
+   answer : Yes, AppDomain.CurrentDomain seems to be the same as well in the
+      exectutable as in the library. You can see this in the debugger, when
+      inspecting the value of AppDomain.CurrentDomain, located somewhere in
+      the library. It says the value of AppDomain.CurrentDomain is:
+      '{Name:QueryPony.exe\r\nThere are no context policies.\r\n}'
+   note :
+   ʘ
+
+   issue 20130725°1611 'connection is missing login name'
+   title : Connection is missing the login name
+   symptom : MySQL connection fails due to a missing login name, if before
+      the connection to MS-SQL has been made.
+   location : Method 20130618°0411 button_Connect_Click()
+   finding : It has to do with the trash entries the ConnectionList contains.
+      some of them are without login name, but they all have the same 'id',
+      so below in 'int iNdx = MainForm.ConnectionList.IndexOfById(sConnId);',
+      the wrong one is grabbed.
+   idea : In the connection id perhaps the user has to be included. - This seesm
+      not so easy, a quick try at 20130725°1613 did not help but make it worse.
+   finding : There are too many ConnectionList.Add() methods, their occurrences
+      should be reduced. Find occurrences as '// (location 20130725°1614xx)'.
+      The ConnectionList will contain many duplicates, and thus is even much longer
+      than the Connections ComboBox list (but which will also contain duplicates).
+   finding : Shutting down one line 20130725°161502 'ServerList.Add()' in
+      SettingsSave() seems to solve the issue.
+   status : Partially solved (20130725°1615)
+   note : //string sDbg1 = textbox_Mysql_LoginName.Text; // = 'fruits'
+   note :
+   ʘ
+
+   issue 20130724°0911 'connect wrong database'
+   title : Connect wrong database
+   symptom : After fetching the Demo Connection Settings, then selecting the
+      CouchDB tabpage, then selecting database 'fruits' and pressing the Connect
+      Button, the database '_replicator' is connected, and also appears in the
+      database combobox then.
+   location : Method 20130618°0411 button_Connect_Click()
+   finding : Curiously, here the combobox Text property says 'fruits', but
+      below inside SettingsSave(), it says '_replicator'. How is this possible?
+   finding : Not the other method is guildy, but already before, the call
+      syncConnectionComboboxWith_PreviouslySelectedTabpage().
+   finding : The guilty is line 20130624°1051 in createNewConnection()
+      'combobox_Connection.SelectedItem = cs;'. What will happen if I just
+      shutdown this line? See note 20130724°0912 in createNewConnection().
+      I shutdown this line and noticed no bad side effects in the first tests.
+   status : Solved (see note 20130724°0912)
+   note : combobox_Couch_DatabaseName.Refresh(); // quick try - does not help
+   note : combobox_Couch_DatabaseName.Update(); // another quick try - does not help
+   note : // string sDbg1 = combobox_Couch_DatabaseName.Text; // = 'fruits'
+   ʘ
+
+   issue 20130719°1531 'prebuild error exit code 9009'
+   title : Mysterious prebuild error 'exited with code 9009'
+   symptom : The Prebuild-Event contains command "$(ProjectDir)prebuild.bat".
+      The build fails with error 'The command "G:\work\*\QueryPony(sf)\trunk\
+      QueryPonyLib\prebuild.bat" exited with code 9009.'. It is the same with
+      project QueryPonyGui. It is the same in both VS-2008 and SharpDevelop 4.1.
+   note : The solution built fine in other folders, it was just copied to that
+      folder \QueryPony(sf)\trunk\. The prebuild.bat manually also run fine.
+   solution : The solution foldername with parentheses was the culprit. After
+      renaming the folder 'QueryPony(sf)' to 'QueryPony@sf' the problem was gone.
+   note : Before the build, a VS-native batchfile is run with a command like
+      'call "$(DevEnvDir)..\tools\vsvars32.bat"' to prepare the environment for
+      Visual Studio (the same for SharpDevelop). I guess, that batchfile swallows
+      parentheses in path names the wrong way.
+   remember : Solution pathes must never contain parenteses, the at-char seems o.k.
+   ref : (Screenshots 20130719°1521..°1524)
+   status : Solved.
+   todo : Possibly document this issue in a dedicated article. [todo 20130719°1525]
+   note :
+   ʘ
+
+   issue 20130716°1231
+   title : single-file-delivery broken
+   symptom : QueryPony.exe starts (end ends) with an exception when run without
+      iobus.dll in the same folder as itself.
+   story : How the issue emerged:
+      - I committed Version 0.3.0.20800 to the repository and tagged it.
+      - When downloading QueryPony.exe from the tag then, it failed running.
+      - I deleted the tag and started debugging.
+      - First I suspected wrongly the missing QueryPony.exe.config being the
+         culprit, and fiddled with the Settings. Some weeks ago, I refactored
+         the Settings, and perhaps did not test single-file-delivery explicitly.
+      - But it turned out, the missing iobus.dll was the culprit.
+      - The debug session was convoluted. It is impossible to straightforward
+         find a culprit line. Empirical methods are too tedious. To handle the
+         situation straightforward, the exact theoretical correlations have
+         to be researched, what I found too tedious as well.
+      - The quickest solution seemed to be just to eliminate the references from
+         QueryPonyGui to IOBus. This was possible, since it were not much occurrences.
+         See class QueryPonyGui.UtilsLib 20130726°1442, which I provisory copied
+         from IOBus::Utils.cs to ConSettingsGui.cs.
+      - This solved the issue for now, and version 0.3.0.40616 could be released.
+      - The restauration of the reference to IOBus was postponed.
+   reference : Findings 20130726°1423 'behaviour if DLLs are deleted on program start'
+   reference : Issue 20130706°2221 'FileNotFoundException even before program entry'
+   ////reference : Provisory class 20130726°1442 QueryPonyGui.UtilsLib.
+   solution : Provisory eliminate reference from QueryPonyGui to IOBus.
+   status : Solved.
+   note : The exact rules have still to be found, and IOBus reference to be restored.
+   note :
+   ʘ
+
+   issue 20130716°0626 'Thread-Safe Calls to Windows Forms Controls'
+   symptom : Executing MainForm.outputStatusLine() causes a Cross-Thread-Exception.
+   finding : We need 'Make Thread-Safe Calls to Windows Forms Controls'.
+   ref : Screenshot 20130716°0626
+   ref : 20130716°0627 'Make Thread-Safe Calls to Windows Forms Controls'
+   ref : 20130716°0642 'hang after invoking a delegate from other thread'
+   solution :  Use BeginInvoke() instead of Invoke().
+   status : Solved.
+   note :
+   ʘ
+
+   issue 20130708°1221 'IE warning'
+   title : Internet Explorer pops a warning when opening the HTML documentation
+   symptoms : When opening the HTML documentation from the menu item 'View
+      Documentation in Browser', IE (and other browsers?), depending on the
+      user's security settings, beeps and shows ugly warning '... Internet
+      Explorer has restricted this webpage from running scripts or ActiveX
+      controls ... Click here for options ...'.
+   reason : The page contains a few JavaScript statements for styling. If
+      you don't allow JavaScript run, in IE (*not* in other browsers), the
+      top-right logo will occupy the complete column down, wasting a lot of
+      space. With the script running, the space is apportioned as intended.
+   question : Shall I rip out the JavaScript and loose some style features,
+      or is it tolerable? How many users will face that warning?
+   solution : Curiously, after having supplemented a '!DOCTYPE html' declaration
+      above the html headers, and outsourced the inlay css styles to the external
+      styles.css, the warning was gone. (20130724°1323)
+   status : Solved (20130724°1323)
+   priority : Low
+   note :
+   ʘ
+
+   issue 20130708°0711 'MySql.Data.dll assembly name spelling'
+   title : Peculiarity with the MySql.Data.dll assembly name spelling
+   location : Method 20130706°1051 provideSingleFileDeployment()
+   summary : The MySQL .NET connector assembly is requested as 'MySql.Data.dll',
+      but in the resources, it is listed as 'mysql.data.dll'. Though Windows
+      is mostly case-insensitive, with the assembyl names it seems to be picky.
+      The assembly loading will fail, if the name is not adjusted.
+   solution : Have the name adjusted before loading the assembly.
+   status : Solved
+   note :
+   ʘ
+
+   issue 20130707°1011 'who is requesting XmlSerializers.dll'
+   title : Who is requesting QueryPony.XmlSerializers.dll?
+   location : Method 20130706°1051 provideSingleFileDeployment()
+   symptoms : There comes a request for resource 'QueryPonyGui.QueryPony.XmlSerializers.dll',
+      which is not included somehow in the QueryPonyGui project (screenshot 20130707°1031).
+      It seems the request comes always before a request for QueryPonyLib.dll and
+      before System.Data.SQLite.dll
+   note : It looks like the project settings 'Build - Generate serialization assembly'
+      have to do with this phenomenon. But switching between the three possible values
+      'Auto/On/Off' did not show any effect.
+   workaround : Ignore the request
+   status : Solved, but don't know why. Would like to know details.
+   note :
+   ʘ
+
+   issue 20130706°2221 'FileNotFoundException before program entry'
+   title : FileNotFoundException even before program entry
+   symptom : FileNotFoundException for QueryPonyLib is thrown, even *before* the program entry
+      point is reached, means before any breakpoint can be set (screenshot 20130706°2214)
+   findings : Not yet a solution but some jigsaw stones so far:
+      (1) No constant or other reference to the library must be used before the AssemblyResolve
+          handler is installed! (In this case it was 'if (! Glb.Debag.ShutdownTemporarily)'.
+      (2) But then line 'InitLib lib = new InitLib(sPathConfigDirUser);' cannot be omitted.
+      (3) When comparing the situation with enumprogs, where the AssemblyResolve handler
+          works fine, I have the suspicion, that shift the libarary initialisation and all
+          other initialsiation things shall be shifted from Program to MainForm.cs.
+   theory : When using a library (QueryPonyLib) in the static class Main(), the
+      library wants already be loaded from the OS during startup preparations. Thus
+      our AssemblyResolve handler is of no use, because it is not yet available.
+      Whether the AssemblyResolve handler could somehow be applied e.g. in a pure
+      console program remains to be shown by separate experiments. ...
+   solution :
+   note : See references and screenshots 20130706°2211..°2215
+   note :
+   ʘ
+
+   issue 20130706°1031 'resource-based library policy check fail'
+   title : Single-file-deployment fails with library resource extraction
+   symptom : Exception "Unverifiable code failed policy check. (Exception from
+      HRESULT: 0x80131402)" after having the SQLite library activated for single-
+      file-deployment. The StackTrace tells, the exception is thrown about in '_task'.
+   ref : See 20130706°1033 'Eric Lippert: base calls from anonymous delegates nonverifiable'
+   ref : See 20130706°1032 'Thread: Unverifiable code failed policy check'
+   location : Exeption caught in DbClient.db
+   workaround : Sequenc 20130706°1034 in method provideSingleFileDeployment
+   status : Solved
+   note :
+   ʘ
+
+   issue 20130703°1511 'Path.Combine() fails to recognize drive letter'
+   title : System.Path.Combine() fails to recognize drive letter.
+   symptom : System.Path.Combine() fails to supplement the necessary backslash,
+              if the leading component is just a drive letter like 'g:'.
+   location : E.g. in method 20130703°1521 CombineServerAndDatabaseToFullfilename().
+   solution : Supplement drive letter it explicitly.
+   status : Finished so far.
+   note :
+   ʘ
+
+   issue 20130624°1101 'Cursor tabbing goes zigzag'
+   title : Cursor tabbing goes zigzag
+   symptoms : E.g. on the ConnectForm, the cursor movement with TAB key goes zigzag.
+   workaround : Use mouse
+   status : Finished (20130702°0611)
+   priority :
+   note :
+   ʘ
+
+   issue 20130624°0911 'commandline parameters fail working'
+   title : Commandline parameters
+   symptoms : Commandline parameter processing does not work
+   location : QueryPonyGui.Program.Main()
+   workaround : None
+   priority : Low
+   note :
+   ʘ
+
+   issue 20130623°0721 'ComboBox Items Order'
+   title : ComboBox Items Order
+   symptom : Curiously, the combobox item indices seem not represent the order
+      of the items as shown in the list box.
+   question : How to find the item shown before the selected?
+   workaround: Ignore?
+   status : Solved. I found the index order does match with the displayed order.
+      Seems to have been another problem.
+   note :
+   ʘ
+
+   issue 20130621°1212 'debug settings IsFirstRun = false'
+   title : Debugging setting 'IsFirstRun = false' is not so easy.
+   symptom : Debugging the Settings has the handicap, that with each new start a new
+      settings folder may be created because each new start gets a new assembly
+      revision number. So you will never see the 'IsFirstRun = false' situation.
+   workaround : Simulate 'IsFirstRun = false' e.g. by stopping here and then
+      manually put an older user.config file into the settings folder, or edit
+      the given one.
+   note : BTW, the file does exist only after Upgrade() was called.
+   status : Solved. It is just a discomfort.
+   note :
+   ʘ
+
+   issue 20130619°0551
+   title    : Orphane processes left behind after program exit
+   location : Application
+   symptom  : When querying, QueryPony leaves processes behind even after program
+              termination, which must be shutdown manually with TaskManager.
+   priority : High
+   status   : Issue finished 20130709°1221
+   workaround : Close the program. Goto Taskmanager and end process 'QueryPony.exe'
+   note     : The issue appeared after switching from MDI to Forms-on-Tabs. We
+              have no Tab-Closing menue item yet anyway, perhaps it's just that.
+   note     :
+   ʘ
+
+   issue 20130619°0531 'F5 key does not work'
+   note : After switching from MDI to Forms-on-Tabs, the F5 key does not work
+      immediately after a database table is created, but only after a first time
+      executeQuery is ignited via the toolbar button.
+      It seems, inserting the SQL statement from the context menu does forget to
+      ignit the PropertyChanged, which in turn calls method EnableControls(),
+      which activates the toolstripmenu and with that the F5 key. Just a try,
+      raise the PropertyChanged event manually.
+   ref : 20130619°0532 'thread: programatically fire event handler'
+      //MethodInfo onTextChanged = dateTimePicker1.GetType().GetMethod("OnTextChanged"
+      //   ,System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+      //onTextChanged.Invoke(dateTimePicker1, new object[] { new EventArgs() });
+   location : Method 20130604°2204 QueryForm.DoBrowserAction()
+   solution : I think it was something inside method 20130604°0643 EnableControls(), not a missed event.
+   status : Solved. (20130723°1412)
+   note :
+   ʘ
+
+   issue 20130604°132402 'Warning: IWin32Windowhides inherited member'
+   symptom : Compiler warning CS0108
+      "'QueryPony.Gui.SettingsForm.ShowDialog(System.Windows.Forms.IWin32Window)' hides
+      inherited member 'System.Windows.Forms.Form.ShowDialog(System.Windows.Forms.IWin32Window)'.
+      Use the new keyword if hiding was intended."
+      on  line "public DialogResult ShowDialog(IWin32Window owner)".
+   note : Only I have no idea, where I could place a 'new' operator on that line.
+   solution : Fixed the issue by renaming the method from ShowDialog() to ShowMyDialog().
+   status : Solved. Hopefully, nothing else is broken from such fix.
+   note :
+   ʘ
+
+   ——————————————————————
+   [file 20130902°0631] Ω

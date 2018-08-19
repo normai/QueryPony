@@ -1,0 +1,526 @@
+﻿
+   **********************************
+   Internet and Literature References
+   **********************************
+
+   ref 20130821°1141 'sqlite: datatypes'
+   title : Documentation 'Datatypes In SQLite Version 3'
+   authors :
+   url : http://www.sqlite.org/datatype3.html
+   use : Method 20130821°1151 buildStatementCreate()
+   ʘ
+
+   ref 20130820°2122 'msdn: backgroundworker component'
+   title : MSDN article 'BackgroundWorker Component'
+   authors :
+   url : http://msdn.microsoft.com/en-us/library/c8dcext2%28v=vs.90%29.aspx
+   use :
+   authors :
+   chain : 20130812°1101 'Rob Philpott: Background Thread'
+   note :
+   ʘ
+
+   ref 20130819°1332 'totaldotnet: linq to dataset and datatable'
+   title : Article 'Use LinQ to DataSet / LinQ to DataTable'
+   authors :
+   url : http://www.totaldotnet.com/Article/ShowArticle73_LinQ2DataTable.aspx
+   use : With method 20130819°1311 fetchFieldProperties() sequence 20130819°1331
+   note : This does not explain how to extract a single value from the
+      System.Data.EnumerableRowCollection<System.Data.DataRow> result type, but
+      it was one of the rare pages showing code lines.
+   note :
+   ʘ
+
+   reference : 20130819°0953 'thread: get column metadata'
+   title : Thread 'OLEDB: What is the fastest way to get column metadata for a SQL Server CE table, without selecting any rows?'
+   authors :
+   url : http://stackoverflow.com/questions/8841802/oledb-what-is-the-fastest-way-to-get-column-metadata-for-a-sql-server-ce-table
+   usage : Method 20130819°0935 GetSchema(), try to extract column types for OleDb fields
+   note : Shows C++ code to access the Win API structures
+   ʘ
+
+   reference : 20130819°0952 'msdn: GetSchema column flags'
+   title : MSDN thread 'GetSchema COLUMN_FLAGS'
+   authors :
+   url : http://social.msdn.microsoft.com/Forums/en-US/3fa2bc10-8720-49db-9d5d-0fa9554b65fe/getschema-columnflags
+   usage : Method 20130819°0935 GetSchema(), try to extract column types for OleDb fields
+   note :
+            
+            
+   reference : 20130819°0951 'msdn: GetSchema column data types'
+   title : MSDN thread 'GetSchema DATA_TYPE'
+   authors :
+   url : http://social.msdn.microsoft.com/Forums/en-US/81bef8f4-a648-48dd-8566-92a9fc3836c5/getschema-datatype
+   usage : Method 20130819°0935 GetSchema(), try to extract column types for OleDb fields
+   note : About how to extract the column's datatypes.
+   ʘ
+
+   reference 20130818°1554 'Kurt Schindler: SQLite'
+   title : Blog 'Getting started with SQLite and .NET' by Kurt Schindler on February 16, 2010
+   authors :
+   url : http://blog.kurtschindler.net/getting-started-with-sqlite-and-net
+   usage : Not used so far.
+   note : About the IDE tools integrated in the SQLite libraries.
+   ʘ
+
+   reference 20130818°1553 'Tigran: SQLite'
+   title : 'Getting started with SQLite in C# Part One' by Tigran on 2012-February-9
+   authors :
+   url : http://blog.tigrangasparian.com/2012/02/09/getting-started-with-sqlite-in-c-part-one/
+   usage : With method 20130818°1614 QueryPonyLib.DbCreate.createSqlite()
+   ʘ
+
+   reference 20130818°1552 'blackwasp: enum description'
+   title : Article 'Adding Descriptive Text to Enumerations'
+   authors :
+   url : http://www.blackwasp.co.uk/EnumDescription.aspx
+   note : Very nice article with compact solution. Used with enum 20130620°0330
+      ConSettings.ConnectionType and extension method 20130818°1602 EnumExtensions.Description()
+   note :
+   ʘ
+
+   reference 20130818°1551 'thread: formatting enums in combobox'
+   title : Thread 'How do I have an enum bound combobox with custom string formatting for enum values?'
+   authors :
+   url : http://stackoverflow.com/questions/796607/how-do-i-have-an-enum-bound-combobox-with-custom-string-formatting-for-enum-valu
+   note : Extensive discussion of various possibilities. Decided for 20130818°1552 'blackwasp enum description'.
+   note :
+   ʘ
+
+   reference 20130814°1011 'thread: keep split container fixed width'
+   title : Thread 'Keeping One Split Container Panel Fixed Width?'
+   authors :
+   url : http://stackoverflow.com/questions/3338105/keeping-one-split-container-panel-fixed-width
+   usage : QueryPonyGui.MainForm.cs::MainForm() sequence 20130814°1012
+   ʘ
+
+   ref 20130812°1101 'Rob Philpott: Background Thread'
+   title : Article 'Background Thread? Let me count the ways ...' by Rob Philpott 2013-Aug-8
+   authors :
+   url : http://www.codeproject.com/Articles/634146/Background-Thread-Let-me-count-the-ways
+   usage :
+   chain : 20130820°2122 'msdn: backgroundworker component'
+   note :
+   ʘ
+
+   reference 20130810°1913 'MSDN: The WM_COPY message'
+   title : MSDN article 'WM_COPY message'
+   authors :
+   url : http://msdn.microsoft.com/en-us/library/ms649022%28v=vs.85%29.aspx
+   usage : Partial class 20130810°1931 MainForm in MainForm_WndProc.cs
+   note : Researching for issue 20130810.1901 'edit menu items fail'
+   ʘ
+
+   reference 20130810°1912 'Thread: Disable Clipboard features'
+   title : Thread 'how to disable copy, Paste and delete features on a textbox using C#'
+   authors :
+   url : http://stackoverflow.com/questions/5113722/how-to-disable-copy-paste-and-delete-features-on-a-textbox-using-c-sharp
+   usage : Partial class 20130810°1931 MainForm in MainForm_WndProc.cs
+   note : Researching for issue 20130810.1901 'edit menu items fail'
+   ʘ
+
+   reference 20130810°1911 'Thread: Hook Paste event'
+   title : Thread 'hook on default “Paste” event of WinForms TextBox control'
+   authors :
+   url : http://stackoverflow.com/questions/3446233/hook-on-default-paste-event-of-winforms-textbox-control
+   usage : Partial class 20130810°1931 MainForm in MainForm_WndProc.cs
+   note : Researching for issue 20130810.1901 'edit menu items fail'
+   ʘ
+
+   reference 20130810°1611 'find focused control'
+   title : Thread 'What is the preferred way to find focused control in WinForms app?'
+   authors :
+   url : http://stackoverflow.com/questions/435433/what-is-the-preferred-way-to-find-focused-control-in-winforms-app
+   note : Found while debugging issue 20130624°1011 'shortcut key fail'
+   ʘ
+
+   reference 20130808°1543 'Hanselmann: Using XmlSerializer to read/write XML'
+   title : Article 'Using the XmlSerializer to Read and Write XML Fragments'
+   authors :
+   url : http://www.hanselman.com/blog/UsingTheXmlSerializerToReadAndWriteXMLFragments.aspx
+   usage : Solving issue 20130731°0131 'ServerList settings silently fail'.
+   note : Here I saw line 'XmlSerializer ser = new XmlSerializer(typeof(AccountType));'
+   ʘ
+
+   reference 20130808°1542 'Hanselmann: Changing XmlSerializer temporary assemblies'
+   title : Article 'Changing where XmlSerializer Outputs Temporary Assemblies'
+   authors :
+   url : http://www.hanselman.com/blog/ChangingWhereXmlSerializerOutputsTemporaryAssemblies.aspx
+   usage : Solving issue 20130731°0131 'ServerList settings silently fail'.
+   note :
+   ʘ
+
+   reference 20130808°1541 'Hanselman: Debug into a .NET XmlSerializer'
+   title : Article 'HOW TO: Debug into a .NET XmlSerializer Generated Assembly'
+   authors :
+   url : http://www.hanselman.com/blog/HOWTODebugIntoANETXmlSerializerGeneratedAssembly.aspx
+   usage : Solving issue 20130731°0131 'ServerList settings silently fail'.
+   note :
+   ʘ
+
+   reference 20130731°0112 'thread: the purpose of XmlSerializers.dll'
+   title : Thread 'What is the purpose of myAssembly.XmlSerializers.dll in .NET?'
+   authors :
+   url : http://codeissue.com/issues/i34f1d6c055ffde/what-is-the-purpose-of-myassembly-xmlserializers-dll-in-net
+   usage : Solving issue 20130731°0131 'ServerList settings silently fail'
+   ʘ
+
+   reference 20130731°0113 'msdn: boost performance with pre-generated XmlSerializers'
+   title : MSDN blog 'Boost performance with Pre-generated XmlSerializers'
+   authors :
+   url : http://blogs.msdn.com/b/crm/archive/2009/02/02/boost-performance-with-pre-generated-xmlserializers.aspx
+   usage : Solving issue 20130731°0131 'ServerList settings silently fail'
+   ʘ
+
+   reference 20130723°1045 'U.N.C.L.E.: Painting Your Own Tabs'
+   title : Article 'Painting Your Own Tabs'
+   url : http://www.codeproject.com/Articles/13305/Painting-Your-Own-Tabs
+   author : The Man from U.N.C.L.E., 2010-Jul-3
+   usage : Method 20130616°1703 ConnectForm.cs::tabcontrol_ServerTypes_DrawItem()
+   note : Sorrily, the download yielded only broken zip files.
+   note : From this artice come files CustomTabControl.cs and ThemedColors.cs.
+   note :
+   ʘ
+
+   reference 20130723°1044 'Oscar Londono: A .NET Flat TabControl'
+   title : Article 'A .NET Flat TabControl (CustomDraw)'
+   url : http://www.codeproject.com/Articles/12185/A-NET-Flat-TabControl-CustomDraw
+   author : Oscar Londono, 2005-Dec-5
+   usage : Method 20130616°1703 ConnectForm.cs::tabcontrol_ServerTypes_DrawItem()
+   note : The download first attempt yielded only broken zip files.
+   note :
+   ʘ
+
+   reference 20130723°1043 'Mick Doherty: Change colours of Tabcontrols Header Item'
+   title : Article 'Change the colours of a Tabcontrols Header Item'
+   url : http://dotnetrix.co.uk/tabcontrol.htm
+   author : Mick Doherty
+   usage : Method 20130616°1703 ConnectForm.cs::tabcontrol_ServerTypes_DrawItem()
+   note :
+   ʘ
+
+   reference 20130723°1042 'Stacko: Set the Base Color of a TabControl'
+   title : Thread 'C# Winform: How to set the Base Color of a TabControl (not the tabpage)'
+   url : http://stackoverflow.com/questions/1849801/c-sharp-winform-how-to-set-the-base-color-of-a-tabcontrol-not-the-tabpage
+   author :
+   usage : Method 20130616°1703 ConnectForm.cs::tabcontrol_ServerTypes_DrawItem()
+   note :
+   ʘ
+
+   reference 20130723°1041 'Stacko: A way to color tabs of a tabpage in winforms'
+   title : Thread 'Is there a way to color tabs of a tabpage in winforms?'
+   url : http://stackoverflow.com/questions/2107463/is-there-a-way-to-color-tabs-of-a-tabpage-in-winforms
+   author :
+   usage : Method 20130616°1703 ConnectForm.cs::tabcontrol_ServerTypes_DrawItem()
+   note :
+   ʘ
+
+   reference 20130720°1232 'msdn forum: PostgreSQL metadata'
+   title : Thread 'Metadata Npgsql (Postgre)'
+   authors :
+   url : http://social.msdn.microsoft.com/Forums/en-US/3b9c7346-34b1-4379-a44e-0fb486028c6e/metadata-npgsql-postgre
+   note : Not such exciting thread, except for one detail. Here I found applied
+      the restriction 'owner = "public"', which solved the PostgreSQL table listing.
+      I wonder, why I did not come across this with the other databases so far
+      (or have I missed something?).
+   usage : With method PgsqlDbBrowser.CreateNodeHierachy()
+   ʘ
+
+   reference 20130720°1233 'msdn: ADO.NET Schema Restrictions'
+   title : MSDN article 'Schema Restrictions (ADO.NET)'
+   authors :
+   url : http://msdn.microsoft.com/en-us/library/cc716722%28v=vs.90%29.aspx
+   note : This is actually the only place to find useful information about how
+      the restrictions array is composed. And this information seems to apply
+      not only to MS-SQL, but also to other databases. How much exactly they
+      have in common remains to be found out.
+   usage : With method PgsqlDbBrowser.CreateNodeHierachy()
+   ʘ
+
+   reference 20130717°1136
+   title : Thread 'Problem with Web Forms Designer'
+   authors :
+   url : http://www.tek-tips.com/viewthread.cfm?qid=1236309
+   note : Introduces class DbDataAdapterEx() as alternative to class DbDataAdapter().
+   chain : issue 20130717°1131
+   ʘ
+
+   reference 20130717°1135
+   title : Thread 'Sample ".NET Framework Data Provider'
+   authors :
+   url : https://groups.google.com/forum/#!topic/microsoft.public.dotnet.languages.csharp/B967t0IstUk
+   note : Shines a little light on the phenomenon, but the situation seems different.
+   chain : issue 20130717°1131
+   ʘ
+
+   reference 20130717°1134
+   title : Thread 'Error in Visual Studio'
+   authors :
+   url : http://forums.asp.net/t/670843.aspx/1
+   note : Describes exactly the situation, but got no answer.
+   chain : issue 20130717°1131
+   ʘ
+
+   reference 20130716°0627 'Make Thread-Safe Calls to Windows Forms Controls'
+   title : MSDN article 'How to: Make Thread-Safe Calls to Windows Forms Controls'
+   authors :
+   url : http://msdn.microsoft.com/en-us/library/ms171728%28VS.90%29.aspx
+   note : E.g. one example there is demonstrating three cases: (1) unsave cross-thread access,
+      (2) thread save calls by using Invoke, (3) thread save calls by using BackgroundWorker.
+       So we need a delegate here, but that's not all, since Invoke() hangs.
+   usage : Method 20130716°0625 dbClient_Error() issue 20130716°0626
+   ʘ
+
+   reference 20130716°0642 'hang after invoking a delegate from other thread'
+   title : Thread 'WinForms App hangs after invoking a delegate from other thread'
+   authors :
+   url : http://stackoverflow.com/questions/14368278/winforms-app-hangs-after-invoking-a-delegate-from-other-thread
+   usage : Method 20130716°0625 dbClient_Error() issue 20130716°0626
+   note : This page told the solution: Use BeginInvoke() instead of Invoke().
+   ʘ
+
+   reference 20130707°1032 'thread: how to list all loaded assemblies'
+   title : Thread 'How do I list all loaded assemblies?'
+   authors :
+   url : http://stackoverflow.com/questions/458362/how-do-i-list-all-loaded-assemblies
+   usage : Method provideSingleFileDeployment() sequence 20130707°1033/1034
+   ʘ
+
+   reference 20130706°2201 'msdn: Understanding The CLR Binder'
+   title : MSDN Magazine Article 'Understanding The CLR Binder'
+   authors :
+   url : http://msdn.microsoft.com/en-us/magazine/dd727509.aspx
+   usage : Methods 20121230°1501 provideSingleFileDeployment()
+   note :
+   ʘ
+
+   ref 20130706°1033 'Eric Lippert: base calls from anonymous delegates nonverifiable'
+   title : Article 'Why are base class calls from anonymous delegates nonverifiable?'
+   url : http://blogs.msdn.com/b/ericlippert/archive/2005/11/14/why-are-base-class-calls-from-anonymous-delegates-nonverifiable.aspx
+   author : Eric Lippert, 2005-Nov-14
+   usage : Issue 20130706°1031 'resource-based library policy check fail'
+   note :
+   ʘ
+
+   ref 20130706°1032 'Thread: Unverifiable code failed policy check'
+   title : Thread '“Unverifiable code failed policy check” for a closed source assembly'
+   url : http://stackoverflow.com/questions/2612128/unverifiable-code-failed-policy-check-for-a-closed-source-assembly
+   author : Stackoverflow
+   usage : Issue 20130706°1031 'resource-based library policy check fail'
+   note :
+   ʘ
+
+   ref 20130624°1001 'Article: Connection strings for Paradox'
+   about : ODBC and OleDb connectionstrings for Paradox
+   title : Article 'Connection strings for Paradox'
+   authors :
+   url : http://www.connectionstrings.com/paradox
+   usage : Class 20130624°1211 DemoConnSettings
+   ʘ
+
+   reference 20130623°1523 'msdn: method IComparable.CompareTo'
+   about : IComparable interface
+   title : MSDN Article 'IComparable.CompareTo Method'
+   authors :
+   url : http://msdn.microsoft.com/en-us/library/system.icomparable.compareto%28v=vs.90%29.aspx
+   note : Used with class 20130604°0127 ConnectionSettings.
+   ʘ
+
+   reference 20130623°1522 'msdn: interface IComparable'
+   about : IComparable interface
+   title : MSDN Article 'IComparable Interface'
+   authors :
+   url : http://msdn.microsoft.com/en-us/library/system.icomparable%28v=vs.90%29.aspx
+   note : Used with class 20130604°0127 ConnectionSettings.
+   ʘ
+
+   reference 20130623°0733 'thread: deselect databound ComboBox'
+   about : Empty ComboBoxes
+   title : Thread 'How to deselect/blank a databound ComboBox? SelectedIndex = -1 does not work'
+   authors :
+   url : http://stackoverflow.com/questions/10427172/how-to-deleselect-blank-a-databound-combobox-selectedindex-1-does-not-work
+   note : Used with ConnectForms.cs sequence 20130623°0734
+   ʘ
+
+   reference 20130623°0732 'msdn: combobox selected index eigenschaft'
+   about : Empty ComboBoxes
+   title : MSDN article 'ComboBox.SelectedIndex-Eigenschaft'
+   authors :
+   url : http://msdn.microsoft.com/de-de/library/system.windows.forms.combobox.selectedindex%28v=vs.90%29.aspx
+   note : Used with ConnectForms.cs sequence 20130623°0734
+   ʘ
+
+   ref 20130621°0934 'Thread: Settings with complex types'
+   title : Thread 'Using Settings with Complex Types'
+   authors :
+   url : http://stackoverflow.com/questions/603501/using-settings-with-complex-types
+   usage : Constructor 20130621.1121 ServerList()
+   note : Heureka! Tom wrote "To get a custom class to show in that list, make sure it
+      has a default constructor as one of it's constructing options. I learned this
+      the hard way." This was the solution for our problem. After introducing this
+      unparameterized constructor, all of a sudden the ServerList saving worked.
+   ʘ
+
+   reference 20130620°1551
+   about : Password Input TexBox
+   title : Thread 'Quick question : how to set a text box for inputing password in winforms?'
+   authors :
+   url : http://stackoverflow.com/questions/2555984/quick-question-how-to-set-a-text-box-for-inputing-password-in-winforms
+   usage : With method 20130622°1211 ConnectForm.cs::combobox_Connection_SelectedIndexChanged()
+   ʘ
+
+   ref 20130619°0532 'thread: programatically fire event handler'
+   title : Thread 'WinForms: How to programatically fire an event handler?'
+   authors :
+   url : http://stackoverflow.com/questions/372974/winforms-how-to-programatically-fire-an-event-handler
+   usage : Method 20130604°2204 DoBrowserAction() issue 20130619°0531 'F5 key does not work'
+   note
+   ʘ
+
+   reference 20130617°1622
+   about : Name of Calling Control
+   title : Thread 'Get name of control calling method'
+   authors :
+   url : http://stackoverflow.com/questions/2681949/get-name-of-control-calling-method
+   usage : With method 20130622°1211 ConnectForm.cs::combobox_Connection_SelectedIndexChanged()
+   ʘ
+
+   reference 20130616°1704 'MSDN: TabControl.DrawItem Event'
+   title : Article 'TabControl.DrawItem Event'
+   url : http://msdn.microsoft.com/en-us/library/system.windows.forms.tabcontrol.drawitem%28v=vs.90%29.aspx
+   author : MSDN
+   usage : Method 20130616°1703 ConnectForm.cs::tabcontrol_ServerTypes_DrawItem()
+   note :
+   ʘ
+
+   reference 20130616°1702 'Stacko: How make TabPage's title text bold?'
+   title : Thread 'How do I make a TabPage's title text bold?'
+   url : http://stackoverflow.com/questions/2326406/how-do-i-make-a-tabpages-title-text-bold
+   author :
+   usage : Method 20130616°1703 ConnectForm.cs::tabcontrol_ServerTypes_DrawItem()
+   note :
+   ʘ
+
+   reference 20130612°1352 'blog: create datatable programmatically'
+   title : Blog 'How to Create DataTable Programmatically in C#, ASP.NET?'
+   authors :
+   url : http://dotnetspidor.blogspot.in/2008/07/how-to-create-datatable.html
+   usage : Demo sequence discarded from method 20130604°0055 ConnectForm() [dump 20130621°0811]
+   note : Warning - page contains irritating advertising (".. Sie sind
+           unser 1.000.000ster Besucher ...") [ws 20180815°0332]
+   note :
+   ʘ
+
+   reference 20130612°1351 'msdn forum: add items to combobox in winform'
+   title : Article 'How to Add items to a Combobox in Winform using C#?'
+   authors :
+   url : http://social.msdn.microsoft.com/Forums/en-US/winforms/thread/2d7f8620-2b6a-49fc-9f54-edcd7ff1f1a7
+   usage : Demo sequence discarded from method 20130604°0055 ConnectForm() [dump 20130621°0811]
+   note : Tells example on how to fill a combobox via DataTable on the fly (does not work as is).
+   ʘ
+
+   reference 20130605°1611 'Thomas Belser: kleine SQLite Einführung'
+   title : Blog 'C# und SQLite – Eine kleine Einführung'
+   authors :
+   url : http://www.thomasbelser.net/2009/01/25/c-sharp-und-sqlite-eine-kleine-einfuhrung
+   usage : Class 20130605°1732 QueryPonyLib.SqliteDbClient
+   ʘ
+
+   reference : 20130618°0505 'article: creating global attributes in cs' heureka
+   title : Article 'Creating and Reading Global Attributes in C#'
+   authors :
+   url : http://tech.pro/tutorial/941/creating-and-reading-global-attributes-in-csharp
+   usage : Class 20130618°0521 QueryPonyLib.Globals.cs::CustomAuthorsAttribute
+   note : Heureka! The first example working smoothly.
+   ʘ
+
+   reference 20130618°0503 'thread: custom assembly information'
+   title : Thread '.Net 4 - Include custom information in assembly'
+   authors :
+   url : http://stackoverflow.com/questions/6354852/net-4-include-custom-information-in-assembly
+   usage : Class 20130618°0511 QueryPonyLib.Globals.cs::AssemblyPluginTestAttribute
+   note :
+   ʘ
+
+   reference 20130607°1101 'blog: getting started with sqlite and vs2010'
+   title : Blog 'Getting Started with SQLite and Visual Studio 2010'
+   authors :
+   url : http://devio.wordpress.com/2012/07/02/getting-started-with-sqlite-and-visual-studio-2010
+   usage : With method 20130605°1723 SqliteBrowser.cs::GetSqliteBrowserValues()
+   note :
+   ʘ
+
+   reference 20130606°2323 'msdn: schemaeinschränkungen'
+   title : MSDN Article 'Schemaeinschränkungen (ADO.NET)'
+   authors :
+   url : http://msdn.microsoft.com/de-de/library/cc716722%28v=vs.90%29.aspx
+   usage : With method 20130605°1723 SqliteBrowser.cs::GetSqliteBrowserValues()
+   note :
+   ʘ
+
+   reference 20130606°2322 'msdn: getschema und schemaauflistungen'
+   title : MSDN Article "'GetSchema' und Schemaauflistungen (ADO.NET)"
+   authors :
+   url : http://msdn.microsoft.com/de-de/library/ms254934%28v=vs.90%29.aspx
+   usage : With method 20130605°1723 SqliteBrowser.cs::GetSqliteBrowserValues()
+   note :
+   ʘ
+
+   reference 20130606°2321 'tread: reading sqlite table information'
+   title : Stackoverflow thread 'Reading SQLite table information in C#.NET'
+   authors :
+   url : http://stackoverflow.com/questions/4770716/reading-sqlite-table-information-in-c-net
+   usage : With method 20130605°1723 SqliteBrowser.cs::GetSqliteBrowserValues()
+   note :
+   ʘ
+
+   reference 20130606°1332 'thread: table schema does not work with sqlite'
+   title : Stackoverflow thread 'Getting table schema doesn't seem to work with System.Data.SQLite'
+   authors :
+   url : http://stackoverflow.com/questions/3268986/getting-table-schema-doesnt-seem-to-work-with-system-data-sqlite
+   usage : With method 20130605°1723 SqliteBrowser.cs::GetSqliteBrowserValues()
+   note :
+   ʘ
+
+   ref 20130116°1623 'Jon Skeet: Write file from assembly to disk'
+   title : Thread 'Write file from assembly resource stream to disk'
+   authors : Contribution Jon Skeet 2009-May-14'16:12
+   url : http://stackoverflow.com/questions/864140/write-file-from-assembly-resource-stream-to-disk
+   usage : Technique after Jon Skeet, contribution 2009-May-14'16:12, used e.g. for
+      methods 20130702°0531 Utils.CopyStream() and 20130519°1431 InitResources.cs::CopyStream().
+   note :
+   ʘ
+
+   reference 20121230°1512 'MSDN: Suche Ressourcennamen in Assembly'
+   title : MSDN article 'Code: Suchen von Ressourcennamen in einer Assembly (Visual C#)'
+   authors : Microsoft
+   url : http://msdn.microsoft.com/de-de/library/aa287526%28v=vs.71%29.aspx
+   usage : E.g. methods 20130707°1844/20130814.1833 listAvailableResources()
+   note :
+   ʘ
+
+   reference 20121230°1501 'provideSingleFileDeployment() prototype'
+   title : Sequence 20121230°1501 in file 20121227°1841 Form1.cs
+   authors :
+   url : http://downtown.trilo.de/svn/enumprogs/trunk/enumprogs/enumprogs
+   usage : Methods 20121230°1501 provideSingleFileDeployment()
+   note :
+   ʘ
+
+   reference 20121229°1502 'Jeffrey Richter: Excerpt 2 from CLR ...'
+   title : MSDN article 'Jeffrey Richter: Excerpt #2 from CLR via C#, Third Edition'
+   authors : Jeffrey Richter, 2010-Feb-3
+   url :  http://blogs.msdn.com/b/microsoft_press/archive/2010/02/03/jeffrey-richter-excerpt-2-from-clr-via-c-third-edition.aspx
+   usage : Methods 20121230°1501 provideSingleFileDeployment()
+   note :
+   ʘ
+
+   reference 20111109°1025 'codeproject: InputBox in C#'
+   title : Article 'InputBox in C#'
+   authors :
+   url : http://www.codeproject.com/KB/edit/InputBox.aspx
+   note : Used e.g. in method 20130114°1539 20111109°1024 IOBusProvider.readLine()
+   ʘ
+
+   ———————————————————————
+   [file 20130615°1555] ʘΩ

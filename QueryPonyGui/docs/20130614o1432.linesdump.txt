@@ -1,0 +1,173 @@
+﻿
+   ************************************************************
+   This file dumps lines shifted out of the code but not be thrown away.
+   ************************************************************
+
+   (cutout 20130727°0911)
+   // Sequence from method 20130615°1221 MysqlDbBrowser.cs::GetObjectHierarchy()
+   //----------------------------------------------------------
+   // debug issue 20130615°1121
+   if (Glb.Debag.ExecuteNo)
+   {
+      ///----------------------------------------------------.
+      // (note 20130616°1411) Explanation related to issue 20130615°1121
+      //                         (and issue 20130103°1431 in other project)
+      //
+      // Why the debugger skipps lines (e.g. in declarations/assignments).
+      //
+      // The lines are skipped, if in the Build Options 'Optimize code' is checked.
+      // The compiler recognizes that those variables are not used in the following
+      // code, and it silently dismisses the lines. Switch off the optimization, and the
+      // breakpoint will stick on the 'superfluous' lines, and they will be executed.
+      //
+      // With simple assignment lines, such debugger behaviour can be recognized as
+      // reasonable (if you remember the reason at the time of observing the behaviour).
+      //
+      // But much more crazy looks this behaviour, if a superfluous assignment is
+      // embedded behind the 'case' clause in a 'switch' block. Then, the yellow
+      // breakpoint marker jumps from the 'switch' keyword directly to the statement
+      // behind the 'switch' block, completely omitting the 'switch' block.
+      //
+      // Because nore the 'break' of the respective 'case', neither the 'default' branch
+      // is highlighted yellow, the behaviour looks really broken! In my opinion, the
+      // 'break' statement following the superfluous statement is indeed executed,
+      // and thus the debugger has no reason, silently skipping to highlight it yellow.
+      //
+      // Failing to highlight the definitely executed 'break', I call a presentation
+      // bug. Or have I somehow misunderstood, how exactly a switch construction works?
+      //------------------------------------------------------
+      //string s234 = "";                                     // a breakpoint here does not work here but at below Sleep() - WHY? See
+      //int iDbg = 123;                                       // a breakpoint here does not work
+      System.Threading.Thread.Sleep(1);                       // a breakpoint here does work
+      string sFilta = "";                                     // a breakpoint here does not work
+      switch (iCurNodeType)
+      {
+            ////case 0: System.Threading.Thread.Sleep(1); break; //// works
+            case 0: { System.Windows.Forms.MessageBox.Show("Hallo 1"); } break; //// fails in debugger but works without debugger
+            ////case 1: s234 = "View"; break;                 //// fails
+            ////case 1: iDbg = 124; break;                    //// fails
+            ////case 1: int iDbg2 = 124; break;               //// fails
+            ////case 1: node.Name = "Hello"; break;           //// works
+            ////case 1: iDbg456 = 111; break;                 //// fails
+            ////case 1: iDbg456 = iDbg456++; break;           //// works
+            ////case 1: sFilta += "x"; break;                 //// works
+            ////case 1: sFilta = "x"; break;                  //// fails
+            case 1: { System.Windows.Forms.MessageBox.Show("Hallo 2" + sFilta); sFilta = "x"; } break; //// fails
+            case Glb.NodeTypeNdxs.SystemTables2: c = System.Drawing.Color.LightGray; break; //// works
+            case Glb.NodeTypeNdxs.SystemViews3: c = System.Drawing.Color.LightGray; break;
+            default: System.Windows.Forms.MessageBox.Show("Hallo 5"); c = System.Drawing.Color.OrangeRed; break;
+      }
+      top[iCurNodeType].ForeColor = c;
+   }
+   //----------------------------------------------------------
+   //-------------------------------------------------
+   // (issue 20130615°1121) (compare note 20130616°1411 and issue 20130103°1431)
+   // title : Mysterious fails in switch block.
+   // symptom : If after the semicolon comes a simple assignment like 'i = 1' or
+   //           'sFilter = Glo.SchemaFilter.Table', the complete switch block is
+   //           is skipped, not even the default branch is executed. Some statments
+   //           work, and some do not work.
+   // note : There seems some system, which statements are bad and which are good,
+   //        but we could not pin it down. Here some examples:
+   //        - case 0: System.Threading.Thread.Sleep(1); break; //// works
+   //        - case 0: break;                                   //// fails
+   //        - case 1: s234 = "View"; break;                    //// fails
+   //        - case 1: iDbg = 124; break;                       //// fails
+   //        - case 1: int iDbg2 = 124; break;                  //// fails
+   //        - case 1: node.Name = "Hello"; break;              //// works
+   //        - case 1: iDbg456 = iDbg456++; break;              //// works
+   //        - case 1: sFilta = "x"; break;                     //// fails
+   //        - case 1: sFilta += "x"; break;                    //// works
+   // workaround : We use 's += "x"' instead 's = "x"'. But this works only as 's' is
+   //        always "" in the beginnng. Only then, those two statements are equivalent.
+   // note : In SharpDevelop, the debugger also skips the switch block on bad statement.
+   //        But interestingly, somehow it does not accept a breakpoint just before the
+   //        switch. It sets the breakpoint, but somehow gray/inactive. And such breakpoint
+   //        does not stop the code after the program was startet. To debug the situation
+   //        in SharpDevelop, the breakpoint must be set higher above, where it has
+   //        a solid color. Bottom line: SharpDevelop recognizes something which has
+   //        to do with that mysterious failures, and what VS does not recognize?
+   // note : The observation is, that this lines seem bad:
+   //           string s234 = "";
+   //           int iDbg = 123;
+   //           string sFilta = "";
+   //        This lines are ignored by the debugger, a breakpoint will be highlighted here
+   //        but when debugging, the yellow bar appears the next good line below (the switch).
+   //        And then, when one of those variables appears behind the case, the switch block
+   //        is skipped. Only funny, that 's = "x"' is bad, but 's += "x"' is good.
+   // question : BTW. What about the 'continue' in a switch? Is that fine?
+   // status : Unsolved.
+   //-------------------------------------------------
+
+
+   [dump 20130621°0811]
+   Cut from ConnectForm.cs. method 20130604°0055 ConnectForm()
+   *
+   // //~~~~~~~~~~~~~~~~~~~~~~~
+   // // Provisory convenience during development (20130607°1222)
+   // // Will become obsolet if the settings start working.
+   // //
+   // // todo : Before throwing away this sequence, extract the sample code
+   // //      about how to create a DataTable programmatically. (20130617°1711)
+   // //
+   // // ref : 20130612°1351 'msdn forum: add items to combobox in winform'
+   // // ref : 20130612°1352 'blog: create datatable programmatically'
+   // if (Glb.Deebug.ExecuteNo)
+   // {
+   //    // (1) hardcoded MySQL settings (just a development convenience)
+   //    string sUrl = "127.0.0.1";        // "localhost:3306";
+   //    string sUrl2 = "127.0.0.1:3307";  // "localhost:3307";
+   //
+   //    // (test sequence after 20130612°1351/°1352) does not yet work as expected
+   //    ////System.Data.DataTable dataTable = GetDataTable();
+   //    System.Data.DataTable dataTable = new System.Data.DataTable();
+   //    System.Data.DataColumn col1 = new System.Data.DataColumn("Display");
+   //    System.Data.DataColumn col2 = new System.Data.DataColumn("Value");
+   //    col1.DataType = System.Type.GetType("System.String");
+   //    col2.DataType = System.Type.GetType("System.String");
+   //    dataTable.Columns.Add(col1);
+   //    dataTable.Columns.Add(col2);
+   //    System.Data.DataRow row1 = dataTable.NewRow();
+   //    System.Data.DataRow row2 = dataTable.NewRow();
+   //    ////row["Code"] = "None";
+   //    ////row["Name"] = "None";
+   //    row1[col1] = sUrl;
+   //    row1[col2] = sUrl;
+   //    row2[col1] = sUrl2;
+   //    row2[col2] = sUrl2;
+   //    ////combobox_Mysql_Server.DisplayMember = "Name";
+   //    ////combobox_Mysql_Server.ValueMember = "Code";
+   //    ////dataTable.Rows.InsertAt(row, 0);
+   //    dataTable.Rows.Add(row1);
+   //    dataTable.Rows.Add(row2);
+   //    combobox_Mysql_Server.DisplayMember = "Display"; // "Name";
+   //    combobox_Mysql_Server.ValueMember = "Value"; //  "Code";
+   //    combobox_Mysql_Server.DataSource = dataTable;
+   //    textbox_Mysql_LoginName.Text = "myloginname";
+   //    textbox_Mysql_Password.Text = "mypassword";
+   //
+   //    // (2) hardcoded SQLite setting
+   //    textBox_SqliteFile.Text = "C:\\Documents and Settings\\All Users\\Application Data\\v4net\\sqlite\\joesgarage.sqlite3";
+   //
+   //    // (3) hardcoded OleDb setting
+   //    textbox_Oledb_ConnectionString.Text = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Paradox 7.x;Data Source=C:\\NetDir\\Joesgarage\\Firmendaten";
+   //
+   //    // (4) select shown tab
+   //    int iSelect = 2;
+   //    switch (iSelect)
+   //    {
+   //       case 1:
+   //          tabcontrol_ServerTypes.SelectedTab = tabpage_Sqlite;
+   //          break;
+   //       case 2:
+   //          tabcontrol_ServerTypes.SelectedTab = tabpage_Mysql;
+   //          break;
+   //       default:
+   //          break;
+   //    }
+   // }
+   // //~~~~~~~~~~~~~~~~~~~~~~~
+
+
+   ——————————————————————
+   [file 20130614°1432] Ω

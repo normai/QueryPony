@@ -1,0 +1,26 @@
+﻿/*
+ **************************************************************
+ * file        : http://downtown.trilo.de/svn/queryponydev/trunk/home/styleslocal.css
+ *               + http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/docs/styleslocal.css
+ * version     : 20130725°1321
+ * license     : The MIT License
+ * copyright   : © 2013 - 2018 Norbert C. Maier
+ * authors     : ncm
+ * status      : Applicable
+ * encoding    : UTF-8-with-BOM
+ * note        :
+ **************************************************************
+ */
+
+/* rule 20130725°1333 */
+body { background-color:#f0f0f0; }
+
+/* rule 20130725°1334 */
+div.chapterapps {
+               background-color:#f8f8f8;
+                max-width:720px; width:80%;
+                 padding:1em;
+                  margin:0 auto; margin-top:1em; margin-bottom:3em;
+}
+
+/* eof */
