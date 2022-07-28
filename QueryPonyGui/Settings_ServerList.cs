@@ -1,27 +1,24 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/Settings_ServerList.cs
-// id          : 20130604°1921
+// file        : 20130604°1921 /QueryPony/QueryPonyGui/Settings_ServerList.cs
 // summary     : This file stores one part of partial class 'Settings' to provide the ServerList custom type Setting.
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2021 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable
 // note        :
 // callers     :
 #endregion Fileinfo
 
-
 namespace QueryPonyGui.Properties
 {
-   /// <summary>This partial class 'Settings' part provides the ServerList custom type Setting.</summary>
+   /// <summary>This partial class 'Settings' part provides the ServerList custom type Setting</summary>
    /// <remarks>id : 20130604°1922</remarks>
-   ////internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
-   public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase // (20130901°073102) switched internal to public
+   public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase // Switched internal to public [chg 20130901°0731`02]
    {
 
-      // experimentally shutdown (20130828°1611)
-      // note : (1) After each edit in the Settings design view, the designer creates
+      // Experimentally shutdown 20130828°1611
+      // Note : (1) After each edit in the Settings design view, the designer creates
       //  a parallel property in Settings.Designer.cs. (2) This then causes compiler
       //  error "The type 'QueryPonyGui.Properties.Settings' already contains a
       //  definition for 'ServerList'". (3) Now let's experimentally shutdown this
@@ -30,9 +27,9 @@ namespace QueryPonyGui.Properties
       //  the initial creation, when the designer did not offer the wanted type
       //  'ServerList'. (5) But now, after 'ServerList' exists, maybe it is fine
       //  there without this manual file here.
-      /*
 
-      /// <summary>This Settings property gets/sets the ServerList custom type setting.</summary>
+      /*
+      /// <summary>This Settings property gets/sets the ServerList custom type setting</summary>
       /// <remarks>
       /// id : 20130604°1923
       /// note : (20130808°1411) This sequence was refreshed by generating it again
@@ -57,6 +54,5 @@ namespace QueryPonyGui.Properties
          }
       }
       */
-
    }
 }

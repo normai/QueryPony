@@ -1,10 +1,9 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyLib/DbApi/DbCreate.cs
-// id          : 20130818°1611
+// file        : 20130818°1611 /QueryPony/QueryPonyLib/DbApi/DbCreate.cs
 // summary     : This file stores class DbCreate to create a new database for the given connection settings.
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 by Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2021 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Experimental
 // note        :
@@ -15,8 +14,7 @@ using System;
 
 namespace QueryPonyLib
 {
-
-   /// <summary>This class creates a new database for the given connection settings.</summary>
+   /// <summary>This class creates a new database for the given connection settings</summary>
    /// <remarks>
    /// id : 20130818°1612
    /// note : I made this a static class because a database creation is a singular
@@ -24,8 +22,7 @@ namespace QueryPonyLib
    /// </remarks>
    public static class DbCreate
    {
-
-      /// <summary>This method creates a database after the given connection settings.</summary>
+      /// <summary>This method creates a database after the given connection settings</summary>
       /// <remarks>id : 20130818°1613</remarks>
       /// <param name="settings">The connection settings for the wanted database</param>
       /// <returns>The newly created database client or null</returns>
@@ -33,7 +30,7 @@ namespace QueryPonyLib
       {
          string s = "";
 
-         // provisory condition
+         // Provisory condition
          if (cs.Type != ConnSettingsLib.ConnectionType.Sqlite)
          {
             s = EnumExtensions.Description((QueryPonyLib.ConnSettingsLib.ConnectionType)cs.Type);
@@ -51,7 +48,7 @@ namespace QueryPonyLib
          //  System.Data.SQLite.dll' because it is being used by another process."
          //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-         // the actual database-specific job
+         // The actual database-specific job
          // [seq 20131201.0821] # wrapped line in try loop for debugging
          DbClient dbclient = null;
          try
@@ -67,20 +64,19 @@ namespace QueryPonyLib
          return dbclient;
       }
 
-
-      /// <summary>This method creates a new SQLite database.</summary>
+      /// <summary>This method creates a new SQLite database</summary>
       /// <remarks>
       /// id : 20130818°1614
-      /// ref : 20130818°1553 'Tigran: SQLite'
+      /// ref : 20130818°1553 'Tigran → SQLite'
       /// </remarks>
       /// <param name="cs">The connection settings to create the database</param>
       /// <returns>The wanted newly created DbClient object</returns>
       private static DbClient createSqlite(ConnSettingsLib csLib)
       {
-         DbClient dbclient = null;
          string s = "";
+         DbClient dbclient = null;
 
-         // does the file already exist?
+         // Does the file already exist? [seq 20130818°1615]
          string sFile = Utils.CombineServerAndDatabaseToFullfilename(csLib.DatabaseServerAddress, csLib.DatabaseName);
          if (System.IO.File.Exists(sFile))
          {
@@ -96,10 +92,10 @@ namespace QueryPonyLib
             }
          }
 
-         // create the file
+         // Create the file [line 20130818°1616]
          System.Data.SQLite.SQLiteConnection.CreateFile(sFile);
 
-         // paranoia (20130620°1613)
+         // Paranoia [seq 20130620°1613]
          if (! DbClientFactory.ValidateSettings(csLib))
          {
             s = "Connection settings invalid: " + csLib.Description;
@@ -107,16 +103,14 @@ namespace QueryPonyLib
             return null;
          }
 
-         // cretate the DbClient
-         // note : Compare sequences 20130618°0351 and sequence 20130713°0922.
+         // Cretate the DbClient [line 20130818°1617]
+         // See todo 20130828°1522 'Combine 4 connect dbClient seqences into one method'
          dbclient = DbClientFactory.GetDbClient(csLib);
 
-         // don't forget to complete the connection (seq 20130821°1111)
+         // Don't forget to complete the connection [seq 20130821°1111]
          dbclient.Connect();
 
          return dbclient;
       }
-
    }
-
 }

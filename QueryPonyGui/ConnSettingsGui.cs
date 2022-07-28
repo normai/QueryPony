@@ -1,43 +1,35 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/ConnectionSettingsGui.cs
-// id          : 20130604°0121
+// file        : 20130604°0121 /QueryPony/QueryPonyGui/ConnectionSettingsGui.cs
 // summary     : This file stores classes 'ConnectionSettingsGui', 'ServerList'/'ConnectionSettingsList' and 'DemoConnectionSettings' to maintain the settings.
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2021 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable
 // note        :
 // callers     :
 #endregion Fileinfo
 
-using QueryPonyLib; // (refactor 20130620°1011)
+using QueryPonyLib;                                                            // [refactor 20130620°1011]
 using System;
 using System.CodeDom.Compiler;
 using System.Collections;
-using System.Collections.Generic; // List
-using System.Configuration; // for [SettingsSerializeAs(SettingsSerializeAs.Xml)] (20130807°1701)
+using System.Collections.Generic;                                              // List
+using System.Configuration;                                                    // For [SettingsSerializeAs(SettingsSerializeAs.Xml)] [line 20130807°1701]
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace QueryPonyGui
 {
-
-   /// <summary>This class provides the XML-file-persisted settings for a connection.</summary>
+   /// <summary>This class provides the XML-file-persisted settings for a connection</summary>
    /// <remarks>
    /// id : 20130604°0127
    /// note : This class is involved in refactor 20130620°0211
-   /// note : Shutdown the following attributes (see note 20130621°1122 class ServerList).:
-   ///        // [GeneratedCode("xsd", "2.0.50727.42")]
-   ///        // [Serializable]
-   ///        // [XmlType(AnonymousType = true)]
-   ///        //// (note 20130621°1123)
    /// </remarks>
-   public class ConnSettingsGui : IComparable // [20130623°1512]
+   public class ConnSettingsGui : IComparable
    {
-
       //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      // experimental
+      // Experimental
 
       /// <summary>
       /// This subclass provides the definition of a server. It is introduced
@@ -46,31 +38,30 @@ namespace QueryPonyGui
       /// <remarks>id : 20130701°1411</remarks>
       public class Server : IEquatable<Server>
       {
-         /// <summary>This constructor creates a new Server object.</summary>
+         /// <summary>This constructor creates a new Server object</summary>
          /// <remarks>id : 20130701°1412</remarks>
          public Server(string sServer)
          {
             this.Name = sServer;
          }
 
-         /// <summary>This property gets/sets the server name.</summary>
+         /// <summary>This property gets/sets the server name</summary>
          /// <remarks>id : 20130701°1413</remarks>
          public string Name { get; set; }
 
-
-         /// <summary>This method ... is wanted for interface IEquatable<Server> ... for treenode comparison.</summary>
+         /// <summary>This method ... is wanted for interface IEquatable<Server> ... for treenode comparison</summary>
          /// <remarks>id : 20130701°1431</remarks>
          /// <param name="other">The object to be compared</param>
          public bool Equals(Server other)
          {
-            // reference equality is still a simple and necessary check
+            // Reference equality is still a simple and necessary check
             if(Object.ReferenceEquals(this, other)) { return true; }
 
-            // another simple check, the two objects should be the same type
+            // Another simple check, the two objects should be the same type
             if(this.GetType() != other.GetType()) { return false; }
 
-            // now compare members of the object that you want to use to determine 'semantic'
-            // equality. These members, if also reference types, must also be 'semantically' equal.
+            // Now compare members of the object that you want to use to determine 'semantic'
+            //  equality. These members, if also reference types, must also be 'semantically' equal.
             if (this.Name == other.Name)
             {
                return true;
@@ -79,8 +70,7 @@ namespace QueryPonyGui
             return false;
          }
 
-
-         /// <summary>This method ... is wanted for interface IEquatable[Server] ... for treenode comparison.</summary>
+         /// <summary>This method ... is wanted for interface IEquatable[Server] ... for treenode comparison</summary>
          /// <remarks>id : 20130701°1434</remarks>
          /// <param name="other">The object to be compared</param>
          public override bool Equals(object other)
@@ -92,8 +82,7 @@ namespace QueryPonyGui
             return false;
          }
 
-
-         /// <summary>This method ... is wanted for interface IEquatable[Server].</summary>
+         /// <summary>This method ... is wanted for interface IEquatable[Server]</summary>
          /// <remarks>id : 20130701°1435</remarks>
          /// <returns>The wanted hash code</returns>
          public override int GetHashCode()
@@ -102,20 +91,18 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This constructor creates a new ConnectionSetting.</summary>
+      /// <summary>This constructor creates a new ConnectionSetting</summary>
       /// <remarks>id : 20130622°0941</remarks>
       public ConnSettingsGui()
       {
-         // (sequence 20130622°0942)
-         // note : This may be a service for later, when they may be empty but must
+         // [seq 20130622°0942]
+         // Note : This may be a service for later, when they may be empty but must
          //    not be null, e.g. in the MySQL getConnection(). This should actually
          //    not be necessary, because those who set up the connection should do it.
          //    [note 20130622°094202]
          this.LoginName = "";
          this.Password = "";
       }
-
 
       /// <summary>This enum defines some connection states</summary>
       /// <remarks>
@@ -126,21 +113,18 @@ namespace QueryPonyGui
       /// </remarks>
       public enum ConnStatus
       {
-         Unvalidated,          // user has written something into the connection settings
-         Invalid,              // the connection settings is defintiely wrong
-         Valid,                // the connection settings seem fine
-         Failed,               // settings is fine, but the server is not reachable or down
-         Connected             // successfully connected (so far the only significant status)
+         Unvalidated,                                                          // User has written something into the connection settings
+         Invalid,                                                              // The connection settings is defintiely wrong
+         Valid,                                                                // The connection settings seem fine
+         Failed,                                                               // Settings is fine, but the server is not reachable or down
+         Connected                                                             // Successfully connected (so far the only significant status)
       }
-
 
       #region Private Variables
 
-
-      /// <summary>This field stores the value of the live property 'Type'.</summary>
+      /// <summary>This field stores the value of the live property 'Type'</summary>
       /// <remarks>id : 20130809°1223</remarks>
       private ConnSettingsLib.ConnectionType _Type = ConnSettingsLib.ConnectionType.NoType;
-
 
       /// <summary>
       /// This field stores the value of the Settings property 'sType' (wanted
@@ -149,14 +133,11 @@ namespace QueryPonyGui
       /// <remarks>id : 20130809°1224</remarks>
       private string _sType = "";
 
-
       #endregion Private Variables
-
 
       #region Public Properties
 
-
-      /// <summary>This property gets/sets the connection's connectionstring.</summary>
+      /// <summary>This property gets/sets the connection's connectionstring</summary>
       /// <remarks>
       /// id : 20130617°1412
       /// note : This property is one of the newly introduced generic
@@ -164,13 +145,11 @@ namespace QueryPonyGui
       /// </remarks>
       public string DatabaseConnectionstring { get; set; }
 
-
-      /// <summary>This property gets/sets the wanted database name on a given server.</summary>
+      /// <summary>This property gets/sets the wanted database name on a given server</summary>
       /// <remarks>id : 20130623°0702</remarks>
       public string DatabaseName { get; set; }
 
-
-      /// <summary>This property gets/sets the connection's server URL.</summary>
+      /// <summary>This property gets/sets the connection's server URL</summary>
       /// <remarks>
       /// id : 20130617°1416
       /// note : This property is one of the newly introduced generic
@@ -178,8 +157,7 @@ namespace QueryPonyGui
       /// </remarks>
       public string DatabaseServerUrl { get; set; }
 
-
-      // (experimentally shutdown 20130808°1554) this property seems not referenced anymore
+      // Experimentally shutdown [chg 20130808°1554] This property seems not be referenced anymore
       /*
       /// <summary>This property gets ...</summary>
       /// <remarks>id : 20130604°0146</remarks>
@@ -235,8 +213,7 @@ namespace QueryPonyGui
       }
       */
 
-
-      /// <summary>This property gets the connection's Key.</summary>
+      /// <summary>This property gets the connection's Key</summary>
       /// <remarks>
       /// id : 20130604°0145
       /// todo : Use here the new property 20130818°1511 ConnTypeString [todo 20130818°151204]
@@ -270,11 +247,11 @@ namespace QueryPonyGui
                   break;
 
                case ConnSettingsLib.ConnectionType.Oracle:
-                  sRet = "ORACLE" + Glb.sUlin + this.DatabaseServerUrl;                // (just on suspicion 20130717°122103)
+                  sRet = "ORACLE" + Glb.sUlin + this.DatabaseServerUrl;        // Just on suspicion [line 20130717°1221`03]
                   break;
 
                case ConnSettingsLib.ConnectionType.Pgsql:
-                  sRet = "PostgreSQL" + Glb.sUlin + this.DatabaseServerUrl;            // (just on suspicion 20130717°122102)
+                  sRet = "PostgreSQL" + Glb.sUlin + this.DatabaseServerUrl;    // Just on suspicion [line 20130717°1221`02]
                   break;
 
                case ConnSettingsLib.ConnectionType.Sqlite:
@@ -288,28 +265,24 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This property gets/sets the connection's login name.</summary>
+      /// <summary>This property gets/sets the connection's login name</summary>
       /// <remarks>id : 20130604°0143</remarks>
       public string LoginName { get; set; }
 
-
-      /// <summary>This property gets/sets the connection's password.</summary>
+      /// <summary>This property gets/sets the connection's password</summary>
       /// <remarks>id : 20130604°0144</remarks>
       [XmlIgnore]
       public string Password { get; set; }
 
-
       /// <summary>
-      /// This property gets/sets the connection type as string
-      ///  (as opposed to 'ConnSettings.ConnectionType Type').
+      /// This property gets/sets the connection type as string, as opposed
+      ///  to 'ConnSettings.ConnectionType Type'. It must be translated
+      ///  to/from 'ConnSettings.ConnectionType Type' on each access.
       /// </summary>
       /// <remarks>
       /// id : 20130809°1222
-      /// note : This is the key component for solution/workaround 20130809°1221
-      ///    against issue 20130731°0131 'Settings with a reference to a
-      ///    resourced library silently fail'. This property must be translated
-      ///    to/from 'ConnSettings.ConnectionType Type' on each access.
+      /// note : This is key component for solution 20130809°1221 against
+      ///    issue 20130731°0131 'Settings with reference to resourced library silently fail'.
       /// </remarks>
       public string sType
       {
@@ -336,8 +309,7 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This property gets/sets the connection's Type.</summary>
+      /// <summary>This property gets/sets the connection's Type</summary>
       /// <remarks>
       /// id : 20130604°0139
       /// note : This property was created during refactor 20130620°0211 'Split GUI from Lib Settings'.
@@ -371,8 +343,7 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This property gets/sets the setting flag 'Save Password' whether to store the password in the settings file or not.</summary>
+      /// <summary>This property gets/sets the setting flag 'Save Password' whether to store the password in the settings file or not</summary>
       /// <remarks>
       /// id : 20130620°1641
       /// todo : Find out about an encryption mechanism offered by .NET to store the password in
@@ -380,52 +351,41 @@ namespace QueryPonyGui
       /// </remarks>
       public bool SavePassword { get; set; }
 
-
-      /// <summary>This property gets/sets the connection status.</summary>
+      /// <summary>This property gets/sets the connection status</summary>
       /// <remarks>id : 20130828°1512</remarks>
       public ConnStatus Status { get; set; }
-
 
       /// <summary>This property gets/sets ...</summary>
       /// <remarks>id : 20130604°0142</remarks>
       public bool Trusted { get; set; }
 
-
       #endregion Public Properties
-
 
       #region Public Functions
 
-
-      /// <summary>This method serves the IComparable interface. It provides the ability of the objects to be sorted.</summary>
+      /// <summary>This method serves the IComparable interface. It provides the ability of the objects to be sorted</summary>
       /// <remarks>
       /// id : 20130623°1511
       /// note : About IComparable see references 20130623°1522 'interface IComparable'
       ///    and 20130623°1523 'method IComparable.CompareTo'.
       /// </remarks>
       /// <param name="other"></param>
-      /// <returns></returns>
+      /// <returns>Comparison result</returns>
       public int CompareTo(object obj)
       {
          int iRet = 1;
-
          if (obj == null)
          {
             return iRet;
          }
 
          ConnSettingsGui csOther = obj as ConnSettingsGui;
-
-         ////string sThis = this.ToString();                                           //// [old 20130724°092101]
-         string sThis = this.ConnIdString();                                           //// [new 20130724°092101]
-         ////string sOther = csOther.ToString();                                       //// [old 20130724°092102]
-         string sOther = csOther.ConnIdString();                                       //// [new 20130724°092102]
-
+         string sThis = this.ConnIdString();
+         string sOther = csOther.ConnIdString();
          iRet = String.Compare(sThis, sOther);
 
          return iRet;
       }
-
 
       /// <summary>
       /// This method provides the captions for displaying
@@ -443,8 +403,7 @@ namespace QueryPonyGui
          return sRet;
       }
 
-
-      /// <summary>This method returns a <see cref="T:System.String"></see> that represents the current <see cref="T:System.Object"></see>.</summary>
+      /// <summary>This method returns a <see cref="T:System.String"></see> that represents the current <see cref="T:System.Object"></see></summary>
       /// <remarks>
       /// id : 20130604°0150
       /// note : This method is wanted to build the names appearing in the
@@ -476,7 +435,6 @@ namespace QueryPonyGui
       /// </remarks>
       /// <filterpriority>2</filterpriority>
       /// <returns>A <see cref="T:System.String"></see> that represents the current <see cref="T:System.Object"></see>.</returns>
-      ////public override string ToString()
       public string ConnIdString()
       {
          string sEle1 = "", sEle2 = "", sRet = "";
@@ -523,7 +481,7 @@ namespace QueryPonyGui
                sEle2 = this.DatabaseName;                                              // (20130702°142302)
                break;
 
-            // (sequence 20130623°0731)
+            // [seq 20130623°0731]
             case ConnSettingsLib.ConnectionType.NoType:
                break;
 
@@ -538,8 +496,7 @@ namespace QueryPonyGui
          return sRet;
       }
 
-
-      /// <summary>This method creates an connection ID string.</summary>
+      /// <summary>This method creates an connection ID string</summary>
       /// <remarks>
       /// id : 20130623°1001
       /// todo : Use here the new property 20130818°1511 ConnTypeString [todo 20130818°151207]
@@ -596,12 +553,10 @@ namespace QueryPonyGui
                sRet = "PostgreSQL" + Glb.sBlHyBl + sEle1 + Glb.sBlHyBl + sEle2;
                break;
 
-
             case ConnSettingsLib.ConnectionType.Sqlite:
 
                sRet = "SQLite" + Glb.sBlHyBl + sEle1 + Glb.sBlHyBl + sEle2; ;
                break;
-
 
             // (20130623°073102)
             case ConnSettingsLib.ConnectionType.NoType:
@@ -616,8 +571,7 @@ namespace QueryPonyGui
          return sRet;
       }
 
-
-      /// <summary>This method clones the ConnectionSettings object itself.</summary>
+      /// <summary>This method clones the ConnectionSettings object itself</summary>
       /// <remarks>
       /// id : 20130604°0151
       /// note : Since this method was never tested, it might be incomplete.
@@ -641,8 +595,7 @@ namespace QueryPonyGui
          return csNew;
       }
 
-
-      /// <summary>This method converts Engine-ConnectionSettings to GUI-ConnectionSettings.</summary>
+      /// <summary>This method converts Engine-ConnectionSettings to GUI-ConnectionSettings</summary>
       /// <remarks>
       /// id : 20130620°1131
       /// note : Need some kind of translator from 'ConnectionSettings' to 'ConnectionSettings_DUMMY'.
@@ -666,8 +619,7 @@ namespace QueryPonyGui
          return csGui;
       }
 
-
-      /// <summary>This method converts GUI ConnectionSettings to Engine ConnectionSettings.</summary>
+      /// <summary>This method converts GUI ConnectionSettings to Engine ConnectionSettings</summary>
       /// <remarks>
       /// id : 20130620°1621
       /// note : Here we see the first time a systematic/alphabetic list of the properties of the
@@ -678,26 +630,7 @@ namespace QueryPonyGui
       /// <returns>The wanted Engine ConnectionSettings</returns>
       public static ConnSettingsLib convertSettingsGuiToLib(ConnSettingsGui csGui)
       {
-
          ConnSettingsLib csLib = new ConnSettingsLib();
-
-         // (type eliminated 20130818°180102)
-         /*
-         // todo : The values should be calculated already at the very beginning of the
-         //    existence of the object, and this bulky sequence can vanish. (todo 20130622°0914)
-         if      (csGui.Type == ConnSettings.ConnectionType.Couch)  { csLib.AddressType_NOTYETUSED = ConnSettings.AddressTyype.URL; }
-         else if (csGui.Type == ConnSettings.ConnectionType.Mssql)  { csLib.AddressType_NOTYETUSED = ConnSettings.AddressTyype.DataSource; }
-         else if (csGui.Type == ConnSettings.ConnectionType.Mysql)  { csLib.AddressType_NOTYETUSED = ConnSettings.AddressTyype.URL; }
-         else if (csGui.Type == ConnSettings.ConnectionType.Odbc)   { csLib.AddressType_NOTYETUSED = ConnSettings.AddressTyype.Connstring; }
-         else if (csGui.Type == ConnSettings.ConnectionType.OleDb)  { csLib.AddressType_NOTYETUSED = ConnSettings.AddressTyype.Connstring; }
-         else if (csGui.Type == ConnSettings.ConnectionType.Oracle) { csLib.AddressType_NOTYETUSED = ConnSettings.AddressTyype.DataSource; }
-         else if (csGui.Type == ConnSettings.ConnectionType.Pgsql)  { csLib.AddressType_NOTYETUSED = ConnSettings.AddressTyype.URL; }
-         else if (csGui.Type == ConnSettings.ConnectionType.Sqlite) { csLib.AddressType_NOTYETUSED = ConnSettings.AddressTyype.Filename; }
-         else
-         {
-            // fatal
-         }
-         */
 
          csLib.DatabaseConnectionstring = csGui.DatabaseConnectionstring;
          csLib.DatabaseName = csGui.DatabaseName;
@@ -714,36 +647,25 @@ namespace QueryPonyGui
 
    }
 
+   /*
+   todo 20130624°1143 'Rename class ServerList to ConnectionSettingsList'
+   Mmatter : Rename class 'ServerList' to 'ConnectionSettingsList'. Only this is sensitive
+      because it involves the Settings. When attempting to refactor the name from the usual
+      editor, we get a dialog [20130624°1142] "The file 'Properties\Settings.Designer.cs'.
+      could not be refactored. The current object is auto-generated and only supports renaming
+      throught the Settings Designer. Do you wish to continue ...?"
+   Location : class 20130604°0122 ServerList
+   Status : ?
+   */
 
-
-   /// <summary>This class constitutes a list of configurations of type GUI-ConnectionSettings.</summary>
+   /// <summary>This class constitutes a list of configurations of type GUI-ConnectionSettings</summary>
    /// <remarks>
-   /// id : 20130604°0122
-   /// note : Shutdown the attributes, don't know what they are good for. With the custom settings
-   ///    saving problem, they had nothing to do. See constructor 20130621°1121 'public ServerList()'.
-   ///    BTW '2.0.50727.42' is one revision of .NET 2.0. This number appears also in the automatically
-   ///    generated ApplicationSettings.cs. I also shutdown the attributes on some other classes, which
-   ///    were tagged with '2.0.50727.42'. This are the shutdown attributes:
-   ///    -------------------------------------
-   ///    // [GeneratedCode("xsd", "2.0.50727.42")]
-   ///    // [Serializable()]
-   ///    // [XmlType(AnonymousType = true)]
-   ///    // [XmlRoot(Namespace = "", IsNullable = false)]
-   ///    -------------------------------------
-   ///    [note 20130621°1122]
-   ///
-   /// todo : Rename class 'ServerList' to 'ConnectionSettingsList'. Only this is sensitive
-   ///    because it involves the Settings. When attempting to refactor the name from the usual
-   ///    editor, we get a dialog [20130624°1142] "The file 'Properties\Settings.Designer.cs'.
-   ///    could not be refactored. The current object is auto-generated and only supports renaming
-   ///    throught the Settings Designer. Do you wish to continue ...?" [todo 20130624°1143]
+   /// id : class 20130604°0122
+   /// note : Remember todo 20130624°1143 'Rename class ServerList to ConnectionSettingsList'
    /// </remarks>
-   ////[Serializable()] // just a try with issue 20130731°0131 (20130807°1331) DOES NOT HELP
-   ////[SettingsSerializeAs(SettingsSerializeAs.Xml)] // (20130807°1701) try for solving issue 20130731°0131 after http://www.blackwasp.co.uk/CustomAppSettings.aspx -- DOES NOT HELP
-   public class ServerList //// no more partial class (refactor 20130620°1011 'Divide Namespaces')
+   public class ServerList
    {
-
-      /// <summary>This constructor creates a empty ServerList object. It is needed to make the Settings work.</summary>
+      /// <summary>This constructor creates a empty ServerList object. It is needed to make the Settings work</summary>
       /// <remarks>
       /// id : 20130621°1121
       /// note : Without constructor, the ServerList will mysteriously be written
@@ -756,13 +678,11 @@ namespace QueryPonyGui
       {
       }
 
-
-      /// <summary>This field stores the ArrayList with the connection settings.</summary>
+      /// <summary>This field stores the ArrayList with the connection settings</summary>
       /// <remarks>id : 20130604°0123</remarks>
       private ArrayList _alConnSettings = new ArrayList();
 
-
-      /// <summary>This property gets/sets the items of the Connection List.</summary>
+      /// <summary>This property gets/sets the items of the Connection List</summary>
       /// <remarks>id : 20130604°0124</remarks>
       [XmlElement("Server", Form = XmlSchemaForm.Unqualified)]
       public ConnSettingsGui[] Items
@@ -772,7 +692,7 @@ namespace QueryPonyGui
             int iNumOfItems = _alConnSettings.Count;
             ConnSettingsGui[] arcs = new ConnSettingsGui[iNumOfItems];
 
-            // (fine - that's what we had before debugging 20130620°1154)
+            // Fine — That's what we had before debugging [line 20130620°1154]
             arcs = (ConnSettingsGui[])this._alConnSettings.ToArray(typeof(ConnSettingsGui));
 
             return arcs;
@@ -784,8 +704,7 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This method adds one ConnectionSettings item to the ServerList.</summary>
+      /// <summary>This method adds one ConnectionSettings item to the ServerList</summary>
       /// <remarks>id : 20130604°0125</remarks>
       /// <param name="conSettings">The ConnectionSettings to be added to this ConnectionList object.</param>
       /// <returns>The ArrayList index at which the value has been added to the ConnectionList (useless because it's the index before sorting).</returns>
@@ -794,14 +713,13 @@ namespace QueryPonyGui
          int iRet = -1;
          iRet = _alConnSettings.Add(conSettings);
 
-         // this works after IComparable was implemented (note 20130623°1513)
+         // This works after IComparable was implemented [note 20130623°1513]
          _alConnSettings.Sort();
 
          return iRet;
       }
 
-
-      /// <summary>This method removes one ConnectionSettings item from the ServerList.</summary>
+      /// <summary>This method removes one ConnectionSettings item from the ServerList</summary>
       /// <remarks>id : 20130623°0711</remarks>
       /// <param name="conSettings">The index for the item to remove</param>
       /// <returns>Success flag</returns>
@@ -816,8 +734,7 @@ namespace QueryPonyGui
          return bRet;
       }
 
-
-      /// <summary>This method retrieves the array index of one Connection by the given key.</summary>
+      /// <summary>This method retrieves the array index of one Connection by the given key</summary>
       /// <remarks>id : 20130604°0126</remarks>
       /// <param name="key">The key for which to retrieve the index.</param>
       /// <returns>The ConnectionSettings array index associated with the given key.</returns>
@@ -834,8 +751,7 @@ namespace QueryPonyGui
          return -1;
       }
 
-
-      /// <summary>This method retrieves the array index of one Connection by the given connection ID.</summary>
+      /// <summary>This method retrieves the array index of one Connection by the given connection ID</summary>
       /// <remarks>
       /// id : 20130701°1241 (20130604°0126)
       /// note : This method is introduced only for method 20130618°0411 button_Connect_Click()
@@ -858,8 +774,7 @@ namespace QueryPonyGui
          return -1;
       }
 
-
-      /// <summary>This property gets a List of the ConnectionList ID strings.</summary>
+      /// <summary>This property gets a List of the ConnectionList ID strings</summary>
       /// <remarks>id : 20130604°0128</remarks>
       [XmlIgnore] // do not store this property in the Settings (added 20130810°1111)
       public List<string> Ids
@@ -876,24 +791,20 @@ namespace QueryPonyGui
       }
    }
 
-
-   /// <summary>This class constitutes a list of hardcoded demo connections (experimental).</summary>
+   /// <summary>This class constitutes a list of hardcoded demo connections (experimental)</summary>
    /// <remarks>id : 20130624°1211 (20130604°0122)</remarks>
    public class DemoConnSettings
    {
-
-      /// <summary>This constructor creates a empty DemoConnSettings object.</summary>
+      /// <summary>This constructor creates a empty DemoConnSettings object</summary>
       /// <remarks>id : 20130624°1212</remarks>
       public DemoConnSettings()
       {
          fillTheList();
       }
 
-
-      /// <summary>This field stores ....</summary>
+      /// <summary>This field stores ...</summary>
       /// <remarks>id : 20130624°1213</remarks>
       private ArrayList _arraylist = new ArrayList();
-
 
       /// <summary>This property gets/sets ...</summary>
       /// <remarks>id : 20130624°1214 (20130604°0124)</remarks>
@@ -911,18 +822,15 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This constructor creates a new ServerList either empty or with default values.</summary>
+      /// <summary>This constructor creates a new ServerList either empty or with default values</summary>
       /// <remarks>id : 20130624°1215 (20130617°1511)</remarks>
       private void fillTheList()
       {
-
          ConnSettingsGui cs = new ConnSettingsGui();
          cs.Type = ConnSettingsLib.ConnectionType.Couch;
          cs.DatabaseServerUrl = "127.0.0.1" + Glb.DbSpecs.sSepaUrlPort + Glb.DbSpecs.CouchDefaultPortnum.ToString(); // '127.0.0.1:5984'
          cs.DatabaseName = "Aloha";
          this.Add(cs);
-
 
          cs = new ConnSettingsGui();
          cs.Type = ConnSettingsLib.ConnectionType.Mssql;
@@ -931,7 +839,6 @@ namespace QueryPonyGui
          cs.Trusted = true;
          this.Add(cs);
 
-
          cs = new ConnSettingsGui();
          cs.Type = ConnSettingsLib.ConnectionType.Mssql;
          cs.DatabaseServerUrl = "localhost\\SQLEXPRESS";
@@ -939,13 +846,11 @@ namespace QueryPonyGui
          cs.Trusted = true;
          this.Add(cs);
 
-
          cs = new ConnSettingsGui();
          cs.Type = ConnSettingsLib.ConnectionType.Mysql;
          cs.DatabaseServerUrl = "127.0.0.1" + Glb.DbSpecs.sSepaUrlPort + Glb.DbSpecs.MysqlDefaultPortnum.ToString(); // '127.0.0.1:3306'
          cs.DatabaseName = "contao";
          this.Add(cs);
-
 
          // See ref 20130624°1001 'Article: Connection strings for Paradox'
          cs = new ConnSettingsGui();
@@ -953,15 +858,13 @@ namespace QueryPonyGui
          cs.DatabaseConnectionstring = "DSN=Joesgarage";
          this.Add(cs);
 
-
          cs = new ConnSettingsGui();
          cs.Type = ConnSettingsLib.ConnectionType.OleDb;
          cs.DatabaseConnectionstring = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Paradox 7.x;Data Source=C:\\NetDir\\Joesgarage\\Firmendaten";
          this.Add(cs);
 
-
          // The Oracle connection makes problems with 'Add Demo Connections'. (20130624°1242)
-         if (Glb.Debag.ExecuteYes)
+         if (Glb.Debag.Execute_Yes)
          {
             cs = new ConnSettingsGui();
             cs.Type = ConnSettingsLib.ConnectionType.Oracle;
@@ -969,53 +872,51 @@ namespace QueryPonyGui
             this.Add(cs);
          }
 
-
          cs = new ConnSettingsGui();
          cs.Type = ConnSettingsLib.ConnectionType.Pgsql;
          cs.DatabaseServerUrl = "127.0.0.1" + Glb.DbSpecs.sSepaUrlPort + Glb.DbSpecs.PgsqlDefaultPortnum.ToString(); // '127.0.0.1:5432'
-         cs.DatabaseServerUrl = "localhost";                                           // port 5432 seems to be supplied automatically
+         cs.DatabaseServerUrl = "localhost";                                   // Port 5432 seems to be supplied automatically
          cs.DatabaseName = "pauline1";
          cs.LoginName = "postgres";
          this.Add(cs);
 
-
          //----------------------------------------------------
-         // garantee SQLite demo database files (sequence 20130709°1351)
-         // note : This is the first time using of provideResourceFiles() with a mixed-assembly-list
+         // Guarantee SQLite demo database files [seq 20130709°1351]
+         // Note : This is the first time using of provideResourceFiles() with a mixed-assembly-list
          System.Reflection.Assembly asmSource1 = System.Reflection.Assembly.GetExecutingAssembly();
          System.Reflection.Assembly asmSource2 = System.Reflection.Assembly.Load(Glb.Resources.AssemblyNameLib);
-         string sAsmResourceName1 = Glb.Resources.JoesgarageSqliteResourcename;        // "QueryPonyGui.docs.joesgarage.sqlite3"
-         string sAsmResourceName2 = Glb.Resources.JoespostboxSqliteResourcename;       // "QueryPonyLib.docs.joespostbox.201307031243.sqlite3"
+         string sAsmResourceName1 = Glb.Resources.JoesgarageSqliteResourcename;  // "QueryPonyGui.docs.joesgarage.sqlite3"
+////     string sAsmResourceName2 = Glb.Resources.JoespostboxSqliteResourcename;  // "QueryPonyLib.docs.joespostbox.201307031243.sqlite3"
          string sTargetFolder = Program.PathConfigDirUser + "\\" + "docs";
-         string sTargetFilename1 = Glb.Resources.JoesgarageSqliteFilename;             // "joesgarage.sqlite3"
-         string sTargetFilename2 = Glb.Resources.JoespostboxSqliteFilename;            // "joespostbox.201307031243.sqlite3";
+         string sTargetFilename1 = Glb.Resources.JoesgarageSqliteFilename;     // "joesgarage.sqlite3"
+////     string sTargetFilename2 = Glb.Resources.JoespostboxSqliteFilename;    // "joespostbox.201307031243.sqlite3";
          string sFullfilename1 = System.IO.Path.Combine(sTargetFolder, sTargetFilename1);
-         string sFullfilename2 = System.IO.Path.Combine(sTargetFolder, sTargetFilename2);
+////     string sFullfilename2 = System.IO.Path.Combine(sTargetFolder, sTargetFilename2);
 
-         // prepare extraction list
+         // Prepare extraction list
          IOBus.Utils.Resofile[] resos = { new IOBus.Utils.Resofile(asmSource1, sAsmResourceName1, sTargetFolder, sTargetFilename1)
-                                       , new IOBus.Utils.Resofile(asmSource2, sAsmResourceName2, sTargetFolder, sTargetFilename2)
+                                        //// , new IOBus.Utils.Resofile(asmSource2, sAsmResourceName2, sTargetFolder, sTargetFilename2)
                                         };
 
-         // determine assembly from which to extract files
-         System.Reflection.Assembly asm = System.Reflection.Assembly.GetEntryAssembly(); // first time I use this method (20130709°1352)
+         // Determine assembly from which to extract files
+         System.Reflection.Assembly asm = System.Reflection.Assembly.GetEntryAssembly(); // First occasion I use this method [line 20130709°1352]
 
-         // perform the extraction
+         // Perform the extraction
          IOBus.Utils.provideResourceFiles(resos);
 
-         // paranoia
+         // Paranoia
          if (! System.IO.File.Exists(sFullfilename1))
          {
-            // fatal
-            // todo : Provide error handling. (issue 20130709°1354)
+            // Fatal
+            // Todo : Provide error handling [issue 20130709°1354]
          }
-         if (! System.IO.File.Exists(sFullfilename2))
-         {
-            // fatal
-            // todo : Provide error handling. (issue 20130709°1355)
-         }
+         ////if (! System.IO.File.Exists(sFullfilename2))
+         ////{
+         ////   // Fatal
+         ////   // Todo : Provide error handling [issue 20130709°1355]
+         ////}
          Program.SqliteDemoJoesgarage = sFullfilename1;
-         Program.SqliteDemoJoespostbox = sFullfilename2;
+         ////Program.SqliteDemoJoespostbox = sFullfilename2;
          //----------------------------------------------------
 
          cs = new ConnSettingsGui();
@@ -1023,10 +924,9 @@ namespace QueryPonyGui
          string sRoot = "";
          string sFilePathWithoutRoot = "";
          bool bProforma = Utils.SplitFullfilenamInServerAndDatabase(Program.SqliteDemoJoesgarage, out sRoot, out sFilePathWithoutRoot);
-         cs.DatabaseServerUrl = sRoot;                                                 // (experiment 20130702°1413)
-         cs.DatabaseName = sFilePathWithoutRoot;                                       // (experiment 20130702°141302)
+         cs.DatabaseServerUrl = sRoot;                                         // Experiment [line 20130702°1413`01]
+         cs.DatabaseName = sFilePathWithoutRoot;                               // Experiment [line 20130702°1413`02]
          this.Add(cs);
-
 
          cs = new ConnSettingsGui();
          cs.Type = ConnSettingsLib.ConnectionType.Sqlite;
@@ -1040,8 +940,7 @@ namespace QueryPonyGui
          return;
       }
 
-
-      /// <summary>This method adds one ConnectionSettings item to this DemoConnectionSettings object.</summary>
+      /// <summary>This method adds one ConnectionSettings item to this DemoConnectionSettings object</summary>
       /// <remarks>id : 20130624°1215 (20130604°0125)</remarks>
       /// <param name="conSettings">The ConnectionSettings to be added to this object.</param>
       /// <returns>The ArrayList index at which the value has been added to the list.</returns>
@@ -1051,6 +950,5 @@ namespace QueryPonyGui
          iRet = _arraylist.Add(conSettings);
          return iRet;
       }
-
    }
 }

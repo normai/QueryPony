@@ -1,33 +1,28 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyLib/ConnSettings.cs
-// id          : 20130620°0311 (20130604°0121)
+// file        : 20130620°0311 (20130604°0121) /QueryPony/QueryPonyLib/ConnSettings.cs
 // summary     : This file stores class 'ConnSettings' to store the connection
 //                settings as seen from the library (as opposed to the GUI
 //                connection settings, which shall rather be eliminated).
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2021 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable
-// version     : (20130620°0311) File cloned from QueryPonyGui/ConnectionSettings.cs ... while refactor 20130620°0211
+// version     : 20130620°0311 — File cloned from QueryPonyGui/ConnectionSettings.cs ... while refactor 20130620°0211
 // note        :
 // callers     :
 #endregion Fileinfo
 
 using System;
-using System.CodeDom.Compiler;
-using System.Collections;
-using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace QueryPonyLib
 {
-
-   /// <summary>This class homes the extension method to show the enum 'Description' attribute in comboboxes.</summary>
+   /// <summary>This class homes the extension method to show the enum 'Description' attribute in comboboxes</summary>
    /// <remarks>id : 20130818°1601</remarks>
    public static class EnumExtensions
    {
-      /// <summary>This extension method returns the enum's 'Description' attributes.</summary>
+      /// <summary>This extension method returns the enum's 'Description' attributes</summary>
       /// <remarks>
       /// id : 20130818°1602
       /// note : After reference 20130818°1552 'enum description'
@@ -45,144 +40,87 @@ namespace QueryPonyLib
       }
    }
 
-
-   /// <summary>This class constitutes the connection settings on the engine side.</summary>
+   /// <summary>This class constitutes the connection settings on the engine side</summary>
    /// <remarks>
    /// id : 20130620°0221
    /// note : This class was created while refactor 20130620°0211. The original
    ///    class ConnectionSettings had to be split into ConnectionSettingsGui and
    ///    ConnectionSettingsLib. After the split, ConnectionSettingsLib served as
    ///    helper dummy until syntax was fine and solution built again, then it was
-   ///    functionally restored. (note 20130713°0903)
+   ///    functionally restored. [note 20130713°0903]
    /// </remarks>
    public class ConnSettingsLib
    {
-
-      /// <summary>This const (16) tells the maximum lenght of the label text of the QueryForm's tabpage.</summary>
+      /// <summary>This const (16) tells the maximum lenght of the label text of the QueryForm's tabpage</summary>
       /// <remarks>id : 20130724°1101</remarks>
       private const int i_MaxLengthLabelTabpageConn = 24;
 
-      /// <summary>This const (16) tells the maximum lenght of the label text of a database treenode.</summary>
+      /// <summary>This const (16) tells the maximum lenght of the label text of a database treenode</summary>
       /// <remarks>id : 20130724°1102</remarks>
       private const int i_MaxLengthLabelTreenodeDatabase = 24;
 
-      /// <summary>This const (16) tells the maximum lenght of the label text of a server treenode.</summary>
+      /// <summary>This const (16) tells the maximum lenght of the label text of a server treenode</summary>
       /// <remarks>id : 20130724°1104</remarks>
       private const int i_MaxLengthLabelTreenodeServer = 24;
 
-
       #region Enum definitions
 
-      // (type eliminated 20130818°1801)
-      /*
-      /// <summary>This enum defines available address types (URL, filename, connectionstring).</summary>
-      /// <remarks>
-      /// id : 20130620°1521
-      /// note : This is just a proposal, not implemented and not mirrored to the
-      ///    GUI-ConnectionSettings. The idea is, that one generic field would suffice
-      ///    for all database types (whereas now, we have all separate). The question
-      ///    is what about a connectionstring: That comprises database type, URL,
-      ///    filename and all things. But this question already exists, it does not
-      ///    dependend on a possible new 'AddresssType' enum. [note 20130620°1521]
-      /// </remarks>
-      [Serializable]
-      public enum AddressTyype
-      {
-         /// <summary>This enum value indicates that the given value is a connectionstring (ODBC, OleDb).</summary>
-         /// <remarks>id : 20130620°1531</remarks>
-         Connstring,
-
-         /// <summary>This enum value indicates that the given value is a 'DataSource' (Oracle).</summary>
-         /// <remarks>id : 20130620°1532</remarks>
-         DataSource,
-
-         /// <summary>This enum value indicates that the given value is a filename (SQLite).</summary>
-         /// <remarks>id : 20130620°1533</remarks>
-         Filename,
-
-         /// <summary>This enum value indicates that the given value is a folder (BDE).</summary>
-         /// <remarks>id : 20130620°1534</remarks>
-         Folder,
-
-         /// <summary>This enum value indicates that the given value is a URL (CouchDB, MySQL, PostgreSQL).</summary>
-         /// <remarks>id : 20130620°1535</remarks>
-         URL
-      }
-      */
-
-
-      /// <summary>This enum defines the available database types.</summary>
+      /// <summary>This enum defines the available database types</summary>
       /// <remarks>id : 20130620°0330 (20130604°0128)</remarks>
       [Serializable]
       public enum ConnectionType
       {
-         /// <summary>This enum value indicates the connection to a SQLite server.</summary>
+         /// <summary>This enum value indicates the connection to a SQLite server</summary>
          /// <remarks>id : 20130620°0332</remarks>
          [System.ComponentModel.Description("CouchDB")]
          Couch,
 
-         /// <summary>This enum value indicates the connection to a MS-SQL server.</summary>
+         /// <summary>This enum value indicates the connection to a MS-SQL server</summary>
          /// <remarks>id : 20130620°0333</remarks>
          [System.ComponentModel.Description("MS-SQL")]
          Mssql,
 
-         /// <summary>This enum value indicates the connection to a MySQL server.</summary>
+         /// <summary>This enum value indicates the connection to a MySQL server</summary>
          /// <remarks>id : 20130620°0334</remarks>
          [System.ComponentModel.Description("MySQL")]
          Mysql,
 
-         /// <summary>This enum value indicates the connection to a ODBC interface.</summary>
+         /// <summary>This enum value indicates the connection to a ODBC interface</summary>
          /// <remarks>id : 20130620°0335</remarks>
          [System.ComponentModel.Description("ODBC")]
          Odbc,
 
-         /// <summary>This enum value indicates the connection to a Oracle DB server.</summary>
+         /// <summary>This enum value indicates the connection to a Oracle DB server</summary>
          /// <remarks>id : 20130620°0336</remarks>
          [System.ComponentModel.Description("Oracle")]
          Oracle,
 
-         /// <summary>This enum value indicates the connection to a OleDb interface.</summary>
+         /// <summary>This enum value indicates the connection to a OleDb interface</summary>
          /// <remarks>id : 20130620°0337</remarks>
          [System.ComponentModel.Description("OleDb")]
          OleDb,
 
-         /// <summary>This enum value indicates the connection to a SQLite server.</summary>
+         /// <summary>This enum value indicates the connection to a SQLite server</summary>
          /// <remarks>id : 20130620°0338</remarks>
          [System.ComponentModel.Description("PostgreSQL")]
          Pgsql,
 
-         /// <summary>This enum value indicates the connection to a SQLite server.</summary>
+         /// <summary>This enum value indicates the connection to a SQLite server</summary>
          /// <remarks>id : 20130620°0339</remarks>
          [System.ComponentModel.Description("SQLite")]
          Sqlite,
 
-         /// <summary>This enum value indicates that no ConnectionType has been selected so far.</summary>
+         /// <summary>This enum value indicates that no ConnectionType has been selected so far</summary>
          /// <remarks>id : 20130620°0331</remarks>
          [System.ComponentModel.Description("NoType")]
          NoType
       }
 
-      /*
-      public string ConnStr()
-      {
-         return "x";
-      }
-
-      ////public string ConnectionType.ToString()
-      ///string ConnectionType.ToString()
-      public static string ConnTypeString()
-      {
-         return "x";
-      }
-      */
-
-
       #endregion Enum definitions
 
       #region Properties
 
-
-      /// <summary>This property gets the connection type as string.</summary>
+      /// <summary>This property gets the connection type as string</summary>
       /// <remarks>
       /// # id : 20130818°1511
       /// todo : This string is wanted at serveral places all over the program, but
@@ -199,7 +137,7 @@ namespace QueryPonyLib
          {
             string sVal = "";
 
-            // read basic database type component
+            // Read basic database type component
             switch (this.Type)
             {
                case ConnectionType.Couch  : sVal = "CouchDB" ; break;
@@ -218,18 +156,15 @@ namespace QueryPonyLib
          }
       }
 
-
-      /// <summary>This property gets/sets this connection settings' connectionstring.</summary>
+      /// <summary>This property gets/sets this connection settings' connectionstring</summary>
       /// <remarks>id : 20130623°1041</remarks>
       public string DatabaseConnectionstring { get; set; }
 
-
-      /// <summary>This property gets/sets this connection settings' database name.</summary>
+      /// <summary>This property gets/sets this connection settings' database name</summary>
       /// <remarks>id : 20130622°0911</remarks>
       public string DatabaseName { get; set; }
 
-
-      /// <summary>This property gets/sets the server address, e.g. 'localhost'.</summary>
+      /// <summary>This property gets/sets the server address, e.g. 'localhost'</summary>
       /// <remarks>
       /// id : 20130723°1021
       /// note : The three new DatabaseServer* properties are tightly related to
@@ -242,7 +177,6 @@ namespace QueryPonyLib
       /// </remarks>
       public string DatabaseServerAddress { get; set; }
 
-
       /// <summary>This property gets/sets the server portnumber, e.g. 3306</summary>
       /// <remarks>
       /// id : 20130723°1022
@@ -250,16 +184,13 @@ namespace QueryPonyLib
       /// </remarks>
       public int DatabaseServerPortnum { get; set; }
 
-
-      /// <summary>This property gets/sets the server protoclo, e.g. 'http'.</summary>
+      /// <summary>This property gets/sets the server protoclo, e.g. 'http'</summary>
       /// <remarks>id : 20130723°1023</remarks>
       public string DatabaseServerProtocol { get; set; }
-
 
       /// <summary>This property gets/sets ...</summary>
       /// <remarks>id : 20130620°0346 (20130617°1416)</remarks>
       public string DatabaseServerUrl { get; set; }
-
 
       /// <summary>This property gets a string to be used as ...</summary>
       /// <remarks>
@@ -277,7 +208,6 @@ namespace QueryPonyLib
          get
          {
             string sRet = "";
-
             switch (this.Type)
             {
                case ConnectionType.Couch:
@@ -317,13 +247,11 @@ namespace QueryPonyLib
                   string sMessage = "Invalid Connection Type";
                   throw new ArgumentOutOfRangeException(sParamName, sMessage);
             }
-
             return sRet;
          }
       }
 
-
-      /// <summary>This property gets a key for this connection setting.</summary>
+      /// <summary>This property gets a key for this connection setting</summary>
       /// <remarks>
       /// id : 20130620°0921 (20130604°0145)
       /// note : What for is this used exactly? In user.config 'Key' it does not show up.
@@ -387,11 +315,9 @@ namespace QueryPonyLib
                   string sMsg = "Invalid Connection Type";
                   throw new ArgumentOutOfRangeException(sParam, sMsg);
             }
-
             return sRet;
          }
       }
-
 
       /// <summary>
       /// This property gets the label text for this connection's QueryForm's
@@ -402,10 +328,10 @@ namespace QueryPonyLib
       {
          get
          {
-            // read basic value
+            // Read basic value
             string sVal = this.DatabaseName;
 
-            // process exceptions
+            // Process exceptions
             switch (this.Type)
             {
                case ConnectionType.Odbc:
@@ -416,24 +342,23 @@ namespace QueryPonyLib
                default: break;
             }
 
-            // adjust
-            sVal = IOBus.Utils.Strings.ShortenDisplayString(sVal, i_MaxLengthLabelTabpageConn); // e.g. 16
+            // Adjust
+            sVal = IOBus.Utils.Strings.Ram(sVal, i_MaxLengthLabelTabpageConn); // E.g. 16
 
             return sVal;
          }
       }
 
-
-      /// <summary>This property gets the label text for this connection's database treenode.</summary>
+      /// <summary>This property gets the label text for this connection's database treenode</summary>
       /// <remarks>id : 20130723°1442</remarks>
       public string LabelTreenodeDatabase
       {
          get
          {
-            // read basic value
+            // Read basic value
             string sVal = this.DatabaseName;
 
-            // process exceptions
+            // Process exceptions
             switch (this.Type)
             {
                case ConnectionType.Odbc:
@@ -444,31 +369,29 @@ namespace QueryPonyLib
                default: break;
             }
 
-            // adjust
-            sVal = IOBus.Utils.Strings.ShortenDisplayString(sVal, i_MaxLengthLabelTreenodeDatabase); // e.g. 32
+            // Adjust
+            sVal = IOBus.Utils.Strings.Ram(sVal, i_MaxLengthLabelTreenodeDatabase); // E.g. 32
 
             return sVal;
          }
       }
 
-
-      /// <summary>This property gets the label text for this connection's server treenode.</summary>
+      /// <summary>This property gets the label text for this connection's server treenode</summary>
       /// <remarks>
       /// id : 20130723°1441
-      /// note : For how the label worked before, see e.g. outcommented workaround 20130719°0922 in QueryForm.cs
       /// </remarks>
       public string LabelTreenodeServer
       {
          get
          {
-            // initial values
+            // Initial values
             string sVal = "";
 
-            // read basic server name component
+            // Read basic server name component
             string sDbUrl = this.DatabaseServerUrl;
 
-            // read basic database type component
-            // todo : Use here the new property 20130818°1511 ConnTypeString [todo 20130818°151202]
+            // Read basic database type component
+            // Todo : Use here the new property 20130818°1511 ConnTypeString [todo 20130818°151202]
             switch (this.Type)
             {
                case ConnectionType.Couch  : sVal = "CouchDB" ; break;
@@ -485,61 +408,48 @@ namespace QueryPonyLib
 
             sVal += " " + sDbUrl;
 
-            // adjust
-            sVal = IOBus.Utils.Strings.ShortenDisplayString(sVal, i_MaxLengthLabelTreenodeServer); // e.g. 24
+            // Adjust
+            sVal = IOBus.Utils.Strings.Ram(sVal, i_MaxLengthLabelTreenodeServer); // E.g. 24
 
             return sVal;
          }
       }
 
-
-      /// <summary>This property gets/sets the login name for this connection.</summary>
+      /// <summary>This property gets/sets the login name for this connection</summary>
       /// <remarks>id : 20130620°0321 (20130604°0143)</remarks>
       public string LoginName { get; set; }
 
-
-      /// <summary>This property gets/sets the connection settings password.</summary>
+      /// <summary>This property gets/sets the connection settings password</summary>
       /// <remarks>id : 20130620°0322 (20130604°0144)</remarks>
       [XmlIgnore]
       public string Password { get; set; }
 
-
-      /// <summary>This property gets/sets the timeout in seconds to use for this connection.</summary>
+      /// <summary>This property gets/sets the timeout in seconds to use for this connection</summary>
       /// <remarks>id : 20130713°0941</remarks>
       public int Timeout { get; set; }
 
-
-      /// <summary>This property gets/sets the connection settings 'Trusted' flag.</summary>
+      /// <summary>This property gets/sets the connection settings 'Trusted' flag</summary>
       /// <remarks>id : 20130620°0319 (20130604°0142)</remarks>
       public bool Trusted { get; set; }
 
-
-      /// <summary>This property gets/sets the connection settings ConnectionType.</summary>
+      /// <summary>This property gets/sets the connection settings ConnectionType</summary>
       /// <remarks>id : 20130620°0341 (20130604°0139)</remarks>
       public ConnectionType Type { get; set; }
 
       #endregion Properties
 
-
       #region Methods
 
-      /// <summary>This method clones this ConnSettings.</summary>
+      /// <summary>This method clones this ConnSettings</summary>
       /// <remarks>
       /// id : 20130620°0313
-      /// todo : It looks like some properties are missing to be
-      ///    cloned. Complete the method. (todo 20130724°0841)
+      /// todo : It looks like some properties are missing to be cloned. Complete method. [todo 20130724°0841]
       /// </remarks>
       public ConnSettingsLib Clone()
       {
          ConnSettingsLib csNew = new ConnSettingsLib();
 
-         // (type eliminated 20130818°180104)
-         /*
-         csNew.AddressType_NOTYETUSED = this.AddressType_NOTYETUSED;
-         */
-
          csNew.DatabaseConnectionstring = this.DatabaseConnectionstring;
-         ////csNew.DatabaseFilename_ELIM = this.DatabaseFilename_ELIM; //// (eliminated 20130818.180203)
          csNew.DatabaseName = this.DatabaseName;
          csNew.DatabaseServerUrl = this.DatabaseServerUrl;
          csNew.LoginName = this.LoginName;
@@ -551,6 +461,5 @@ namespace QueryPonyLib
       }
 
       #endregion Methods
-
    }
 }

@@ -2,15 +2,15 @@
 
 **Slogan** : A Simple Generic Database Query Tool and API
 
-**Places** : [Homepage](http://downtown.trilo.de/svn/queryponydev/trunk/home/index.html) — [Downloads](http://downtown.trilo.de/svn/queryponydev/downloads/) — [UserGuide](http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/docs/index.html)
+**Places** : [Homepage](http://downtown.trilo.de/svn/queryponydev/trunk/home/index.html)
+ — [Downloads](http://downtown.trilo.de/svn/queryponydev/downloads/)
+ — [UserGuide](http://downtown.trilo.de/svn/queryponydev/trunk/QueryPony/QueryPonyGui/docs/index.html)
 
-**Status** : Proof-of-concept
+**Status** : Under overhaul — Disrupted
 
-**Highlight** : API utilizable from any .NET program
+**Highlight** : Database agnostic API utilizable from any .NET program
 
 ## Quickstart
-
-Aloha folks, it goes like follows.
 
 [Download](http://downtown.trilo.de/svn/queryponydev/downloads/) the executable and start it.
 
@@ -54,8 +54,9 @@ To edit the table, write/mark/execute an appropriate SQL update
 
 ![View the result](./QueryPonyGui/docs/img/20180819o0216.querypony-helpmenu.v0.png)
 
-Of course you also want inspect the meager offline User Guide,
- which will show up in your default browser.
+Sure you also want inspect the meager offline User Guide
+ which will show up in your default browser
+ (here [online](https://rawgit.com/normai/QueryPony/master/QueryPonyGui/docs/index.html)).
 
 ![View the result](./QueryPonyGui/docs/img/20180819o0217.querypony-userguide.v0.png)
 
@@ -67,30 +68,13 @@ To resolve this riddle, seek some hint from the 'About' dialog.
 
 ![View the result](./QueryPonyGui/docs/img/20180819o0218.querypony-aboutbox.v0.png)
 
-Yep, now you also have found the two folders, which you must
- delete, once you get tired of QueryPony and want purge it
- from your machine without any residues.
+Now you also have found the two folders, which you must delete, once you get
+ tired of QueryPony and want purge it from your machine without any residues.
 
-Try, play, explore, have fun, get mad!
+Have fun!
 
-Please mind: This is beta — never cherish expectations.
+*2018-Aug-19 ~~*
 
-Otherwise you are welcome to study the code and contribute.
+---
 
-Goodbye,
-
-Norbert
-
-BTW. What I find much more fascinating than above described cruelsome
- GUI, is the __engine__ with it's database agnostic API, usable from any
- other .NET program.
-
-So if the customer for your latest cool business application is asking
- 'Which database does your application need?', perplex her with the
- laconic answer: __'Any'__.
-
-*2018-August-19*
-
-*eof*
-
-<!-- [pg 20180819°0331] -->
+<sup><sub><sup>File 20180819°0331, solution 20130603°1234 ܀Ω</sup></sub></sup>

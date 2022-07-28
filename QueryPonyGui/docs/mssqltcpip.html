@@ -1,0 +1,259 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8" data-encoding="UTF-8-with-BOM">
+   <title>QueryPony → MS-SQL via TCP/IP</title>
+   <link rel="stylesheet" type="text/css" href="./styleslocal.css"/>
+</head>
+
+<body id="i20140127o0112">
+
+<div class="TopLogoRightPlain" id="i20110826o112202">
+               <img id="i20110826o112203" src="./img/20130705o0812.mcol-chess-horse.v0.x0200y0200.png" width="96" height="96" alt="Logo 20130705°0812" />
+</div>
+
+<div class="ChapterApps">
+
+ <div class="TopTitleNaviArrows" id="i20140127o0514">
+               Page 3 of 8
+       <br>
+               <a href="./connect.html" style="color:#404040;"><img src="./img/20081114o1721.left.png.gif" width="32" height="24" alt="Go to the previous page" style="border-style: none;" /></a> &nbsp;
+               <a href="./index.html" style="color:#404040;"><img src="./img/20081114o172303.up.png.gif" width="24" height="24" alt="Home" style="border-style: none;" /></a> &nbsp;
+               <a href="./treeview.html" style="color:#404040;"><img src="./img/20081114o1722.right.png.gif" width="32" height="24" alt="Go to the next page" style="border-style: none;" /></a>
+ </div>
+
+ <p class="TopTitleNaviCake" id="i20140127o0515">
+               <a href="./index.html">Start</a> &nbsp;
+               <a href="./connect.html"><b>Connect</b></a> &nbsp;
+               <a href="./treeview.html">Treeview</a> &nbsp;
+               <a href="./query.html">Query</a> &nbsp;
+               <a href="./options.html">Options</a> &nbsp;
+               <a href="./settings.html">Settings</a> &nbsp;
+               <a href="./about.html">About</a> &nbsp;
+       <br>
+               <!-- a href="./mssqltcpip.html" --><b>MS-SQL via TCP/IP</b><!-- /a --> &nbsp;
+ </p>
+
+ <p class="TopTitleCrumbs" id="i20180801o0732">
+               <a href="./index.html">QueryPony User Manual</a> →
+               <a href="./connect.html">The Connect Form</a> →
+ </p>
+
+ <h1 id="i20140127o0521">
+               Connect to MS SQL Server via TCP/IP
+ </h1>
+
+ <p id="i20140127o0522">
+               To connect to the legacy <b>Microsoft SQL Server 7</b>
+               and <b>Microsoft SQL Server 2000</b> from QueryPony, you may need a non-standard procedure.
+               Those versions do not yet know the shared memory protocol used by
+               default by today's versions, but they speak TCP/IP.
+               This page shall help you to configure a connection using TCP/IP.
+ </p>
+
+ <p id="i20140127o0523">
+               To force a connection to use TCP/IP, just prepend '<b>tcp:</b>'
+               to the server name.
+               But in order for such connection to succeed (1) the server has to
+               offer the TCP/IP protocol and (2) the client machine has to allow using it.
+ </p>
+
+ <h2>
+               The Session
+ </h2>
+
+ <p id="i20140127o0524">
+               This chapter just documents how I made a TCP/IP connection work
+               on a Windows XP station with a SQL Server Express 10.0 (not having available a true legacy SQL Server).
+               The procedure
+               will surely look different on your station, but
+               the story might give you an idea on what is involved.
+ </p>
+
+ <p id="i20140127o0525">
+               (1) &nbsp; Try to connect with the 'tcp:' prefix.
+ </p>
+
+ <p class="ImageCenter" id="i20140127o0526">
+               <a href="./img/20140126o1847.querypony--connect-via-tcpip.png">
+                <img src="./img/20140126o1847.querypony--connect-via-tcpip.png" width="411" height="292" alt="Image 20140126°1847 Connect to MS SQL Server via TCP/IP" data-imgdims="587 ∙ 417 * 0.7 = 411 ∙ 292" />
+               </a>
+       <br>
+               Try to connect via TCP/IP to a Microsoft SQL Server. Instead of
+          <br> 'localhost' you may also write '127.0.0.1' or the name of the machine.
+ </p>
+
+ <p id="i20140127o0531">
+               (2) &nbsp; QueryPony probably refuses to connect.
+ </p>
+
+ <p class="ImageCenter" id="i20140127o0532">
+               <a href="./img/20140126o1522.querypony--test-mssql-over-tcp--error.png">
+                <img src="./img/20140126o1522.querypony--test-mssql-over-tcp--error.png" width="624" height="76" alt="Image 20140126°1522 Error message" data-imgdims="1041 ∙ 126 * 0.6 = 624 ∙ 76" />
+               </a>
+       <br>
+               Trying to connect via TCP/IP may result in this error message.
+ </p>
+
+ <p id="i20140127o0533">
+               (3) &nbsp; On the machine with the SQL Server, go to the Control Panel
+               and inspect the protocols your SQL Server is offering.
+ </p>
+
+ <p class="ImageCenter" id="i20140127o0534">
+               <a href="./img/20140126o1821.comp-man--sqlexpress--protocols.png">
+                <img src="./img/20140126o1821.comp-man--sqlexpress--protocols.png" width="461" height="317" alt="Image 20140126°1821" data-imgdims="658 ∙ 452 * 0.7 = 461 ∙ 317" />
+               </a>
+       <br>
+               The TCP/IP protocol is disabled by default. Rightclick and <b>enable it</b>!
+ </p>
+
+ <p id="i20140127o0535">
+               (4) &nbsp; Windows tells you to restart the SQL Server.
+ </p>
+
+ <p class="ImageCenter" id="i20140127o0536">
+               <a href="./img/20140126o1822.comp-man--sqlexpress--restart.png">
+                <img src="./img/20140126o1822.comp-man--sqlexpress--restart.png" width="424" height="89" alt="Image 20140126°1822" />
+               </a>
+       <br>
+               Restart the SQL Server or the simply reboot.
+         <br>  (Or wait because below comes another restart.)
+ </p>
+
+ <p id="i20140127o0541">
+               (5) &nbsp; Though set being enabled, the TCP/IP protocol seems not yet available.
+               So have a closer look on the properties.
+ </p>
+
+ <p class="ImageCenter" id="i20140127o0542">
+               <a href="./img/20140126o1824.comp-man-sqlexpress--protocols--tcp-enabled.png">
+                <img src="./img/20140126o1824.comp-man-sqlexpress--protocols--tcp-enabled.png" width="425" height="320" alt="Image 20140126°1824" />
+               </a>
+       <br>
+               Have a closer look to the protocol settings by rightclick/Properties.
+ </p>
+
+ <p id="i20140127o0543">
+               (6) &nbsp; The Protocol Properties dialog shows a second place where the TCP/IP protocol
+                must be enabled (per network card).
+ </p>
+
+ <p class="ImageCenter" id="i20140127o0544">
+               <a href="./img/20140126o1825.comp-man-sqlexpress--protocols--tcp--props.png">
+                <img src="./img/20140126o1825.comp-man-sqlexpress--protocols--tcp--props.png" width="277" height="309" alt="Image 20140126°1825" />
+               </a>
+       <br>
+               Set the protocol to '<b>Enabled = Yes</b>' on the Protocol Properties dialog as well.
+         <br>  Again the SQL Server needs to be restarted (could have skipped the restart above).
+ </p>
+
+ <p id="i20140127o0545">
+               (7) &nbsp; Not only the server has to be ready to talk TCP/IP, but also
+               the client machine has to allow for it. Again go to the Control Panel, this
+               time for the Windows Services. (Of course, if the SQL Server is on 'localhost',
+               the server machine and the client machine are the same.)
+ </p>
+
+ <p class="ImageCenter" id="i20140127o0546">
+               <a href=".img/20140126o1841.control-panel--services--sql-server-browser.png">
+                <img src="./img/%2320140126'1841.control-panel--services--sql-server-browser.png" width="623" height="347" alt="Image 20140126°1841" />
+               </a>
+       <br>
+               If you see the SQL Server Browser disabled, then <b>start it</b>!
+ </p>
+
+ <p id="i20140127o0547">
+               (8) &nbsp; Back in QueryPony, I try again to make a SQL Server connection
+               via TCP/IP and -- it works!
+ </p>
+
+ <p class="ImageCenter" id="i20140127o0548">
+               <a href="./img/20140126o1845.querypony--connect-via-tcpip--heureka.png">
+                <img src="./img/20140126o1845.querypony--connect-via-tcpip--heureka.png" width="506" height="356" alt="Image 20140126°184502 Connect to MS SQL Server via TCP/IP succeeded" data-imgdims="844 ∙ 592 * 0.6 = 506 ∙ 356" />
+               </a>
+       <br>
+               Connection via TCP/IP to a Microsoft SQL Server succeeded.
+ </p>
+
+ <p id="i20140127o0549">
+               &nbsp;
+ </p>
+
+ <h2>
+               Attention
+ </h2>
+
+ <p id="i20140127o0551">
+               Above description does not tell anything about
+               the <b>security issues</b> you raise when you open the TCP/IP
+               protocol for the SQL Server. Escpecially on a productive
+               system, you have to know what you are doing. Perhaps it is
+               not allowed at all in your environment, or at least you may
+               want to adjust the firewall(s) accordingly.
+ </p>
+
+ <p id="i20140127o0552">
+               Note: The procedure described above is not yet confirmed or finetuned
+               by other people. I wish you good luck. Please feedback any mistakes.
+ </p>
+
+ <h2>
+               Links
+ </h2>
+
+ <p id="i20140127o0553">
+               Blog article
+               <a href="http://sqlserverbuilds.blogspot.de" target="_blank">
+                Microsoft SQL Server 2014, 2012, 2008R2, 2008, 2005, 2000 and 7.0 Builds
+               </a> .
+               provides a nice summary about the existing SQL Server versions.
+               <span class="timestamp">(#&nbsp;20140126.1111)</span>
+ </p>
+
+ <p id="i20140127o0554">
+               On the MSDN page
+               <a href="http://msdn.microsoft.com/library/system.data.sqlclient%28v=vs.90%29.aspx" target="_blank">
+                System.Data.SqlClient Namespace
+               </a>
+               the crucial statement about accessing SQL Server 7 and SQL Server 2000 is found:
+               <span class="FontTtyMedium">Caution ADO.NET 2.0 does not support asynchronous commands over
+               shared memory for SQL Server 2000 or lower. However, you can force
+               TCP instead of shared memory. You can do that by prefixing tcp: to
+               the server name in the connection string or you can use localhost.</span>
+               <span class="timestamp">(#&nbsp;20140126.1512)</span>
+ </p>
+
+ <p id="i20140127o0555">
+               The Microsoft support page
+               <a href="http://support.microsoft.com/default.aspx?scid=kb;EN-US;914277" target="_blank">
+                How to configure SQL Server 2005 to allow remote connections
+               </a>
+               describes the TCP/IP configuration for a remote connection to the SQL Server(s).
+               <span class="timestamp">(#&nbsp;20140126.1833)</span>
+ </p>
+
+ <p id="i20140127o0556">
+               The blog article
+               <a href="http://www.linglom.com/it-support/enable-remote-connection-on-sql-server-2008-express" target="_blank">
+                Enable Remote Connection on SQL Server 2008 Express
+               </a>
+               describes how to configure a remote connection to SQL Server 2008.
+               <span class="timestamp">(#&nbsp;20140126.1832)</span>
+ </p>
+
+</div>
+
+<p class="FooterUpdate" id="i20140127o0113">
+               Version : 2014-Jan-27
+</p>
+<p class="FooterImprint" id="i20130724o1318">
+               Imprint : <a href="http://www.trilo.de/imprint.html" class="Extern">www.trilo.de/imprint.html</a>
+</p>
+<p class="FooterReferer" id="i20140127o0511">
+               <span class="FooterFileUrl">http://downtown.trilo.de/svn/queryponydev/trunk/QueryPony/QueryPonyGui/docs/<a href="http://downtown.trilo.de/svn/queryponydev/trunk/QueryPony/QueryPonyGui/docs/mssqltcpip.html">mssqltcpip.html</a></span>
+               <span class="FooterCopyright">© 2013 - 2021 Norbert C. Maier</span>
+               <span class="FooterPageId">20140127°0111</span>
+</p>
+</body>
+</html>

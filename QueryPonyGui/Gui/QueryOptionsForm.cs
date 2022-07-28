@@ -1,10 +1,9 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/Gui/QueryOptionsForm.cs
-// id          : 20130604°2241
+// file        : 20130604°2241 /QueryPony/QueryPonyGui/Gui/QueryOptionsForm.cs
 // summary     : This file stores class 'QueryOptionsForm' to constitute the QueryOptions Dialog Form.
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2021 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable
 // note        :
@@ -17,7 +16,7 @@ using System.Windows.Forms;
 namespace QueryPonyGui
 {
 
-   /// <summary>This class constitutes the QueryOptions Dialog Form.</summary>
+   /// <summary>This class constitutes the QueryOptions Dialog Form</summary>
    /// <remarks>
    /// id : 20130604°2242
    /// note : Access modifier set 'public' to make it accessible from other projects (20130604°1426)
@@ -32,7 +31,6 @@ namespace QueryPonyGui
          InitializeComponent();
       }
 
-
       /// <summary>This eventhandler ...</summary>
       /// <remarks>id : 20130604°2244</remarks>
       private void cmdResetToDefault_General_Click(object sender, EventArgs e)
@@ -43,7 +41,6 @@ namespace QueryPonyGui
          txtBatchSeparator.Text = "GO";
       }
 
-
       /// <summary>This eventhandler ...</summary>
       /// <remarks>id : 20130604°2245</remarks>
       internal void cmdOk_Click(object sender, EventArgs e)
@@ -51,6 +48,5 @@ namespace QueryPonyGui
          DialogResult = DialogResult.OK;
          Close();
       }
-
    }
 }

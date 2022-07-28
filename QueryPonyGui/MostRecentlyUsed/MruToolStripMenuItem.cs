@@ -1,6 +1,7 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/MostRecentlyUsed/MruToolStripMenuItem.cs from
-//                "Genghis v0.8.zip" at http://genghis.codeplex.com/releases/view/4954
+// file        : http://downtown.trilo.de/svn/queryponydev/trunk/QueryPony/QueryPonyGui/MostRecentlyUsed/MruToolStripMenuItem.cs
+//                + https://github.com/normai/QueryPony/blob/master/QueryPonyGui/MostRecentlyUsed/MruToolStripMenuItem.cs
+// origin      : "Genghis v0.8.zip" at http://genghis.codeplex.com/releases/view/4954
 // id          : 20130604°1541
 // summary     : This file stores Genghis class 'MruToolStripMenuItem' to provide ...
 // license     : Custom License
@@ -26,7 +27,6 @@ namespace MRUSampleControlLibrary {
       /// <remarks>id : 20130604°1543</remarks>
       private string filename;
 
-
       /// <summary>This constructor ...</summary>
       /// <remarks>id : 20130604°1544</remarks>
       public MruToolStripMenuItem(string filename, int textWidth, int index, System.EventHandler click) {
@@ -35,13 +35,11 @@ namespace MRUSampleControlLibrary {
          this.Text = GetMruMenuItemText(filename, textWidth, index);
       }
 
-
       /// <summary>This property gets ...</summary>
       /// <remarks>id : 20130604°1545</remarks>
       public string Filename {
          get { return filename; }
       }
-
 
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130604°1546</remarks>
@@ -51,7 +49,6 @@ namespace MRUSampleControlLibrary {
          return string.Format("{0} {1}", formattedAccessKey, formattedFilename);
       }
 
-
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130604°1547</remarks>
       private string GetFormattedAccessKey(int index) {
@@ -60,7 +57,6 @@ namespace MRUSampleControlLibrary {
          else if ( index == 10 ) return "1&0";
          else return index.ToString();
       }
-
 
       // Derived from original post by James Berry from Chris Sells's win_tech_off_topic list
       /// <summary>This method ...</summary>
@@ -113,6 +109,5 @@ namespace MRUSampleControlLibrary {
          if ( addHeader == true ) sb.Insert(0, pathBits[0] + "\\...");
          return sb.ToString();
       }
-
    }
 }

@@ -1,6 +1,7 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/MostRecentlyUsed/IMenuMruRenderer.cs from
-//                "Genghis v0.8.zip" at http://genghis.codeplex.com/releases/view/4954
+// file        : http://downtown.trilo.de/svn/queryponydev/trunk/QueryPony/QueryPonyGui/MostRecentlyUsed/IMenuMruRenderer.cs
+//                + https://github.com/normai/QueryPony/blob/master/QueryPonyGui/MostRecentlyUsed/IMenuMruRenderer.cs
+// origin      : "Genghis v0.8.zip" at http://genghis.codeplex.com/releases/view/4954
 // id          : 20130604°1621
 // summary     : This file stores Genghis class 'InMenuMruMenuListRender' to provide ...
 // license     : Custom License
@@ -26,7 +27,6 @@ namespace MRUSampleControlLibrary {
       /// <remarks>id : 20130604°1623</remarks>
       public void Render(ToolStripMenuItem mruListMenu, MruMenuListItems mruMenuListItems, int textWidth, EventHandler mruMenuItem_Click)
       {
-
          // Clear existing menu items, if any
          ToolStripDropDownMenu rootMenu = (ToolStripDropDownMenu)mruListMenu.Owner;
 
@@ -52,6 +52,5 @@ namespace MRUSampleControlLibrary {
             mruListMenu.Visible = false;
          }
       }
-
    }
 }

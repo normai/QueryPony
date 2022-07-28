@@ -1,10 +1,9 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyLib/DbApi/OledbDbClient.cs
-// id          : 20130604°1001 (20130605°1731)
+// file        : 20130604°1001 (20130605°1731) /QueryPony/QueryPonyLib/DbApi/OledbDbClient.cs
 // summary     : This file stores class 'OledbDbClient' to constitute an implementation of DbClient for OleDb.
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 by Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2021 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable
 // note        :
@@ -19,19 +18,16 @@ using System.Text;
 
 namespace QueryPonyLib
 {
-
-   /// <summary>This class constitutes an implementation of DbClient for OleDb.</summary>
+   /// <summary>This class constitutes an implementation of DbClient for OleDb</summary>
    /// <remarks>id : 20130604°1002 (20130605°1732)</remarks>
    class OledbDbClient : DbClient
    {
-
       /// <summary>This constructor ...</summary>
       /// <remarks>id : 20130604°1003 (20130605°1733)</remarks>
       /// <param name="settings">...</param>
       public OledbDbClient(ConnSettingsLib settings) : base(settings)
       {
       }
-
 
       /// <summary>This property gets ...</summary>
       /// <remarks>id : 20130604°1004 (20130605°1734)</remarks>
@@ -40,8 +36,7 @@ namespace QueryPonyLib
          get { return (OleDbConnection) _connection; }
       }
 
-
-      /// <summary>This method returns an OleDb database connection.</summary>
+      /// <summary>This method returns an OleDb database connection</summary>
       /// <remarks>id : 20130604°1005 (20130605°1735)</remarks>
       /// <returns>The wanted OleDb database connection</returns>
       protected override IDbConnection GetDbConnection()
@@ -51,8 +46,7 @@ namespace QueryPonyLib
          return con;
       }
 
-
-      /// <summary>This eventhandler processes the InfoMessage event of this OleDb connection.</summary>
+      /// <summary>This eventhandler processes the InfoMessage event of this OleDb connection</summary>
       /// <remarks>id : 20130604°1006 (20130605°1736)</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -61,8 +55,7 @@ namespace QueryPonyLib
          OnInfoMessage(sender, new InfoMessageEventArgs(e.Message, ""));
       }
 
-
-      /// <summary>This method builds a OleDb connectionstring from the connection settings of this DbClient.</summary>
+      /// <summary>This method builds a OleDb connectionstring from the connection settings of this DbClient</summary>
       /// <remarks>id : 20130604°1007 (20130605°1737)</remarks>
       /// <returns>The wanted connectionstring</returns>
       protected override string GenerateConnectionString()
@@ -72,8 +65,7 @@ namespace QueryPonyLib
          return csb.ConnectionString;
       }
 
-
-      /// <summary>This method delivers an OleDb command object for a given command string.</summary>
+      /// <summary>This method delivers an OleDb command object for a given command string</summary>
       /// <remarks>id : 20130604°1008 (20130605°1738)</remarks>
       /// <param name="sQuery">The command string for which to get a command object</param>
       /// <returns>The wanted command object</returns>
@@ -84,8 +76,7 @@ namespace QueryPonyLib
          return cmd;
       }
 
-
-      /// <summary>This method retrieves the default QueryOptions.</summary>
+      /// <summary>This method retrieves the default QueryOptions</summary>
       /// <remarks>id : 20130604°1009 (20130605°1739)</remarks>
       /// <returns>The wanted default QueryOptions</returns>
       public override QueryOptions GetDefaultOptions()
@@ -93,8 +84,7 @@ namespace QueryPonyLib
          return new OledbQueryOptions();
       }
 
-
-      /// <summary>This method creates an IDbDataAdapter for the given command.</summary>
+      /// <summary>This method creates an IDbDataAdapter for the given command</summary>
       /// <remarks>id : 20130604°1017 (20130605°1740)</remarks>
       /// <param name="command">The command for which to create a DbDataAdapter</param>
       /// <returns>The wanted (IDbDataAdapter</returns>
@@ -103,8 +93,7 @@ namespace QueryPonyLib
          return new OleDbDataAdapter((OleDbCommand) command);
       }
 
-
-      /// <summary>This method applies QueryOptions to this DbClient.</summary>
+      /// <summary>This method applies QueryOptions to this DbClient</summary>
       /// <remarks>id : 20130604°1010 (20130605°1741)</remarks>
       public override void ApplyQueryOptions()
       {
@@ -133,6 +122,5 @@ namespace QueryPonyLib
          ExecuteOnWorker(sb.ToString(), 5);
          */
       }
-
    }
 }

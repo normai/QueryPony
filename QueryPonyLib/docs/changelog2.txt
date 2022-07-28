@@ -1,0 +1,18 @@
+﻿
+
+   chg 20200522°0911 Oracle.ManagedDataAccess.dll
+   Replace namespace System.Data.OracleClient by Oracle.ManagedDataAccess.Client.
+   Occurs only in OracleDbClient.cs
+   ⬞
+
+   log 20200522°0151 start providing interactivity (seq 20200522°0153)
+
+   chg 20190410°0533 'switch QueryPonyLib from DLL to EXE'
+
+   chg 20190410°0531 'Switch from .NET 3.5 to .NET 4.0'
+
+   chg 20190410°0444 'shutdown Divan'
+   • Shutdown and delete folder trunk\QueryPony\QueryPonyLib\libs2\
+
+   ———————————————————————
+   [file 20190410°0441] ⬞Ω

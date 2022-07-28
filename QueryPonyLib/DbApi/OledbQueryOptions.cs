@@ -1,10 +1,9 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyLib/DbApi/OledbQueryOptions.cs
-// id          : 20130604°1011 (20130605°1751)
+// file        : 20130604°1011 (20130605°1751) /QueryPony/QueryPonyLib/DbApi/OledbQueryOptions.cs
 // summary     : This file stores class 'OledbQueryOptions' to define OleDb-specific query options.
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 by Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2021 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable
 // note        :
@@ -19,7 +18,6 @@ using System.Windows.Forms;
 
 namespace QueryPonyLib
 {
-
    /// <summary>
    /// This class defines OleDb-specific query options that can be globally
    ///  applied to commands and/or connections. Not yet implemented for OleDB.
@@ -27,7 +25,6 @@ namespace QueryPonyLib
    /// <remarks>id : 20130604°1012 (20130605°1752)</remarks>
    class OledbQueryOptions : QueryOptions
    {
-
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130604°1013 (20130605°1753)</remarks>
       /// <param name="connection">...</param>
@@ -35,7 +32,6 @@ namespace QueryPonyLib
       {
          return;
       }
-
 
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130604°1014 (20130605°1754)</remarks>
@@ -45,7 +41,6 @@ namespace QueryPonyLib
          return;
       }
 
-
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130604°1015 (20130605°1755)</remarks>
       /// <param name="connection">...</param>
@@ -54,21 +49,18 @@ namespace QueryPonyLib
          return;
       }
 
-
       /// <summary>This method ...</summary>
       /// <remarks>
-      /// id : 20130604°1016 (20130605°1756)
+      /// id : 20130604°1016 [sibling 20130604°1016`13]
       /// note : This method is involved in refactor 20130619°1311
       /// </remarks>
       /// <returns>...</returns>
       public override DialogResult ShowForm()
       {
-         ////return ShowForm(new QueryOptionsForm()); // original line
          return ShowForm(new MysqlQueryOptionsForm_DUMMY());
       }
 
-
-      /// <summary>This method implements ... (experimental).</summary>
+      /// <summary>This method implements ... (experimental)</summary>
       /// <remarks>id : 20130705°1026</remarks>
       public override void LetOptionsPushFromGui()
       {
@@ -78,9 +70,7 @@ namespace QueryPonyLib
                         ;
          System.Windows.Forms.MessageBox.Show(sMsg);
 
-
          return;
       }
-
    }
 }

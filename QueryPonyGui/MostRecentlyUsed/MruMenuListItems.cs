@@ -1,6 +1,7 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/MostRecentlyUsed/MruMenuListItems.cs from
-//                "Genghis v0.8.zip" at http://genghis.codeplex.com/releases/view/4954
+// file        : http://downtown.trilo.de/svn/queryponydev/trunk/QueryPony/QueryPonyGui/MostRecentlyUsed/MruMenuListItems.cs
+//                + https://github.com/normai/QueryPony/blob/master/QueryPonyGui/MostRecentlyUsed/MruMenuListItems.cs
+// origin      : "Genghis v0.8.zip" at http://genghis.codeplex.com/releases/view/4954
 // id          : 20130604°1751
 // summary     : This file stores Genghis class 'MruMenuListItems' to provide ...
 // license     : Custom License
@@ -27,13 +28,11 @@ namespace MRUSampleControlLibrary {
       /// <remarks>id : 20130604°1753</remarks>
       private int maximumItems;
 
-
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130604°1754</remarks>
       public MruMenuListItems(int maximumItems) {
          this.maximumItems = maximumItems;
       }
-
 
       /// <summary>This property gets/sets ...</summary>
       /// <remarks>id : 20130604°1755</remarks>
@@ -46,7 +45,6 @@ namespace MRUSampleControlLibrary {
            TrimToMaximumItems();
         }
       }
-
 
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130604°1756</remarks>
@@ -76,6 +74,5 @@ namespace MRUSampleControlLibrary {
             }
          }
       }
-
   }
 }

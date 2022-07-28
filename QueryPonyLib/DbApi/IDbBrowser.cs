@@ -1,11 +1,10 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyLib/DbApi/IDbBrowser.cs
-// id          : 20130604°0441
+// file        : 20130604°0441 /QueryPony/QueryPonyLib/DbApi/IDbBrowser.cs
 // summary     : This file stores interface 'IBrowser' to defines DbBrowser
 //                classes (for an Explorer-like tree view of a database).
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 by Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2021 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable
 // note        :
@@ -23,15 +22,14 @@ namespace QueryPonyLib
 
    #region DbBrowser Interface
 
-   /// <summary>This interface defines Browser classes (an Explorer-like tree view of a database).</summary>
+   /// <summary>This interface defines Browser classes (an Explorer-like tree view of a database)</summary>
    /// <remarks>
    /// id : 20130604°0442
    /// note : Access modifier switched from 'internal' to 'public' to
-   ///    make it accessible from other projects. (note 20130604°1422)
+   ///    make it accessible from other projects. [note 20130604°1422]
    /// </remarks>
    public interface IDbBrowser
    {
-
       /// <summary>
       /// This interface method creates and returns a new browser object, using
       ///  the supplied database client object.
@@ -45,11 +43,9 @@ namespace QueryPonyLib
       /// <returns>The wanted newly cloned DbBrowser object</returns>
       IDbBrowser Clone(DbClient newDbClient);
 
-
-      /// <summary>This property gets the active DbClient object given in the constructor.</summary>
+      /// <summary>This property gets the active DbClient object given in the constructor</summary>
       /// <remarks>id : 20130604°0443</remarks>
       DbClient DbClient { get; }
-
 
       /// <summary>
       /// This interface method returns a list of actions applicable to a node
@@ -59,7 +55,6 @@ namespace QueryPonyLib
       /// <param name="node">The treenode for which the context menu shall be created</param>
       /// <returns>The created context menu items for the given treenode</returns>
       StringCollection GetActionList(TreeNode node);
-
 
       /// <summary>
       /// This interface method returns text suitable for pasting into a query
@@ -73,12 +68,10 @@ namespace QueryPonyLib
       /// <returns>The wanted command string</returns>
       string GetActionText(TreeNode node, string sAction);
 
-
-      /// <summary>This interface retrieves the list of available databases on this server.</summary>
+      /// <summary>This interface retrieves the list of available databases on this server</summary>
       /// <remarks>id : 20130604°0449</remarks>
       /// <returns>The wanted list of databases</returns>
       string[] GetDatabases();
-
 
       /// <summary>
       /// This interface method returns text suitable for dropping
@@ -89,7 +82,6 @@ namespace QueryPonyLib
       /// <returns>The wanted drag text</returns>
       string GetDragText(TreeNode node);
 
-
       /// <summary>
       /// This interface method returns an array of TreeNodes representing the
       ///  object hierarchy for the 'Explorer' view. This can return either the
@@ -98,7 +90,6 @@ namespace QueryPonyLib
       /// <remarks>id : 20130604°0444</remarks>
       /// <returns>The wanted array of treenodes</returns>
       TreeNode[] GetObjectHierarchy();
-
 
       /// <summary>
       /// This interface method returns an array of TreeNodes representing the
@@ -116,40 +107,31 @@ namespace QueryPonyLib
       /// <returns>The wanted array of treenodes</returns>
       TreeNode[] GetSubObjectHierarchy(TreeNode node);
 
-
-      /// <summary>This interface method attaches field an index subnodes to the given table node.</summary>
+      /// <summary>This interface method attaches field an index subnodes to the given table node</summary>
       /// <remarks>id : 20130819°1501 (20130604°0445)</remarks>
       /// <param name="node">The node to be supplemented with a subhierarchy</param>
       /// <returns>Success flag</returns>
       bool GetSubObjectHierarchy2(Nodes.Table node);
 
-
-      /// <summary>This interface method retrieves the collections available for this data provider.</summary>
+      /// <summary>This interface method retrieves the collections available for this data provider</summary>
       /// <remarks>id : 20130826°1211</remarks>
       /// <returns>The wanted array of collections</returns>
       string[] SchemaGetCollections();
 
-
-      /// <summary>This interface method retrieves the array of index nodes for the given table.</summary>
+      /// <summary>This interface method retrieves the array of index nodes for the given table</summary>
       /// <remarks>id : 20130825°1311</remarks>
       /// <returns>The wanted array of Index Nodes</returns>
-      ////Nodes.Indices[] SchemaGetIndices(string sTablename);
       Nodes.Indices[] SchemaGetIndices(Nodes.Table ndTable);
 
-
-      /// <summary>This interface method retrieves an experimental schema object for debug purposes.</summary>
+      /// <summary>This interface method retrieves an experimental schema object for debug purposes</summary>
       /// <remarks>id : 20130819°0921</remarks>
       /// <returns>The wanted schema object, e.g. an DataTable or a XML table</returns>
       object SchemaGetSchema();
 
-
-      /// <summary>This interface method retrieves the list of tables in this IDbBrowser's DbClient.</summary>
+      /// <summary>This interface method retrieves the list of tables in this IDbBrowser's DbClient</summary>
       /// <remarks>id : 20130819°0701</remarks>
       /// <returns>The wanted list of tables</returns>
       string[] SchemaGetTables();
-
    }
-
    #endregion DbBrowser Interface
-
 }

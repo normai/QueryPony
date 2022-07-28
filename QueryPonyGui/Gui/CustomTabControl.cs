@@ -1,5 +1,6 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/Gui/CustomTabControl.cs
+// file        : http://downtown.trilo.de/svn/queryponydev/trunk/QueryPony/QueryPonyGui/Gui/CustomTabControl.cs
+//                + https://github.com/normai/QueryPony/blob/master/QueryPonyGui/Gui/CustomTabControl.cs
 // id          : 20130723°1201
 // summary     : This file stores class 'CSharpCustomTabControl' to constitute a custom tabcontrol.
 // license     : The Code Project Open License (CPOL) 1.02
@@ -22,13 +23,11 @@ using System.Runtime.InteropServices;
 // id : 20130723°1202
 namespace CSharpCustomTabControl
 {
-
    /// <summary>Description of CustomTabControl.</summary>
    /// <remarks>id : 20130723°1203</remarks>
    [ToolboxBitmap(typeof(TabControl))]
    public class CustomTabControl : TabControl
    {
-
       /// <summary>This constructor creates a new CustomTabControl.</summary>
       /// <remarks>id : 20130723°1204</remarks>
       public CustomTabControl() : base()
@@ -119,7 +118,6 @@ namespace CSharpCustomTabControl
       /// <remarks>id : 20130723°1209</remarks>
       protected override void OnPaint(PaintEventArgs e)
       {
-
          // Paint the Background
          this.PaintTransparentBackground(e.Graphics, this.ClientRectangle);
 
@@ -228,7 +226,7 @@ namespace CSharpCustomTabControl
 
             //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
             // switch off/on fontstyle bold (20130723°1401)
-            if (IOBus.Gb.Debag.ShutdownAlternatively)
+            if (IOBus.Gb.Debag.Shutdown_Alternatively)
             {
                // original line
                tabFont = new Font(this.Font, FontStyle.Bold);
@@ -307,7 +305,6 @@ namespace CSharpCustomTabControl
                path.AddLine(rect.Right - 1, rect.Top + 2, rect.Right - 1, rect.Bottom + 1);
                path.AddLine(rect.Right - 1, rect.Bottom + 1, rect.Left, rect.Bottom + 1);
             }
-
          }
          return path;
       }
@@ -352,6 +349,5 @@ namespace CSharpCustomTabControl
          this.UpdateStyles();
          this.ItemSize = new Size(0, this.Font.Height + 2);
       }
-
    }
 }

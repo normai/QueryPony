@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -13,12 +13,12 @@
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
     <NoStdLib>False</NoStdLib>
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
-    <OldToolsVersion>2.0</OldToolsVersion>
+    <OldToolsVersion>3.5</OldToolsVersion>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <ApplicationIcon>docs\img\20130705o081203.mcol-chess-horse.ico</ApplicationIcon>
     <NoWin32Manifest>True</NoWin32Manifest>
@@ -34,6 +34,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
     <!-- GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies -->
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -44,6 +46,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DebugSymbols>false</DebugSymbols>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
@@ -61,7 +64,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Debug\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>TRACE;DEBUG;MYSQL20130619YES</DefineConstants>
     <FileAlignment>4096</FileAlignment>
     <DebugType>Full</DebugType>
@@ -71,6 +74,7 @@
     <Optimize>false</Optimize>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -81,6 +85,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
@@ -109,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnSettingsGui.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Globs.cs" />
     <Compile Include="Gui\AboutForm.cs">
       <SubType>Form</SubType>
@@ -268,7 +274,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="docs\changelog.txt" />
-    <EmbeddedResource Include="docs\devnotes.txt" />
     <EmbeddedResource Include="docs\summary.txt" />
     <EmbeddedResource Include="docs\issues.txt" />
     <EmbeddedResource Include="Gui\QueryOptionsFormMssql.resx">
@@ -279,32 +284,15 @@
     <EmbeddedResource Include="docs\agpl-3.0.txt" />
     <EmbeddedResource Include="docs\license.txt" />
     <EmbeddedResource Include="docs\img\20141115o1731.extern.png" />
-    <EmbeddedResource Include="docs\img\20110826o111902.transparent.png" />
     <EmbeddedResource Include="docs\img\20130705o0812.mcol-chess-horse.v0.x0200y0200.png" />
     <EmbeddedResource Include="docs\img\20130705o081203.mcol-chess-horse.ico" />
-    <Content Include="libs\mysql.data.dll" />
+    <!-- manually added 20190410°0731`03 -->
+    <!-- manually added 20190410°0731`04 -->
     <EmbeddedResource Include="libs\Npgsql.dll" />
-    <EmbeddedResource Include="libs\QueryPonyLib.dll" />
-    <EmbeddedResource Include="libs\System.Data.SQLite.dll" />
-    <EmbeddedResource Include="libs\iobus.dll" />
-    <None Include="prebuild.bat" />
-    <EmbeddedResource Include="docs\joesgarage.sqlite3" />
     <EmbeddedResource Include="Gui\QueryOptionsFormMysql.resx">
       <DependentUpon>QueryOptionsFormMysql.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\IOBus\IOBus.csproj">
-      <Project>{00C8285B-1109-4D69-ABEF-153DDDDD5B93}</Project>
-      <Name>IOBus</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\QueryPonyLib\QueryPonyLib.csproj">
-      <Project>{6895D15C-4AC8-4D77-A77B-B599F73DAB38}</Project>
-      <Name>QueryPonyLib</Name>
-      <Private>False</Private>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="docs\img\20130705o081202.mcol-chess-horse.ico" />
@@ -324,7 +312,7 @@
     <EmbeddedResource Include="libs\Newtonsoft.Json.dll" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="docs\20140127o0511.mstcp.html" />
+    <EmbeddedResource Include="docs\mssqltcpip.html" />
     <EmbeddedResource Include="docs\about.html" />
     <EmbeddedResource Include="docs\connect.html" />
     <EmbeddedResource Include="docs\options.html" />
@@ -334,6 +322,8 @@
     <EmbeddedResource Include="docs\treeview.html" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="docs\img\20140126o1847.querypony--connect-via-tcpip.png" />
+    <Content Include="docs\img\20181106o0138.arrow3right.v2.x0012y0012.png" />
     <EmbeddedResource Include="docs\img\20130724o1621.querypony-connect.png" />
     <EmbeddedResource Include="docs\img\20130724o162102.querypony-connect.png" />
     <EmbeddedResource Include="docs\img\20130724o1622.querypony-connected.png" />
@@ -341,16 +331,16 @@
     <EmbeddedResource Include="docs\img\20130724o1624.querypony-query-settings.png" />
     <EmbeddedResource Include="docs\img\20130724o1625.querypony-overview.png" />
     <EmbeddedResource Include="docs\authors.txt" />
-    <Content Include="docs\drafts.txt" />
-    <Content Include="docs\20140124o1441.issue.txt" />
-    <Content Include="docs\20130902o0627.issues.txt" />
-    <Content Include="docs\20130614o1432.linesdump.txt" />
-    <Content Include="docs\references.txt" />
-    <EmbeddedResource Include="docs\daftari.css" />
     <EmbeddedResource Include="docs\styleslocal.css" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QueryPonyLib\QueryPonyLib.csproj">
+      <Project>{6895d15c-4ac8-4d77-a77b-b599f73dab38}</Project>
+      <Name>QueryPonyLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" Condition=" '$(Configuration)' == 'Release' " />
+  <!-- Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" Condition=" '$(Configuration)' == 'Release' " / -->
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets. -->
   <Target Name="BeforeBuild" Condition=" '$(Configuration)' == 'Release' ">
@@ -367,6 +357,7 @@
     <Zip Files="@(Compile);@(None);@(EmbeddedResource);@(Content);$(ProjectFileName);$(SolutionFileName)" ZipFileName="$(TargetName)_Source_$(Major)_$(Minor)_$(Build)_$(Revision).zip" Condition=" '$(Configuration)' == 'Release' " />
   </Target>
   <PropertyGroup>
-    <PreBuildEvent>$(ProjectDir)prebuild.bat</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
 </Project>

@@ -29,8 +29,6 @@ namespace QueryPonyGui
         private void InitializeComponent()
         {
            this.components = new System.ComponentModel.Container();
-           ////System.Windows.Forms.TabPage tabpage_Options;
-           ////this.tabpage_Options = new System.Windows.Forms.TabPage();
            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QueryForm));
            this.button1 = new System.Windows.Forms.Button();
            this.splitBrowser = new System.Windows.Forms.SplitContainer();
@@ -552,6 +550,5 @@ namespace QueryPonyGui
         private System.Windows.Forms.RichTextBox richtextbox_Query;
         private System.Windows.Forms.Panel panel_DbClone;
         private System.Windows.Forms.Button button1;
-
     }
 }

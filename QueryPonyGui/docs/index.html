@@ -1,45 +1,28 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-   <meta charset="UTF-8" /><!-- UTF-8-with-BOM -->
+   <meta charset="UTF-8" data-encoding="UTF-8-with-BOM">
    <title>QueryPony User Guide</title>
-
-   <link rel="stylesheet" type="text/css" href="./daftari.css"/>
    <link rel="stylesheet" type="text/css" href="./styleslocal.css"/>
 </head>
 
-<body id="id20130621o0312">
+<body id="i20130621o0312">
 
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-<!-- Feature 20110826°1122 Typearea/Logo-Overlapper by André Motzel -->
-<!-- Original implementation see http://downtown.trilo.de/svn/app.apache1/trunk/htdocs/index.html -->
-<!-- todo : Adjust widths and heights -->
-<div id="id20110826o112202" style="position:absolute; right:20px; padding-top:20px">
-               <img id="id20110826o112203" src="./img/20130705o0812.mcol-chess-horse.v0.x0200y0200.png" width="160" height="160" alt="Logo 20130705°0812" />
+<div class="TopLogoRightPlain" id="i20110826o112202">
+               <img id="i20110826o112203" src="./img/20130705o0812.mcol-chess-horse.v0.x0200y0200.png" width="96" height="96" alt="Logo 20130705°0812" />
 </div>
 
-<p id="id20110826o112204"><!-- this image paragraph does shift the text to left instead to cover it over -->
-               <img id="id20110826o112205" src="img/20110826o111902.transparent.png" alt="Invisible box" align="right" style="height:188px; width:188px; width:expression('0px');" />
-</p>
+<div class="ChapterApps">
 
-<!-- if 10% (because chapter is 80%) of the body width is less than [imagewidth] then set DIV-width to ([imagewidth] - [10% of bodywidth]) -->
-<div id="id20130724o1246" class="chapterapps" style="width:expression((document.body.clientWidth * 0.8) > 800 ? '800px': '80%'); overflow:expression('hidden');"><!-- id="id20110826o112206" -->
-
- <!-- todo : set a backgroundcolor for debugging -->
- <!-- div style="width:0px; float:right; background-color:#ff0000; height:162px;" -->
- <div id="id20110826o112207" style="width:0px; float:right; height:162px;
-                width:expression((document.body.clientWidth * 0.1) < 160 ? (160 - document.body.clientWidth * 0.1) + 'px' : '0px');">
- </div>
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
- <div id="id20130724o1247" align="right">
-   <span style="vertical-align:top;">Page 1 of 8</span> &nbsp;
-   <a href="./about.html" style="color:#404040;"><img src="./img/20081114o1721.left.png.gif" width="32" height="24" alt="Go to the previous page" style="border-style: none;" /></a> &nbsp;
-   <!-- a href="./index.html" style="color:#404040;" --><img src="./img/20081114o172611.up.png" width="24" height="24" alt="Home" style="border-style: none;" /><!-- /a --> &nbsp;
-   <a href="./connect.html" style="color:#404040;"><img src="./img/20081114o1722.right.png.gif" width="32" height="24" alt="Go to the next page" style="border-style: none;" /></a>
+ <div class="TopTitleNaviArrows" id="i20130724o1247">
+               Page 1 of 8
+       <br>
+               <a href="./about.html" style="color:#404040;"><img src="./img/20081114o1721.left.png.gif" width="32" height="24" alt="Go to the previous page" style="border-style: none;" /></a> &nbsp;
+               <!-- a href="./index.html" style="color:#404040;" --><img src="./img/20081114o172611.up.png" width="24" height="24" alt="Home" style="border-style: none;" /><!-- /a --> &nbsp;
+               <a href="./connect.html" style="color:#404040;"><img src="./img/20081114o1722.right.png.gif" width="32" height="24" alt="Go to the next page" style="border-style: none;" /></a>
  </div>
 
- <p id="id20130724o1248">
+ <p class="TopTitleNaviCake" id="i20130724o1248">
                <!-- a href="./index.html" --><b>Start</b><!-- /a --> &nbsp;
                <a href="./connect.html">Connect</a> &nbsp;
                <a href="./treeview.html">Treeview</a> &nbsp;
@@ -49,43 +32,43 @@
                <a href="./about.html">About</a> &nbsp;
  </p>
 
- <h1 id="id20130724o1205">
+ <h1 id="i20130724o1205">
                QueryPony User Guide
  </h1>
 
- <p id="id20130724o1741" class="fontTty" style="font-size:150%; color:red; font-weight:bold;"><!-- turquoise mediumvioletred -->
+ <p id="i20130724o1741" class="FontTtyMedium" style="font-size:150%; color:red; font-weight:bold;"><!-- turquoise mediumvioletred -->
                &lt; Draft &gt;
  </p>
 
- <p id="id20130724o1206">
+ <p id="i20130724o1206">
                This document is about how to use QueryPony.
                To read further details, please also see the QueryPony
-               <a href="http://downtown.trilo.de/svn/queryponydev/trunk/home/index.html" class="extern">Homepage</a>
+               <a href="http://downtown.trilo.de/svn/queryponydev/trunk/home/index.html" class="Extern">Homepage</a>
  </p>
 
  <a name="20130724o1207"></a>
- <h2 id="id20130724o1207">
+ <h2 id="i20130724o1207">
                Summary
  </h2>
 
  <table border="0" width="100%">
 
-  <tr id="id20130724o1208">
-   <td id="id20130724o1209">
+  <tr id="i20130724o1208">
+   <td id="i20130724o1209">
                Slogan
    </td>
    <td>&nbsp;:&nbsp;</td>
-   <td id="id20130724o1210">
+   <td id="i20130724o1210">
                A Simple Generic Database Query Tool and API.
    </td>
   </tr>
 
-  <tr id="id20130724o1211">
-   <td id="id20130724o1212">
+  <tr id="i20130724o1211">
+   <td id="i20130724o1212">
                Description
    </td>
    <td>&nbsp;:&nbsp;</td>
-   <td id="id20130724o1213">
+   <td id="i20130724o1213">
                Connect to <b>various databases</b> and view the tables
                (provided you have some basic SQL language knowledge).
                Supported databases are MS-SQL, MySQL, ODBC, OleDb, Oracle,
@@ -93,57 +76,57 @@
    </td>
   </tr>
 
-  <tr id="id20130724o1214">
-   <td id="id20130724o1215">
+  <tr id="i20130724o1214">
+   <td id="i20130724o1215">
                Target&nbsp;audience
    </td>
    <td>&nbsp;:&nbsp;</td>
-   <td id="id20130724o1216">
+   <td id="i20130724o1216">
                Advanced users, system administrators, programmers.
    </td>
   </tr>
 
-  <tr id="id20130724o1217">
-   <td id="id20130724o1218">
+  <tr id="i20130724o1217">
+   <td id="i20130724o1218">
                Requirements
    </td>
    <td>&nbsp;:&nbsp;</td>
-   <td id="id20130724o1219">
+   <td id="i20130724o1219">
                QueryPony is developed under <b>Windows XP/SP3 32-bit with .NET 3.5</b>. It should
                also run on the higher Windows flavours, but that is not tested yet.
                (UAC issues? 64-bit issues?)
    </td>
   </tr>
 
-  <tr id="id20130724o1220">
-   <td id="id20130724o1221">
+  <tr id="i20130724o1220">
+   <td id="i20130724o1221">
                Status
    </td>
    <td>&nbsp;:&nbsp;</td>
-   <td id="id20130724o1222">
+   <td id="i20130724o1222">
                Version 0.3.0 is an <b>Alpha Release</b>,
                the offered features may be only partially working.
    </td>
   </tr>
 
-  <tr id="id20130724o1223">
-   <td id="id20130724o1224">
+  <tr id="i20130724o1223">
+   <td id="i20130724o1224">
                Installation
    </td>
    <td>&nbsp;:&nbsp;</td>
-   <td id="id20130724o1225">
+   <td id="i20130724o1225">
                No installation. On first start, a configuration folder is created (see menu item About
                tab Machine). You can delete this folder to reset the settings or to cleanup your machine
                when discarding the program.
    </td>
   </tr>
 
-  <tr id="id20130724o1226">
-   <td id="id20130724o1227">
+  <tr id="i20130724o1226">
+   <td id="i20130724o1227">
                History
    </td>
    <td>&nbsp;:&nbsp;</td>
-   <td id="id20130724o1228">
+   <td id="i20130724o1228">
 
                QueryPony is a derivative of
                <a href="http://sourceforge.net/projects/queryexplus" target="_blank">Query&nbsp;ExPlus 2.0.3.1</a>,
@@ -152,13 +135,13 @@
    </td>
   </tr>
 
-  <tr id="id20130724o1229">
-   <td id="id20130724o1230">
+  <tr id="i20130724o1229">
+   <td id="i20130724o1230">
                License
        <br> &nbsp;
    </td>
    <td>&nbsp;:&nbsp;</td>
-   <td id="id20130724o1231">
+   <td id="i20130724o1231">
                GNU AGPL v3 &nbsp;
                (see file <a href="./license.txt" target="_blank">license.txt</a>)
    </td>
@@ -166,7 +149,7 @@
 
  </table>
 
- <p id="id20130724o1631" class="image">
+ <p class="ImageCenter" id="i20130724o1631">
                <a href="./img/20130724o1625.querypony-overview.png">
                 <img src="./img/20130724o1625.querypony-overview.png"
                    width="620" height="444" alt="Image 20130724°1625 Overview"
@@ -177,81 +160,81 @@
                A connection was made, and a query issued.
  </p>
 
- <p id="id20130724o1251">
+ <p id="i20130724o1251">
                The remaining chapters of this manual are:
  </p>
 
- <h3 id="id20130724o1232" style="text-align:center;">
+ <h3 id="i20130724o1232" style="text-align:center;">
                <a href="./connect.html">The Connect Form</a>
  </h3>
 
- <p id="id20130724o1233">
+ <p id="i20130724o1233">
                In the Connect Form, you provide the connection settings and
                then connect to a database on a database server.
  </p>
 
- <h3 id="id20130724o1234" style="text-align:center;">
+ <h3 id="i20130724o1234" style="text-align:center;">
                <a href="./treeview.html">The Object Treeview</a>
  </h3>
 
- <p id="id20130724o1235">
+ <p id="i20130724o1235">
                The Object Treeview displays your connections in a hierarchical view
                with the server nodes on top, inside them the databases,
                inside them the tables, inside them the fields.
                
  </p>
 
- <h3 id="id20130724o1236" style="text-align:center;">
+ <h3 id="i20130724o1236" style="text-align:center;">
                <a href="./query.html">The Query Form</a>
  </h3>
 
- <p id="id20130724o1237">
+ <p id="i20130724o1237">
                The Query Form lets you write SQL query statements and issue
                them to the database, and it shows the results of the queries.
  </p>
 
- <h3 id="id20130724o1238" style="text-align:center;">
+ <h3 id="i20130724o1238" style="text-align:center;">
                <a href="./options.html">The Query Options</a>
  </h3>
 
- <p id="id20130724o1239">
+ <p id="i20130724o1239">
                (This feature is not yet available.)
                The Query Options allow to predefine certain query behaviours.
  </p>
 
- <h3 id="id20130724o1240" style="text-align:center;">
+ <h3 id="i20130724o1240" style="text-align:center;">
                <a href="./settings.html">The Program Settings</a>
  </h3>
 
- <p id="id20130724o1241">
+ <p id="i20130724o1241">
                The Program Settings define some program behaviour.
  </p>
 
- <h3 id="id20130724o1242" style="text-align:center;">
+ <h3 id="i20130724o1242" style="text-align:center;">
                <a href="./about.html">About</a>
  </h3>
 
- <p id="id20130724o1243">
+ <p id="i20130724o1243">
                The About Form displays the background information
                about QueryPony.
  </p>
 
- <p id="id20130724o1249">
+ <p id="i20130724o1249">
                &nbsp;
  </p>
 
 </div>
 
-<p class="footerUpdate" id="id20130621o0313">
+<p class="FooterUpdate" id="i20130621o0313">
                Version : 2013-July-27
 </p>
-<p class="footerImprint" id="id20130724o1244">
-               Imprint : <a href="http://www.trilo.de/imprint.html" class="extern">www.trilo.de/imprint.html</a>
+<p class="FooterImprint" id="i20130724o1244">
+               Imprint : <a href="http://www.trilo.de/imprint.html" class="Extern">www.trilo.de/imprint.html</a>
 </p>
-<p class="footerReferer" id="id20130724o1245">
-               <span class="footerFileUrl">http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/docs/<a href="http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/docs/index.html">index.html</a></span>
-               <span class="footerCopyright">© 2013 - 2018 Norbert C. Maier</span>
-               <span class="footerPageId">20130621°0311</span>
+<p class="FooterReferer" id="i20130724o1245">
+               <span class="FooterFileUrl">http://downtown.trilo.de/svn/queryponydev/trunk/QueryPony/QueryPonyGui/docs/<a href="http://downtown.trilo.de/svn/queryponydev/trunk/QueryPony/QueryPonyGui/docs/index.html">index.html</a></span>
+               <span class="FooterCopyright">© 2013 - 2021 Norbert C. Maier</span>
+               <span class="FooterPageId">20130621°0311</span>
 </p>
 </body>
 </html>

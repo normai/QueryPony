@@ -9,11 +9,11 @@
    title       : Genghis v0.8 (some files from it)
    slogan      : A set of .NET extensions to provide application-level services
    homepage    : http://genghis.codeplex.com
-   download    : http://genghis.codeplex.com/releases/view/4954
+   download    : http://genghis.codeplex.com/releases/view/4954 [20130612°1721]
    license     : Custom License (http://genghis.codeplex.com/license)
    copyright   : (C) 2002 - 2004 The Genghis Group
    authors     : Shawn Wildermuth and 'The Genghis Project'
-   usage       : For the 'Recent Files' functionality in the Files menu.
+   usage       : For the 'Recent Files' functionality in the Files menu
 
 
    title       : ADO.NET Data Provider for SQLite ('System.Data.SQLite')
@@ -50,10 +50,13 @@
    license     : GNU GPL v2
    copyright   : Copyright (c) 2004, 2011, Oracle and/or its affiliates
    authors     :
-   note        : This library is not always part of QueryPony. If your version
+   note        : [[This library is not always part of QueryPony. If your version
                  of QueryPony is missing mysql.data.dll, please dowonload it
                  on your own and put it in the same directory as QueryPony
-                 Then QueryPony will attempt to talk to it
+                 Then QueryPony will attempt to talk to it.]]
+                 The MySQL driver my be included in QueryPony due to
+                 http://www.mysql.com/about/legal/licensing/foss-exception/
+                   [ws 20180911°0228]
 
 
    title       : The QueryPony Logo
@@ -99,4 +102,4 @@
    Norbert
 
    ———————————————————————
-   [file 20130615°1557] ʘΩ
+   [file 20130615°1557] ⬞Ω

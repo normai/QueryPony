@@ -1,10 +1,9 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/Gui/MainTv.cs
-// id          : 20130703°0911
+// file        : 20130703°0911 /QueryPony/QueryPonyGui/Gui/MainTv.cs
 // summary     : This file stores class 'MainTv' to provide the gears for the main treeview.
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2021 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      :
 // note        :
@@ -18,38 +17,37 @@ using System.Windows.Forms; // e.g. TabPage
 namespace QueryPonyGui
 {
 
-   /// <summary>This class provides the gears for the main treeview.</summary>
+   /// <summary>This class provides the gears for the main treeview</summary>
    /// <remarks>
    /// id : 20130703°0912
    /// note : Declaring this class 'static' is the quickest way to get the methods
    ///    outsourced from MainForm.cs running. But I am not sure if it is the best
-   ///    choice on the long term as well. (note 20130703°091202)
+   ///    choice on the long term as well. [note 20130703°091202]
    /// </remarks>
    public static class MainTv
    {
 
-      /// <summary>This method processes the main treeview's BeforeExpand eventhandler to create possible sub-nodes.</summary>
+      /// <summary>This method processes the main treeview's BeforeExpand eventhandler to create possible sub-nodes</summary>
       /// <remarks>id : 20130703°0951 ()</remarks>
       internal static void BeforeExpand(TreeView tvMain, TreeNode tnTarget)
       {
-
-         // detect the correct QueryForm from the given treenode (see debug note 20130702°1531).
+         // Detect the correct QueryForm from the given treenode (see debug note 20130702°1531).
          QueryForm queryform = searchCorrespondingQueryform(tvMain, tnTarget);
 
-         // paranoia (queryform being null happens regularly)
+         // Paranoia (queryform being null happens regularly)
          if (queryform == null)
          {
             return;
          }
 
-         // if a browser has been installed, see if it has a sub-object
+         // If a browser has been installed, see if it has a sub-object
          //  hierarchy for us at the point of expansion
          if (queryform.Browser == null)
          {
             return;
          }
 
-         // retrieve the basic nodes for the specific database and node type
+         // Retrieve the basic nodes for the specific database and node type
          TreeNode[] subtree = queryform.Browser.GetSubObjectHierarchy(tnTarget);
          if (subtree != null)
          {
@@ -60,18 +58,17 @@ namespace QueryPonyGui
          return;
       }
 
-
-      /// <summary>This method processes the main treeview's ItemDrag eventhandler to ... serve drag'n'drop.</summary>
+      /// <summary>This method processes the main treeview's ItemDrag eventhandler to ... serve drag'n'drop</summary>
       /// <remarks>id : 20130703°0941 (20130701°1132 20130604°2206)</remarks>
       internal static void ItemDrag(TreeView tvMain, TreeNode tnTarget)
       {
-         // detect the correct QueryForm from the given treenode (see debug note 20130702°1531).
+         // Detect the correct QueryForm from the given treenode (see debug note 20130702°1531).
          QueryForm queryform = searchCorrespondingQueryform(tvMain, tnTarget); // adding 'tnTarget', it is not yet proofen that this is correct indeed (20130717°1236)
 
-         // ask the browser object for a string applicable to dragging onto the query window.
+         // Ask the browser object for a string applicable to dragging onto the query window.
          string dragText = queryform.Browser.GetDragText(tnTarget);
 
-         // we'll use a simple string-type DataObject
+         // We'll use a simple string-type DataObject
          if (dragText != "")
          {
             tvMain.DoDragDrop(new DataObject(dragText), DragDropEffects.Copy);
@@ -80,20 +77,18 @@ namespace QueryPonyGui
          return;
       }
 
-
-      /// <summary>This method processes the main treeview's MouseUp eventhandler to ignit a context menu.</summary>
+      /// <summary>This method processes the main treeview's MouseUp eventhandler to ignit a context menu</summary>
       /// <remarks>id : 20130703°0932 (20130701°1134 20130604°2203)</remarks>
       internal static void MouseUpRight(MouseEventArgs e, TreeView tvMain)
       {
-
-         // somehow we have to detect the correct QueryForm from the given treenode (see debug note 20130702°1531).
+         // Somehow we have to detect the correct QueryForm from the given treenode (see debug note 20130702°1531).
          QueryForm queryform = null;
          queryform = searchCorrespondingQueryform(tvMain, tvMain.SelectedNode); // adding tvMain.SelectedNode, it is not yet sure whether SelectedNode is what we need (20130717°1233)
 
-         // avoid excepion when e.g. rightclicking the 'Hello' node (sequence 20130711°0921)
+         // avoid excepion when e.g. rightclicking the 'Hello' node [seq 20130711°0921]
          if (queryform == null)
          {
-            // experimental sequence to probe non-QueryForm nodes (sequence 20130711°0922)
+            // Experimental sequence to probe non-QueryForm nodes [seq 20130711°0922]
             System.Windows.Forms.ContextMenu cm = new ContextMenu();
             cm.MenuItems.Add("Hello One", new System.EventHandler(MainTv.DoDummyAction));
             cm.MenuItems.Add("Hello Two", new System.EventHandler(MainTv.DoDummyAction));
@@ -116,14 +111,13 @@ namespace QueryPonyGui
          return;
       }
 
-
-      /// <summary>This eventhandler processes a treeview item context menu selection.</summary>
+      /// <summary>This eventhandler processes a treeview item context menu selection</summary>
       /// <remarks>id : 20130711°0923 (20130604°2204)</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
       private static void DoDummyAction(object sender, System.EventArgs e)
       {
-         // this is called from the context menu activated by the TreeView's right-click event handler
+         // This is called from the context menu activated by the TreeView's right-click event handler
          //  treeView_MouseUp() and appends text to the query textbox applicable to the selected menu item
          MenuItem mi = (MenuItem)sender;
          string s = mi.Text;
@@ -132,7 +126,6 @@ namespace QueryPonyGui
 
          return;
       }
-
 
       /// <summary>
       /// This method processes the main treeview's AfterSelect
@@ -143,18 +136,17 @@ namespace QueryPonyGui
       /// <param name="tn">The selected treenode</param>
       internal static void AfterSelect(TreeView tvMain, TreeNode tn)
       {
-
-         // detect the correct QueryForm from the given treenode (line 20130703°0952)
-         // ref : Compare debug note 20130702°1531
-         // note : Possibly this inserted line makes large parts of below sequence superfluous (note 20130703°095202)
+         // Detect the correct QueryForm from the given treenode (line 20130703°0952)
+         // Ref : Compare debug note 20130702°1531
+         // Note : Possibly this inserted line makes large parts of below sequence superfluous [note 20130703°0952`02]
          QueryForm queryform = searchCorrespondingQueryform(tvMain, tn); // adding 'tn', it is not yet proofen that tn is what we need indeed (20130717°1234)
 
-         // need to know which tab is corresponding
+         // Need to know which tab is corresponding
          object oTag = tn.Tag;
          string sTagType2NOTUSED = "N/A";
          if (oTag != null)
          {
-            // note : Fullname is e.g. (Name were the last component of it):
+            // Note : Fullname is e.g. (Name were the last component of it):
             // - "QueryPonyGui.ConnectionSettings+Server"
             // - "QueryPonyGui.ConnectionSettings+Database"
             sTagType2NOTUSED = oTag.GetType().FullName;
@@ -174,7 +166,7 @@ namespace QueryPonyGui
          else if (oTag.GetType() == typeof(ConnSettingsLib))
          {
             //-------------------------------------------------
-            // (issue 20130724°0927)
+            // issue 20130724°0927 ''
             // title : About the (Lib's) ConnSettings ToString() method.
             // note : A database always holds a ConnSettings object. The use of below
             //    'oDb.ConnSettingsLib.ToString();' makes not much sense as long as
@@ -185,12 +177,12 @@ namespace QueryPonyGui
             //-------------------------------------------------
 
             ConnSettingsLib oDb = oTag as ConnSettingsLib;
-            sTagType = oDb.ToString(); // is always "QueryPonyLib.ConnSettings" //// so what? [new 20130724°0926] [not new 20130724°092115]
+            sTagType = oDb.ToString();                                         // Always "QueryPonyLib.ConnSettings" // So what? [line 20130724°0926]
             TabPage tabpage = MainTv.searchCorrespondingTabPage(oDb);
          }
          else
          {
-            // (20130810°1101)
+            // [seq 20130810°1101]
             if (Properties.Settings.Default.DeveloperMode)
             {
                sTagType = "ProgramFlowFuzzy";
@@ -205,14 +197,12 @@ namespace QueryPonyGui
          }
       }
 
-
       //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-      // below are search methods a la issue 20130729°1521
+      // Below are search methods a la issue 20130729°1521
       //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
 
       //-------------------------------------------------------
-      // issue 20130729°1521
+      // issue 20130729°1521 ''
       // title : 'Centralize connection search methods' or 'Synchronizing
       //    various controls across the system'
       // story : To synchronize various controls, we often need to search
@@ -243,7 +233,6 @@ namespace QueryPonyGui
       //    - one state object to sync the main treeview and the Connection tabs
       //-------------------------------------------------------
 
-
       /// <summary>
       /// This method helps the main treeview's AfterSelect
       ///  event to find it's corresponding TabPage.
@@ -255,7 +244,7 @@ namespace QueryPonyGui
       {
          TabPage tabpage = null;
 
-         // see whether for the given connection setting a correspondend tabpage exists
+         // See whether for the given connection setting a correspondend tabpage exists
          int iFound = -1;
          for (int i = 0; i < MainForm._maintabcontrol.Controls.Count; i++)
          {
@@ -271,7 +260,7 @@ namespace QueryPonyGui
             }
          }
 
-         // a corresponding tabpage was found, and we can act on it
+         // A corresponding TabPage was found, and we can act on it
          if (iFound >= 0)
          {
             tabpage = MainForm._maintabcontrol.Controls[iFound] as TabPage;
@@ -282,14 +271,13 @@ namespace QueryPonyGui
                MessageBox.Show(sMsg);
             }
 
-            // do the finally wanted service right here, make the found tab the shown one
+            // Do the finally wanted service right here, make the found tab the shown one
             MainForm._maintabcontrol.SelectedTab = tabpage;
          }
 
-         // return the possibly found tabpage, so the caller can do even more with it
+         // Return the possibly found tabpage, so the caller can do even more with it
          return tabpage;
       }
-
 
       /// <summary>
       /// This method searches the QueryForm corresponding to the given TreeNode.
@@ -308,13 +296,13 @@ namespace QueryPonyGui
          QueryForm qfRet = null;
          ConnSettingsLib csd = null;
 
-         // paranoia (no node being selected happens regularly)
+         // Paranoia — No node being selected happens regularly
          if (tnTarget == null)
          {
             return qfRet;
          }
 
-         // search the nodes hierarchy up to find a node tagged as type Database
+         // Search the nodes hierarchy up to find a node tagged as type Database
          TreeNode tn = tnTarget;
          csd = tn.Tag as ConnSettingsLib;
          while ((csd == null) && (tn != null))
@@ -326,13 +314,13 @@ namespace QueryPonyGui
             }
          }
 
-         // no Database treenode found?
+         // No Database treenode found?
          if (csd == null)
          {
             return qfRet;
          }
 
-         // for the found database treenode, search the corresponding tabpage (sequence 20130703°0934)
+         // for the found database treenode, search the corresponding tabpage [seq 20130703°0934]
          // note : This is the sequence redundant in 20130702°1511 searchCorrespondingTabPage().
          ConnSettingsLib csLib = csd;
          TabPage tabpage = null;
@@ -351,32 +339,30 @@ namespace QueryPonyGui
             }
          }
 
-         // a tabpage was found
+         // A tabpage was found
          if (iFound >= 0)
          {
-            // is it a tabpage indeed?
+            // Is it a tabpage indeed?
             tabpage = MainForm._maintabcontrol.Controls[iFound] as TabPage;
 
-            // paranoia
+            // Paranoia
             if (tabpage == null)
             {
                string sMsg = Glb.Errors.TheoreticallyNotPossible + Glb.sBlnk + "(Error 20130703°0935)";
                MessageBox.Show(sMsg);
             }
 
-            // we assume, that one QueryForm tabpage contains only one control, and that is the wanted QueryForm
+            // We assume, that one QueryForm tabpage contains only one control, and that is the wanted QueryForm
             qfRet = tabpage.Controls[0] as QueryForm;
 
-
-            // do the finally wanted service right here (not sure whether this is the right place to do)
+            // Do the finally wanted service right here. Not sure this is the right place to do.
             MainForm._maintabcontrol.SelectedTab = tabpage;
          }
 
          return qfRet;
       }
 
-
-      /// <summary>This method searches a database TreeNode by it's ConnSettings.</summary>
+      /// <summary>This method searches a database TreeNode by it's ConnSettings</summary>
       /// <remarks>id : 20130729°1531</remarks>
       /// <param name="csTarget">The connection settings for which the corresponding treenode is wanted</param>
       /// <returns>The wanted treenode or null</returns>
@@ -384,7 +370,7 @@ namespace QueryPonyGui
       {
          TreeNode tnRet = null;
 
-         // iterate over all database nodes
+         // Iterate over all database nodes
          // issue : The traversing algorithm can be that simple, because given hierarchy
          //    structure is simply 'server nodes on top and under them database nodes'.
          //    But remember: The algorithm must be adjusted, becoming more complicated,
@@ -400,7 +386,6 @@ namespace QueryPonyGui
                }
             }
          }
-
          return tnRet;
       }
    }

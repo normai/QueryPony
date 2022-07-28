@@ -809,7 +809,5 @@ namespace QueryPonyGui
       private System.Windows.Forms.SplitContainer splitContainer2;
       private System.Windows.Forms.TextBox textboxStatus;
       private System.Windows.Forms.ToolStripMenuItem viewHelpInBrowserToolStripMenuItem;
-
    }
-
 }

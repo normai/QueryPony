@@ -1,10 +1,9 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyLib/DbApi/MssqlQueryOptions.cs
-// id          : 20130604°0731
+// file        : 20130604°0731 /QueryPony/QueryPonyLib/DbApi/MssqlQueryOptions.cs
 // summary     : This file stores class 'MssqlQueryOptions' to definine MS-SQL-specific query options.
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 by Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2021 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable
 // changes     : File/class renamed from SqlQueryOptions.cs to MssqlQueryOptions.cs (20130606°1343)
@@ -20,7 +19,6 @@ using System.Text;
 
 namespace QueryPonyLib
 {
-
    /// <summary>
    /// This class definines MS-SQL-specific query options that can be
    ///  globally applied to commands and/or connections.
@@ -28,7 +26,6 @@ namespace QueryPonyLib
    /// <remarks>id : 20130604°0732</remarks>
    internal class MssqlQueryOptions : QueryOptions
    {
-
       #region Private Fields
 
       /// <summary>This field stores ...</summary>
@@ -316,7 +313,6 @@ namespace QueryPonyLib
          cmd.ExecuteNonQuery();
       }
 
-
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130604°0819</remarks>
       /// <param name="connection">...</param>
@@ -335,7 +331,6 @@ namespace QueryPonyLib
             cmd.ExecuteNonQuery();
          }
       }
-
 
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130604°0821</remarks>
@@ -356,7 +351,6 @@ namespace QueryPonyLib
          }
       }
 
-
       /// <summary>This method ...</summary>
       /// <remarks>
       /// id : 20130604°0822
@@ -365,21 +359,18 @@ namespace QueryPonyLib
       /// <returns>...</returns>
       public override System.Windows.Forms.DialogResult ShowForm()
       {
-         ////SqlQueryOptionsForm f = new SqlQueryOptionsForm(); // original line
          MysqlQueryOptionsForm_DUMMY f = new MysqlQueryOptionsForm_DUMMY();
-         FieldsToForm(f); //// (debug 20130705°093110)
+         FieldsToForm(f);
 
          System.Windows.Forms.DialogResult res = ShowForm(f);
          if (res == System.Windows.Forms.DialogResult.OK)
          {
-            ////FormToFields_Mssql(f);
-            FormToFields(f); //// (debug 20130705°093109)
+            FormToFields(f);
          }
          return res;
       }
 
-
-      /// <summary>This method sets this QueryOptions object with the values from MysqlQueryOptionsForm_DUMMY.</summary>
+      /// <summary>This method sets this QueryOptions object with the values from MysqlQueryOptionsForm_DUMMY</summary>
       /// <summary>This method ...</summary>
       /// <remarks>
       /// id : 20130604°0823
@@ -387,11 +378,7 @@ namespace QueryPonyLib
       /// note : About compiler warnings with method name, compare note 20130623°0931.
       /// </remarks>
       /// <param name="f">...</param>
-      ////private void FormToFields(SqlQueryOptionsForm f)
-      ////private void FormToFields(MssqlQueryOptionsForm_DUMMY f)
-      ////private void FormToFields_Mssql(MysqlQueryOptionsForm_DUMMY f) //// (debug 20130705°093108)
-      ////private void FormToFields(MysqlQueryOptionsForm_DUMMY f) //// (debug 20130705°093108)
-      private void FormToFields_Mssql(MysqlQueryOptionsForm_DUMMY f) //// (debug 20130705°093108)
+      private void FormToFields_Mssql(MysqlQueryOptionsForm_DUMMY f)
       {
          this.TextSize = (int)(f.txtTextSize.Value);
 
@@ -418,20 +405,16 @@ namespace QueryPonyLib
          this.Ansi_Nulls = f.chkAnsiNulls.Checked;
       }
 
-
-      /// <summary>This method fills in the MysqlQueryOptionsForm_DUMMY from from the QueryOptions object.</summary>
+      /// <summary>This method fills in the MysqlQueryOptionsForm_DUMMY from from the QueryOptions object</summary>
       /// <remarks>
       /// id : 20130604°0824
       /// note : This method is involved in refactor 20130619°1311
       /// note : About compiler warnings with method name, compare note 20130623°0931.
       /// </remarks>
       /// <param name="f">...</param>
-      ////private void FieldsToForm(SqlQueryOptionsForm f)
-      ////private void FieldsToForm(MssqlQueryOptionsForm_DUMMY f)
-      ////private void FieldsToForm_Mssql(MysqlQueryOptionsForm_DUMMY f) //// (debug 20130705°093111)
-      private void FieldsToForm_Mssql(MysqlQueryOptionsForm_DUMMY f) //// (debug 20130705°093111)
+      private void FieldsToForm_Mssql(MysqlQueryOptionsForm_DUMMY f)
       {
-         f.txtTextSize.Value = this.TextSize; //// (debug 20130705°093114)
+         f.txtTextSize.Value = this.TextSize;
 
          f.chkNoCount.Checked = this.NoCount;
          f.chkNoExec.Checked = this.NoExec;
@@ -458,8 +441,7 @@ namespace QueryPonyLib
 
       #endregion Interface Definition
 
-
-      /// <summary>This method implements ... (experimental).</summary>
+      /// <summary>This method implements ... (experimental)</summary>
       /// <remarks>id : 20130705°1023</remarks>
       public override void LetOptionsPushFromGui()
       {
@@ -469,10 +451,7 @@ namespace QueryPonyLib
                         ;
          System.Windows.Forms.MessageBox.Show(sMsg);
 
-
          return;
       }
-
-
    }
 }

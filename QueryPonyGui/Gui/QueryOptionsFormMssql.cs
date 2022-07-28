@@ -1,10 +1,9 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/Gui/QueryOptionsFormMssql.cs
-// id          : 20130604°1331
+// file        : 20130604°1331 /QueryPony/QueryPonyGui/Gui/QueryOptionsFormMssql.cs
 // summary     : This file stores class 'QueryOptionsFormMssql' to constitute the MS-SQL Query Options Dialog Form.
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2021 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable
 // note        :
@@ -17,7 +16,7 @@ using System.Windows.Forms;
 namespace QueryPonyGui
 {
 
-   /// <summary>This class constitutes the MS-SQL Query Options Dialog Form.</summary>
+   /// <summary>This class constitutes the MS-SQL Query Options Dialog Form</summary>
    /// <remarks>id : 20130604°1332</remarks>
    internal partial class QueryOptionsFormMssql : QueryOptionsForm
    {
@@ -28,7 +27,6 @@ namespace QueryPonyGui
       {
          InitializeComponent();
       }
-
 
       /// <summary>This eventhandler ...</summary>
       /// <remarks>id : 20130604°1334</remarks>
@@ -48,7 +46,6 @@ namespace QueryPonyGui
          txtLockTimeout.Value = -1;
          txtQueryGovernorCostLimit.Value = 0;
       }
-
 
       /// <summary>This eventhandler ...</summary>
       /// <remarks>id : 20130604°1335</remarks>
@@ -80,9 +77,7 @@ namespace QueryPonyGui
             chkStatisticsIo.Enabled = true;
             chkStatisticsTime.Enabled = true;
          }
-
       }
-
 
       /// <summary>This eventhandler ...</summary>
       /// <remarks>id : 20130604°1336</remarks>
@@ -116,7 +111,6 @@ namespace QueryPonyGui
          }
       }
 
-
       /// <summary>This eventhandler ...</summary>
       /// <remarks>id : 20130604°1337</remarks>
       /// <param name="e">The object which sent the event</param>
@@ -149,7 +143,6 @@ namespace QueryPonyGui
          }
       }
 
-
       /// <summary>This eventhandler ...</summary>
       /// <remarks>id : 20130604°1338</remarks>
       /// <param name="e">The object which sent the event</param>
@@ -181,7 +174,6 @@ namespace QueryPonyGui
          }
       }
 
-
       /// <summary>This eventhandler ...</summary>
       /// <remarks>id : 20130604°1339</remarks>
       /// <param name="e">The object which sent the event</param>
@@ -203,7 +195,6 @@ namespace QueryPonyGui
          }
       }
 
-
       /// <summary>This eventhandler ...</summary>
       /// <remarks>id : 20130604°1341</remarks>
       /// <param name="e">The object which sent the event</param>
@@ -218,6 +209,5 @@ namespace QueryPonyGui
          chkAnsiWarnings.Checked = true;
          chkAnsiNulls.Checked = true;
       }
-
    }
 }

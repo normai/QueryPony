@@ -1,10 +1,9 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/Gui/MainForm_WndProc.cs
-// id          : 20130812°0811
+// file        : 20130812°0811 /QueryPony/QueryPonyGui/Gui/MainForm_WndProc.cs
 // summary     : This file stores partial class 'MainForm' to constitute the Main Form's Windows message pipe hook part.
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2021 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable
 // note        :
@@ -19,7 +18,7 @@ using System.Windows.Forms;
 namespace QueryPonyGui
 {
 
-   /// <summary>This partial class constitutes the Main Form's Windows message pipe hook part.</summary>
+   /// <summary>This partial class constitutes the Main Form's Windows message pipe hook part</summary>
    /// <remarks>
    /// id : 20130810°1931 (20130604°0532)
    /// note : This partial class was introduced while debugging issue 20130810°1901 'edit menu items fail'.
@@ -30,13 +29,11 @@ namespace QueryPonyGui
    public partial class MainForm
    {
 
-      /// <summary>This field stores the ClipboardEvent eventhandler.</summary>
+      /// <summary>This field stores the ClipboardEvent eventhandler</summary>
       /// <remarks>id : 20130810°1925</remarks>
-      ////public event EventHandler<ClipboardEventArgs> PastedOrWhat;
       private event EventHandler<ClipboardEventArgs> _eventhandlerPastedOrWhat;
 
-
-      /// <summary>This field defines System.Windows.Forms.Message bulk messages to be skipped.</summary>
+      /// <summary>This field defines System.Windows.Forms.Message bulk messages to be skipped</summary>
       /// <remarks>
       /// id : 20130810°1934
       /// note : This values and names were found empirically in a debug session until
@@ -104,56 +101,54 @@ namespace QueryPonyGui
                     , 0xc167 // 49511  bulk  24  .                 {hwnd=0x18093a wparam=0x0 lparam=0x0 result=0x0}
                     };
 
-
-      /// <summary>This const tells the Windows message number WM_CONTEXTMENU for opening the context menu (empirically found).</summary>
+      /// <summary>This const tells the Windows message number WM_CONTEXTMENU for opening the context menu (empirically found)</summary>
       /// <remarks>id : 20130810°1951</remarks>
       private const int WM_CONTEXTMENU = 0x007b; // 123
 
-      /// <summary>This const tells the Windows message number WM_ENABLE for igniting a menu item selection (empirically found).</summary>
+      /// <summary>This const tells the Windows message number WM_ENABLE for igniting a menu item selection (empirically found)</summary>
       /// <remarks>id : 20130810°1952</remarks>
       private const int WM_ENABLE = 0x000a; // 113
 
-      /// <summary>This const tells the Windows message number WM_IME_SETCONTEXT for ... (?) (empirically found).</summary>
+      /// <summary>This const tells the Windows message number WM_IME_SETCONTEXT for ... (?) (empirically found)</summary>
       /// <remarks>id : 20130810°1953</remarks>
       private const int WM_IME_SETCONTEXT = 0x0281; // 641
 
-      /// <summary>This const tells the Windows message number to execute a specific menu item (empirically found).</summary>
+      /// <summary>This const tells the Windows message number to execute a specific menu item (empirically found)</summary>
       /// <remarks>
       /// id : 20130810°1954
       /// note : Why has this value no name? What is the official description?
       /// </remarks>
       private const int WM__MenuItem_OpenDocInBrowser = 0x03e0; // 992
 
-      /// <summary>This const tells the Windows message number for ~'Clipboard Clear' (from MSDN).</summary>
+      /// <summary>This const tells the Windows message number for ~'Clipboard Clear' (from MSDN)</summary>
       /// <remarks>id : 20130810°1941</remarks>
       private const int WM_CLEAR = 0x0303;
 
-      /// <summary>This const tells the Windows message number for 'Clipboard Copy' (from MSDN).</summary>
+      /// <summary>This const tells the Windows message number for 'Clipboard Copy' (from MSDN)</summary>
       /// <remarks>id : 20130810°1942</remarks>
       private const int WM_COPY = 0x0301;
 
-      /// <summary>This const tells the Windows message number for 'Clipboard Cut' (from MSDN).</summary>
+      /// <summary>This const tells the Windows message number for 'Clipboard Cut' (from MSDN)</summary>
       /// <remarks>id : 20130810°1943</remarks>
       private const int WM_CUT = 0x0300;
 
-      /// <summary>This const tells the Windows message number for 'Clipboard Paste' (from MSDN).</summary>
+      /// <summary>This const tells the Windows message number for 'Clipboard Paste' (from MSDN)</summary>
       /// <remarks>id : 20130810°1944</remarks>
       private const int WM_PASTE = 0x0302;
 
-      /// <summary>This const tells the Windows message number for ~deprecated ~'Clipboard Undo' (from MSDN).</summary>
+      /// <summary>This const tells the Windows message number for ~deprecated ~'Clipboard Undo' (from MSDN)</summary>
       /// <remarks>id : 20130810°1945</remarks>
       private const int WM_UNDO = 0; // ?
 
-      /// <summary>This const tells the Windows message number for ~'Clipboard Undo' (from MSDN).</summary>
+      /// <summary>This const tells the Windows message number for ~'Clipboard Undo' (from MSDN)</summary>
       /// <remarks>id : 20130810°1946</remarks>
       private const int EM_UNDO = 0; // ?
 
-      /// <summary>This const tells the Windows message number for ~'Clipboard CanUndo' (from MSDN).</summary>
+      /// <summary>This const tells the Windows message number for ~'Clipboard CanUndo' (from MSDN)</summary>
       /// <remarks>id : 20130810°1947</remarks>
       private const int EM_CANUNDO = 0; // ?
 
-
-      /// <summary>This method hooks into the Windows message pipe (for debug purposes).</summary>
+      /// <summary>This method hooks into the Windows message pipe (for debug purposes)</summary>
       /// <remarks>
       /// id : 20130810°1932
       /// note : Compare ref 20130810°1911
@@ -163,22 +158,21 @@ namespace QueryPonyGui
       [System.Security.Permissions.SecurityPermissionAttribute(System.Security.Permissions.SecurityAction.LinkDemand, Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)]
       protected override void WndProc(ref Message msg)
       {
-
-         // ignore bulk messages (sequence 20130810°1935)
+         // Ignore bulk messages [seq 20130810°1935]
          if (Array.IndexOf(iMsgs, msg.Msg) > -1)
          {
             base.WndProc(ref msg);
             return;
          }
 
-         // just demonstrate the syntax for a message creation (sequence 20130810°1936)
-         if (Glb.Debag.ExecuteNo)
+         // Just demonstrate the syntax for a message creation [seq 20130810°1936]
+         if (Glb.Debag.Execute_No)
          {
             System.IntPtr ptr = (System.IntPtr)1;
             Message message = System.Windows.Forms.Message.Create(ptr, 1, ptr, ptr);
          }
 
-         // process some empirical examples
+         // Process some empirical examples
          string sMsg = "";
          switch (msg.Msg)
          {
@@ -197,30 +191,24 @@ namespace QueryPonyGui
             }
          }
 
-         // seek for the wanted messages (sequence 20130810°1933)
-         // note : Only they never catch
+         // Seek for the wanted messages [seq 20130810°1933]
+         // Note : Only they never catch
          if (msg.Msg == WM_COPY || msg.Msg == WM_CUT || msg.Msg == WM_PASTE)
          {
-            // ignore input if it was from a keyboard shortcut or a menu command
+            // Ignore input if it was from a keyboard shortcut or a menu command
             // note : To cancle the action, just leave out 'base.WndProc(ref msg);'
 
-            // want ignore but have some feedback (but that is never seen)
-            string s = "[Debug] Clipboard Copy/Cut/Paste intercepted (20130810°1932).";
+            // Want ignore but have some feedback (but that is never seen)
+            const string s = "[Debug] Clipboard Copy/Cut/Paste intercepted (20130810°1932).";
             MainForm.outputStatusLine(s);
 
          }
-         else
-         {
-            ////// handle the windows message normally
-            ////base.WndProc(ref msg);
-         }
 
-         // handle the windows message normally
+         // Handle the windows message normally
          base.WndProc(ref msg);
       }
 
-
-      /// <summary>This eventhandler processes the ClipboardEvent event.</summary>
+      /// <summary>This eventhandler processes the ClipboardEvent event</summary>
       /// <remarks>
       /// id : 20130828°1431
       /// note : Implemented to avoid compiler warning "The event '_eventhandlerPastedOrWhat' is never used".
@@ -231,19 +219,17 @@ namespace QueryPonyGui
       {
          return;
       }
-
    }
 
-
-   /// <summary>This class constitutes ClipboardEvent arguments.</summary>
+   /// <summary>This class constitutes ClipboardEvent arguments</summary>
    /// <remarks>id : 20130810°1922</remarks>
    public class ClipboardEventArgs : EventArgs
    {
-      /// <summary>This property gets/sets the text in the clipboard.</summary>
+      /// <summary>This property gets/sets the text in the clipboard</summary>
       /// <remarks>id : 20130810°1923</remarks>
       public string ClipboardText { get; set; }
 
-      /// <summary>This constructor creates a new ClipboardEventArgs object.</summary>
+      /// <summary>This constructor creates a new ClipboardEventArgs object</summary>
       /// <param name="clipboardText"></param>
       /// <remarks>id : 20130810°1924</remarks>
       public ClipboardEventArgs(string clipboardText)
@@ -251,5 +237,4 @@ namespace QueryPonyGui
          ClipboardText = clipboardText;
       }
    }
-
 }

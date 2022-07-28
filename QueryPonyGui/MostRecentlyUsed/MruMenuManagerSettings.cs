@@ -1,6 +1,7 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/MostRecentlyUsed/MruMenuMangerSettings.cs from
-//                "Genghis v0.8.zip" at http://genghis.codeplex.com/releases/view/4954
+// file        : http://downtown.trilo.de/svn/queryponydev/trunk/QueryPony/QueryPonyGui/MostRecentlyUsed/MruMenuMangerSettings.cs
+//                + https://github.com/normai/QueryPony/blob/master/QueryPonyGui/MostRecentlyUsed/MruMenuMangerSettings.cs
+// origin      : "Genghis v0.8.zip" at http://genghis.codeplex.com/releases/view/4954
 // id          : 20130604°1851
 // summary     : This file stores Genghis class 'MruMenuManagerSettings' to provide ...
 // license     : Custom License
@@ -28,7 +29,6 @@ namespace MRUSampleControlLibrary {
       /// <remarks>id : 20130604°1853</remarks>
       public MruMenuManagerSettings(IComponent owner, string settingsKey) : base(owner, settingsKey) { }
 
-
       /// <summary>This property gets/sets ...</summary>
       /// <remarks>id : 20130604°1854</remarks>
       [UserScopedSetting]
@@ -36,6 +36,5 @@ namespace MRUSampleControlLibrary {
          get { return (ArrayList)this["MruListItems"]; }
          set { this["MruListItems"] = value; }
       }
-
    }
 }

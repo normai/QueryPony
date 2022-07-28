@@ -1,12 +1,33 @@
-﻿                                                [folder 20130708°0811]
+﻿
+   This folder hosts DLLs
 
-   This is folder /querypony/QueryPonyLib/libs/
+   • mysql-connector-net-8.0.20-noinstall
+      ◦ /v4.5.2/MySql.Data.dll (1 727 488 bytes)
+      ◦ /v4.8/MySql.Data.dll (1 725 952 bytes)
 
-   This is for the build process to temporarily store file
+      This to MySql.Data.dll files are extracted
+      from 'mysql-connector-net-8.0.20-noinstall.zip' [download 20200523°0211]
+      from https://dev.mysql.com/downloads/connector/net/ [ref 20200523°0212]
 
-      - iobus.dll
+      License : GPLv2 (and possibly others)
 
-   That file is svn-ignored.
+   • oracle.manageddataaccess.19.7.0/Oracle.ManagedDataAccess.dll
+      Extracted from 'oracle.manageddataaccess.19.7.0.nupkg' [download 20200522°0812 file 20200522°0816]
+      from https://www.nuget.org/packages/Oracle.ManagedDataAccess/ [ref 20200522°0815]
 
-   ———————————————————————
-   [file 20130708°0812] ʘΩ
+      License : Proprietary but redistributable
+
+   • sqlite-netFx46-binary-bundle-Win32-2015-1.0.112.0/System.Data.SQLite.dll
+      Extracted from file sqlite-netFx46-binary-bundle-Win32-2015-1.0.112.0.zip [download 20200522°0634]
+      from https://system.data.sqlite.org/index.html/doc/trunk/www/downloads.wiki [ref 20200522°0633]
+
+      License : Public domain
+
+   • sqlite-netFx46-binary-bundle-x64-2015-1.0.112.0/System.Data.SQLite.dll
+      Extracted from file sqlite-netFx46-binary-bundle-x64-2015-1.0.112.0.zip [download 20200522°0634]
+      from https://system.data.sqlite.org/index.html/doc/trunk/www/downloads.wiki [ref 20200522°0633]
+
+      License : Public domain
+
+   ————————————————————————————————————————————
+   [file 20200522°0832 folder 20200522°0831] ⬞Ω
