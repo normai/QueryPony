@@ -1,11 +1,9 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyLib/DbApi/SqliteDbBrowser.cs
-// id          : 20130605°1701 (20130604°0931)
-// summary     : This file stores class 'SqliteDbBrowser' to constitute
-//                an implementation of IDbBrowser for SQLite.
+// file        : 20130605°1701 (20130604°0931) /QueryPony/QueryPonyLib/DbApi/SqliteDbBrowser.cs
+// summary     : Class 'SqliteDbBrowser' constitutes an implementation of IDbBrowser for SQLite
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 by Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2022 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Experimental
 // note        :
@@ -16,30 +14,26 @@
 using System;
 using System.Collections.Specialized;
 using System.Data;
-using System.Data.SQLite; // [20130606°1329]
+using System.Data.SQLite;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
 
 namespace QueryPonyLib
 {
-
-   /// <summary>This class constitutes an implementation of IBrowser for SQLite.</summary>
+   /// <summary>This class constitutes an implementation of IBrowser for SQLite</summary>
    /// <remarks>id : 20130605°1702 (20130604°0932)</remarks>
    internal class SqliteDbBrowser : IDbBrowser
    {
-
-      /// <summary>This subclass constitutes the TreeNode objects for SQLite tables.</summary>
+      /// <summary>This subclass constitutes the TreeNode objects for SQLite tables</summary>
       /// <remarks>id : 20130605°1704 (20130604°0934)</remarks>
       class SqliteNode : TreeNode
       {
-
-         /// <summary>This field stores the node type (why?).</summary>
+         /// <summary>This field stores the node type (why?)</summary>
          /// <remarks>id : 20130605°1705 (20130604°0935)</remarks>
-         internal int _type = Glb.NodeTypeNdxs.Invalid;                                // -1
+         internal int _type = Glb.NodeTypeNdxs.Invalid;                        // -1
 
-
-         /// <summary>This property gets the DragText if a SQLite table treenode is dragged.</summary>
+         /// <summary>This property gets the DragText if a SQLite table treenode is dragged</summary>
          /// <remarks>
          /// id : 20130605°1706 (20130604°0936)
          /// todo : Streamline usage of dragtext and SqlTokenTicks() throughout
@@ -51,15 +45,14 @@ namespace QueryPonyLib
             {
                string sRet = this.Text;
 
-               // if the token contains a blank or hyphen, wrap it in e.g. squarebrackets (20130723°0902)
+               // If the token contains a blank or hyphen, wrap it in e.g. squarebrackets [line 20130723°0902]
                sRet = IOBus.Utils.Strings.SqlTokenTicks(sRet, " -", "[]");
 
                return sRet;
             }
          }
 
-
-         /// <summary>This constructor creates a new SQLite table treenode.</summary>
+         /// <summary>This constructor creates a new SQLite table treenode</summary>
          /// <remarks>id : 20130605°1707 (20130604°0937)</remarks>
          /// <param name="text">The wanted node text, e.g. ...</param>
          /// <param name="type">The wanted node type, e.g. -1 or 0, 1, etc for the nodes array index.</param>
@@ -69,13 +62,11 @@ namespace QueryPonyLib
          }
       }
 
-
-      /// <summary>This field stores the DbClient given in the constructor.</summary>
+      /// <summary>This field stores the DbClient given in the constructor</summary>
       /// <remarks>id : 20130605°1703 (20130604°0933)</remarks>
       private DbClient _dbClient;
 
-
-      /// <summary>This constructor creates a new SqliteDbBrowser object for the given DbClient.</summary>
+      /// <summary>This constructor creates a new SqliteDbBrowser object for the given DbClient</summary>
       /// <remarks>id : 20130605°1708 (20130604°0938)</remarks>
       /// <param name="dbClient">The DbClient for which to create this SqliteDbBrowser object</param>
       public SqliteDbBrowser(DbClient dbClient)
@@ -83,8 +74,7 @@ namespace QueryPonyLib
          this._dbClient = dbClient;
       }
 
-
-      /// <summary>This property gets the SQLite DbClient for which this DbBrowser was created.</summary>
+      /// <summary>This property gets the SQLite DbClient for which this DbBrowser was created</summary>
       /// <remarks>id : 20130605°1709 (20130604°0939)</remarks>
       public DbClient DbClient
       {
@@ -94,8 +84,7 @@ namespace QueryPonyLib
          }
       }
 
-
-      /// <summary>This method delivers a clone of this SQLite DbBrowser for another SQLite DbClient.</summary>
+      /// <summary>This method delivers a clone of this SQLite DbBrowser for another SQLite DbClient</summary>
       /// <remarks>
       /// id : 20130605°1710 (20130604°0941)
       /// note : What may this method be good for? It seems not be called at all. And it
@@ -109,14 +98,13 @@ namespace QueryPonyLib
          return sdbb;
       }
 
-
-      /// <summary>This method creates the context menu for the given SQLite table node.</summary>
+      /// <summary>This method creates the context menu for the given SQLite table node</summary>
       /// <remarks>id : 20130605°1714 (20130604°0945)</remarks>
       /// <param name="node">The SQLite treenode for which the context menu shall be created</param>
       /// <returns>The created context menu items for the given SQLite treenode</returns>
       public StringCollection GetActionList(TreeNode node)
       {
-         // paranoia
+         // Paranoia
          if (! (node is SqliteNode))
          {
             return null;
@@ -127,16 +115,15 @@ namespace QueryPonyLib
 
          if (on._type >= 0)
          {
-            scOutput.Add(Glb.TvContextMenuItems.SelectAllFrom + " " + on._sDragText);  // "select * from"
-            scOutput.Add(Glb.TvContextMenuItems.InsertAllFields);                      // "(insert all fields)"
-            scOutput.Add(Glb.TvContextMenuItems.InsertAllFieldsTblPrefixed);           // "(insert all fields, table prefixed)"
+            scOutput.Add(Glb.TvContextMenuItems.SelectAllFrom + " " + on._sDragText); // "select * from"
+            scOutput.Add(Glb.TvContextMenuItems.InsertAllFields);              // "(insert all fields)"
+            scOutput.Add(Glb.TvContextMenuItems.InsertAllFieldsTblPrefixed);   // "(insert all fields, table prefixed)"
          }
 
          return scOutput.Count == 0 ? null : scOutput;
       }
 
-
-      /// <summary>This method retrieves the command string behind a table node's context menu item.</summary>
+      /// <summary>This method retrieves the command string behind a table node's context menu item</summary>
       /// <remarks>id : 20130605°1715 (20130604°0946)</remarks>
       /// <param name="node">The table node</param>
       /// <param name="action">The menu item's text</param>
@@ -149,7 +136,7 @@ namespace QueryPonyLib
          }
 
          SqliteNode on = (SqliteNode)node;
-         if (sAction.StartsWith(Glb.TvContextMenuItems.SelectAllFrom))                 // "select * from"
+         if (sAction.StartsWith(Glb.TvContextMenuItems.SelectAllFrom))         // "select * from"
          {
             return sAction;
          }
@@ -158,7 +145,7 @@ namespace QueryPonyLib
          {
             StringBuilder sb = new StringBuilder();
 
-            // if the table-prefixed option has been selected, add the table name to all the fields
+            // If the table-prefixed option has been selected, add the table name to all the fields
             string sPrefix = (sAction == Glb.TvContextMenuItems.InsertAllFields ? "" : on._sDragText + "."); // "(insert all fields)"
             int iChars = 0;
             foreach (TreeNode subNode in GetSubObjectHierarchy(node))
@@ -177,7 +164,6 @@ namespace QueryPonyLib
 
          return null;
       }
-
 
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130605°1717 (20130604°0948)</remarks>
@@ -205,14 +191,13 @@ namespace QueryPonyLib
             }
             else
             {
-               // todo : Supplement more serious error processing. (todo 20130709°0946)
+               // Todo : Supplement more serious error processing. (todo 20130709°0946)
                sRet = null; // perhaps better than any arbitrary value?
             }
          }
 
          return sRet;
       }
-
 
       /// <summary>
       /// This method returns the connectionstring to open a database through an UDL
@@ -222,7 +207,7 @@ namespace QueryPonyLib
       /// id : 20130605°1719 (20130604°0951)
       /// note : Explanation of file extensions see this method in OleDbBrowser.cs
       /// todo : This method is just inherited from copying the file from OledbBrowser.cs. It
-      ///         is not proofen yet, that it makes sense with SQLite as well. [20130605°171902]
+      ///         is not proofen yet, that it makes sense with SQLite as well. [todo 20130605°1719`02]
       /// </remarks>
       /// <param name="dbfileName">The filename of the file, the SQLite connectionstring shall be taken from.</param>
       /// <returns>The wanted SQLite connectionstring</returns>
@@ -254,7 +239,7 @@ namespace QueryPonyLib
          }
          else
          {
-            // (seq 20130719°081204)
+            // [seq 20130719°0812`04]
             string sErr = "Error with file " + sFilename;
             System.Windows.Forms.MessageBox.Show(sErr, sFilename);
          }
@@ -262,8 +247,7 @@ namespace QueryPonyLib
          return sResult;
       }
 
-
-      /// <summary>This method retrieves the list of databases available on this server.</summary>
+      /// <summary>This method retrieves the list of databases available on this server</summary>
       /// <remarks>id : 20130605°1716 (20130604°0947)</remarks>
       /// <returns>The wanted list of databases</returns>
       public string[] GetDatabases()
@@ -276,8 +260,7 @@ namespace QueryPonyLib
          return ssResult;
       }
 
-
-      /// <summary>This method returns text from the given treenode, suitable for dropping into a query window.</summary>
+      /// <summary>This method returns text from the given treenode, suitable for dropping into a query window</summary>
       /// <remarks>id : 20130605°1713 (20130604°0944)</remarks>
       /// <param name="node">The treenode from which the drag text is wanted</param>
       /// <returns>The wanted drag text</returns>
@@ -293,21 +276,20 @@ namespace QueryPonyLib
          return sRet;
       }
 
-
-      /// <summary>This method builds the initial browser tree for this SQLite DbBrowser.</summary>
+      /// <summary>This method builds the initial browser tree for this SQLite DbBrowser</summary>
       /// <remarks>id : 20130605°1711 (20130604°0942)</remarks>
       /// <returns>The wanted array of SQLite table treenodes</returns>
       public TreeNode[] GetObjectHierarchy()
       {
          TreeNode[] top = new TreeNode[]
          {
-            new TreeNode (Glb.NodeItems.Tables),                                       // [0] "Tables"
-            new TreeNode (Glb.NodeItems.Views),                                        // [1] "Views"
-            new TreeNode (Glb.NodeItems.SystemTables),                                 // [2] "System Tables"
-            new TreeNode (Glb.NodeItems.SystemViews)                                   // [3] "System Views"
+            new TreeNode (Glb.NodeItems.Tables),                               // [0] "Tables"
+            new TreeNode (Glb.NodeItems.Views),                                // [1] "Views"
+            new TreeNode (Glb.NodeItems.SystemTables),                         // [2] "System Tables"
+            new TreeNode (Glb.NodeItems.SystemViews)                           // [3] "System Views"
          };
 
-         int iCurNodeType = Glb.NodeTypeNdxs.Tables0;                                  // initial nodes array index 0
+         int iCurNodeType = Glb.NodeTypeNdxs.Tables0;                          // initial nodes array index 0
          foreach (TreeNode node in top)
          {
             //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -315,11 +297,11 @@ namespace QueryPonyLib
             string sFilter = "";
             switch (iCurNodeType)
             {
-               case Glb.NodeTypeNdxs.Tables0: sFilter = Glb.SchemaFilter.Table; break;  // 0 : "TABLE"
-               case Glb.NodeTypeNdxs.Views1: sFilter = Glb.SchemaFilter.View; break;   // 1 : "VIEW"
+               case Glb.NodeTypeNdxs.Tables0: sFilter = Glb.SchemaFilter.Table; break; // 0 : "TABLE"
+               case Glb.NodeTypeNdxs.Views1: sFilter = Glb.SchemaFilter.View; break; // 1 : "VIEW"
                case Glb.NodeTypeNdxs.SystemTables2: sFilter = Glb.SchemaFilter.SystemTable; break;  // 2 : "SYSTEM TABLE"
                case Glb.NodeTypeNdxs.SystemViews3: sFilter = Glb.SchemaFilter.SystemView; break;  // 3 : "SYSTEM VIEW"
-               default: break;                                                         // fatal
+               default: break;                                                 // Fatal
             }
             //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -329,8 +311,7 @@ namespace QueryPonyLib
          return top;
       }
 
-
-      /// <summary>This method creates the column nodes for the selected table.</summary>
+      /// <summary>This method creates the column nodes for the selected table</summary>
       /// <remarks>id : 20130605°1712 (20130604°0943)</remarks>
       /// <param name="node">The node to expand, e.g. node.Text = "Addresses"</param>
       /// <returns>Array with the wanted nodes</returns>
@@ -359,8 +340,7 @@ namespace QueryPonyLib
          return tn;
       }
 
-
-      /// <summary>This method supplies the subtree hierarchy to the given table node.</summary>
+      /// <summary>This method supplies the subtree hierarchy to the given table node</summary>
       /// <remarks>id : 20130819°1518 (20130819°1501)</remarks>
       /// <param name="node">The node to be supplemented with a subtree hierarchy</param>
       /// <returns>Success flag</returns>
@@ -369,8 +349,7 @@ namespace QueryPonyLib
          return true;
       }
 
-
-      /// <summary>This interface method retrieves the collections available for this data provider.</summary>
+      /// <summary>This interface method retrieves the collections available for this data provider</summary>
       /// <remarks>id : 20130826°1228 (20130826°1211)</remarks>
       /// <returns>The wanted array of available collections</returns>
       public string[] SchemaGetCollections()
@@ -379,8 +358,7 @@ namespace QueryPonyLib
          return ssCollections;
       }
 
-
-      /// <summary>This interface method retrieves the array of Index Nodes for the given table.</summary>
+      /// <summary>This interface method retrieves the array of Index Nodes for the given table</summary>
       /// <remarks>id : 20130825°1328 (20130825°1311)</remarks>
       /// <param name="sTablename">The tablename for the indices to retrieve</param>
       /// <returns>The wanted array of Index Nodes</returns>
@@ -390,8 +368,7 @@ namespace QueryPonyLib
          return ndxs;
       }
 
-
-      /// <summary>This method retrieves an experimental schema object for debug purposes.</summary>
+      /// <summary>This method retrieves an experimental schema object for debug purposes</summary>
       /// <remarks>id : 20130819°0938 (20130819°0921)</remarks>
       /// <returns>The wanted schema object, e.g. a DataTable or a XML table</returns>
       public object SchemaGetSchema()
@@ -400,8 +377,7 @@ namespace QueryPonyLib
          return o;
       }
 
-
-      /// <summary>This method retrieves the list of tables in this DbBrowser's DbClient.</summary>
+      /// <summary>This method retrieves the list of tables in this DbBrowser's DbClient</summary>
       /// <remarks>
       /// id : 20130819°0711 (20130819°0701)
       /// todo : This method is implemented for only OleDb so far. Implement the others. [todo 20130819°0719]
@@ -409,7 +385,7 @@ namespace QueryPonyLib
       /// <returns>The wanted list of tables</returns>
       public string[] SchemaGetTables()
       {
-         if (IOBus.Gb.Debag.ExecuteYES)
+         if (IOBus.Gb.Debag.Execute_Yes)
          {
             string[] sDummy = { "N/A" };
             return sDummy;
@@ -421,20 +397,17 @@ namespace QueryPonyLib
 
          string sFilter = "Tables";
 
-         string sDbName = GetDatabaseFilter();                                         // "main"
+         string sDbName = GetDatabaseFilter();                                 // "main"
 
-         string[] arRestrict = { null, null, null, null };                             // formerly { sDb, null, null, filter };
+         string[] arRestrict = { null, null, null, null };                     // Formerly { sDb, null, null, filter };
          arResult = GetSqliteBrowserValues(sFilter, arRestrict);
-
 
          return ssTables;
       }
 
-
       #region Implementation Helpers
 
-
-      /// <summary>This method ... is called one time for each of the four initial browser tree nodes.</summary>
+      /// <summary>This method ... is called one time for each of the four initial browser tree nodes</summary>
       /// <remarks>
       /// id : 20130605°1722 (20130604°0954)
       /// note : Used like top[curNodeType].Add("SELECT [TABLE_NAME] FROM [Tables] WHERE [Tabletyp] = {filter}").
@@ -443,23 +416,18 @@ namespace QueryPonyLib
       /// <param name="curNodeType">...</param>
       /// <param name="filter">...</param>
       /// <returns>Nothing</returns>
-      private void CreateNodeHierachy ( TreeNode[] top                                 // complete treeview object
-                                       , int iCurNodeType                              // call counter: 0, 1, 2, 3
-                                        , string sFilter                               // e.g. "TABLE", "VIEW", "SYSTEM TABLE", "SYSTEM VIEW"
+      private void CreateNodeHierachy ( TreeNode[] top                         // Complete treeview object
+                                       , int iCurNodeType                      // Call counter: 0, 1, 2, 3
+                                        , string sFilter                       // E.g. "TABLE", "VIEW", "SYSTEM TABLE", "SYSTEM VIEW"
                                          )
       {
          string[] arResult = null;
-
-         ////result = GetOleDbBrowserValues ( "TABLE_NAME"
-         ////                                 , OleDbSchemaGuid.Tables
-         ////                                  , new object[] { GetDatabaseFilter(), null, null, filter }
-         ////                                   );
-         if (sFilter == Glb.SchemaFilter.Table) { sFilter = "Tables"; }                // "TABLE"
-         if (sFilter == Glb.SchemaFilter.View) { sFilter = "Views"; }                  // "VIEW"
-         if (sFilter == Glb.SchemaFilter.SystemTable) { sFilter = ""; }                // "SYSTEM TABLE"
-         if (sFilter == Glb.SchemaFilter.SystemView) { sFilter = ""; }                 // "SYSTEM VIEW"
-         string sDbName = GetDatabaseFilter();                                         // "main"
-         string[] arRestrict = { null, null, null, null };                             // formerly { sDb, null, null, filter };
+         if (sFilter == Glb.SchemaFilter.Table) { sFilter = "Tables"; }        // "TABLE"
+         if (sFilter == Glb.SchemaFilter.View) { sFilter = "Views"; }          // "VIEW"
+         if (sFilter == Glb.SchemaFilter.SystemTable) { sFilter = ""; }        // "SYSTEM TABLE"
+         if (sFilter == Glb.SchemaFilter.SystemView) { sFilter = ""; }         // "SYSTEM VIEW"
+         string sDbName = GetDatabaseFilter();                                 // "main"
+         string[] arRestrict = { null, null, null, null };                     // Formerly { sDb, null, null, filter };
          arResult = GetSqliteBrowserValues(sFilter, arRestrict);
 
          if (arResult != null)
@@ -478,8 +446,7 @@ namespace QueryPonyLib
          }
       }
 
-
-      /// <summary>This method ... opens a database file through OleDb.</summary>
+      /// <summary>This method ... opens a database file through OleDb</summary>
       /// <remarks>
       /// id : 20130605°1718 (20130604°0949)
       /// example : HandleCmdLineParameterOpenDbFile("Northwind.mdb")
@@ -497,18 +464,17 @@ namespace QueryPonyLib
 
          string sConnectTemplate;
 
-         // load Template from working or exe-directory
+         // Load Template from working or exe-directory
          if (( Utils.ReadFromFile ( Path.Combine
                                    ( Directory.GetCurrentDirectory()
                                     , sFilenameTemplate
                                      ), out sConnectTemplate
                                       ))
-            || ( Utils.ReadFromFile ( Path.Combine
-                                     //// ( GetExecPath()
-                                     ( IOBus.Utils.Pathes.ExecutableFullFolderName()
-                                      , sFilenameTemplate
-                                       ), out sConnectTemplate
-                                        )))
+             || ( Utils.ReadFromFile ( Path.Combine
+                                      ( IOBus.Utils.Pathes.ExecutableFullFolderName()
+                                       , sFilenameTemplate
+                                        ), out sConnectTemplate
+              )))
          {
             return string.Format(sConnectTemplate, sDbFilename);
          }
@@ -525,8 +491,7 @@ namespace QueryPonyLib
          return null;
       }
 
-
-      /// <summary>This method delivers the name of the connected database.</summary>
+      /// <summary>This method delivers the name of the connected database</summary>
       /// <remarks>id : 20130605°1721 (20130604°0953)</remarks>
       /// <returns>The wanted name of the database this DbClient is connected to</returns>
       private string GetDatabaseFilter()
@@ -539,21 +504,7 @@ namespace QueryPonyLib
          return sResult;
       }
 
-      /// todo : This method occurres redundant in several classes. Make it
-      ///    an utility method in IOBus. [todo 20130727°0921 - done 20130905°0912]
-      /*
-      /// <summary>This method delivers the path of the executable.</summary>
-      /// <remarks>id : 20130605°1720 (20130604°0952)</remarks>
-      /// <returns>The wanted executable's path</returns>
-      private static string GetExecPath()
-      {
-         string s = System.Reflection.Assembly.GetExecutingAssembly().Location;
-         string sRet = System.IO.Path.GetDirectoryName(s);
-         return sRet;
-      }
-      */
-
-      /// <summary>This method performs a SQLite-specific internal query.</summary>
+      /// <summary>This method performs a SQLite-specific internal query</summary>
       /// <remarks>
       /// id : 20130605°1723 (20130604°0955)
       /// note : The query looks like 'SELECT {resultColumnName} FROM {schema} WHERE {restrictions}'
@@ -566,11 +517,10 @@ namespace QueryPonyLib
       /// <param name="resultColumnName">...</param>
       /// <param name="restrictions">...</param>
       /// <returns>String-Array with Fields from </returns>
-      private string[] GetSqliteBrowserValues ( string sResultColName                  // e.g. "Tables"
-                                               , string[] arRestrictions               // array of 4 strings - check: What do the fields mean exactly?
+      private string[] GetSqliteBrowserValues ( string sResultColName          // E.g. "Tables"
+                                               , string[] arRestrictions       // Array of 4 strings — Check: What do the fields mean exactly?
                                                 )
       {
-
          SQLiteConnection conn = null;
          DataTable dt = null;
          string[] arRet = null;
@@ -580,36 +530,34 @@ namespace QueryPonyLib
             conn = ((SqliteDbClient) DbClient).Connection;
 
             //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            // perform some test calls
-            if (Glb.Debag.ExecuteNo)
+            // Perform some test calls
+            if (Glb.Debag.Execute_No)
             {
                // debug
                dt = conn.GetSchema();
-               dt.WriteXml(InitLib.SettingsDir + IOBus.Gb.Bricks.PathBkslsh + "debug_schema1.xml");
+               dt.WriteXml(InitLib.Settings1Dir + IOBus.Gb.Bricks.PathBkslsh + "debug_schema1.xml");
 
                dt = conn.GetSchema("Tables");
-               dt.WriteXml(InitLib.SettingsDir + IOBus.Gb.Bricks.PathBkslsh + "debug_schema2.xml");
+               dt.WriteXml(InitLib.Settings1Dir + IOBus.Gb.Bricks.PathBkslsh + "debug_schema2.xml");
 
                dt = conn.GetSchema("Columns");
-               dt.WriteXml(InitLib.SettingsDir + IOBus.Gb.Bricks.PathBkslsh + "debug_schema3.xml");
+               dt.WriteXml(InitLib.Settings1Dir + IOBus.Gb.Bricks.PathBkslsh + "debug_schema3.xml");
 
                string[] arRestrictions2 = { null, null, "Addresses", null };
                dt = conn.GetSchema("Columns", arRestrictions2);
-               dt.WriteXml(InitLib.SettingsDir + IOBus.Gb.Bricks.PathBkslsh + "debug_schema4.xml");
+               dt.WriteXml(InitLib.Settings1Dir + IOBus.Gb.Bricks.PathBkslsh + "debug_schema4.xml");
             }
             //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-            // execute the wanted query
+            // Execute the wanted query
             dt = conn.GetSchema(sResultColName, arRestrictions);
 
-            if (Glb.Debag.ExecuteNo)
+            if (Glb.Debag.Execute_No)
             {
-               dt.WriteXml(InitLib.SettingsDir + IOBus.Gb.Bricks.PathBkslsh + "debug_schema5.xml");
+               dt.WriteXml(InitLib.Settings1Dir + IOBus.Gb.Bricks.PathBkslsh + "debug_schema5.xml");
             }
 
-
-            ////DataColumn col = tab.Columns[resultColumnName]; // ["TABLE_TYPE"]
-            // probably a workaround due to not exactly knowing the parameterization [20130607°1211]
+            // Workaround for not knowing the exact parameterization [line 20130607°1211]
             string sCol = "";
 
             if (sResultColName == "Catalogs") { sCol = "CATALOG_NAME"; }
@@ -625,7 +573,7 @@ namespace QueryPonyLib
 
             DataColumn col = dt.Columns[sCol];
 
-            // (continue with lines from the original OleDb method)
+            // Continue with lines from the original OleDb method
             arRet = new string[dt.Rows.Count];
             int iCount = 0;
             foreach (DataRow row in dt.Rows)

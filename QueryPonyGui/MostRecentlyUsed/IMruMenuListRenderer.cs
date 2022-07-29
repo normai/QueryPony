@@ -1,6 +1,7 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/MostRecentlyUsed/IMruMenuListRenderer.cs from
-//                "Genghis v0.8.zip" at http://genghis.codeplex.com/releases/view/4954
+// file        : http://downtown.trilo.de/svn/queryponydev/trunk/QueryPony/QueryPonyGui/MostRecentlyUsed/IMruMenuListRenderer.cs
+//                + https://github.com/normai/QueryPony/blob/master/QueryPonyGui/MostRecentlyUsed/IMruMenuListRenderer.cs
+// origin      : "Genghis v0.8.zip" at http://genghis.codeplex.com/releases/view/4954
 // id          : 20130604°1611
 // summary     : This file stores Genghis interface 'IMruMenuListRenderer' to provide ...
 // license     : Custom License
@@ -29,5 +30,4 @@ namespace MRUSampleControlLibrary {
     void Render(ToolStripMenuItem mruListMenu, MruMenuListItems mruMenuListItems, int textWidth, EventHandler mruMenuItem_Click);
 
   }
-
 }

@@ -1,10 +1,9 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyLib/DbApi/OdbcDbClient.cs
-// id          : 20130604°0901
-// summary     : This file stores class 'OdbcClient' to constitute an implementation of DBClient for ODBC.
+// file        : 20130604°0901 /QueryPony/QueryPonyLib/DbApi/OdbcDbClient.cs
+// summary     : Class 'OdbcClient' constitutes an implementation of DBClient for ODBC
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 by Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2022 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable
 // note        :
@@ -16,18 +15,15 @@ using System.Data.Odbc;
 
 namespace QueryPonyLib
 {
-
-   /// <summary>This class constitutes an implementation of DBClient for ODBC.</summary>
+   /// <summary>This class constitutes an implementation of DBClient for ODBC</summary>
    /// <remarks>id : 20130604°0902</remarks>
    class OdbcClient : DbClient
    {
-
       /// <summary>This constructor...</summary>
       /// <remarks>id : 20130604°0903</remarks>
       public OdbcClient(ConnSettingsLib settings) : base(settings)
       {
       }
-
 
       /// <summary>This property gets ...</summary>
       /// <remarks>id : 20130604°0904</remarks>
@@ -36,8 +32,7 @@ namespace QueryPonyLib
          get { return (OdbcConnection) _connection; }
       }
 
-
-      /// <summary>This method returns an ODBC database connection.</summary>
+      /// <summary>This method returns an ODBC database connection</summary>
       /// <remarks>id : 20130604°0905</remarks>
       /// <returns>The wanted ODBC database connection</returns>
       protected override IDbConnection GetDbConnection()
@@ -47,16 +42,14 @@ namespace QueryPonyLib
          return con;
       }
 
-
-      /// <summary>This eventhandler processes the InfoMessage event of this ODBC connection.</summary>
+      /// <summary>This eventhandler processes the InfoMessage event of this ODBC connection</summary>
       /// <remarks>id : 20130604°0906</remarks>
       void con_InfoMessage(object sender, OdbcInfoMessageEventArgs e)
       {
          OnInfoMessage(sender, new InfoMessageEventArgs(e.Message, ""));
       }
 
-
-      /// <summary>This method builds an ODBC connectionstring from the connection settings of this DbClient.</summary>
+      /// <summary>This method builds an ODBC connectionstring from the connection settings of this DbClient</summary>
       /// <remarks>id : 20130604°0907</remarks>
       /// <returns>The wanted connectionstring</returns>
       protected override string GenerateConnectionString()
@@ -64,11 +57,10 @@ namespace QueryPonyLib
          OdbcConnectionStringBuilder csb = new OdbcConnectionStringBuilder();
          csb.ConnectionString = _connSettings.DatabaseConnectionstring;
 
-         return csb.ConnectionString;                                                  // connectString.ToString();
+         return csb.ConnectionString;                                          // connectString.ToString();
       }
 
-
-      /// <summary>This method delivers an ODBC command object for a given command string.</summary>
+      /// <summary>This method delivers an ODBC command object for a given command string</summary>
       /// <remarks>id : 20130604°0908</remarks>
       /// <param name="sQuery">The command string for which to get a command object</param>
       /// <returns>The wanted command object</returns>
@@ -79,7 +71,6 @@ namespace QueryPonyLib
          return cmd;
       }
 
-
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130604°0909</remarks>
       public override QueryOptions GetDefaultOptions()
@@ -87,14 +78,12 @@ namespace QueryPonyLib
          return new ODBCQueryOptions();
       }
 
-
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130604°0911</remarks>
       protected override IDbDataAdapter GetDataAdapter(IDbCommand command)
       {
          return new OdbcDataAdapter((OdbcCommand) command);
       }
-
 
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130604°0912</remarks>
@@ -126,6 +115,5 @@ namespace QueryPonyLib
          */
 
       }
-
    }
 }

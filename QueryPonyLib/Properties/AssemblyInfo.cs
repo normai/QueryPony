@@ -1,9 +1,8 @@
 #region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyLib/Properties/AssemblyInfo.cs
-// id          : 20130619°1212 (20130604°0021)
+// file        : 20130619°1212 (20130604°0021) /QueryPony/QueryPonyLib/Properties/AssemblyInfo.cs
 // summary     : This file stores the project attribute definitions.
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 by Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : ncm
 // encoding    : UTF-8-with-BOM
 // status      : Applicable
@@ -21,9 +20,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle ("QueryPonyLib")]
 [assembly: AssemblyDescription ("QueryPonyLib is a Simple Generic Database Query API")]
 [assembly: AssemblyConfiguration ("")]
-[assembly: AssemblyCompany ("www.trilo.de")]
+[assembly: AssemblyCompany ("www.trekta.biz")]
 [assembly: AssemblyProduct ("QueryPonyLib")]
-[assembly: AssemblyCopyright ("© 2013 - 2018 by Norbert C. Maier")]
+[assembly: AssemblyCopyright("© 2013 - 2022 Norbert C. Maier")]
 [assembly: AssemblyTrademark ("Trekta®")]
 [assembly: AssemblyCulture ("")]
 // Setting ComVisible to false makes the types in this assembly not visible
@@ -66,7 +65,7 @@ using System.Runtime.InteropServices;
 //[assembly: AssemblyFileVersion("0.3.1.0")]   // Version 0.3.1.42329 Alpha Release (20130810°1956)
 //[assembly: AssemblyFileVersion("0.3.2.1")]   // Intermediate (20130912°2121)
 [assembly: AssemblyFileVersion ("0.3.4.0")]
-// Intermediate (20160318°1311)
-// custom attributes
+
+// Custom attributes — Intermediate [seq 20160318°1311]
 [assembly: GlobalCustomAttributes.AssemblyPluginTestAttribute (GlobalCustomAttributes.AssemblyPluginTestType.Library)]
 [assembly: GlobalCustomAttributes.CustomAuthorsAttribute (Authors = "Joseph Albahari, Timor Fanshteyn, Christian S., dl3bak, klaus3b, Norbert C. Maier")]

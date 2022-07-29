@@ -1,10 +1,9 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/Gui/MainForm_Menu.cs
-// id          : 20130725°1411 (20130604°0531)
-// summary     : This file stores a parts of class 'MainForm' to constitute the Main Form.
+// file        : 20130725°1411 (20130604°0531) /QueryPony/QueryPonyGui/Gui/MainForm_Menu.cs
+// summary     : This file stores a parts of class 'MainForm' to constitute the Main Form
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2022 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable
 // history     : (20130725°1411) This about 600 lines outsourced from MainForm.cs.
@@ -20,12 +19,12 @@ using System.Xml.Serialization;
 namespace QueryPonyGui
 {
 
-   /// <summary>This class constitutes the Main Form.</summary>
+   /// <summary>This class constitutes the Main Form</summary>
    /// <remarks>id : 20130604°0532</remarks>
    public partial class MainForm
    {
 
-      /// <summary>This method enables/disables some non-edit toolbar or menu items.</summary>
+      /// <summary>This method enables/disables some non-edit toolbar or menu items</summary>
       /// <remarks>
       /// id : 20130812°1401
       /// note : The original EnableControls() does it's job only if a QueryForm is focussed.
@@ -35,12 +34,10 @@ namespace QueryPonyGui
          queryOptionsToolStripMenuItem.Enabled = Properties.Settings.Default.DeveloperMode;
       }
 
-
-      /// <summary>This method enables/disables the toolbar and menu items.</summary>
+      /// <summary>This method enables/disables the toolbar and menu items</summary>
       /// <remarks>id : 20130604°0643</remarks>
-      private void EnableControls()                                                    //// (debug 20130810°1602 'menu items gray')
+      private void EnableControls()                                            // [mark 20130810°1602`11 'debug menu items gray']
       {
-
          // retrieve QueryForm handle or leave it null
          IQueryForm qf = null;
          bool active = IsChildActive();
@@ -49,12 +46,11 @@ namespace QueryPonyGui
             qf = GetQueryChild();
          }
 
-
-         // (sequence 20130809°1522) empirical try against issue 20130809°1521 with Settings Form
-         // note : If q is null, then it is not a QueryForm.
+         // Empirical try against issue 20130809°1521 with Settings Form [seq 20130809°1522]
+         // Note : If q is null, then it is not a QueryForm.
          if (qf == null)
          {
-            if (Glb.Debag.ExecuteNo)
+            if (Glb.Debag.Execute_No)
             {
                string s = "Tab selection issue 20130809°1521 (o.k.)";
                outputStatusLine(s);
@@ -62,14 +58,12 @@ namespace QueryPonyGui
             return;
          }
 
-
-         // try envelope against bug 20130729°1543
+         // Try envelope against bug 20130729°1543
          try
          {
             openToolStripMenuItem.Enabled = openToolStripButton.Enabled
                                            = saveResultsAsToolStripMenuItem.Enabled
-                                        ////= (active && q.RunState == DbClient.RunStates.Idle)
-                                            = (active && (qf.RunState == DbClient.RunStates.Idle)) // (explicitly indicate precedence 20130809°1531)
+                                            = (active && (qf.RunState == DbClient.RunStates.Idle)) // explicitly indicate precedence [line 20130809°1531]
                                              ;
          }
          catch (Exception ex)
@@ -90,8 +84,7 @@ namespace QueryPonyGui
 
          settingsToolStripMenuItem.Enabled = true;
 
-
-         // (sequence 20130725°1511) experiment with the Close Menu Item .. to be continued
+         // [seq 20130725°1511] experiment with the Close Menu Item .. to be continued
          // original lines:
          // //disconnectToolStripMenuItem.Enabled = (active && (q.RunState != DbClient.RunStates.Cancelling));
          // new experimental lines:
@@ -102,7 +95,6 @@ namespace QueryPonyGui
          {
             disconnectToolStripMenuItem.Enabled = true; // (active && (q.RunState != DbClient.RunStates.Cancelling));
          }
-
 
          //miQueryOptions.Enabled = (active && q.RunState == DbClient.RunStates.Idle);
 
@@ -136,11 +128,9 @@ namespace QueryPonyGui
 
       }
 
-
       #region Menu and Toolbar Button Events
 
-
-      /// <summary>This eventhandler processes the Main Menu 'File/Connect' Item click.</summary>
+      /// <summary>This eventhandler processes the Main Menu 'File/Connect' Item click</summary>
       /// <remarks>id : 20130604°0540</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -149,8 +139,7 @@ namespace QueryPonyGui
          DoConnect_POSSIBLY_REVIVE();
       }
 
-
-      /// <summary>This eventhandler processes the Main Menu 'File/Close' Item click.</summary>
+      /// <summary>This eventhandler processes the Main Menu 'File/Close' Item click</summary>
       /// <remarks>id : 20130604°0541</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -159,8 +148,7 @@ namespace QueryPonyGui
          DoDisconnect();
       }
 
-
-      /// <summary>This eventhandler processes the Main Menu 'Query/Execute' Item (F5) click.</summary>
+      /// <summary>This eventhandler processes the Main Menu 'Query/Execute' Item (F5) click</summary>
       /// <remarks>id : 20130604°0542</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -169,8 +157,7 @@ namespace QueryPonyGui
          DoExecuteQuery();
       }
 
-
-      /// <summary>This eventhandler processes the Main Toolbar 'Execute' Icon (F5) click.</summary>
+      /// <summary>This eventhandler processes the Main Toolbar 'Execute' Icon (F5) click</summary>
       /// <remarks>id : 20130604°0543</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -179,8 +166,7 @@ namespace QueryPonyGui
          DoExecuteQuery();
       }
 
-
-      /// <summary>This eventhandler processes the Main Menu 'Query/CancelExecuting' Item click.</summary>
+      /// <summary>This eventhandler processes the Main Menu 'Query/CancelExecuting' Item click</summary>
       /// <remarks>id : 20130604°0544</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -189,8 +175,7 @@ namespace QueryPonyGui
          DoCancel();
       }
 
-
-      /// <summary>This eventhandler processes the Main Toolbar 'CancelExecuting' Icon click.</summary>
+      /// <summary>This eventhandler processes the Main Toolbar 'CancelExecuting' Icon click</summary>
       /// <remarks>id : 20130604°0545</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -199,8 +184,7 @@ namespace QueryPonyGui
          DoCancel();
       }
 
-
-      /// <summary>This eventhandler processes the Main Toolbar 'New' (Ctrl+N) Icon click.</summary>
+      /// <summary>This eventhandler processes the Main Toolbar 'New' (Ctrl+N) Icon click</summary>
       /// <remarks>id : 20130604°0546</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -209,8 +193,7 @@ namespace QueryPonyGui
          DoNew();
       }
 
-
-      /// <summary>This eventhandler processes the Main Menu 'File/New' (Ctrl+N) Item click.</summary>
+      /// <summary>This eventhandler processes the Main Menu 'File/New' (Ctrl+N) Item click</summary>
       /// <remarks>id : 20130604°0547</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -219,8 +202,7 @@ namespace QueryPonyGui
          DoNew();
       }
 
-
-      /// <summary>This eventhandler processes the Main Menu 'Query/ResultsInText' Item click.</summary>
+      /// <summary>This eventhandler processes the Main Menu 'Query/ResultsInText' Item click</summary>
       /// <remarks>id : 20130604°0548</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -229,8 +211,7 @@ namespace QueryPonyGui
          DoResultsInText();
       }
 
-
-      /// <summary>This eventhandler processes the Main Toolbar 'ResultsInText' Icon click.</summary>
+      /// <summary>This eventhandler processes the Main Toolbar 'ResultsInText' Icon click</summary>
       /// <remarks>id : 20130604°0549</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -239,8 +220,7 @@ namespace QueryPonyGui
          DoResultsInText();
       }
 
-
-      /// <summary>This eventhandler processes the Main Menu 'Query/ResultsInGrid' Item click.</summary>
+      /// <summary>This eventhandler processes the Main Menu 'Query/ResultsInGrid' Item click</summary>
       /// <remarks>id : 20130604°0550</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -249,8 +229,7 @@ namespace QueryPonyGui
          DoResultsInGrid();
       }
 
-
-      /// <summary>This eventhandler processes the Main Toolbar 'ResultsInGrid' Icon click.</summary>
+      /// <summary>This eventhandler processes the Main Toolbar 'ResultsInGrid' Icon click</summary>
       /// <remarks>id : 20130604°0551</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -259,8 +238,7 @@ namespace QueryPonyGui
          DoResultsInGrid();
       }
 
-
-      /// <summary>This eventhandler processes the Main Menu 'Query/ShowNullValues' Item click.</summary>
+      /// <summary>This eventhandler processes the Main Menu 'Query/ShowNullValues' Item click</summary>
       /// <remarks>id : 20130604°0552</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -269,8 +247,7 @@ namespace QueryPonyGui
          DoShowNullValues();
       }
 
-
-      /// <summary>This eventhandler processes the Main Menu 'Query/HideNullValues' Item click.</summary>
+      /// <summary>This eventhandler processes the Main Menu 'Query/HideNullValues' Item click</summary>
       /// <remarks>id : 20130604°0553</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -279,8 +256,7 @@ namespace QueryPonyGui
          DoHideNullValues();
       }
 
-
-      /// <summary>This eventhandler processes the Main Menu 'File/Exit' Item click.</summary>
+      /// <summary>This eventhandler processes the Main Menu 'File/Exit' Item click</summary>
       /// <remarks>id : 20130604°0554</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -289,8 +265,7 @@ namespace QueryPonyGui
          Close();
       }
 
-
-      /// <summary>This eventhandler processes the Main Menu 'File/Open' Item click.</summary>
+      /// <summary>This eventhandler processes the Main Menu 'File/Open' Item click</summary>
       /// <remarks>id : 20130604°0555</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -299,8 +274,7 @@ namespace QueryPonyGui
          DoOpen();
       }
 
-
-      /// <summary>This eventhandler processes the Main Toolbar 'Open' Icon click.</summary>
+      /// <summary>This eventhandler processes the Main Toolbar 'Open' Icon click</summary>
       /// <remarks>id : 20130604°0556</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -309,8 +283,7 @@ namespace QueryPonyGui
          DoOpen();
       }
 
-
-      /// <summary>This eventhandler processes the Main Menu 'File/Save' (Ctrl+S) Item click.</summary>
+      /// <summary>This eventhandler processes the Main Menu 'File/Save' (Ctrl+S) Item click</summary>
       /// <remarks>id : 20130604°0557</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -319,8 +292,7 @@ namespace QueryPonyGui
          DoSave();
       }
 
-
-      /// <summary>This eventhandler processes the Main Toolbar 'Save' Icon click.</summary>
+      /// <summary>This eventhandler processes the Main Toolbar 'Save' Icon click</summary>
       /// <remarks>id : 20130604°0558</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -329,8 +301,7 @@ namespace QueryPonyGui
          DoSave();
       }
 
-
-      /// <summary>This eventhandler processes the Main Menu 'Window/HideObjectBrowser' Item click.</summary>
+      /// <summary>This eventhandler processes the Main Menu 'Window/HideObjectBrowser' Item click</summary>
       /// <remarks>id : 20130604°0559</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -339,25 +310,20 @@ namespace QueryPonyGui
          DoHideShowBrowser();
       }
 
-
-      /// <summary>This eventhandler processes the Main Menu 'Query/QueryOptions' Item click.</summary>
+      /// <summary>This eventhandler processes the Main Menu 'Query/QueryOptions' Item click</summary>
       /// <remarks>id : 20130604°0602</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
       private void queryOptionsToolStripMenuItem_Click(object sender, EventArgs e)
       {
-         ////// original line (20130604°060202)
-         ////if (IsChildActive()) GetQueryChild().ShowQueryOptions();
-
          if (IsChildActive())
          {
             IQueryForm iqf = GetQueryChild();
-            iqf.ShowQueryOptions();                                                    // (debug 20130705°093112) this is a key location
+            iqf.ShowQueryOptions();                                            // key location with issue 20130716°1121
          }
       }
 
-
-      /// <summary>This eventhandler processes the Main Menu 'File/SaveAs' Item click.</summary>
+      /// <summary>This eventhandler processes the Main Menu 'File/SaveAs' Item click</summary>
       /// <remarks>id : 20130604°0603</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -366,8 +332,7 @@ namespace QueryPonyGui
          DoSaveAs();
       }
 
-
-      /// <summary>This eventhandler processes the Main Menu 'File/SaveResultsAs' Item click.</summary>
+      /// <summary>This eventhandler processes the Main Menu 'File/SaveResultsAs' Item click</summary>
       /// <remarks>id : 20130604°0604</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -376,8 +341,7 @@ namespace QueryPonyGui
          if (IsChildActive()) { GetQueryChild().SaveResults(); }
       }
 
-
-      /// <summary>This eventhandler processes the Main Menu 'Edit/Find' (Ctrl-F) Item click.</summary>
+      /// <summary>This eventhandler processes the Main Menu 'Edit/Find' (Ctrl-F) Item click</summary>
       /// <remarks>id : 20130604°0605</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -386,8 +350,7 @@ namespace QueryPonyGui
          if (IsChildActive()) { GetQueryChild().ShowFind(); }
       }
 
-
-      /// <summary>This eventhandler processes the Main Menu 'Edit/FindNext' (F3) Item click.</summary>
+      /// <summary>This eventhandler processes the Main Menu 'Edit/FindNext' (F3) Item click</summary>
       /// <remarks>id : 20130604°0606</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -396,8 +359,7 @@ namespace QueryPonyGui
          if (IsChildActive()) { GetQueryChild().FindNext(); }
       }
 
-
-      /// <summary>This eventhandler processes the Main Menu 'Help/About' Item click.</summary>
+      /// <summary>This eventhandler processes the Main Menu 'Help/About' Item click</summary>
       /// <remarks>id : 20130604°0607</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -406,9 +368,7 @@ namespace QueryPonyGui
          new AboutForm().ShowDialog();
       }
 
-
-
-      /// <summary>This eventhandler processes the Menu Menu 'Help/ViewUserManualInBrowser' Item Click event.</summary>
+      /// <summary>This eventhandler processes the Menu Menu 'Help/ViewUserManualInBrowser' Item Click event</summary>
       /// <remarks>id : 20130707°1811</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -417,13 +377,11 @@ namespace QueryPonyGui
          _MenuItems.main_help_viewDocInBrowser();
       }
 
-
       #endregion Menu and Toolbar Button Events
 
       #region Menu and Toolbar Button Implementations
 
-
-      /// <summary>This method executes the Main Menu 'Query/Execute' Item job.</summary>
+      /// <summary>This method executes the Main Menu 'Query/Execute' Item job</summary>
       /// <remarks>id : 20130604°0608</remarks>
       private void DoExecuteQuery()
       {
@@ -440,8 +398,7 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This method executes the Main Menu 'File/New' Item job.</summary>
+      /// <summary>This method executes the Main Menu 'File/New' Item job</summary>
       /// <remarks>id : 20130604°0609</remarks>
       private void DoNew()
       {
@@ -469,13 +426,11 @@ namespace QueryPonyGui
          }
       }
 
-
       //-------------------------------------------------------
       // the methods below may are not soo typical for file MainMenu.cs (20130725°1413)
       //-------------------------------------------------------
 
-
-      /// <summary>This eventhandler ... (seems nowhere attached).</summary>
+      /// <summary>This eventhandler ... (seems nowhere attached)</summary>
       /// <remarks>id : 20130604°0610</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -485,7 +440,6 @@ namespace QueryPonyGui
          throw new Exception(s);
       }
 
-
       /// <summary>
       /// This method performs a parameterized auto-connect on program
       ///  start (it seems only be called from the MainForm constructor).
@@ -493,18 +447,17 @@ namespace QueryPonyGui
       /// <remarks>
       /// id : 20130604°0611
       /// note : This method seems to be called only if the program is started with arguments,
-      ///    but not if a connection is initiated via the 'Connect' button. (20130617°1542)
+      ///    but not if a connection is initiated via the 'Connect' button. [note 20130617°1542]
       /// </remarks>
       /// <param name="conSettings">The ConnSettings for which to create a QueryForm</param>
       /// <returns>The newly created QueryForm</returns>
       private IQueryForm DoConnect(ConnSettingsGui conSettings)
       {
-
-         // fix single-file-deployment collission (20130706°1054)
+         // fix single-file-deployment collission [seq 20130706°1054]
          ConnSettingsLib csLib1 = null;
          csLib1 = ConnSettingsGui.convertSettingsGuiToLib(conSettings);
 
-         // collission with single-file-deployment (20130706°105403)
+         // collission with single-file-deployment [line 20130706°1054`03]
          DbClient client = DbClientFactory.GetDbClient(csLib1);
 
          Cursor oldCursor = Cursor;
@@ -527,21 +480,14 @@ namespace QueryPonyGui
             return null;
          }
 
-
          // find index (line 20130620°1135) looks like a good line with issue 20130828°1531
          int settingIndex = ServerList_.IndexOf(client.ConnSettings.Key);
-
 
          // [seqence 20130620°1134 (20130620°1121)]
          // Need some kind of translator from 'ConnectionSettings' to 'ConnectionSettings_DUMMY'
          // Seems a key element while refactor 20130620°0211 'Split Settings GUI and Lib'.
          ConnSettingsGui csGui = ConnSettingsGui.convertSettingsLibToGui(client.ConnSettings);
          ConnSettingsLib csLib = client.ConnSettings; // ?
-
-         //////~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-         ////// just a try against issue 20130828°1531 'connection status gets lost' -- does not help
-         ////csGui.Status = ConnSettingsGui.ConnStatus.Connected;
-         //////~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
          // put item on the global connection list
          if (settingIndex >= 0)
@@ -555,7 +501,6 @@ namespace QueryPonyGui
 
          SaveServerList();
 
-         ////QueryForm qf = new QueryForm(client, false);
          QueryForm qf = new QueryForm(client, true);
          qf.MdiParent = this;
          // This is so that we can update the toolbar and menu as the state of the QueryForm changes.
@@ -566,8 +511,7 @@ namespace QueryPonyGui
          return qf;
       }
 
-
-      /// <summary>This method opens a Connect Form as modal dialog.</summary>
+      /// <summary>This method opens a Connect Form as modal dialog</summary>
       /// <remarks>
       /// id : 20130604°0612
       /// issue : (1) Since we have the Connect Form on a tabpage now, this method
@@ -581,33 +525,21 @@ namespace QueryPonyGui
       /// <returns>The opened Connect Form object (but that is evaluated by none of the callers) or null</returns>
       private IQueryForm DoConnect_POSSIBLY_REVIVE()
       {
-
-         // (20130725°142202)
-         if (IOBus.Gb.Debag.ShutdownArchived)
+         // [condition 20130725°1422'02]
+         if (IOBus.Gb.Debag.Shutdown_Archived)
          {
-            //=================================================
-            // the original code, possibly to be revived
-            //=================================================
+            // almost original code, possibly to be revived
 
-            ////ConnectForm cf = new ConnectForm();
             ConnectForm cf = new ConnectForm(_furnishNewConnection, _outputToStatusLine);
-
-            ////// (finally outcommented 20130715°112101)
-            ////// (seqence 20130622°0931)
-            ////if (Glb.Debag.ShutdownTemporarily)
-            ////{
-            ////   cf.ApplyServerList_SHUTDOWN(_serverList);
-            ////   System.Diagnostics.Debugger.Break();
-            ////}
 
             if (cf.ShowDialog(this) == DialogResult.OK)
             {
                int settingIndex = ServerList_.IndexOf(cf.DbClient.ConnSettings.Key);
 
-               //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+               // ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
                // [seqence 20130620°1132 (20130620°1121)]
                ConnSettingsGui csGui = ConnSettingsGui.convertSettingsLibToGui(cf.DbClient.ConnSettings);
-               //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+               // ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
 
                if (settingIndex >= 0)
                {
@@ -620,7 +552,6 @@ namespace QueryPonyGui
 
                SaveServerList();
 
-               ////QueryForm qf = new QueryForm(cf.DbClient, false); //, cf.Browser, cf.LowBandwidth);
                QueryForm qf = new QueryForm(cf.DbClient, true);
                qf.MdiParent = this;
                // This is so that we can update the toolbar and menu as the state of the QueryForm changes.
@@ -640,8 +571,8 @@ namespace QueryPonyGui
             // alternative 'connect-surrogate' gimmick feature (20130725°1422)
             //=================================================
 
-            // just go to the Connect Tab (sequence 20130725°1423)
-            // note : This algorithm presumes the Connect Tab exists, otherwise it will crash. (note 20130725°1424)
+            // just go to the Connect Tab [seq 20130725°1423]
+            // note : This algorithm presumes the Connect Tab exists, otherwise it will crash. [note 20130725°1424]
             TabPage tbBefore = MainForm._maintabcontrol.SelectedTab;
             foreach (TabPage tabpage in MainForm._maintabcontrol.TabPages)
             {
@@ -657,7 +588,7 @@ namespace QueryPonyGui
             //  effect of the menu item clicking, since otherwise nothing happens)
             if (_tabpageFound == tbBefore)
             {
-               // connect-surrogate feature (sequence 20130725°1438)
+               // connect-surrogate feature [seq 20130725°1438]
                // note : The eventhandler attachment line
                //  '_blinkTimer.Tick += new System.EventHandler(dispatcherTimer_Tick);'
                //  must not be here but at a place where it is called only once.
@@ -668,9 +599,7 @@ namespace QueryPonyGui
 
             return null;
          }
-
       }
-
 
       //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       // The 'connect surrogate gimmick' feature (20130725°1431)
@@ -679,19 +608,19 @@ namespace QueryPonyGui
       //    the other code. And as well for the user to provide some correlation
       //    between the menu item and the Connect TabPage.
 
-      /// <summary>This field stores a helper variable for the Connect Surrogate gimmick feature.</summary>
+      /// <summary>This field stores a helper variable for the Connect Surrogate gimmick feature</summary>
       /// <remarks>id : 20130725°1434</remarks>
       private static TabPage _tabpageFound = null;
 
-      /// <summary>This field stores a helper variable for the Connect Surrogate gimmick feature.</summary>
+      /// <summary>This field stores a helper variable for the Connect Surrogate gimmick feature</summary>
       /// <remarks>id : 20130725°1435</remarks>
       private static System.Drawing.Color _colorFound;
 
-      /// <summary>This field stores a helper variable for the Connect Surrogate gimmick feature.</summary>
+      /// <summary>This field stores a helper variable for the Connect Surrogate gimmick feature</summary>
       /// <remarks>id : 20130725°1436</remarks>
       private static int _iBlinkCount = 0;
 
-      /// <summary>This private property stores a timer.</summary>
+      /// <summary>This private property stores a timer</summary>
       /// <remarks>
       /// id : 20130725°1432 (20130609°1545)
       /// note : This requires a reference to WindowsBase.
@@ -722,8 +651,7 @@ namespace QueryPonyGui
       }
       //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-
-      /// <summary>This eventhandler processes the MRUFileAddedEvent event of this form.</summary>
+      /// <summary>This eventhandler processes the MRUFileAddedEvent event of this form</summary>
       /// <remarks>id : 20130604°0613</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -734,26 +662,24 @@ namespace QueryPonyGui
          QueryPonyGui.Properties.Settings.Default.Save();
       }
 
-
-      /// <summary>This method closes one QueryForm.</summary>
+      /// <summary>This method closes one QueryForm</summary>
       /// <remarks>
       /// id : 20130604°0614
       /// note : Since the Settings Form is also using this method to remove itself, the
       ///    name 'DoDisconnect' is no more really correct, because only the Query Forms
       ///    use the disconnect sequence, the Settings Form uses only the tabpage-remove
-      ///    sequence. (note 20130809°1526)
+      ///    sequence. [note 20130809°1526]
       /// callers : The QueryForms and Settings Form.
       /// </remarks>
       internal void DoDisconnect()
       {
          if (this.IsChildActive())
          {
-
             // make a handle for the QueryForm to close
             IQueryForm iqf = GetQueryChild();
 
             // retrieve the connection id of the QueryForm to close to find
-            //  the corresponding treeview node (sequence 20130729°1511)
+            //  the corresponding treeview node [seq 20130729°1511]
             QueryForm qf = iqf as QueryForm;
 
             // make this method suited for the Settings Form as well (20130809°1525)
@@ -761,7 +687,7 @@ namespace QueryPonyGui
             {
                ConnSettingsLib csTarget = qf.DbClient.ConnSettings;
 
-               // close the QueryForm (sequence 20130729°1544)
+               // close the QueryForm [seq 20130729°1544]
                // note : Remember bug 20130729°1543 'ArgumentOutOfRangeException when
                //    clicking tabs/nodes'. This line being before the treeview maintenance
                //    instead of behind it fixes it. Now only message 'QueryForm not closed
@@ -771,7 +697,7 @@ namespace QueryPonyGui
 
                //-----------------------------------------
                // remove the corresponding treeview database node and
-               //  possibly also the server node (sequence 20130729°1512)
+               //  possibly also the server node [seq 20130729°1512]
                TreeNode tnTarget = MainTv.searchTreenodeByConnSettings(csTarget);
                TreeNode tnServer = tnTarget.Parent;
 
@@ -787,13 +713,12 @@ namespace QueryPonyGui
 
             }
 
-            // remove the TabPage (sequence 20130709°1421)
+            // remove the TabPage [seq 20130709°1421]
             // note : Sequence shifted here from method 20130704°1251
-            //    QueryForm.cs::button_Queryform_Close_Click(). (note 20130725°1521)
+            //    QueryForm.cs::button_Queryform_Close_Click(). [note 20130725°1521]
             MainForm._maintabcontrol.SelectedTab.Dispose();
 
-
-            // (sequence finally outcommented 20130818°1541)
+            // seq finally outcommented [log 20130818°1541]
             //  it seems to be from a time with a differend order of commands
             /*
             int iTabBefore = tabcontrolMain.SelectedIndex; // debug 20130729°154303
@@ -811,8 +736,7 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This method performs the Cancel action for the active QueryForm.</summary>
+      /// <summary>This method performs the Cancel action for the active QueryForm</summary>
       /// <remarks>id : 20130604°0615</remarks>
       private void DoCancel()
       {
@@ -822,8 +746,7 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This method switches the ResultsInText flag of the active QueryForm to 'true'.</summary>
+      /// <summary>This method switches the ResultsInText flag of the active QueryForm to 'true'</summary>
       /// <remarks>id : 20130604°0616</remarks>
       private void DoResultsInText()
       {
@@ -833,11 +756,9 @@ namespace QueryPonyGui
          {
             GetQueryChild().ResultsInText = true;
          }
-
       }
 
-
-      /// <summary>This method switches the ResultsInText flag of the active QueryForm to 'false'.</summary>
+      /// <summary>This method switches the ResultsInText flag of the active QueryForm to 'false'</summary>
       /// <remarks>id : 20130604°0617</remarks>
       private void DoResultsInGrid()
       {
@@ -849,8 +770,7 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This method switches the GridShowNulls flag of the active QueryForm to 'true'.</summary>
+      /// <summary>This method switches the GridShowNulls flag of the active QueryForm to 'true'</summary>
       /// <remarks>id : 20130604°0618</remarks>
       private void DoShowNullValues()
       {
@@ -860,8 +780,7 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This method switches the GridShowNulls flag of the active QueryForm to 'false'.</summary>
+      /// <summary>This method switches the GridShowNulls flag of the active QueryForm to 'false'</summary>
       /// <remarks>id : 20130604°0619</remarks>
       private void DoHideNullValues()
       {
@@ -871,8 +790,7 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This method opens the ... file for the active QueryForm.</summary>
+      /// <summary>This method opens the ... file for the active QueryForm</summary>
       /// <remarks>id : 20130604°0620</remarks>
       private void DoOpen()
       {
@@ -882,8 +800,7 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This method saves the ... file for the active QueryForm.</summary>
+      /// <summary>This method saves the ... file for the active QueryForm</summary>
       /// <remarks>id : 20130604°0621</remarks>
       private void DoSave()
       {
@@ -893,8 +810,7 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This method saves the ... file for the active QueryForm via the Save-As dialog.</summary>
+      /// <summary>This method saves the ... file for the active QueryForm via the Save-As dialog</summary>
       /// <remarks>id : 20130604°0622</remarks>
       private void DoSaveAs()
       {
@@ -904,8 +820,7 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This method toggles the visibility of the dedicated database browser treeview.</summary>
+      /// <summary>This method toggles the visibility of the dedicated database browser treeview</summary>
       /// <remarks>id : 20130604°0623</remarks>
       private void DoHideShowBrowser()
       {
@@ -916,6 +831,5 @@ namespace QueryPonyGui
       }
 
       #endregion Menu and Toolbar Button Implementations
-
    }
 }

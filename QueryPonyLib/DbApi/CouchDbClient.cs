@@ -1,10 +1,9 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyLib/DbApi/CouchDbClient.cs
-// id          : 20130616°1631 (20130605°1731)
+// file        : 20130616°1631 (20130605°1731) /QueryPony/QueryPonyLib/DbApi/CouchDbClient.cs
 // summary     : This file homes class 'CouchDbClient' to constitute an
-//                experimental implementation of DbClient for CouchDB.
+//                experimental implementation of DbClient for CouchDB
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : ncm
 // encoding    : UTF-8-with-BOM
 // status      : Experimental
@@ -21,28 +20,26 @@ using System.Text;
 namespace QueryPonyLib
 {
 
-   /// <summary>This class constitutes an implementation of DbClient for CouchDB.</summary>
+   /// <summary>This class constitutes an implementation of DbClient for CouchDB</summary>
    /// <remarks>id : 20130616°1632 (20130605°1732)</remarks>
    class CouchDbClient : DbClient
    {
 
-      /// <summary>This constructor creates a CouchDB DbClient according the given connection settings.</summary>
+      /// <summary>This constructor creates a CouchDB DbClient according the given connection settings</summary>
       /// <remarks>id : 20130616°1633 (20130605°1733)</remarks>
       /// <param name="settings">The event object itself</param>
       public CouchDbClient(ConnSettingsLib connSettings) : base(connSettings)
       {
       }
 
-
-      /// <summary>This property gets a database connection.</summary>
+      /// <summary>This property gets a database connection</summary>
       /// <remarks>id : 20130616°1634 (20130605°1734)</remarks>
       public System.Data.CouchDB.CouchDBConnection Connection
       {
          get { return (System.Data.CouchDB.CouchDBConnection)_connection; }
       }
 
-
-      /// <summary>This method builds a CouchDB connectionstring from the connection settings of this DbClient.</summary>
+      /// <summary>This method builds a CouchDB connectionstring from the connection settings of this DbClient</summary>
       /// <remarks>
       /// id : 20130616°1635 (20130605°1735)
       /// note : Just for fun, here how the IDbConnection interface looks like:
@@ -72,14 +69,13 @@ namespace QueryPonyLib
       protected override IDbConnection GetDbConnection()
       {
 
-         // (sequence 20130606°132203)
+         // [seq 20130606°1322`03]
          string sCon = GenerateConnectionString();
          System.Data.CouchDB.CouchDBConnection con = new System.Data.CouchDB.CouchDBConnection();
          con.ConnectionString = sCon;
 
          return (System.Data.CouchDB.CouchDBConnection)con;
       }
-
 
       /// <summary>
       /// This eventhandler processes the InfoMessage event of this CouchDB
@@ -88,15 +84,12 @@ namespace QueryPonyLib
       /// <remarks>id : 20130616°1636 (20130605°1736)</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
-      ////void con_InfoMessage(object sender, OleDbInfoMessageEventArgs e)
-      ////void con_InfoMessage(object sender, System.Data.OleDb.OleDbInfoMessageEventArgs e)
       void con_InfoMessage(object sender, System.Data.CouchDB.CouchDBInfoMessageEventArgs e)
       {
          OnInfoMessage(sender, new InfoMessageEventArgs(e.Message, ""));
       }
 
-
-      /// <summary>This method builds a connectionstring.</summary>
+      /// <summary>This method builds a connectionstring</summary>
       /// <remarks>id : 20130616°1637 (20130605°1737)</remarks>
       /// <returns>The wanted connectionstring</returns>
       protected override string GenerateConnectionString()
@@ -109,24 +102,16 @@ namespace QueryPonyLib
          return csb.ConnectionString;
          */
 
-         // (sequence 20130723°0921) experimental
+         // Experimental [seq 20130723°0921]
          string sUrlPlain = "";
-         //////uint uiPortnumber = 0;
          int iPortnumber = 0;
-         //////string sErr = IOBus.Utils.extractPortnumberFromUrl(_connSettings.DatabaseServerUrl, out sUrlPlain, out uiPortnumber);
          string sErr = IOBus.Utils.extractPortnumberFromUrl(_connSettings.DatabaseServerUrl, out sUrlPlain, out iPortnumber); // fix 20180819°0121`02
          if (sErr != "")
          {
-            // fatal
-            // todo : Provide error processing. (todo 20130723°0932)
+            // Fatal
+            // Todo 20130723°0932 : Provide error processing.
          }
-         ////if (uiPortnumber < 1)
-         ////{
-         ////   uiPortnumber = Glb.DbSpecs.DefaultPortnumberCouch;
-         ////}
-         ////csb.Port = (uiPortnumber < 1) ? Glb.DbSpecs.DefaultPortnumberMysql : uiPortnumber;
          iPortnumber = (iPortnumber < 1) ? ((int) Glb.DbSpecs.CouchDefaultPortnum) : iPortnumber;
-         //////_connSettings.DatabaseServerPortnum = (int) uiPortnumber;
          _connSettings.DatabaseServerPortnum = iPortnumber;
 
          sRet = sUrlPlain + Glb.DbSpecs.sSepaUrlPort + iPortnumber.ToString();
@@ -134,8 +119,7 @@ namespace QueryPonyLib
          return sRet;
       }
 
-
-      /// <summary>This method delivers a CouchDB command object for a given command string.</summary>
+      /// <summary>This method delivers a CouchDB command object for a given command string</summary>
       /// <remarks>id : 20130616°1638 (20130605°1738)</remarks>
       /// <param name="sQuery">The command string for which to get a command object</param>
       /// <returns>The wanted command object</returns>
@@ -152,7 +136,6 @@ namespace QueryPonyLib
          return cmd;
       }
 
-
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130616°1639 (20130605°1739)</remarks>
       /// <returns>...</returns>
@@ -160,7 +143,6 @@ namespace QueryPonyLib
       {
          return new CouchQueryOptions();
       }
-
 
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130616°1640 (20130605°1740)</remarks>
@@ -170,7 +152,6 @@ namespace QueryPonyLib
       {
          return new System.Data.CouchDB.CouchDBDataAdapter((System.Data.CouchDB.CouchDBCommand)command);
       }
-
 
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130616°1641 (20130605°1741)</remarks>
@@ -201,6 +182,5 @@ namespace QueryPonyLib
          ExecuteOnWorker(sb.ToString(), 5);
          */
       }
-
    }
 }

@@ -1,45 +1,28 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-   <meta charset="UTF-8" /><!-- UTF-8-with-BOM -->
+   <meta charset="UTF-8" data-encoding="UTF-8-with-BOM">
    <title >QueryPony → About</title>
-
-   <link rel="stylesheet" type="text/css" href="./daftari.css"/>
    <link rel="stylesheet" type="text/css" href="./styleslocal.css"/>
 </head>
 
-<body id="id20130621o0322">
+<body id="i20130621o0322">
 
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-<!-- Feature 20110826°1122 Typearea/Logo-Overlapper by André Motzel -->
-<!-- Original implementation see http://downtown.trilo.de/svn/app.apache1/trunk/htdocs/index.html -->
-<!-- todo : Adjust widths and heights -->
-<div id="id20110826o112202" style="position:absolute; right:20px; padding-top:20px">
-               <img id="id20110826o112203" src="./img/20130705o0812.mcol-chess-horse.v0.x0200y0200.png" width="160" height="160" alt="Logo 20130705°0812" />
+<div class="TopLogoRightPlain" id="i20110826o112202">
+               <img id="i20110826o112203" src="./img/20130705o0812.mcol-chess-horse.v0.x0200y0200.png" width="96" height="96" alt="Logo 20130705°0812" />
 </div>
 
-<p id="id20110826o112204"><!-- this image paragraph does shift the text to left instead to cover it over -->
-               <img id="id20110826o112205" src="./img/20110826o111902.transparent.png" alt="Invisible box" align="right" style="height:188px; width:188px; width:expression('0px');" />
-</p>
+<div class="ChapterApps">
 
-<!-- if 10% (because chapter is 80%) of the body width is less than [imagewidth] then set DIV-width to ([imagewidth] - [10% of bodywidth]) -->
-<div id="id20130724o1545" class="chapterapps" style="width:expression((document.body.clientWidth * 0.8) > 800 ? '800px': '80%'); overflow:expression('hidden');"><!-- id="id20110826o112206" -->
-
- <!-- todo : set a backgroundcolor for debugging -->
- <!-- div style="width:0px; float:right; background-color:#ff0000; height:162px;" -->
- <div id="id20110826o112207" style="width:0px; float:right; height:162px;
-                width:expression((document.body.clientWidth * 0.1) < 160 ? (160 - document.body.clientWidth * 0.1) + 'px' : '0px');">
- </div>
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
- <div id="id20130724o1546" align="right">
-   <span style="vertical-align:top;">Page 8 of 8</span> &nbsp;
-   <a href="./settings.html" style="color:#404040;"><img src="./img/20081114o1721.left.png.gif" width="32" height="24" alt="Go to the previous page" style="border-style: none;" /></a> &nbsp;
-   <a href="./index.html" style="color:#404040;"><img src="./img/20081114o172303.up.png.gif" width="24" height="24" alt="Home" style="border-style: none;" /></a> &nbsp;
-   <a href="./index.html" style="color:#404040;"><img src="./img/20081114o1722.right.png.gif" width="32" height="24" alt="Go to the next page" style="border-style: none;" /></a>
+ <div class="TopTitleNaviArrows" id="i20130724o1546">
+               Page 8 of 8
+       <br>
+               <a href="./settings.html" style="color:#404040;"><img src="./img/20081114o1721.left.png.gif" width="32" height="24" alt="Go to the previous page" style="border-style: none;" /></a> &nbsp;
+               <a href="./index.html" style="color:#404040;"><img src="./img/20081114o172303.up.png.gif" width="24" height="24" alt="Home" style="border-style: none;" /></a> &nbsp;
+               <a href="./index.html" style="color:#404040;"><img src="./img/20081114o1722.right.png.gif" width="32" height="24" alt="Go to the next page" style="border-style: none;" /></a>
  </div>
 
- <p id="id20130724o1547">
+ <p class="TopTitleNaviCake" id="i20130724o1547">
                <a href="./index.html">Start</a> &nbsp;
                <a href="./connect.html">Connect</a> &nbsp;
                <a href="./treeview.html">Treeview</a> &nbsp;
@@ -49,15 +32,15 @@
                <!-- a href="./about.html" --><b>About</b><!-- /a --> &nbsp;
  </p>
 
- <p class="topTitleCrumbs" id="20130724o1548">
+ <p class="TopTitleCrumbs" id="20130724o1548">
                <a href="./index.html">QueryPony User Manual</a> →
  </p>
 
- <h1 id="id20130724o1548" style="margin-top:0.1em;">
+ <h1 id="i20130724o1548" style="margin-top:0.1em;">
                About
  </h1>
 
- <p id="id20130724o1711">
+ <p id="i20130724o1711">
                Subchapters on this page:
                <a href="#20130724o1712">Authors</a> &nbsp;
                <a href="#20130724o1714">Thirdparty</a> &nbsp;
@@ -66,21 +49,21 @@
                <a href="#20130724o1720">Fineprint</a> &nbsp;
  </p>
 
- <p id="id20130724o1549">
+ <p id="i20130724o1549">
                Here you find repeated the information from the About Form,
                perhaps more easily readable.
  </p>
 
  <a name="20130724o1712"></a>
- <h2 id="id20130724o1712">
+ <h2 id="i20130724o1712">
                Authors
  </h2>
 
- <p id="id20130724o1713">
+ <p id="i20130724o1713">
                Below pane is faded in from file <a href="./authors.txt" target="_blank">authors.txt</a>.
  </p>
 
-<pre class="codeNormal">
+<pre class="CodeMedium">
 
    Authors
 
@@ -117,11 +100,11 @@
 </pre>
 
  <a name="20130724o1714"></a>
- <h2 id="id20130724o1714">
+ <h2 id="i20130724o1714">
                Third Party Products
  </h2>
 
- <p id="id20130724o1715">
+ <p id="i20130724o1715">
                Here the list of the third party products, which are incorporated in Query Pony,
                 with their authors, licenses and supply sources.
                The pane is faded in from file
@@ -129,7 +112,7 @@
                :
  </p>
 
-<pre class="codeNormal">
+<pre class="CodeMedium">
 
    Third party products
 
@@ -233,15 +216,15 @@
 </pre>
 
  <a name="20130724o1716"></a>
- <h2 id="id20130724o1716">
+ <h2 id="i20130724o1716">
                Changelog
  </h2>
 
- <p id="id20130724o1717">
+ <p id="i20130724o1717">
                Below pane is faded in from file <a href="./changelog.txt" target="_blank">changelog.txt</a>.
  </p>
 
-<pre class="codeSmall">
+<pre class="CodeSmall">
 
    2013-07-26 QueryPony 0.3.0 Alpha Release
    - Outlined database types shall all be accessible
@@ -288,19 +271,19 @@
 </pre>
 
  <a name="20130724o1718"></a>
- <h2 id="id20130724o1718">
+ <h2 id="i20130724o1718">
                License
  </h2>
 
- <p id="id20130724o1719">
+ <p id="i20130724o1719">
                Below pane is faded in from file <a href="./license.txt" target="_blank">license.txt</a>.
  </p>
 
-<pre class="codeNormal">
+<pre class="CodeMedium">
 
    QueryPony — A Simple Generic Database Query Tool and API.
 
-   Copyright © 2013 - 2018 Norbert C. Maier
+   Copyright © 2013 - 2022 Norbert C. Maier
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU Affero General Public License as published
@@ -323,15 +306,15 @@
 </pre>
 
  <a name="20130724o1720"></a>
- <h2 id="id20130724o1720">
+ <h2 id="i20130724o1720">
                The License Fineprint
  </h2>
 
- <p id="id20130724o1721">
+ <p id="i20130724o1721">
                Here the AGPL license fineprint, faded in from file <a href="./agpl-3.0.txt" target="_blank">agpl-3.0.txt</a>.
  </p>
 
-<pre class="codeSmall">
+<pre class="CodeSmall">
 
                     GNU AFFERO GENERAL PUBLIC LICENSE
                        Version 3, 19 November 2007
@@ -999,16 +982,16 @@ For more information on this, and how to apply and follow the GNU AGPL, see
 
 </div>
 
-<p class="footerUpdate" id="id20130621o0323">
+<p class="FooterUpdate" id="i20130621o0323">
                Version : 2013-July-27
 </p>
-<p class="footerImprint" id="id20130724o1550">
-               Imprint : <a href="http://www.trilo.de/imprint.html" class="extern">www.trilo.de/imprint.html</a>
+<p class="FooterImprint" id="i20130724o1550">
+               Imprint : <a href="http://www.trilo.de/imprint.html" class="Extern">www.trilo.de/imprint.html</a>
 </p>
-<p class="footerReferer" id="id20130724o1541">
-               <span class="footerFileUrl">http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/docs/<a href="http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/docs/about.html">about.html</a></span>
-               <span class="footerCopyright">© 2013 - 2018 Norbert C. Maier</span>
-               <span class="footerPageId">20130621°0321</span>
+<p class="FooterReferer" id="i20130724o1541">
+               <span class="FooterFileUrl">http://downtown.trilo.de/svn/queryponydev/trunk/QueryPony/QueryPonyGui/docs/<a href="http://downtown.trilo.de/svn/queryponydev/trunk/QueryPony/QueryPonyGui/docs/about.html">about.html</a></span>
+               <span class="FooterCopyright">© 2013 - 2022 Norbert C. Maier</span>
+               <span class="FooterPageId">20130621°0321</span>
 </p>
 </body>
 </html>

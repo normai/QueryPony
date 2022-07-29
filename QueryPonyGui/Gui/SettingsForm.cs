@@ -1,10 +1,9 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/Gui/SettingsForm.cs
-// id          : 20130604°1321
-// summary     : This file stores class 'SettingsForm' to constitute the Settings Form.
+// file        : 20130604°1321 /QueryPony/QueryPonyGui/Gui/SettingsForm.cs
+// summary     : Class 'SettingsForm' constitutes the Settings Form
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2022 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable
 // note        :
@@ -22,12 +21,12 @@ using System.Windows.Forms;
 namespace QueryPonyGui.Gui
 {
 
-   /// <summary>This class constitutes the Settings Form.</summary>
+   /// <summary>This class constitutes the Settings Form</summary>
    /// <remarks>id : 20130604°1322</remarks>
    public partial class SettingsForm : Form
    {
 
-      /// <summary>This constructor creates a new Settings Form.</summary>
+      /// <summary>This constructor creates a new Settings Form</summary>
       /// <remarks>id : 20130604°1323</remarks>
       public SettingsForm()
       {
@@ -36,19 +35,18 @@ namespace QueryPonyGui.Gui
 
          _flagValueChangeByUser = true;
 
-         // (seq 20130828°1442)
+         // [seq 20130828°1442]
          _PropertyChanged = SettingsForm_PropertyChanged;
 
-         // (seq 20130828°1452)
+         // [seq 20130828°1452]
          _MRUFileAdded = SettingsForm_MRUFileAdded;
       }
 
-      /// <summary>This field stores a flag to prevent recursion during the initial settings loading.</summary>
+      /// <summary>This field stores a flag to prevent recursion during the initial settings loading</summary>
       /// <remarks>id : 20130812°0921</remarks>
       private bool _flagValueChangeByUser = false;
 
-
-      /// <summary>This field(?) stores the PropertyChanged eventhandler.</summary>
+      /// <summary>This field(?) stores the PropertyChanged eventhandler</summary>
       /// <remarks>
       /// id : 20130809°1514 (20130604°0507)
       /// note : Not sure whether this eventhandler makes sense inside the Settings
@@ -61,8 +59,7 @@ namespace QueryPonyGui.Gui
       /// </remarks>
       private event EventHandler<EventArgs> _PropertyChanged;
 
-
-      /// <summary>This field(?) stores the MRUFileAdded eventhandler.</summary>
+      /// <summary>This field(?) stores the MRUFileAdded eventhandler</summary>
       /// <remarks>
       /// id : 20130809°1515 (20130604°0508)
       /// note : See note in the PropertyChanged eventhandler 20130809°1514 above.
@@ -71,8 +68,7 @@ namespace QueryPonyGui.Gui
       /// </remarks>
       private event EventHandler<MRUFileAddedEventArgs> _MRUFileAdded;
 
-
-      /// <summary>This method presents this form as a modal dialog. It is called from a menu event in MainForm.</summary>
+      /// <summary>This method presents this form as a modal dialog. It is called from a menu event in MainForm</summary>
       /// <remarks>
       /// id : 20130604°1324
       /// note : Remember issue 20130604°132402 'Warning: IWin32Windowhides inherited member'
@@ -83,8 +79,7 @@ namespace QueryPonyGui.Gui
          return base.ShowDialog(owner);
       }
 
-
-      /// <summary>This method loads the actual settings.</summary>
+      /// <summary>This method loads the actual settings</summary>
       /// <remarks>id : 20130604°1325</remarks>
       private void LoadSettings()
       {
@@ -108,8 +103,7 @@ namespace QueryPonyGui.Gui
 
       }
 
-
-      /// <summary>This method saves the given settings.</summary>
+      /// <summary>This method saves the given settings</summary>
       /// <remarks>id : 20130604°1326</remarks>
       private void SaveSettings()
       {
@@ -124,7 +118,6 @@ namespace QueryPonyGui.Gui
          Properties.Settings.Default.ColorNumbers = picturebox_ColorNumbers.BackColor;
          Properties.Settings.Default.ColorOperators = picturebox_ColorOperators.BackColor;
          Properties.Settings.Default.ColorStrings = picturebox_ColorStrings.BackColor;
-
 
          if (textbox_Delimiter.Text != "")
          {
@@ -145,18 +138,17 @@ namespace QueryPonyGui.Gui
             Properties.Settings.Default.TextDelimiter = '"';
          }
 
-         // immediately save to file
+         // Immediately save to file
          Properties.Settings.Default.Save();
 
-         // (20130812°1403) possibly change the 'Query Options'menu item availability
+         // Possibly change the 'Query Options'menu item availability [line 20130812°1403]
          MainForm._mainform.EnableControlsOthers();
 
          Properties.Settings.Default.ShowDebugProgramExit = checkbox_ShowDebugProgramExit.Checked;
          Properties.Settings.Default.ShowDeveloperObjects = checkbox_ShowDeveloperObjects.Checked;
       }
 
-
-      /// <summary>This eventhandler processes the ... click.</summary>
+      /// <summary>This eventhandler processes the ... click</summary>
       /// <remarks>id : 20130604°1329</remarks>
       /// <param name="sender">The sending object</param>
       /// <param name="e">The event object</param>
@@ -167,8 +159,7 @@ namespace QueryPonyGui.Gui
          ((PictureBox)sender).BackColor = colorDialog.Color;
       }
 
-
-      /// <summary>This eventhandler processes the button 'Cancel' event.</summary>
+      /// <summary>This eventhandler processes the button 'Cancel' event</summary>
       /// <remarks>
       /// id : 20130604°1328
       /// todo : Implement a value-restore feature. [todo 20130809°1543]
@@ -177,18 +168,17 @@ namespace QueryPonyGui.Gui
       /// <param name="e">The event object</param>
       private void button_Cancel_Click(object sender, EventArgs e)
       {
-         if (Globs.Debag.ExecuteNo)
+         if (Globs.Debag.Execute_No)
          {
-            MainForm._mainform.DoDisconnect(); // (20130809°1524) only for form-on-tab, not for modal dialog!
+            MainForm._mainform.DoDisconnect();                                 // Only for form-on-tab, not for modal dialog! [line 20130809°1524]
 
-            // original sequence for the form as a modal dialog
+            // Original sequence for the form as a modal dialog
             DialogResult = DialogResult.Cancel;
             Close();
          }
       }
 
-
-      /// <summary>This eventhandler processes the button 'Close' click.</summary>
+      /// <summary>This eventhandler processes the button 'Close' click</summary>
       /// <remarks>
       /// id : 20130809°1541
       /// todo : Adjust for the differences between possible opening modes 'modal dialog'
@@ -198,15 +188,14 @@ namespace QueryPonyGui.Gui
       /// <param name="e">The event object</param>
       private void button_Close_Click(object sender, EventArgs e)
       {
-         MainForm._mainform.DoDisconnect(); // just a quick try (20130809°1524) only for form-on-tab, not for modal dialog!
+         MainForm._mainform.DoDisconnect();                                    // Quick try only for form-on-tab, not for modal dialog! [line 20130809°1524]
 
-         // original sequence for the form as a modal dialog
+         // Original sequence for the form as a modal dialog
          DialogResult = DialogResult.Cancel;
          Close();
       }
 
-
-      /// <summary>This eventhandler processes the button 'Save' event.</summary>
+      /// <summary>This eventhandler processes the button 'Save' event</summary>
       /// <remarks>
       /// id : 20130604°1327
       /// todo : Adjust for the differences between possible opening modes 'modal dialog'
@@ -218,15 +207,14 @@ namespace QueryPonyGui.Gui
       {
          SaveSettings();
 
-         if (Globs.Debag.ExecuteNo)
+         if (Globs.Debag.Execute_No)
          {
             DialogResult = DialogResult.OK;
             Close();
          }
       }
 
-
-      /// <summary>This eventhandler processes all CheckBoxes CheckedChanged events.</summary>
+      /// <summary>This eventhandler processes all CheckBoxes CheckedChanged events</summary>
       /// <remarks>id : 20130812°0911</remarks>
       /// <param name="sender">The CheckBox which sent the event</param>
       /// <param name="e">The event object</param>
@@ -235,8 +223,7 @@ namespace QueryPonyGui.Gui
          valueChanged(sender, e);
       }
 
-
-      /// <summary>This eventhandler processes all TextBoxes TextChanged events.</summary>
+      /// <summary>This eventhandler processes all TextBoxes TextChanged events</summary>
       /// <remarks>id : 20130812°0912</remarks>
       /// <param name="sender">The TextBox which sent the event</param>
       /// <param name="e">The event object</param>
@@ -245,8 +232,7 @@ namespace QueryPonyGui.Gui
          valueChanged(sender, e);
       }
 
-
-      /// <summary>This eventhandler processes all PictureBoxes SystemColorsChanged events.</summary>
+      /// <summary>This eventhandler processes all PictureBoxes SystemColorsChanged events</summary>
       /// <remarks>id : 20130812°0913</remarks>
       /// <param name="sender">The PictureBox which sent the event</param>
       /// <param name="e">The event object</param>
@@ -255,8 +241,7 @@ namespace QueryPonyGui.Gui
          valueChanged(sender, e);
       }
 
-
-      /// <summary>This method processes all CheckBox, TexBox and PictureBox value changed events.</summary>
+      /// <summary>This method processes all CheckBox, TexBox and PictureBox value changed events</summary>
       /// <remarks>id : 20130812°0914</remarks>
       /// <param name="sender">The CheckBox, TexBox or PictureBox which sent the event</param>
       /// <param name="e">The event object</param>
@@ -268,11 +253,10 @@ namespace QueryPonyGui.Gui
          }
       }
 
-
-      /// <summary>This eventhandler processes the  event.</summary>
+      /// <summary>This eventhandler processes the  event</summary>
       /// <remarks>
       /// id : 20130828°1441
-      /// note : Implemented to avoid compiler warning "The event 'PropertyChanged' is never used" (field 20130809°1514).
+      /// note : Implemented to avoid compiler warning "The event 'PropertyChanged' is never used" [field 20130809°1514].
       /// </remarks>
       /// <param name="sender">The sending object</param>
       /// <param name="e">The event object</param>
@@ -281,11 +265,10 @@ namespace QueryPonyGui.Gui
          return;
       }
 
-
-      /// <summary>This eventhandler processes the  event.</summary>
+      /// <summary>This eventhandler processes the  event</summary>
       /// <remarks>
       /// id : 20130828°1451
-      /// note : Implemented to avoid compiler warning "The event 'PropertyChanged' is never used" (field 20130809°1514).
+      /// note : Implemented to avoid compiler warning "The event 'PropertyChanged' is never used" [field 20130809°1514].
       /// </remarks>
       /// <param name="sender">The sending object</param>
       /// <param name="e">The event object</param>
@@ -294,8 +277,7 @@ namespace QueryPonyGui.Gui
          return;
       }
 
-
-      /// <summary>This eventhandler processes the checkbox 'ShowDevelop' CheckedChanged event.</summary>
+      /// <summary>This eventhandler processes the checkbox 'ShowDevelop' CheckedChanged event</summary>
       /// <remarks>id : 20130828°1612</remarks>
       /// <param name="sender">The object which sent the event</param>
       /// <param name="e">The event object</param>
@@ -305,8 +287,7 @@ namespace QueryPonyGui.Gui
          switchDeveloperView();
       }
 
-
-      /// <summary>This eventhandler processes the checkbox 'DebugProgramExit' CheckedChanged event.</summary>
+      /// <summary>This eventhandler processes the checkbox 'DebugProgramExit' CheckedChanged event</summary>
       /// <remarks>id : 20130828°1613</remarks>
       /// <param name="sender">The object which sent the event</param>
       /// <param name="e">The event object</param>
@@ -315,8 +296,7 @@ namespace QueryPonyGui.Gui
          valueChanged(sender, e);
       }
 
-
-      /// <summary>This method toggles the visibility of the developer objects.</summary>
+      /// <summary>This method toggles the visibility of the developer objects</summary>
       /// <remarks>id : 20130828°1614</remarks>
       private void switchDeveloperView()
       {
@@ -338,7 +318,6 @@ namespace QueryPonyGui.Gui
                }
             }
          }
-
       }
    }
 }

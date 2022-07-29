@@ -1,25 +1,21 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyLib/DbApi/OracleDbBrowser.cs
-// id          : 20130604°1021
-// summary     : This file stores class 'OracleDbBrowser' to constitute
-//                a simple implementation of IDbBrowser for Oracle.
+// file        : 20130604°1021 /QueryPony/QueryPonyLib/DbApi/OracleDbBrowser.cs
+// summary     : Class 'OracleDbBrowser' constitutes a simple implementation of IDbBrowser for Oracle
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 by Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2022 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable
 // note        :
 // callers     :
 #endregion Fileinfo
 
-using System;
 using System.Collections.Specialized;
 using System.Data;
 using System.Windows.Forms;
 
 namespace QueryPonyLib
 {
-
    /// <summary>
    /// This class constitutes a simple implementation of IBrowser
    ///  for Oracle. No support for SPs, packages, etc.
@@ -27,36 +23,32 @@ namespace QueryPonyLib
    /// <remarks>id : 20130604°1022</remarks>
    internal class OracleDbBrowser : IDbBrowser
    {
-
-      /// <summary>This subclass constitutes the TreeNode objects for Oracle tables.</summary>
+      /// <summary>This subclass constitutes the TreeNode objects for Oracle tables</summary>
       /// <remarks>id : 20130604°1023</remarks>
       class OracleNode : TreeNode
       {
-
          /// <summary>This internal field stores the node type (why?)</summary>
          /// <remarks>id : 20130604°1036</remarks>
          internal string _type = "";
 
-         /// <summary>This property gets the DragText if an Oracle treenode is dragged.</summary>
+         /// <summary>This property gets the DragText if an Oracle treenode is dragged</summary>
          /// <remarks>id : 20130604°1037</remarks>
          internal string _dragText = "";
 
-         /// <summary>This constructor creates a new Oracle table treenode.</summary>
+         /// <summary>This constructor creates a new Oracle table treenode</summary>
          /// <remarks>id : 20130604°1038</remarks>
          public OracleNode(string sText) : base(sText) { }
       }
-
 
       /// <summary>This field stores ...</summary>
       /// <remarks>id : 20130604°1024</remarks>
       const int i_Timeout = 5;
 
-      /// <summary>This field stores the DbClient given in the constructor.</summary>
+      /// <summary>This field stores the DbClient given in the constructor</summary>
       /// <remarks>id : 20130604°1025</remarks>
       private DbClient _dbClient;
 
-
-      /// <summary>This constructor creates a new OracleDbBrowser object for the given DbClient.</summary>
+      /// <summary>This constructor creates a new OracleDbBrowser object for the given DbClient</summary>
       /// <remarks>id : 20130604°1026</remarks>
       /// <param name="dbClient">The DbClient for which to create this OracleDbBrowser object</param>
       public OracleDbBrowser(DbClient dbClient)
@@ -64,16 +56,14 @@ namespace QueryPonyLib
          this._dbClient = dbClient;
       }
 
-
-      /// <summary>This property gets the Oracle DbClient for which this DbBrowser was created.</summary>
+      /// <summary>This property gets the Oracle DbClient for which this DbBrowser was created</summary>
       /// <remarks>id : 20130604°1027</remarks>
       public DbClient DbClient
       {
          get { return _dbClient; }
       }
 
-
-      /// <summary>This method delivers a clone of this Oracle DbBrowser for another Oracle DbClient.</summary>
+      /// <summary>This method delivers a clone of this Oracle DbBrowser for another Oracle DbClient</summary>
       /// <remarks>
       /// id : 20130604°1035
       /// note : What may this method be good for? It seems not be called at all. And it
@@ -87,8 +77,7 @@ namespace QueryPonyLib
          return ob;
       }
 
-
-      /// <summary>This method creates the context menu for the given Oracle table node.</summary>
+      /// <summary>This method creates the context menu for the given Oracle table node</summary>
       /// <remarks>id : 20130604°1032</remarks>
       /// <param name="node">The Oracle treenode for which the context menu shall be created</param>
       /// <returns>The created context menu items for the given Oracle treenode</returns>
@@ -102,18 +91,17 @@ namespace QueryPonyLib
          OracleNode on = (OracleNode)node;
          StringCollection output = new StringCollection();
 
-         if (   on._type == Glb.NodeTypes.Tttttt                                       // "T"
-             || on._type == Glb.NodeTypes.View                                         // "V"
+         if (   on._type == Glb.NodeTypes.Tttttt                               // "T"
+             || on._type == Glb.NodeTypes.View                                 // "V"
               )
          {
-            output.Add(Glb.TvContextMenuItems.SelectAllFrom + " " + on._dragText);     // "select * from"
+            output.Add(Glb.TvContextMenuItems.SelectAllFrom + " " + on._dragText); // "select * from"
          }
 
          return output.Count == 0 ? null : output;
       }
 
-
-      /// <summary>This method retrieves the command string behind a table node's context menu item.</summary>
+      /// <summary>This method retrieves the command string behind a table node's context menu item</summary>
       /// <remarks>id : 20130604°1033</remarks>
       /// <param name="node">The table node</param>
       /// <param name="action">The menu item's text</param>
@@ -126,7 +114,7 @@ namespace QueryPonyLib
          }
 
          OracleNode on = (OracleNode)node;
-         if (sAction.StartsWith(Glb.TvContextMenuItems.SelectAllFrom))                 // "select * from"
+         if (sAction.StartsWith(Glb.TvContextMenuItems.SelectAllFrom))         // "select * from"
          {
             return sAction;
          }
@@ -136,8 +124,7 @@ namespace QueryPonyLib
          }
       }
 
-
-      /// <summary>This method retrieves the list of databases available on this server.</summary>
+      /// <summary>This method retrieves the list of databases available on this server</summary>
       /// <remarks>id : 20130604°1034</remarks>
       /// <returns>The wanted list of databases</returns>
       public string[] GetDatabases()
@@ -145,8 +132,7 @@ namespace QueryPonyLib
          return new string[] { _dbClient.Database };
       }
 
-
-      /// <summary>This method returns text from the given treenode, suitable for dropping into a query window.</summary>
+      /// <summary>This method returns text from the given treenode, suitable for dropping into a query window</summary>
       /// <remarks>
       /// id : 20130604°1031
       /// todo : Throughout the various *DbBrowser implementations, the usage of method GetDragText()
@@ -164,7 +150,7 @@ namespace QueryPonyLib
          {
             sRet = ((OracleNode)node)._dragText;
 
-            // if token contains ' ' or '-' then wrap it with backticks, just on
+            // If token contains ' ' or '-' then wrap it with backticks, just on
             //  suspicion, not sure whether this is located right here (20130719°0934)
             sRet = IOBus.Utils.Strings.SqlTokenTicks(sRet, " -", "``");
          }
@@ -172,8 +158,7 @@ namespace QueryPonyLib
          return sRet;
       }
 
-
-      /// <summary>This method retrieves the treenodes for the this Oracle DbBrowser.</summary>
+      /// <summary>This method retrieves the treenodes for the this Oracle DbBrowser</summary>
       /// <remarks>id : 20130604°1028</remarks>
       /// <returns>The wanted array of Oracle table treenodes</returns>
       public TreeNode[] GetObjectHierarchy()
@@ -193,11 +178,11 @@ namespace QueryPonyLib
          foreach (DataRow row in ds.Tables[0].Rows)
          {
             OracleNode oraclenode = new OracleNode(row[0].ToString());
-            oraclenode._type = Glb.NodeTypes.Tttttt;                                   // "T";
+            oraclenode._type = Glb.NodeTypes.Tttttt;                           // "T";
             oraclenode._dragText = oraclenode.Text;
             tnRet[0].Nodes.Add(oraclenode);
 
-            // add a dummy sub-node to user tables and views so they'll have a
+            // Add a dummy sub-node to user tables and views so they'll have a
             //  clickable expand sign allowing us to have GetSubObjectHierarchy
             //  called so the user can view the columns
             oraclenode.Nodes.Add(new TreeNode());
@@ -212,11 +197,11 @@ namespace QueryPonyLib
          foreach (DataRow row in ds.Tables[0].Rows)
          {
             OracleNode node = new OracleNode(row[0].ToString());
-            node._type = Glb.NodeTypes.View;                                           // "V"
+            node._type = Glb.NodeTypes.View;                                   // "V"
             node._dragText = node.Text;
             tnRet[1].Nodes.Add(node);
 
-            // add a dummy sub-node to user tables and views so they'll have a
+            // Add a dummy sub-node to user tables and views so they'll have a
             //  clickable expand sign allowing us to have GetSubObjectHierarchy
             //  called so the user can view the columns
             node.Nodes.Add(new TreeNode());
@@ -225,20 +210,19 @@ namespace QueryPonyLib
          return tnRet;
       }
 
-
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130604°1029</remarks>
       /// <param name="node">...</param>
       /// <returns>...</returns>
       public TreeNode[] GetSubObjectHierarchy(TreeNode node)
       {
-         // show the column breakdown for the selected table
+         // Show the column breakdown for the selected table
 
          if (node is OracleNode)
          {
             OracleNode on = (OracleNode)node;
-            if ((on._type == Glb.NodeTypes.Tttttt)                                  // "T"
-                || (on._type == Glb.NodeTypes.View)                                    // "V"
+            if ((on._type == Glb.NodeTypes.Tttttt)                             // "T"
+                || (on._type == Glb.NodeTypes.View)                            // "V"
                  )
             {
                DataSet ds = _dbClient.ExecuteOnWorker("select COLUMN_NAME name, DATA_TYPE type"
@@ -288,8 +272,7 @@ namespace QueryPonyLib
          return null;
       }
 
-
-      /// <summary>This method supplies the subtree hierarchy to the given table node.</summary>
+      /// <summary>This method supplies the subtree hierarchy to the given table node</summary>
       /// <remarks>id : 20130819°1516 (20130819°1501)</remarks>
       /// <param name="node">The node to be supplemented with a subtree hierarchy</param>
       /// <returns>Success flag</returns>
@@ -298,8 +281,7 @@ namespace QueryPonyLib
          return true;
       }
 
-
-      /// <summary>This interface method retrieves the collections available for this data provider.</summary>
+      /// <summary>This interface method retrieves the collections available for this data provider</summary>
       /// <remarks>id : 20130826°1226 (20130826°1211)</remarks>
       /// <returns>The wanted array of available collections</returns>
       public string[] SchemaGetCollections()
@@ -308,8 +290,7 @@ namespace QueryPonyLib
          return collections;
       }
 
-
-      /// <summary>This interface method retrieves the array of Index Nodes for the given table.</summary>
+      /// <summary>This interface method retrieves the array of Index Nodes for the given table</summary>
       /// <remarks>id : 20130825°1326 (20130825°1311)</remarks>
       /// <param name="sTablename">The tablename for the indices to retrieve</param>
       /// <returns>The wanted array of Index Nodes</returns>
@@ -319,8 +300,7 @@ namespace QueryPonyLib
          return ndxs;
       }
 
-
-      /// <summary>This method retrieves an experimental schema object for debug purposes.</summary>
+      /// <summary>This method retrieves an experimental schema object for debug purposes</summary>
       /// <remarks>id : 20130819°0936 (20130819°0921)</remarks>
       /// <returns>The wanted schema object, e.g. a DataTable or a XML table</returns>
       public object SchemaGetSchema()
@@ -329,8 +309,7 @@ namespace QueryPonyLib
          return o;
       }
 
-
-      /// <summary>This method retrieves the list of tables in this DbBrowser's DbClient.</summary>
+      /// <summary>This method retrieves the list of tables in this DbBrowser's DbClient</summary>
       /// <remarks>id : 20130819°0717 (20130819°0701)</remarks>
       /// <returns>The wanted list of tables</returns>
       public string[] SchemaGetTables()
@@ -338,6 +317,5 @@ namespace QueryPonyLib
          string[] tables = null;
          return tables;
       }
-
    }
 }

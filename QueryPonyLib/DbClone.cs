@@ -1,10 +1,9 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyLib/CloneDb.cs
-// id          : 20130818°1531
-// summary     : This file stores class 'CloneDb' to facilitate a database cloning.
+// file        : 20130818°1531 /QueryPony/QueryPonyLib/CloneDb.cs
+// summary     : Class 'CloneDb' facilitates a database cloning
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 by Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2022 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      :
 // note        :
@@ -16,8 +15,7 @@ using SyTh = System.Threading;
 
 namespace QueryPonyLib
 {
-
-   /// <summary>This class facilitates database cloning.</summary>
+   /// <summary>This class shall facilitate database cloning</summary>
    /// <remarks>
    /// id : 20130818°1532
    /// note : See todo 20130818°1545 'make class DbClone static'
@@ -27,37 +25,35 @@ namespace QueryPonyLib
    /// </remarks>
    public class Clone
    {
-
-      /// <summary>This field stores the max number of records copied while debugging (0 = no limit).</summary>
+      /// <summary>This field stores the max number of records copied while debugging (0 = no limit)</summary>
       /// <remarks>id : 20130823°1421</remarks>
       private int _iDebugMaxRecToFill = 0; // 11;
 
-      /// <summary>This field stores an indent.</summary>
+      /// <summary>This field stores an indent</summary>
       /// <remarks>id : 20130823°1521</remarks>
       private string _sIndent = "        ";
 
-      /// <summary>This field 'true/false' stores the flag which algorithm to use for DataTime translation.</summary>
+      /// <summary>This field 'true/false' stores the flag which algorithm to use for DataTime translation</summary>
       /// <remarks>id : 20130824°0923</remarks>
       private bool _bUseDatatimeAlgo = true;
 
-      /// <summary>This field stores the flag whether to use workaround for issue 20130824°0911 'special chars in SQLite field values' or not.</summary>
+      /// <summary>This field stores the flag whether to use workaround for issue 20130824°0911 'special chars in SQLite field values' or not</summary>
       /// <remarks>id : 20130824°0921</remarks>
       private bool _bUseWorkaroundForIssue20130824o0911 = true;
 
-      /// <summary>This field stores the flag whether to use workaround for issue 20130824°0912 'umlauts in SQLite field values' or not.</summary>
+      /// <summary>This field stores the flag whether to use workaround for issue 20130824°0912 'umlauts in SQLite field values' or not</summary>
       /// <remarks>id : 20130824°0922</remarks>
       private bool _bUseWorkaroundFieldvalWithUmlauts = true;
 
-      /// <summary>This field stores the flag whether to apply or not workaround for issue 20130826°1331 'index schema wrong'.</summary>
+      /// <summary>This field stores the flag whether to apply or not workaround for issue 20130826°1331 'index schema wrong'</summary>
       /// <remarks>id : 20130828°1131</remarks>
       private bool _bUseWorkaroundTableUnderlineInternet = true;
 
-      /// <summary>This field stores the umlaut 'oe' ('÷' = 247 = 0xf7 = 'ö') as it comes via OleDb from a Paradox table (empirical finding).</summary>
+      /// <summary>This field stores the umlaut 'oe' ('÷' = 247 = 0xf7 = 'ö') as it comes via OleDb from a Paradox table (empirical finding)</summary>
       /// <remarks>id : 20130824°0931</remarks>
       private string _sUmlautOe = "÷";
 
-
-      /// <summary>This constructor creates a new CloneDb object.</summary>
+      /// <summary>This constructor creates a new CloneDb object</summary>
       /// <remarks>
       /// id : 20130818°1533
       /// note : Watch out, who is responsible for calling Dispose() on the objects.
@@ -68,8 +64,7 @@ namespace QueryPonyLib
       {
       }
 
-
-      /// <summary>This method clones the source db to the target db.</summary>
+      /// <summary>This method clones the source db to the target db</summary>
       /// <remarks>
       /// id : 20130820°2121
       /// ref : 'msdn: backgroundworker component' (20130820°2122)
@@ -86,7 +81,7 @@ namespace QueryPonyLib
          s = "DbClone is starting.";
          IOBusConsumer.writeHost(s);
 
-         // do cloning in separate thread
+         // Do cloning in separate thread
          System.ComponentModel.BackgroundWorker worker = new System.ComponentModel.BackgroundWorker();
          worker.DoWork += delegate { doClone(dbSrc, csTgt); };
          worker.RunWorkerAsync();
@@ -94,14 +89,13 @@ namespace QueryPonyLib
          s = "DbClone thread is running.";
          IOBusConsumer.writeHost(s);
 
-         // not sure whether this is necessary, but it seems not to hurt either
+         // Not sure this is necessary, but it seems not to hurt either
          worker.Dispose();
 
          return true;
       }
 
-
-      /// <summary>This method clones the source db to the target db.</summary>
+      /// <summary>This method clones the source db to the target db</summary>
       /// <remarks>id : 20130818°1536</remarks>
       /// <param name="dbcSource">The source DbClient</param>
       /// <param name="csTarget">The target ConnSettings</param>
@@ -114,23 +108,23 @@ namespace QueryPonyLib
          s = "DbClone create new database '" + csTarget.DatabaseName + "'.";
          IOBusConsumer.writeHost(s);
 
-         // create database
+         // Create database
          DbClient dbcTarget = DbCreate.CreateDatabase(csTarget);
 
-         // paranoia
+         // Paranoia
          if (dbcTarget == null)
          {
             return false;
          }
 
-         // complete the connection
+         // Complete the connection
          dbcTarget.Connect();
 
-         // retrieve list of source database tables
+         // Retrieve list of source database tables
          IDbBrowser dbbrowserSource = DbClientFactory.GetBrowser(dbcSource);
          string[] tables = dbbrowserSource.SchemaGetTables();
 
-         // paranoia
+         // Paranoia
          if (tables == null)
          {
             s = "Error retrieving database tables list." + IOBus.Gb.Bricks.Sp + "[20130818°1542]";
@@ -139,16 +133,14 @@ namespace QueryPonyLib
             return false;
          }
 
-
-         // loop over all tables of the source database
+         // Loop over all tables of the source database
          for (int i = 0; i < tables.Length; i++)
          {
-
             //+++++++++++++++++++++++++++++++++++++++++
             //+++++++++++++++++++++++++++++++++++++++++
             //+++++++++++++++++++++++++++++++++++++++++
-            // debug setting [seq 20131201°0351]
-            if (IOBus.Gb.Debag.ExecuteNO)
+            // Debug setting [seq 20131201°0351]
+            if (IOBus.Gb.Debag.Execute_No)
             {
                if (i < 18) { continue; }
                if (i > 18) { break; }
@@ -180,18 +172,17 @@ namespace QueryPonyLib
             }
          }
 
-         // cleanup, otherwise, orphane process is left behind
+         // Cleanup, otherwise, orphane process is left behind
          dbcTarget.Dispose();
 
-         // notification
+         // Notification
          s = "DbClone finished.";
          IOBusConsumer.writeHost(s);
 
          return bRet;
       }
 
-
-      /// <summary>This method executes a SQL statement.</summary>
+      /// <summary>This method executes a SQL statement</summary>
       /// <remarks>
       /// id : 20130821°1511
       /// ref : See todo 20130823°1221 'dbc.Execute vs. dbc.ExecuteOnWorker()'
@@ -204,17 +195,17 @@ namespace QueryPonyLib
       {
          sErr = null;
 
-         // (.1) prepare execution
-         // note : Nice try, but this seconds, will not apply, somehow it will remain the 15 from default.
+         // (.1) Prepare execution
+         // Note : Nice try, but this seconds, will not apply, somehow it will remain the 15 from default.
          dbc.QueryOptions.ExecutionTimeout = 33;
 
-         // (.2) execute
-         // note : About how to run a query compare method 20130604°2059 QueryForm.cs::Execute().
-         // note : Remember a while issue 20130821°1131 'clone query error: operation is not implemented'.
+         // (.2) Execute
+         // Note : About how to run a query compare method 20130604°2059 QueryForm.cs::Execute().
+         // Note : Remember a while issue 20130821°1131 'clone query error: operation is not implemented'.
          dbc.Execute(sSql);
 
-         // (.3) read result
-         // note : Errors seen e.g. seen 20130821°1112 "The method or operation
+         // (.3) Read result
+         // Note : Errors seen e.g. seen 20130821°1112 "The method or operation
          //    is not implemented." coming from DoConnect() 20130821°1132
          sErr = dbc.ErrorMessage;
          TimeSpan ts = dbc.ExecDuration;
@@ -224,13 +215,11 @@ namespace QueryPonyLib
          return dataset;
       }
 
-
-      /// <summary>This field stores a memory for already processed cases to avoid repetitive notifications.</summary>
+      /// <summary>This field stores a memory for already processed cases to avoid repetitive notifications</summary>
       /// <remarks>id : 20130824°0941</remarks>
       private string[] _ssRenamed = { };
 
-
-      /// <summary>This method cleans a field or table name from underlines and dashes.</summary>
+      /// <summary>This method cleans a field or table name from underlines and dashes</summary>
       /// <remarks>
       /// id : 20130823°1551
       /// note : For SQL keyword-name mangling see issue 20130824°0913 and
@@ -240,12 +229,12 @@ namespace QueryPonyLib
       /// <returns>The cleaned name</returns>
       private string getCleanTablename(string sName)
       {
-         // remember
+         // Remember
          string sNameOrg = sName;
 
-         // (.) mangle
-         // (.1) umlaut mangling (see issue 20130824°0912)
-         // e.g. field 'Vormerkung_möglich' to 'Vormerkung_moeglich'
+         // (.) Mangle
+         // (.1) Umlaut mangling (see issue 20130824°0912)
+         // E.g. field 'Vormerkung_möglich' to 'Vormerkung_moeglich'
          if (_bUseWorkaroundFieldvalWithUmlauts)
          {
             if (sName.Contains(_sUmlautOe)) // "÷"
@@ -254,11 +243,11 @@ namespace QueryPonyLib
             }
          }
 
-         // (.2) standard mangling
+         // (.2) Standard mangling
          sName = sName.Replace("-", "");
          sName = sName.Replace("_", "");
 
-         // notification
+         // Notification
          if (sNameOrg != sName)
          {
             if (Array.IndexOf(_ssRenamed, sNameOrg) < 0)
@@ -266,7 +255,7 @@ namespace QueryPonyLib
                Array.Resize(ref _ssRenamed, _ssRenamed.Length + 1);
                _ssRenamed[_ssRenamed.Length - 1] = sNameOrg;
 
-               // notification
+               // Notification
                string s = _sIndent + "Rename '" + sNameOrg + "' to '" + sName + "'";
                IOBusConsumer.writeHost(s);
             }
@@ -275,8 +264,7 @@ namespace QueryPonyLib
          return sName;
       }
 
-
-      /// <summary>This method prepares a field value to be used in the SQL statement.</summary>
+      /// <summary>This method prepares a field value to be used in the SQL statement</summary>
       /// <remarks>
       /// id : 20130823°1552
       /// ref : About SQLite field types see 20130821°1141 'sqlite: datatypes'
@@ -284,13 +272,11 @@ namespace QueryPonyLib
       /// <param name="sVal">The field value to be escaped</param>
       /// <param name="sEsc">The the wrapper character, e.g. "'" or '"'</param>
       /// <returns>The wanted field escaped value</returns>
-      ////private string getSqlValueFromObject(object oVal, string sQuot)
       private string getSqlValueFromObject(object oVal, Type type, string sQuot)
       {
          string s = "", sVal = "";
 
-         // dispatch types
-         ////Type type = oVal.GetType();
+         // Dispatch types
          if (type == typeof(System.Boolean))
          {
             sVal = "0";
@@ -307,7 +293,7 @@ namespace QueryPonyLib
          {
             // See issue 20130824°0914 'SQLite fields of DataType Byte[]'
             //  provisory solution e.g. for field 'ObjLang.audio'
-            sVal = sQuot + sQuot; //// "''";
+            sVal = sQuot + sQuot;
          }
          else if (type == typeof(System.Double))
          {
@@ -323,28 +309,25 @@ namespace QueryPonyLib
          }
          else if (type == typeof(System.DateTime))
          {
-
-            // grip DateTime value [seq 20131201°0832]
-            // note : Remember issue 20131201°0833 'Find a DateTime null value for SQLite'.
-            ////DateTime dt = (DateTime) oVal; // throws InvalidCastException
-            DateTime dt = DateTime.MinValue;                                           // '0001-01-01 00:00:00'
-            if (IOBus.Gb.Debag.ExecuteNO)
+            // Grip DateTime value [seq 20131201°0832]
+            // Note : Remember issue 20131201°0833 'Find a DateTime null value for SQLite'.
+            DateTime dt = DateTime.MinValue;                                   // '0001-01-01 00:00:00'
+            if (IOBus.Gb.Debag.Execute_No)
             {
-               dt = new DateTime(1970, 1, 1, 1, 0, 0, 0);                              // begin of UNIX time
+               dt = new DateTime(1970, 1, 1, 1, 0, 0, 0);                      // begin of UNIX time
             }
             if (oVal.GetType() != typeof(DBNull))
             {
                dt = Convert.ToDateTime(oVal);
             }
 
-
-            // format value [seq 20130823°1611]
+            // Format value [seq 20130823°1611]
             if (_bUseDatatimeAlgo)
             {
-               if (IOBus.Gb.Debag.ShutdownForever)
+               if (IOBus.Gb.Debag.Shutdown_Forever)
                {
                   // [seq 20130823°1612]
-                  // note : This sequence produces a corrupt field entry. See
+                  // Note : This sequence produces a corrupt field entry. See
                   //    issue 20131201°0811 'SQLite String not recognized as DateTime'.
                   Double dbl = dt.ToOADate();
                   sVal = dbl.ToString();
@@ -366,17 +349,17 @@ namespace QueryPonyLib
                   //    Applications can chose to store dates and times in any of these formats and
                   //    freely convert between formats using the built-in date and time functions.
                   //   ----------------------------------------
-                  // note : Real and integer were probably the more effecive storage format, but
+                  // Note : Real and integer were probably the more effecive storage format, but
                   //    more conventient for us to write the code quickly, seems the Text option.
                   IOBus.Gb.Formats.SqlitDatetypeStorage option = IOBus.Gb.Formats.SqlitDatetypeStorage.AsText;
                   if (option == IOBus.Gb.Formats.SqlitDatetypeStorage.AsInteger)
                   {
-                     // not yet implemented
+                     // Not yet implemented
                      sVal = sQuot + sQuot;
                   }
                   else if (option == IOBus.Gb.Formats.SqlitDatetypeStorage.AsReal)
                   {
-                     // not yet implemented
+                     // Not yet implemented
                      sVal = sQuot + sQuot;
                   }
                   else if (option == IOBus.Gb.Formats.SqlitDatetypeStorage.AsText)
@@ -392,7 +375,7 @@ namespace QueryPonyLib
                   }
                   else
                   {
-                     // program flow error
+                     // Program flow error
                      sVal = sQuot + sQuot;
                   }
                }
@@ -412,7 +395,7 @@ namespace QueryPonyLib
          {
             sVal = oVal.ToString();
 
-            //note : This seems not a workaround anymore, but a solid feature. [todo 20130825°1202]
+            // Note : This seems not a workaround anymore, but a solid feature. [todo 20130825°1202]
             if (_bUseWorkaroundForIssue20130824o0911)
             {
                // (.1) a quote itself
@@ -422,45 +405,43 @@ namespace QueryPonyLib
                   sVal = sVal.Replace(sQuot, "*");
                }
 
-               // (.2) dedicated special case
-               // note : For CRLF, there seems a 0x03/0x01 to come via OleDb from Paradox table.
-               // note : Remember issue 20130824°1131 'chinese and null characters in memo field'.
-               if (IOBus.Gb.Debag.ShutdownAlternatively)
+               // (.2) Dedicated special case
+               // Note : For CRLF, there seems a 0x03/0x01 to come via OleDb from Paradox table.
+               // Note : Remember issue 20130824°1131 'chinese and null characters in memo field'.
+               if (IOBus.Gb.Debag.Shutdown_Alternatively)
                {
                   char[] chars = { Convert.ToChar(3), Convert.ToChar(1) };
                   s = new string(chars);
                }
                else
                {
-                  s = char.ConvertFromUtf32(3) + char.ConvertFromUtf32(1); // empirical finding
+                  s = char.ConvertFromUtf32(3) + char.ConvertFromUtf32(1);     // Empirical finding
                }
                if (sVal.Contains(s))
                {
-                  sVal = sVal.Replace(s, "*"); // is not enough in the dedicated case
+                  sVal = sVal.Replace(s, "*");                                 // Is not enough in the dedicated case
                   sVal = "*"; // brute force repair
                   s = _sIndent + "ATTENTION - Chinese chars in source val, val fully replaced by \"*\".";
                   IOBusConsumer.writeHost(s);
                }
 
-               // (.3) prophylactic paranoia (generic against issue 20130824°1131)
-               // todo : Possibly replace this by an algorithm to replace e.g. all chars < 33 [todo 20130825°1201]
+               // (.3) Prophylactic paranoia (generic against issue 20130824°1131)
+               // Todo : Possibly replace this by an algorithm to replace e.g. all chars < 33 [todo 20130825°1201]
                if ( sVal.Contains(char.ConvertFromUtf32(0))
                    || sVal.Contains(char.ConvertFromUtf32(1))
                     || sVal.Contains(char.ConvertFromUtf32(3))
                      )
                {
-                  sVal = "*"; // brute force repair
+                  sVal = "*";                                                  // Brute force repair
                   s = _sIndent + "ATTENTION - Chinese characters ... value fully replaced by \"*\".";
                   IOBusConsumer.writeHost(s);
                }
-
             }
             else
             {
                string x = "\\" + sQuot;
                sVal = sVal.Replace(sQuot, x);
             }
-
 
             sVal = sQuot + sVal + sQuot;
          }
@@ -470,8 +451,7 @@ namespace QueryPonyLib
             IOBusConsumer.writeHost(s);
          }
 
-
-         // [seq 20130823°1621] don't leave the value totally blank, otherwise SQLite exception 'syntax error ...'
+         // Don't leave the value totally blank, otherwise SQLite exception 'syntax error ...' [seq 20130823°1621]
          if (sVal == "")
          {
             sVal = sQuot + sQuot;
@@ -480,8 +460,7 @@ namespace QueryPonyLib
          return sVal;
       }
 
-
-      /// <summary>This method clones one table from the source DbClient to the target DbClient.</summary>
+      /// <summary>This method clones one table from the source DbClient to the target DbClient</summary>
       /// <remarks>id : 20130818°1537</remarks>
       /// <param name="dbTgt">The target DbClient</param>
       /// <param name="sTable">The name of the table to be cloned</param>
@@ -500,8 +479,8 @@ namespace QueryPonyLib
          tablenode.TblName = sTableName;                                               // o.k.
          tablenode.Text = sTableName;                                                  //
 
-         // (D.2) retrieve the field list for this table including field properties
-         // note : See todo 20130826°1321 'GetSubObjectHierarchy2() is awkward'.
+         // (D.2) Retrieve the field list for this table including field properties
+         // Note : See todo 20130826°1321 'GetSubObjectHierarchy2() is awkward'.
          if (! dbbrowserSource.GetSubObjectHierarchy2(tablenode))
          {
             s = "ERROR GetSubObjectHierarchy2() failed." + " " + "[20130818°1545]";
@@ -509,16 +488,15 @@ namespace QueryPonyLib
             return false;
          }
 
-         // (D.3) retrieve indices (sequence 20130826°1311)
+         // (D.3) Retrieve indices [seq 20130826°1311]
          Nodes.Indices[] ndxs = dbbrowserSource.SchemaGetIndices(tablenode);
          tablenode.TblIndices = ndxs;
 
-
-         // (E) create table
-         // (E.1) build create statement
+         // (E) Create table
+         // (E.1) Build create statement
          string sSql = tableCreate_sqlCreateTable(tablenode);
 
-         // (E.2) paranoia
+         // (E.2) Paranoia
          if (dbcTarget.ErrorMessage != null)
          {
             s = "Orphane error message deleted: " + dbcTarget.ErrorMessage + " " + "[20130823°1601]";
@@ -526,14 +504,14 @@ namespace QueryPonyLib
             dbcTarget.ErrorMessage = null;
          }
 
-         // (E.3) execute create statement
+         // (E.3) Execute create statement
          // note : here also executeStatement() would work (see todo 20130823°1221)
          System.Data.DataSet dataset = dbcTarget.ExecuteOnWorker(sSql, 3333);
 
-         // (E.4) process error
+         // (E.4) Process error
          if (dbcTarget.ErrorMessage != null)
          {
-            // todo : This error leaves an orphane process behind, fix this. [todo 20130823°1531]
+            // Todo : This error leaves an orphane process behind, fix this. [todo 20130823°1531]
 
             s = dbcTarget.ErrorMessage.Replace("\r\n", " - "); // cosmetics
             s = "ERROR creating table '" + sTableName + "' : \"" + s + "\". [#20130821.1133]"
@@ -546,8 +524,7 @@ namespace QueryPonyLib
             return false;
          }
 
-
-         // (F) create indices (sequence 20130828°1112)
+         // (F) Create indices [seq 20130828°1112]
          for (int iNdx = 0; iNdx < tablenode.TblIndices.Length; iNdx++)
          {
             bool bIsPrimaryMulti = (tablenode.TblIndices.Length > 1);
@@ -571,12 +548,10 @@ namespace QueryPonyLib
             }
          }
 
-
          return true;
       }
 
-
-      /// <summary>This method builds the SQL statement to create an index.</summary>
+      /// <summary>This method builds the SQL statement to create an index</summary>
       /// <remarks>
       /// id : 20130828°1111
       /// ref : E.g. 20130828°1121 'Stacko: SQLite index columns'
@@ -588,30 +563,30 @@ namespace QueryPonyLib
       {
          string sSql = "";
 
-         // workaround for sqlite tablenames
+         // Workaround for sqlite tablenames
          string sTablename = getCleanTablename(node.NdxTable.TblName);
 
-         // tick tablename
+         // Tick tablename
          sTablename = IOBus.Utils.Strings.SqlTokenTicks(sTablename, " -", "``");
 
-         // comfort
+         // Comfort
          string sIndexname = node.NdxName;
          sIndexname = getCleanTablename(sIndexname);
          string[] ssFields = node.NdxFieldnames;
          bool bIsPrimary = node.NdxIsPrimary;
 
-         // skip primary index
+         // Skip primary index
          if (bIsPrimary)
          {
-            // see issue 20130828°1141 'SQLite has no combined primary keys'
+            // See issue 20130828°1141 'SQLite has no combined primary keys'
             if (!bIsPrimaryMulti)
             {
                return sSql;
             }
          }
 
-         // process curious exception
-         // note : See issue 20130826°1331 'index schema wrong'
+         // Process curious exception
+         // Note : See issue 20130826°1331 'index schema wrong'
          if (_bUseWorkaroundTableUnderlineInternet)
          {
             if (sTablename == "InternetpartnerMergingExcel")
@@ -620,21 +595,21 @@ namespace QueryPonyLib
             }
          }
 
-         // manipulate index name (sequence 20130828°1212)
-         // note : See issue 20130828°1211 'SQLite no index names with cross'.
+         // Manipulate index name [seq 20130828°1212]
+         // Note : See issue 20130828°1211 'SQLite no index names with cross'.
          if (sIndexname.EndsWith("#PX"))
          {
             sIndexname = "PRIMARI";
          }
 
-         // manipulate index name (sequence 20130828°1152)
+         // Manipulate index name [seq 20130828°1152]
          //  fighting issue 20130828°1151 'SQLite allows no two indices with the same name'
          sIndexname = sTablename + "_" + sIndexname;
 
-         // open line
+         // Open line
          sSql = "CREATE INDEX" + " " + sIndexname + " " + "ON" + " " + sTablename + " (";
 
-         // loop over the fields of this index
+         // Loop over the fields of this index
          for (int iCol = 0; iCol < ssFields.Length; iCol++)
          {
             if (iCol > 0)
@@ -644,14 +619,13 @@ namespace QueryPonyLib
             sSql += getCleanTablename(ssFields[iCol]);
          }
 
-         // close line
+         // Close line
          sSql += ");";
 
          return sSql;
       }
 
-
-      /// <summary>This method builds the SQL statement to create a table.</summary>
+      /// <summary>This method builds the SQL statement to create a table</summary>
       /// <remarks>
       /// id : 20130821°1151
       /// ref : About SQLite field types see 20130821°1141 'sqlite: datatypes'
@@ -663,23 +637,23 @@ namespace QueryPonyLib
       {
          string s = "";
 
-         // workaround for sqlite tablenames
+         // Workaround for sqlite tablenames
          string sTablename = getCleanTablename(node.TblName);
 
-         // tick tablename
+         // Tick tablename
          sTablename = IOBus.Utils.Strings.SqlTokenTicks(sTablename, " -", "``");
 
-         // (.1) build statement header
+         // (.1) Build statement header
          string sSql = "CREATE TABLE" + " " + sTablename;
 
-         // (.2) build statement body
+         // (.2) Build statement body
          // loop over the fields of the given table
          for (int i = 0; i < node.Nodes.Count; i++)
          {
             Nodes.Fields nField = (Nodes.Fields)node.Nodes[i];
 
-            // notification
-            if (IOBus.Gb.Debag.ExecuteNO)
+            // Notification
+            if (IOBus.Gb.Debag.Execute_No)
             {
                s = "         " + i.ToString()
                   + "\t " + nField.FldName
@@ -700,9 +674,9 @@ namespace QueryPonyLib
             }
 
             //-----------------------------------------
-            // determine and adjust fielname and datatype (possibly to be outsourced)
+            // Determine and adjust fielname and datatype (possibly to be outsourced)
 
-            // (.1) fieldname
+            // (.1) Fieldname
             string sFieldname = "";
             switch (nField.FldName)
             {
@@ -710,53 +684,53 @@ namespace QueryPonyLib
                default: sFieldname = nField.FldName; break;
             }
 
-            // workaround 20130823°1542 against issue 20130823.1541
+            // Workaround 20130823°1542 against issue 20130823.1541
             sFieldname = getCleanTablename(sFieldname);
 
-            // clean fieldname
+            // Clean fieldname
             sFieldname = IOBus.Utils.Strings.SqlTokenTicks(sFieldname, " -", "``");
 
-            // (.2) datatype
+            // (.2) Datatype
             string sDataType = nField.FldDataType;
-            if (    (nField.FldLength > 0)                                             // do not print colum width if there is none
-                &&  (nField.FldDataType != "Boolean")                                  // do not print colum width for booleans (which have '2' internally)
-                 && false                                                              // SQLite never has any columns width anyway, not even WChar
+            if (    (nField.FldLength > 0)                                     // Do not print colum width if there is none
+                &&  (nField.FldDataType != "Boolean")                          // Do not print colum width for booleans (which have '2' internally)
+                 && false                                                      // SQLite never has any columns width anyway, not even WChar
                   )
             {
-               // append width info to column type
+               // Append width info to column type
                sDataType += "(" + nField.FldLength.ToString() + ")";
             }
             //-----------------------------------------
 
-            // (.) write line
-            // (.1) open line
+            // (.) Write line
+            // (.1) Open line
             if (i < 1)
             {
-               sSql += IOBus.Gb.Bricks.Cr + "( "; // open field list
+               sSql += IOBus.Gb.Bricks.Cr + "( ";                              // Open field list
             }
             else
             {
                sSql += IOBus.Gb.Bricks.Cr + ", ";
             }
 
-            // (.2) write fieldname
+            // (.2) Write fieldname
             sSql += sFieldname;
 
-            // (.3) write datatype
+            // (.3) Write datatype
             sSql += " " + sDataType;
 
-            // (.4) write primarykey
+            // (.4) Write primarykey
             if (nField.FldIsPrimary)
             {
-               // see issue 20130828°1141 'SQLite has no combined primary keys'
+               // See issue 20130828°1141 'SQLite has no combined primary keys'
                if (! nField.FldIsPrimaryMulticol)
                {
                   sSql += " " + "PRIMARY KEY";
                }
             }
 
-            // process curious exception
-            // note : See issue 20130826°1331 'index schema wrong'
+            // Process curious exception
+            // Note : See issue 20130826°1331 'index schema wrong'
             if (_bUseWorkaroundTableUnderlineInternet)
             {
                if ((sTablename == "InternetpartnerMergingExcel") && (sFieldname == "Fid"))
@@ -772,14 +746,13 @@ namespace QueryPonyLib
             }
          }
 
-         // (.3) close field list
+         // (.3) Close field list
          sSql += IOBus.Gb.Bricks.Cr + ")" + IOBus.Gb.Bricks.Cr;
 
          return sSql;
       }
 
-
-      /// <summary>This method fills the newly created cloned table.</summary>
+      /// <summary>This method fills the newly created cloned table</summary>
       /// <remarks>
       /// id : 20130823°1211 (20130821°1501)
       /// note : Now dbcSource.ExecuteOnWorker() is used in sequence 20130823°1216.
@@ -796,7 +769,7 @@ namespace QueryPonyLib
       {
          string s = "", sErr = null, sSql = "", sTableClean = "";
 
-         // paranoia
+         // Paranoia
          if (dbcSource.ErrorMessage != null)
          {
             s = "ERROR orphan message " + " : \"" + dbcSource.ErrorMessage + "\"" + " " + "[#20130823.1511]";
@@ -804,16 +777,16 @@ namespace QueryPonyLib
             dbcSource.ErrorMessage = null;
          }
 
-         // (.) retrieve record count of source table (sequence 20130823°1215)
-         // (.1) execute statement
-         // (.1.1) build
+         // (.) Retrieve record count of source table [seq 20130823°1215]
+         // (.1) Execute statement
+         // (.1.1) Build
          sTableClean = IOBus.Utils.Strings.SqlTokenTicks(sTable, " -", "``");
          sSql = "SELECT COUNT(*) FROM " + sTableClean + ";";
 
-         // (.1.2) the calling (seq 20130823°1216)
+         // (.1.2) The calling [seq 20130823°1216]
          System.Data.DataSet dataset = dbcSource.ExecuteOnWorker(sSql, 3333);
 
-         // (.1.3) process error
+         // (.1.3) Process error
          if (dbcSource.ErrorMessage != null)
          {
             s = _sIndent + "Well known error \"" + dbcSource.ErrorMessage + "\" " + "[#20130823.1512]";
@@ -821,7 +794,7 @@ namespace QueryPonyLib
             IOBusConsumer.writeHost(s);
          }
 
-         // (.2) interpret result
+         // (.2) Interpret result
          int iRecCount = -1;
          if (dataset != null)
          {
@@ -833,7 +806,7 @@ namespace QueryPonyLib
          s = _sIndent + "Fill in " + iRecCount.ToString() + " records ";
          IOBusConsumer.writeHost(s);
 
-         // loop over source table to read each single record
+         // Loop over source table to read each single record
          sErr = tableFillRecords(dbcSource, dbcTarget, sTable);
          if (sErr != null)
          {
@@ -845,8 +818,7 @@ namespace QueryPonyLib
          return true;
       }
 
-
-      /// <summary>This method fills the newly created cloned table with records.</summary>
+      /// <summary>This method fills the newly created cloned table with records</summary>
       /// <remarks>
       /// id : 20130823°1231
       /// note : See issue 20130823°1411 'OleDb has no LIMIT clause'. The original
@@ -866,16 +838,16 @@ namespace QueryPonyLib
          string s = "", sMsg = "", sTbl = "", sErr = null, sSql1 = "";
          int iCountNotify = 0;
 
-         // mangle table name
+         // Mangle table name
          sTbl = IOBus.Utils.Strings.SqlTokenTicks(sTable, " -", "``");
 
-         // build command (seq 20130823°1331) (see issue 20130823°1411)
+         // Build command [seq 20130823°1331] (see issue 20130823°1411)
          sSql1 = "SELECT * FROM" + " " + sTbl;
 
-         // execute command
+         // Execute command
          System.Data.DataSet dataset1 = dbcSource.ExecuteOnWorker(sSql1, 3333);
 
-         // extract record from result DataSet (we know, it is only one table)
+         // Extract record from result DataSet (we know, it is only one table)
          if (dataset1 == null)
          {
             sErr = "ERROR : \"" + dbcSource.ErrorMessage + "\" [#20130823.1233]";
@@ -883,14 +855,14 @@ namespace QueryPonyLib
          }
          System.Data.DataTable tbl = dataset1.Tables[0];
 
-         // workaround
+         // Workaround
          string sTblCln = getCleanTablename(sTable);
          sTblCln = IOBus.Utils.Strings.SqlTokenTicks(sTblCln, " -", "``");
 
-         // loop over the records of the source table
+         // Loop over the records of the source table
          for (int iRec = 0; iRec < tbl.Rows.Count; iRec++)
          {
-            // stop at possible record limit
+            // Stop at possible record limit
             if ((_iDebugMaxRecToFill > 0) && (iRec > _iDebugMaxRecToFill))
             {
                sMsg = _sIndent + "Max. records to copy in debug mode = " + _iDebugMaxRecToFill.ToString() + ".";
@@ -898,7 +870,7 @@ namespace QueryPonyLib
                break;
             }
 
-            // notification (the more records, the less but wider dots)
+            // Notification (the more records, the less but wider dots)
             if (iRec < 100)
             {
                IOBusConsumer.writeHostChar(".");
@@ -922,39 +894,37 @@ namespace QueryPonyLib
                }
             }
 
-
-            // (.) build command to insert one target record
-            // (.1) write header
-            // note : This uses the syntax flavour with colum list to avoid dependency on the field order.
+            // (.) Build command to insert one target record
+            // (.1) Write header
+            // Note : This uses the syntax flavour with colum list to avoid dependency on the field order.
             string sSql2 = "INSERT INTO" + " " + sTblCln + " " + IOBus.Gb.Bricks.Cr + "( ";
 
-            // (.2) process the single fields
-            // (.2.1) preparations
+            // (.2) Process the single fields
+            // (.2.1) Preparations
             string sColumns = "";
             string sValues = "";
 
-            // (.2.2) loop over columns of this record to write the field names/values
+            // (.2.2) Loop over columns of this record to write the field names/values
             for (int iCol = 0; iCol < tbl.Rows[iRec].ItemArray.Length; iCol++)
             {
                object oVal = tbl.Rows[iRec].ItemArray[iCol];
                string sColumnName = tbl.Columns[iCol].ColumnName;
                Type datatype = tbl.Columns[iCol].DataType;
 
-
                //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-               // debug issue 20130824°0911 'special chars in SQLite field values'
+               // Debug issue 20130824°0911 'special chars in SQLite field values'
                if (oVal.ToString().Contains("Joe"))
                {
-                  System.Threading.Thread.Sleep(1); // breakpoint
+                  System.Threading.Thread.Sleep(1);                            // Breakpoint
                }
-               // debug issue 20130824°0914 'SQLite fields of DataType Byte[]'
+               // Debug issue 20130824°0914 'SQLite fields of DataType Byte[]'
                if (sColumnName == "audio")
                {
-                  System.Threading.Thread.Sleep(1); // breakpoint
+                  System.Threading.Thread.Sleep(1);                            // Breakpoint
                }
-               if (sColumnName == "Datum" || sColumnName == "Nichtmahnen") // for Datetime
+               if (sColumnName == "Datum" || sColumnName == "Nichtmahnen")     // For Datetime
                {
-                  SyTh.Thread.Sleep(1); // breakpoint
+                  SyTh.Thread.Sleep(1);                                        // Breakpoint
                }
                var v = oVal;
                Type t = v.GetType();
@@ -973,16 +943,16 @@ namespace QueryPonyLib
 
                sValues += sVal;
             }
-            // (.2.3) close fields list
+            // (.2.3) Close fields list
             sSql2 += sColumns + IOBus.Gb.Bricks.Cr + ") VALUES" + IOBus.Gb.Bricks.Cr + "( " + sValues;
 
-            // (.3) write footer
+            // (.3) Write footer
             sSql2 += IOBus.Gb.Bricks.Cr + ");" + IOBus.Gb.Bricks.Cr;
 
-            // (.) send INSERT command
+            // (.) Send INSERT command
             System.Data.DataSet dataset2 = dbcTarget.ExecuteOnWorker(sSql2, 3333);
 
-            // (.) error?
+            // (.) Error?
             if (dbcTarget.ErrorMessage != null)
             {
                sMsg = "ERROR: \"" + dbcTarget.ErrorMessage + "\" [20130823°1234]. Offending statement = "
@@ -998,13 +968,10 @@ namespace QueryPonyLib
 
          return sErr;
       }
-
    }
-
 
    //==========================================================
    /*
-
 
    issue 20130828°1211 'SQLite no index names with cross'
    title : In SQLite index names must not contain a cross.
@@ -1012,10 +979,10 @@ namespace QueryPonyLib
       But SQLite dislikes the number sign in the index name, it answers with
       error "SQL logic error or missing database - near "#PX": syntax error".
    location : Method 20130828°1151 tableCreate_sqlCreateIndex().
-   workaround : Manipulate index name (sequence 20130828°1212).
+   workaround : Manipulate index name seq 20130828°1212.
    solution :
    status :
-
+   ܀
 
    issue 20130828°1151 'SQLite allows no two indices with the same name'
    title : SQLite allows no two indices with the same name.
@@ -1027,7 +994,7 @@ namespace QueryPonyLib
       see sequence 20130828°1152, which boldly prepends the table name.
    solution :
    status :
-
+   ܀
 
    issue 20130828°1141 'SQLite has no combined primary keys'
    title :
@@ -1039,21 +1006,21 @@ namespace QueryPonyLib
    ref : See e.g. 20130828°1132 'Stacko: SQL multi-primary key'
    solution :
    status : Solved
-
+   ܀
 
    ref 20130828°1132 'Stacko: SQL multi-primary key'
    title : Thread 'SQLite multi-Primary Key on a Table, one of them is Auto Increment'
-   url : http://stackoverflow.com/questions/6154730/sqlite-multi-primary-key-on-a-table-one-of-them-is-auto-increment
+   url : stackoverflow.com/questions/6154730/sqlite-multi-primary-key-on-a-table-one-of-them-is-auto-increment
    usage : Method 20130821°1151 tableCreate_sqlCreateTable()
    note :
-
+   ܀
 
    ref 20130828°1121 'Stacko: SQLite index columns'
    title : Thread 'Using SQLite how do I index columns in a CREATE TABLE statement?'
-   url : http://stackoverflow.com/questions/1676448/using-sqlite-how-do-i-index-columns-in-a-create-table-statement
+   url : stackoverflow.com/questions/1676448/using-sqlite-how-do-i-index-columns-in-a-create-table-statement
    usage : E.g. method 20130828°1111 tableCreate_sqlCreateIndex()
    note :
-
+   ܀
 
    todo 20130825°1211 'provide Clone class public methods'
    title : Provide Clone class public methods e.g. CloneTable
@@ -1063,7 +1030,7 @@ namespace QueryPonyLib
       to make menu items work as independend actions.
    status : Open
    priority : Low
-
+   ܀
 
    issue 20130824°1131 'chinese and null characters in memo field'
    title : Chinese and null characters from field ObjLang.namelong
@@ -1095,7 +1062,7 @@ namespace QueryPonyLib
    workaround : If the two chars are found, the whole value is set '*'.
    solution :
    status :
-
+   ܀
 
    issue 20130824°0915 'names beginning with ciphers'
    title : Table and fieldnames beginning with ciphers
@@ -1104,7 +1071,7 @@ namespace QueryPonyLib
    workaround :
    solution : Wrap name in quotes (seq 20130824°1221)
    status : Open
-
+   ܀
 
    issue 20130824°0914 'SQLite fields of DataType Byte[]'
    title : What are the exact rules for Blob fields?
@@ -1113,7 +1080,7 @@ namespace QueryPonyLib
    workaround : Provisory set null
    solution :
    status : Open
-
+   ܀
 
    issue 20130824°0913 'keywords as SQLite field names'
    title : What are the exact rules
@@ -1123,7 +1090,7 @@ namespace QueryPonyLib
    workaround :
    solution : Quote those words (e.g. 20130824°0952)
    status : Open
-
+   ܀
 
    issue 20130824°0912 'umlauts in SQLite field values'
    title : How exactly to umlauts?
@@ -1132,7 +1099,7 @@ namespace QueryPonyLib
    workaround : Manual mangling on demand
    solution :
    status : Open
-
+   ܀
 
    issue 20130824°0911 'special chars in SQLite field values'
    title : How exactly to write quotes and possible other special chars into a field?
@@ -1141,7 +1108,7 @@ namespace QueryPonyLib
    workaround : Manual mangling on demand
    solution :
    status : Open
-
+   ܀
 
    issue 20130823.1541 'no dashes in sqlite fieldnames'
    title : If an SQLite table create statement contains fieldnames with dashes,
@@ -1151,7 +1118,7 @@ namespace QueryPonyLib
    status :
    todo : Find exact rules, possibly the dashes could be preserved
    priority :
-
+   ܀
 
    issue 20130823°1411 'OleDb has no LIMIT clause'
    title : 'OleDb SQL does not know the LIMIT clause'
@@ -1162,14 +1129,14 @@ namespace QueryPonyLib
    workaround : Use only statements without LIMIT clause.
    solution : None
    status :
-
+   ܀
 
    ref 20130823°1321 'thread: no LIMIT clause in OleDb'
    title : Thread 'LIMIT Clause is OleDbCommand'
-   url : http://forums.asp.net/t/1114677.aspx/1
+   url : forums.asp.net/t/1114677.aspx/1
    usage : Method 20130823°1231 cloneTableFillRecords()
    note : The bottom line is 'no LIMIT clause in OleDb'.
-
+   ܀
 
    issue 20130823°1311 'OleDb tablenames with underline or dash'
    title :
@@ -1205,7 +1172,7 @@ namespace QueryPonyLib
       //    sSql = "SELECT COUNT(*) FROM `_Internetpartner\\-Merging-Excel_`"; // "The Microsoft Jet database engine could not find the object '_Internetpartner\-Merging-Excel_'. ..."
       //    sSql = "SELECT (COUNT(*)) FROM `_Internetpartner-Merging-Excel_`"; // 'Index not found'
       // }
-
+   ܀
 
    todo 20130823°1221 'dbc.Execute vs. dbc.ExecuteOnWorker()'
    title : Difference between method 20130604°0337 dbclient.Execute() and
@@ -1218,7 +1185,7 @@ namespace QueryPonyLib
       it with passing a delegate.
    ref : Method 20130821°1511 executeStatement()
    ref : Compare note 20130823°1224
-
+   ܀
 
    todo 20130822°2112 'introduce splashscreen delegate'
    title : Introduce a splashscreen delegate to be used by the library
@@ -1229,7 +1196,7 @@ namespace QueryPonyLib
       initialisation, that could be used.
    location : class 20130619°1221 InitLib
    priority : medium
-
+   ܀
 
    issue 20130822°2111 'DbClient triggers QueryForm methods'
    title : SQL command yielding an answer table fails with QueryForm involved
@@ -1247,7 +1214,7 @@ namespace QueryPonyLib
       issue sufficiently. But curiosity about executeStatement() remains.
    status : Solved partially
    note : Compare todo 20130823°1221
-
+   ܀
 
    todo 20130818°1545 'make class DbClone static'
    title : Declare class 20130818°1532 DbClone as static
@@ -1259,16 +1226,15 @@ namespace QueryPonyLib
       static.
    priority :
    status : Open
-
+   ܀
 
    issue 20130818°1538 'ping server'
    note : Somehow ping target server. It is not yet clear how to proceed with a
       pure server connection with a not yet existing database. BTW, the _csTgt
       connection settings are such 'uncomplete' settings.
    status : Open
-
+   ܀
 
    */
    //==========================================================
-
 }

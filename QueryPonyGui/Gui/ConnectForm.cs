@@ -1,10 +1,9 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/ConnectForm.cs
-// id          : 20130604°0051
-// summary     : This file stores class 'ConnectForm' to constitute the Connect Form.
+// file        : 20130604°0051 /QueryPony/QueryPonyGui/ConnectForm.cs
+// summary     : Class 'ConnectForm' constitutes the Connect Form
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2022 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable
 // note        :
@@ -13,21 +12,18 @@
 
 using QueryPonyLib;
 using System;
-using System.Collections.Generic; // List<>
-using System.Drawing; // Graphics (experimental)
+using System.Collections.Generic;                                              // List<>
+using System.Drawing;                                                          // Graphics (experimental)
 using System.IO;
 using System.Windows.Forms;
 
 namespace QueryPonyGui
 {
-
-
-   /// <summary>This class constitutes the Connect Form.</summary>
+   /// <summary>This class constitutes the Connect Form</summary>
    /// <remarks>id : 20130604°0052</remarks>
    public partial class ConnectForm : Form
    {
-
-      /// <summary>This method adds one item to the Connection Combobox (experimental).</summary>
+      /// <summary>This method adds one item to the Connection Combobox (experimental)</summary>
       /// <remarks>
       /// id : 20130810°1134
       /// callers : So far only method 20130604°0635 MainForm.cs::ImportServerlist().
@@ -37,7 +33,7 @@ namespace QueryPonyGui
       /// <returns>Success flag, true if inserted, false if not inserted</returns>
       public bool ComboboxConnectionAddItem(ConnSettingsGui csGui)
       {
-         // don't store duplicate connection settings
+         // Don't store duplicate connection settings
          // note : Actually, if the ConnectionsCombobox were strictly synchronized with
          //    the ServerList, such conditions were not necessary, because the ServerList
          //    would handle this.
@@ -49,25 +45,24 @@ namespace QueryPonyGui
             }
          }
 
-         // the actual job
+         // The actual job
          combobox_Connection.Items.Add(csGui);
 
-         // some cosmetics
-         combobox_Connection.SelectedItem = csGui; // does not to work always
+         // Some cosmetics
+         combobox_Connection.SelectedItem = csGui;                             // Does not to work always
 
          return true;
       }
 
-
       /// <summary>This field stores the DbClient ... (for this ConnectForm or for what exactly?)</summary>
-      /// <remarks>id : 20130604°0053</remarks>
+      /// <remarks>Ident 20130604°0053</remarks>
       private DbClient _client = null;
 
-      /// <summary>This field stores the actually displayed settings. Those are used if the Connect Button is pressed.</summary>
+      /// <summary>This field stores the actually displayed settings. Those are used if the Connect Button is pressed</summary>
       /// <remarks>id : 20130604°0054</remarks>
       private ConnSettingsGui _conSettings = new ConnSettingsGui();
 
-      /// <summary>This field stores a flag telling the main connection combobox's SelectionChanged event not to adjust the tabcontrol.</summary>
+      /// <summary>This field stores a flag telling the main connection combobox's SelectionChanged event not to adjust the tabcontrol</summary>
       /// <remarks>id : 20130622°1012</remarks>
       private bool _tabpageHasChanged_AndCombobox_IsAlreadyAdjusted = false;
 
@@ -79,34 +74,31 @@ namespace QueryPonyGui
       /// <remarks>id : 20130623°1021</remarks>
       private bool _tabpageChange_WasInitiated_ByCombobox = false;
 
-      /// <summary>This field stores a flag telling whether the Connection Combobox SelectionChanged event is called the very first time or not.</summary>
+      /// <summary>This field stores a flag telling whether the Connection Combobox SelectionChanged event is called the very first time or not</summary>
       /// <remarks>id : 20130623°1553</remarks>
       private bool _connectionCombobox_SelectionChanged_FirstCall_HELPERFLAG = true;
 
-      /// <summary>This field stores the original filling of a tabpage for later use when creating a new connection.</summary>
+      /// <summary>This field stores the original filling of a tabpage for later use when creating a new connection</summary>
       /// <remarks>id : 20130623°1554</remarks>
       private string _tabpageSelected_OriginalFilling_HELPERMEMO = "";
 
-      /// <summary>This field stores a flag to signal connection deletion as reason for tabpage selection change.</summary>
+      /// <summary>This field stores a flag to signal connection deletion as reason for tabpage selection change</summary>
       /// <remarks>id : 20130624°0932</remarks>
       private bool _tabpageSelectionChange_CausedByConnectionDeletion = false;
 
-      /// <summary>This field stores the actually selected tabpage to be still available after the selection has changed.</summary>
+      /// <summary>This field stores the actually selected tabpage to be still available after the selection has changed</summary>
       /// <remarks>id : 20130622°1012</remarks>
       private TabPage _previouslySelectedTabpage = null;
 
-
-      /// <summary>This field stores the actually selected connection index to be available for the Settings on progam exit via 'static'.</summary>
+      /// <summary>This field stores the actually selected connection index to be available for the Settings on progam exit via 'static'</summary>
       /// <remarks>id : 20130622°1131</remarks>
       internal static int SelectedConnectionIndex = -1;
-
 
       /// <summary>This delegate stores the method to display a new connection ...</summary>
       /// <remarks>id : 20130618°0422</remarks>
       private Delegate _furnishNewConnection = null;
 
-
-      /// <summary>This field stores the delegate to output text to the status display.</summary>
+      /// <summary>This field stores the delegate to output text to the status display</summary>
       /// <remarks>
       /// id : 20130716°0631
       /// note : Created to solve issue 20130716°0622. It enables asynchronous access to the Status TextBox.
@@ -114,8 +106,7 @@ namespace QueryPonyGui
       /// <param name="sText">The text to output</param>
       private Delegate _outputStatusLino = null;
 
-
-      /// <summary>This constructor creates a Connect Form while taking a delegate for opening new connections.</summary>
+      /// <summary>This constructor creates a Connect Form while taking a delegate for opening new connections</summary>
       /// <remarks>id : 20130618°0421</remarks>
       /// <param name="FunishNewConnection">The delegate to establish a connection display after the Connect Button is pressed.</param>
       public ConnectForm(Delegate FunishNewConnection, Delegate OutputStatusLino) : this()
@@ -124,8 +115,7 @@ namespace QueryPonyGui
          _outputStatusLino = OutputStatusLino;
       }
 
-
-      /// <summary>This constructor creates a Connect Form.</summary>
+      /// <summary>This constructor creates a Connect Form</summary>
       /// <remarks>id : 20130604°0055</remarks>
       private ConnectForm()
       {
@@ -134,8 +124,8 @@ namespace QueryPonyGui
          label_SignPost.Text = MainForm._signPost;
          label_SignPost.ForeColor = MainForm._signPostColor;
 
-         // legacy sequence
-         // todo : Possibly shift or remove this to a better suited place. [todo 20130623°0832]
+         // Legacy sequence
+         // Todo : Possibly shift or remove this to a better suited place. [todo 20130623°0832]
          if (QueryPonyGui.Properties.Settings.Default.MssqlServerAuthenticationDefault)
          {
             radiobutton_Mssql_Trusted.Checked = false;
@@ -149,48 +139,43 @@ namespace QueryPonyGui
 
          radiobutton_Oracle_Untrusted.Checked = true;
 
-
-         if (IOBus.Gb.Debag.ShutdownTemporarily) // ? permanently [20130623°1531]
+         if (IOBus.Gb.Debag.Shutdown_Temporarily)                              // Permanently? [seq 20130623°1531]
          {
-            this.ActiveControl = textbox_Mssql_ServerAddress; // is this a good idea? [todo 20130620°1612]
+            this.ActiveControl = textbox_Mssql_ServerAddress;                  // Is this a good idea? [todo 20130620°1612]
          }
 
-
-         // carry out the initial filling of the controls
+         // Carry out the initial filling of the controls
          SettingsLoad();
 
-
-         // retrieve last used connection
+         // Retrieve last used connection
          int iLastUsedConn = QueryPonyGui.Properties.Settings.Default.LastSelectedConnection;
 
-         // possibly select last used connection
+         // Possibly select last used connection
          if (combobox_Connection.Items.Count < 1)
          {
-            // combobox empty, no index to select
+            // ComboBox empty, no index to select
          }
          else if (combobox_Connection.Items.Count <= iLastUsedConn)
          {
-            // last used connection not applicable
+            // Last used connection not applicable
             combobox_Connection.SelectedIndex = 0;
          }
          else
          {
-            // normal case
+            // Normal case
             combobox_Connection.SelectedIndex = iLastUsedConn;
          }
 
-
-         // avoid null reference exception on very first TabControl SelectedIndexChanged event [20130623°1112]
+         // Avoid null reference exception on very first TabControl SelectedIndexChanged event [line 20130623°1112]
          _previouslySelectedTabpage = tabcontrol_ServerTypes.SelectedTab;
 
-         // maintain Connect Form title (20130724°1112)
+         // Maintain Connect Form title (20130724°1112)
          maintainFormTitleText();
 
-         // maintain main treeview (20130701°1114)
-         // todo : Not sure yet whether this is the final location to put the treeview maintenance (todo 20130701°111402)
+         // Maintain main treeview (20130701°1114)
+         // Todo : Not sure yet whether this is the final location to put the treeview maintenance [todo 20130701°1114`02]
          bool b = maintainTreeviewMain();
       }
-
 
       /// <summary>
       /// This property gets the DbClient of the Connect Form.
@@ -208,7 +193,6 @@ namespace QueryPonyGui
          get { return _client; }
       }
 
-
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130604°0057</remarks>
       private void radiobutton_Mssql_Trusted_CheckedChanged(object sender, EventArgs e)
@@ -223,9 +207,7 @@ namespace QueryPonyGui
             textbox_Mssql_LoginName.Enabled = true;
             textbox_Mssql_Password.Enabled = true;
          }
-
       }
-
 
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130604°0058</remarks>
@@ -243,44 +225,42 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This eventhandler processes the Connect Buttons Click event.</summary>
+      /// <summary>This eventhandler processes the Connect Buttons Click event</summary>
       /// <remarks>
-      /// id : 20130618°0411 (20130604°0059)
-      /// note : Here was issue 20130724°0911 'connect wrong database', solved 20130724°0912
-      /// note : Here was issue 20130725°1611 'connection is missing login name', solved 20130725°1615
+      /// id : 20130618°0411 [after 20130604°0059]
+      /// note : Here was issue 20130724°0911 'connect wrong database' solved 20130724°0912
       /// </remarks>
       private void button_Connect_Click(object sender, EventArgs e)
       {
          string sErr = "";
 
-         // (sequence 20130704°1242)
+         // [seq 20130704°1242]
          if (Glb.Debag.Debug_ConnectForm_ButtonConnect && System.Diagnostics.Debugger.IsAttached)
          {
             System.Diagnostics.Debugger.Break();
          }
 
-         // see if the left tabpage displayed a new connection [seq 20130623°1411]
+         // See if the left tabpage displays a new connection [seq 20130623°1411]
          TabPage tabPageSelected = tabcontrol_ServerTypes.SelectedTab;
          if (! syncConnectionComboboxWith_PreviouslySelectedTabpage(tabPageSelected))
          {
             return;
          }
 
-         // save the displayed settings
+         // Save the displayed settings
          SettingsSave();
 
-         // determine selected connection settings
-         // note : ScreenToSettings() has written just all tabpages back, ignorant about which
+         // Determine selected connection settings
+         // Note : ScreenToSettings() has written just all tabpages back, ignorant about which
          //    is the selected one. Here a humble workaround, possibly to be much refactored.
          TabPage tb = tabcontrol_ServerTypes.SelectedTab;
 
-         // (.) update the active connection settings (seq 20130701°1231)
-         // (.1) identify ServerList entry
+         // (.) Update the active connection settings [seq 20130701°1231]
+         // (.1) Identify ServerList entry
          string sConnId = getConnectionIdFromTabpage(tb);
          int iNdx = MainForm.ServerList_.IndexOfById(sConnId);
 
-         // (.2) paranoia about IndexOutOfRangeException
+         // (.2) Paranoia about IndexOutOfRangeException
          if (iNdx < 1)
          {
             sErr = "Program flow error: Something seems wrong with the connection settings. [error 20130725°0913]";
@@ -288,17 +268,15 @@ namespace QueryPonyGui
             return;
          }
 
-         // (.3) finally do the update
+         // (.3) Finally do the update
          _conSettings = MainForm.ServerList_.Items[iNdx];
 
-
-         // experimental (20130828°1513)
+         // Experimental [line 20130828°1513]
          _conSettings.Status = ConnSettingsGui.ConnStatus.Unvalidated;
 
-
-         // read password (seq 20130717°1251)
-         // note : The password must be read from the live tabpage, not from the ConnList.
-         // todo : Finally the SettingsSave() mechanism has to be refactored to handle
+         // Read password [seq 20130717°1251]
+         // Note : The password must be read from the live tabpage, not from the ConnList.
+         // Todo : Finally the SettingsSave() mechanism has to be refactored to handle
          //    the option 'save password' versus 'do not save password' cleanly.
          if      (tb == tabpage_Couch)  { _conSettings.Password = textbox_Couch_Password.Text  ; }
          else if (tb == tabpage_Mssql)  { _conSettings.Password = textbox_Mssql_Password.Text  ; }
@@ -308,9 +286,8 @@ namespace QueryPonyGui
          else if (tb == tabpage_Sqlite) { _conSettings.Password = textbox_Sqlite_Password.Text ; }
          else { }
 
-
-         // repair possible connection type 'no type' (seq 20130624°1041)
-         // note : This is an empirical fix for _conSettings being of 'no-type',
+         // Repair possible connection type 'no type' [seq 20130624°1041]
+         // Note : This is an empirical fix for _conSettings being of 'no-type',
          //    appearing in the situation that the combobox is empty, and the user
          //    fills values into a tabpage and presses the Connect Button.
          if (_conSettings.Type == ConnSettingsLib.ConnectionType.NoType)
@@ -318,98 +295,109 @@ namespace QueryPonyGui
             _conSettings = combobox_Connection.SelectedItem as ConnSettingsGui;
          }
 
+         /*
+         Todo 20130828°1522 'Combine 4 connect dbClient seqences into one method'
+         Matter : The code from around here to method end is used for method
+                      20130828°1521 establishConnection().
+         Do : Try to outsource this sequence here, and use that method instead.
+         Findings : This are 4 places marked 'Compare seqence 20130713°0922/20130618°0351'
+            • MainForm.cs seq 20130618°0351`01
+            • MainForm.cs seq 20130618°0351`02
+            • ConnecForm.cs line 20130818°1617 'Cretate the DbClient'
+            • ConnecForm.cs 20130713°0922 'Connect dbClient'
+         Location : Method 20130618°0411 button_Connect_Click seq 20130620°1613
+         Status : Open
+         ܀
+         */
 
-         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-         // todo : The sequence from about here to method end is used for method
-         //  20130828°1521 establishConnection(). Try to outsource this sequence
-         //  here, and use that method instead(). [todo 20130828°1522]
-         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-
-         // create the engine connection settings (seq 20130620°1613)
+         // Create the engine connection settings [seq 20130620°1613]
+         // See : Todo 20130828°1522 'Combine seqences into method'
          ConnSettingsLib csLib = ConnSettingsGui.convertSettingsGuiToLib(this._conSettings);
 
-
-         // paranoia (seq 20130620°1613)
+         // Paranoia [seq 20130620°1613]
          if (! DbClientFactory.ValidateSettings(csLib))
          {
-            sErr = "Connection settings invalid: " + this._conSettings.ConnIdString(); // 'Oracle -  - XE'
+            sErr = "Connection settings invalid: " + this._conSettings.ConnIdString(); // 'Oracle - XE'
             MainForm.outputStatusLine(sErr);
             return;
          }
 
          //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-         // create the connection (seq 20130618°0351) (compare seqence 20130713°0922)
+         // Create the connection [seq 20130618°0351`02]
+         // See todo 20130828°1522 'Combine 4 connect dbClient seqences into one method'
 
-         // retrieve the client object
-         _client = DbClientFactory.GetDbClient(csLib); // breakpoint 20140126°1611
+         // Retrieve the client object
+         _client = DbClientFactory.GetDbClient(csLib);                         // Breakpoint 20140126°1611`12
 
-         // waiting phase start
+         // Waiting phase start
          Cursor oldCursor = Cursor;
          Cursor = Cursors.WaitCursor;
          SplashConnecting c = new SplashConnecting();
          c.Show(this);
          c.Refresh();
 
-         // make the connection
-         bool bSuccess = _client.Connect(); // breakpoint 20140126°1621
+         // Make the connection
+         bool bSuccess = _client.Connect();                                    // Breakpoint 20140126°1621
 
-         // waiting phase end
+         // Waiting phase end
          c.Close();
          Cursor = oldCursor;
 
-         // all right?
+         // All right?
          if (! bSuccess)
          {
             string s = "Unable to connect: " + _client.ErrorMessage + " " + "[Error 20130717°1243]";
 
-            // different icons make different sounds (seq 20130725°0912)
-            if (IOBus.Gb.Debag.ShutdownAlternatively)
+            // Different icons make different sounds [seq 20130725°0912]
+            if (IOBus.Gb.Debag.Shutdown_Alternatively)
             {
-               // the error icon makes an annoying bang sound
+               // The error icon makes an annoying bang sound
                MessageBox.Show(s, "QueryPony", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-               // the exclamation icon makes a more graceful bling sound
+               // The exclamation icon makes a more graceful bling sound
                MessageBox.Show(s, "QueryPony", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
 
             _client.Dispose();
 
-            // experimental (20130828°1515)
+            // Experimental [line 20130828°1515]
             _conSettings.Status = ConnSettingsGui.ConnStatus.Failed;
 
             return;
          }
          //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-         // preserve connected status for next program start (seq 20130828°1514)
-         _conSettings.Status = ConnSettingsGui.ConnStatus.Connected;                   // this seems not to propagate into the ServerList ...
-         MainForm.ServerList_.Items[iNdx].Status = ConnSettingsGui.ConnStatus.Connected; // ... and this is also not yet enough ...
-         QueryPonyGui.Properties.Settings.Default.ServerList = MainForm.ServerList_;   // ... but brute force helps.
+         // Preserve connected status for next program start [seq 20130828°1514]
+         _conSettings.Status = ConnSettingsGui.ConnStatus.Connected;           // This seems not to propagate into the ServerList ...
+         MainForm.ServerList_.Items[iNdx].Status = ConnSettingsGui.ConnStatus.Connected;  // ... and this is also not yet enough ...
+         QueryPonyGui.Properties.Settings.Default.ServerList = MainForm.ServerList_;  // ... but brute force helps.
          QueryPonyGui.Properties.Settings.Default.Save();
 
+         /*
+         note 20130618°0411`02 'Care about form opening via delegate'
+         Text : Formerly, the caller cared about opening the connection form. Now,
+            with the ConnectForm on a tab, we have to care about opening the form
+            independently here via below called delegate.
+            //DialogResult = DialogResult.OK; // no more useful with the Connect-Form-on-Tab
+            //DialogResult DialogResultELIMINATE = DialogResult.OK; // no more useful with the Connect-Form-on-Tab
+         Location : ConnectForm.cs seq 20130618°0411`03
+         Status : ?
+         */
 
-         // note : Formerly, the caller cared about opening the connection form. Now, with the
-         //    ConnectForm on a tab, we have to care about opening the form independently here
-         //    via below called delegate. (20130618°041102)
-         // //DialogResult = DialogResult.OK; // no more useful with the Connect-Form-on-Tab
-         // //DialogResult DialogResultELIMINATE = DialogResult.OK; // no more useful with the Connect-Form-on-Tab
-
-
-         // establish a GUI for the new connection (sequence 20130618°041103 new style)
-         // note : The delegate implementation finally being called is method 20130618°0412
+         // Establish a GUI for the new connection [seq 20130618°0411`03] New style
+         // Note : The delegate implementation finally being called is method 20130618°0412
          //    MainForm::furnishNewConnectionDelegateImplementation(). (Use 'Find' with the
          //    method id to navigate there, that is much easier than with 'Go To Definition'.)
+         // See : note 20130618°0411`02 'Care about form opening via delegate'
          object[] aro = { _client, csLib };
          this.Invoke(this._furnishNewConnection, aro);
 
          return;
       }
 
-
-      /// <summary>This method fills the tabpages with initial values.</summary>
+      /// <summary>This method fills the tabpages with initial values</summary>
       /// <remarks>id : 20130604°0103</remarks>
       private void ConnectForm_Load(object sender, EventArgs e)
       {
@@ -423,8 +411,7 @@ namespace QueryPonyGui
          tabpage_Sqlite.Tag = ConnSettingsLib.ConnectionType.Sqlite;
       }
 
-
-      /// <summary>This eventhandler processes the 'ODBC Load' button click.</summary>
+      /// <summary>This eventhandler processes the 'ODBC Load' button click</summary>
       /// <remarks>id : 20130604°0107</remarks>
       private void cmdLoadOdbc_Click(object sender, EventArgs e)
       {
@@ -466,8 +453,7 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This eventhandler processes the 'ODBC Save' button click.</summary>
+      /// <summary>This eventhandler processes the 'ODBC Save' button click</summary>
       /// <remarks>id : 20130604°0108</remarks>
       private void cmdSaveOdbc_Click(object sender, EventArgs e)
       {
@@ -503,8 +489,7 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This eventhandler processes the 'OleDb Load' button click.</summary>
+      /// <summary>This eventhandler processes the 'OleDb Load' button click</summary>
       /// <remarks>id : 20130604°0109</remarks>
       private void cmdLoadOleDb_Click(object sender, EventArgs e)
       {
@@ -535,8 +520,7 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This eventhandler processes the 'OleDb Save' button click.</summary>
+      /// <summary>This eventhandler processes the 'OleDb Save' button click</summary>
       /// <remarks>id : 20130604°0110</remarks>
       private void cmdSaveOleDb_Click(object sender, EventArgs e)
       {
@@ -574,11 +558,9 @@ namespace QueryPonyGui
                MessageBox.Show("Unable to save connection string");
             }
          }
-
       }
 
-
-      /// <summary>This eventhandler processes the 'SQLite Browse' button click.</summary>
+      /// <summary>This eventhandler processes the 'SQLite Browse' button click</summary>
       /// <remarks>
       /// id : 20130606°1311
       /// note : Code copied/modified from cmdLoadOdbc_Click()
@@ -587,12 +569,8 @@ namespace QueryPonyGui
       /// <param name="e">The event object itself</param>
       private void button_BrowseSqliteFile_Click(object sender, EventArgs e)
       {
-
          OpenFileDialog ofd;
          ofd = new System.Windows.Forms.OpenFileDialog();
-         ////ofd.DefaultExt = "connectString";
-         ////ofd.FileName = "ODBC";
-         ////ofd.Filter = "Connection String|*.connectString|Text File|*.txt|All Files|*.*";
 
          if (ofd.ShowDialog() == DialogResult.OK)
          {
@@ -622,18 +600,15 @@ namespace QueryPonyGui
                MessageBox.Show(ex.Message, "Error opening file", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             */
-            ///string s = ofd.FileName;
             string sServer = "";
             string sDatabase = "";
             Utils.SplitFullfilenamInServerAndDatabase(ofd.FileName, out sServer, out sDatabase);
-            ////textBox_SqliteFile.Text = ofd.FileName;
             textbox_Sqlite_ServerAddress.Text = sServer;
             textBox_SqliteFile.Text = sDatabase;
          }
       }
 
-
-      /// <summary>This eventhandler is a gimmick to manipulate the appearance of the tabs title text.</summary>
+      /// <summary>This eventhandler is a gimmick to manipulate the appearance of the tabs title text</summary>
       /// <remarks>
       /// id : 20130616°1703
       /// note : Open issue 20130616°1711 'TabControl DrawItem border missing black line'
@@ -652,38 +627,35 @@ namespace QueryPonyGui
       /// <param name="e">The event object itself</param>
       private void tabcontrol_ServerTypes_DrawItem(object sender, DrawItemEventArgs e)
       {
-
-         // no more wanted now after CustomTabControl is implemented,
+         // No more wanted now after CustomTabControl is implemented,
          //  but keep the code a while in case (shutdown 20130723°1445)
-         if (IOBus.Gb.Debag.ShutdownForever)
+         if (IOBus.Gb.Debag.Shutdown_Forever)
          {
-
             Graphics g = e.Graphics;
             Brush brush;
 
-            // get the item from the collection.
+            // Get the item from the collection.
             TabPage tabpage = tabcontrol_ServerTypes.TabPages[e.Index];
 
-            // get the real bounds for the tab rectangle.
+            // Get the real bounds for the tab rectangle.
             Rectangle rectTabBounds = tabcontrol_ServerTypes.GetTabRect(e.Index);
 
-            // use own font, just for fun
-            // //Font font = new Font(e.Font.FontFamily, (float)9, FontStyle.Bold, GraphicsUnit.Pixel);
-            Font font = tabcontrol_ServerTypes.Font; // borrow font from designer setting
+            // Use own font, just for fun
+            // //Font font = new Font(e.Font.FontFamily, (float) 9, FontStyle.Bold, GraphicsUnit.Pixel);
+            Font font = tabcontrol_ServerTypes.Font;                           // Borrow font from designer setting
 
-            // paint selected tab different than the others
+            // Paint selected tab different than the others
             if (e.State == DrawItemState.Selected)
             {
-               // draw a different background color, and don't paint a focus rectangle.
+               // Draw a different background color, and don't paint a focus rectangle.
                brush = new System.Drawing.SolidBrush(Color.Black);
 
-               ////Brush brushRect = new SolidBrush(Color.FloralWhite);
                Brush brushRect = new SolidBrush(System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(240)))), ((int)(((byte)(250)))))); // (experiment 20130716°0801)
                g.FillRectangle(brushRect, e.Bounds);
 
-               if (Glb.Debag.ExecuteNo)
+               if (Glb.Debag.Execute_No)
                {
-                  font = new Font(font.FontFamily, font.Size, FontStyle.Bold, GraphicsUnit.Point); // (experiment 20130716°0802)
+                  font = new Font(font.FontFamily, font.Size, FontStyle.Bold, GraphicsUnit.Point); // Experiment [line 20130716°0802]
                }
             }
             else
@@ -692,40 +664,23 @@ namespace QueryPonyGui
                // e.DrawBackground();
 
                // BorderStyle? Empirical test => This is the border of the page area, not the title text area.
-               ////tabcontrol_ServerTypes.TabPages[e.Index].BorderStyle = BorderStyle.FixedSingle;
-               ////tabcontrol_ServerTypes.TabPages[e.Index].BorderStyle = BorderStyle.None;
-               ////tabcontrol_ServerTypes.TabPages[e.Index].BorderStyle = BorderStyle.Fixed3D;
+               // //tabcontrol_ServerTypes.TabPages[e.Index].BorderStyle = BorderStyle.FixedSingle;
+               // //tabcontrol_ServerTypes.TabPages[e.Index].BorderStyle = BorderStyle.None;
+               // //tabcontrol_ServerTypes.TabPages[e.Index].BorderStyle = BorderStyle.Fixed3D;
 
-               // (experiment 20130723°1047) this works
-               ////Brush brushRect = new SolidBrush(Color.Salmon);
+               // Experiment [seq 20130723°1047] This works
                Brush brushRect = new SolidBrush(System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(240)))), ((int)(((byte)(250))))));
                g.FillRectangle(brushRect, e.Bounds);
             }
 
-
-            ////// use own font, just because we can
-            ////////Font font = new Font(e.Font.FontFamily, (float)9, FontStyle.Bold, GraphicsUnit.Pixel);
-            ////Font font = tabcontrol_ServerTypes.Font; // borrow font from designer setting
-
-            // todo : Retrieve wanted index programmatically (todo 20130616°1731)
-            ////if (   (e.Index == 5)                                                         // 5 = PostgreSQL
-            ////    || (e.Index == 7)                                                         // 7 = CouchDB
-            ////     )
-            if ((e.Index == 7)                                                                // 7 = CouchDB
-                 )
+            // Todo : Retrieve wanted index programmatically [todo 20130616°1731]
+            if ((e.Index == 7))                                                // 7 = CouchDB
             {
-               ////font = new Font(font.FontFamily, font.Size, FontStyle.Italic, GraphicsUnit.Point);
                font = new Font(font.FontFamily, font.Size, GraphicsUnit.Point);
-               ////brush = new SolidBrush(Color.Turquoise);
                brush = new SolidBrush(Color.Teal);
             }
-            else
-            {
-               // (experiment 20130723°1046)
-               ////brush = new SolidBrush(Color.Yellow);
-            }
 
-            // draw string, center the text.
+            // Draw string, center the text
             StringFormat stringformat = new StringFormat();
             stringformat.Alignment = StringAlignment.Center;
             stringformat.LineAlignment = StringAlignment.Center;
@@ -738,8 +693,7 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This eventhandler serves test purposes only.</summary>
+      /// <summary>This eventhandler serves test purposes only</summary>
       /// <remarks>
       /// id : 20130617°1431
       /// finding : This event fires on about each keystroke.
@@ -748,11 +702,10 @@ namespace QueryPonyGui
       /// <param name="e">The event object itself</param>
       private void combobox_MssqlServer_TextChanged(object sender, EventArgs e)
       {
-         System.Threading.Thread.Sleep(0); // breakpoint
+         System.Threading.Thread.Sleep(0);                                     // Breakpoint
       }
 
-
-      /// <summary>This eventhandler serves test purposes only.</summary>
+      /// <summary>This eventhandler serves test purposes only</summary>
       /// <remarks>
       /// id : 20130617°1432
       /// finding : This event fires on about each keystroke.
@@ -761,11 +714,10 @@ namespace QueryPonyGui
       /// <param name="e">The event object itself</param>
       private void combobox_MssqlServer_TextUpdate(object sender, EventArgs e)
       {
-         System.Threading.Thread.Sleep(0); // breakpoint
+         System.Threading.Thread.Sleep(0);                                     // Breakpoint
       }
 
-
-      /// <summary>This eventhandler serves test purposes only.</summary>
+      /// <summary>This eventhandler serves test purposes only</summary>
       /// <remarks>
       /// id : 20130617°1433
       /// finding : ?
@@ -774,11 +726,10 @@ namespace QueryPonyGui
       /// <param name="e">The event object itself</param>
       private void combobox_MssqlServer_SelectedValueChanged(object sender, EventArgs e)
       {
-         System.Threading.Thread.Sleep(0); // breakpoint
+         System.Threading.Thread.Sleep(0);                                     // Breakpoint
       }
 
-
-      /// <summary>This eventhandler serves test purposes only.</summary>
+      /// <summary>This eventhandler serves test purposes only</summary>
       /// <remarks>
       /// id : 20130617°1434
       /// finding : This fires on typing character keys, but not on the TAB or ENTER key.
@@ -790,21 +741,20 @@ namespace QueryPonyGui
          char cKey = ' ';
          cKey = e.KeyChar;
 
-         System.Threading.Thread.Sleep(0); // breakpoint
+         System.Threading.Thread.Sleep(0);                                     // Breakpoint
       }
 
-
-      /// <summary>This eventhandler processes the SelectedIndexChanged event of all server comboboxes.</summary>
+      /// <summary>This eventhandler processes the SelectedIndexChanged event of all server comboboxes</summary>
       /// <remarks>id : 20130622°1211 (20130617°1621)</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
       private void combobox_Connection_SelectedIndexChanged(object sender, EventArgs e)
       {
-         // service/workaround for storing the selected connection on program exit
+         // Service or workaround for storing the selected connection on program exit
          ComboBox combobox = sender as ComboBox;
          SelectedConnectionIndex = combobox.SelectedIndex;
 
-         // obey flag to avoid vicious circle of adjustment events
+         // Obey flag to avoid vicious circle of adjustment events
          if (_tabpageHasChanged_AndCombobox_IsAlreadyAdjusted == true)
          {
             _tabpageHasChanged_AndCombobox_IsAlreadyAdjusted = false;
@@ -812,22 +762,21 @@ namespace QueryPonyGui
          }
          _tabpageChange_WasInitiated_ByCombobox = true;
 
-         // confusing workaround ...
-         // todo : Streamline/clear that flag's mechanism. [todo 20130624°0922]
+         // Confusing workaround ...
+         // Todo : Streamline/clear that flag's mechanism. [todo 20130624°0922]
          if (_connectionCombobox_SelectionChanged_FirstCall_HELPERFLAG)
          {
             _connectionCombobox_SelectionChanged_FirstCall_HELPERFLAG = false;
             _tabpageChange_WasInitiated_ByCombobox = false;
          }
 
-
-         // the 'try' should not be necessary, but during development we had failing casts
+         // The 'try' should not be necessary, but during development we had failing casts
          ConnSettingsGui csGui = null;
          try
          {
             csGui = (ConnSettingsGui)combobox.SelectedItem; // (refactor 20130620°0211)
 
-            // empirical try to prevent crashing when loading demo connection settings [20130624°1231] this helped to some degree
+            // Empirical try to prevent crashing when loading demo connection settings [seq 20130624°1231] This helped to some degree
             if (csGui == null)
             {
                return;
@@ -835,23 +784,21 @@ namespace QueryPonyGui
          }
          catch (Exception ex)
          {
-            // fatal
+            // Fatal
             string sMst = ex.Message;
          }
 
-         // todo : Check when exactly this executed, and whether it is useful at all. (todo 20130709°1323)
+         // Todo : Check when exactly this executed, and whether it is useful at all. (todo 20130709°1323)
          tabpagePaint(csGui);
 
-         // remember original tabpage filling for later use with creating new connection [20130623°1555]
+         // Remember original tabpage filling for later use with creating new connection [20130623°1555]
          _tabpageSelected_OriginalFilling_HELPERMEMO = csGui.ConnIdString();
 
-         // don't forget this one, otherwise the Connect Button will work wrong [20130620°1623]
+         // Don't forget this one, otherwise the Connect Button will work wrong [20130620°1623]
          _conSettings = csGui;
       }
 
-
-
-      /// <summary>This method paints a TabPage depending on the given connection setting.</summary>
+      /// <summary>This method paints a TabPage depending on the given connection setting</summary>
       /// <remarks>
       /// id : 20130624°1241
       /// note : Sequence outsourced from method 20130622°1211 combobox_Connection_SelectedIndexChanged()
@@ -859,8 +806,7 @@ namespace QueryPonyGui
       /// </remarks>
       private void tabpagePaint(ConnSettingsGui cs)
       {
-
-         // the actual job, depending on the selected connection type
+         // The actual job, depending on the selected connection type
          ConnSettingsLib.ConnectionType cst = cs.Type;
          if (cst == ConnSettingsLib.ConnectionType.Couch)
          {
@@ -868,7 +814,7 @@ namespace QueryPonyGui
             textbox_Couch_ServerAddress.Text = cs.DatabaseServerUrl;
 
             // (empirical shutdown 20130725°1702)
-            if (IOBus.Gb.Debag.Shutdown)
+            if (IOBus.Gb.Debag.Shutdown_Anyway)
             {
                combobox_Couch_DatabaseName.Items.Add("cleopatra");
                combobox_Couch_DatabaseName.SelectedIndex = 0;
@@ -890,7 +836,7 @@ namespace QueryPonyGui
             combobox_Mssql_DatabaseName.Text = cs.DatabaseName;
 
             radiobutton_Mssql_Trusted.Checked = cs.Trusted;
-            radiobutton_Mssql_Untrusted.Checked = (! cs.Trusted);                      // is this necessary? [20130623°1533]
+            radiobutton_Mssql_Untrusted.Checked = (! cs.Trusted);              // Is this necessary? [line 20130623°1533]
             textbox_Mssql_LoginName.Text = cs.LoginName;
             textbox_Mssql_Password.PasswordChar = '*';
             textbox_Mssql_Password.Text = cs.Password;
@@ -949,22 +895,19 @@ namespace QueryPonyGui
          }
          else
          {
-            // fatal
+            // Fatal
          }
-
       }
 
-
-      /// <summary>This method reads all settings from disk and writes them into the controls en bloc.</summary>
+      /// <summary>This method reads all settings from disk and writes them into the controls en bloc</summary>
       /// <remarks>id : 20130622°0711 (20130604°0102)</remarks>
       private void SettingsLoad()
       {
-
-         // preparation
+         // Preparation
          MainForm.ServerList_ = Properties.Settings.Default.ServerList;
 
-         // possible initialisation on program start
-         // todo : The default proposal settings for each database type should be set
+         // Possible initialisation on program start
+         // Todo : The default proposal settings for each database type should be set
          //    by the tab, in the moment the tab is is selected the first time
          //    and it recognizes it has no settings yet. [todo 20130622°0741]
          if (MainForm.ServerList_ == null)
@@ -973,21 +916,21 @@ namespace QueryPonyGui
          }
 
          //----------------------------------------------------
-         // note : Below assigned controls should resemble the exact list of all
+         // Note : Below assigned controls should resemble the exact list of all
          //         controls existing on the Connect Form. [note 20130622°0713]
          //----------------------------------------------------
 
-         // no list, no looping
+         // No list, no looping
          int iListCount = 0;
          if (MainForm.ServerList_ != null)
          {
             iListCount = MainForm.ServerList_.Items.Length;
          }
 
-         // loop over the ServerList
+         // Loop over the ServerList
          for (int i = 0; i < iListCount; i++)
          {
-            ConnSettingsGui csNdx = MainForm.ServerList_.Items[i];                     // just looping comfort
+            ConnSettingsGui csNdx = MainForm.ServerList_.Items[i];             // Just looping comfort
 
             combobox_Connection.Items.Add(csNdx);
 
@@ -996,8 +939,8 @@ namespace QueryPonyGui
                case ConnSettingsLib.ConnectionType.Mssql:
 
                   textbox_Mssql_ServerAddress.Text = csNdx.DatabaseServerUrl;
-                  combobox_Mssql_DatabaseName.SelectedText = csNdx.DatabaseName;       // just on suspicion 20130717°122108
-                  combobox_Mssql_DatabaseName.Text = csNdx.DatabaseName;               // just on suspicion 20130717°122109
+                  combobox_Mssql_DatabaseName.SelectedText = csNdx.DatabaseName; // Just on suspicion [line 20130717°1221`08]
+                  combobox_Mssql_DatabaseName.Text = csNdx.DatabaseName;       // Just on suspicion [line 20130717°1221`09]
 
                   radiobutton_Mssql_Trusted.Checked = csNdx.Trusted;
                   radiobutton_Mssql_Untrusted.Checked = (! csNdx.Trusted);
@@ -1027,7 +970,7 @@ namespace QueryPonyGui
                case ConnSettingsLib.ConnectionType.Oracle:
 
                   textbox_Oracle_DataSource.Text = csNdx.DatabaseServerUrl;
-                  combobox_Oracle_DatabaseName.Text = csNdx.DatabaseName;              // just on suspicion (20130717°122107)
+                  combobox_Oracle_DatabaseName.Text = csNdx.DatabaseName;      // Just on suspicion [line 20130717°1221`07]
                   radiobutton_Oracle_Trusted.Checked = csNdx.Trusted;
                   radiobutton_Oracle_Untrusted.Checked = (! csNdx.Trusted);
                   textbox_Oracle_LoginName.Text = csNdx.LoginName;
@@ -1037,7 +980,7 @@ namespace QueryPonyGui
                case ConnSettingsLib.ConnectionType.Pgsql:
 
                   textbox_Pgsql_ServerAddress.Text = csNdx.DatabaseServerUrl;
-                  combobox_Pgsql_DatabaseName.Text = csNdx.DatabaseName;               // abuse
+                  combobox_Pgsql_DatabaseName.Text = csNdx.DatabaseName;       // Abuse
                   textbox_Pgsql_LoginName.Text = csNdx.LoginName;
                   textbox_Pgsql_Password.Text = csNdx.Password;
                   break;
@@ -1062,18 +1005,17 @@ namespace QueryPonyGui
                   break;
             }
 
-            // remember original tabpage filling for later use with creating new connection [20130623°1556]
+            // Remember original tabpage filling for later use with creating new connection [20130623°1556]
             _tabpageSelected_OriginalFilling_HELPERMEMO = csNdx.ConnIdString();
 
          }
 
-         // dummy flag (compare issue 20130714°1702)
+         // Dummy flag (compare issue 20130714°1702)
          checkbox_LowBandwidth.Checked = Properties.Settings.Default.LowBandwidth;
 
       }
 
-
-      /// <summary>This method saves all available Setting values en bloc.</summary>
+      /// <summary>This method saves all available Setting values en bloc</summary>
       /// <remarks>
       /// id : 20130621°1311 (20130604°0101)
       /// todo : More elegant were, not to save all tablpages en bloc, but only
@@ -1083,13 +1025,11 @@ namespace QueryPonyGui
       /// </remarks>
       private void SettingsSave()
       {
-
-         // preparation
+         // Preparation
          List<ConnSettingsGui> liConnSettings = new List<ConnSettingsGui>();
 
          //====================================================================
-         // (sequence 20130621°1312)
-         // note : This sequence resembles the exact list of all controls on the Connect Form.
+         // Resemble the exact list of all controls on the Connect Form [seq 20130621°1312]
 
          string sComboConnection = combobox_Connection.Text;
          int sTabconSelectedIndex = tabcontrol_ServerTypes.SelectedIndex;
@@ -1121,7 +1061,7 @@ namespace QueryPonyGui
             csMssql.DatabaseName = combobox_Mssql_DatabaseName.Text;
 
             csMssql.Trusted = radiobutton_Mssql_Trusted.Checked;
-            csMssql.Trusted = (! radiobutton_Mssql_Untrusted.Checked);                 // haha
+            csMssql.Trusted = (! radiobutton_Mssql_Untrusted.Checked);         // Haha
             csMssql.LoginName = textbox_Mssql_LoginName.Text;
             csMssql.Password = textbox_Mssql_Password.Text;
 
@@ -1176,7 +1116,7 @@ namespace QueryPonyGui
             ConnSettingsGui csOracle = new ConnSettingsGui();
             csOracle.Type = ConnSettingsLib.ConnectionType.Oracle;
 
-            csOracle.DatabaseServerUrl = textbox_Oracle_DataSource.Text;               // gray, not used
+            csOracle.DatabaseServerUrl = textbox_Oracle_DataSource.Text;       // Gray, not used
             csOracle.DatabaseName = combobox_Oracle_DatabaseName.Text;
 
             csOracle.Trusted = radiobutton_Oracle_Trusted.Checked;
@@ -1210,32 +1150,30 @@ namespace QueryPonyGui
             ConnSettingsGui csSqlite = new ConnSettingsGui();
             csSqlite.Type = ConnSettingsLib.ConnectionType.Sqlite;
 
-            // (sequence 20130702°1412)
+            // [seq 20130702°1412]
             string sRoot = "";
             string sFilePathWithoutRoot = "";
             bool b = Utils.SplitFullfilenamInServerAndDatabase ( textBox_SqliteFile.Text
                                                                 , out sRoot
                                                                  , out sFilePathWithoutRoot
                                                                   );
-            csSqlite.DatabaseServerUrl = sRoot;                                        // e.g. "C:"
-            csSqlite.DatabaseName = sFilePathWithoutRoot;                              // e.g. "Documents and Settings\Frank\Local Settings\Application Data\www.trilo.de\QueryPony.vshost.exe_Url_pnyidnkusl2rbapfnj3mkumbsyerzfns\2.1.2.34917\joesgarage.sqlite3"
+            csSqlite.DatabaseServerUrl = sRoot;                                // E.g. "C:"
+            csSqlite.DatabaseName = sFilePathWithoutRoot;                      // E.g. "Documents and Settings\Frank\Local Settings\Application Data\www.trilo.de\QueryPony.vshost.exe_Url_pnyidnkusl2rbapfnj3mkumbsyerzfns\2.1.2.34917\joesgarage.sqlite3"
 
             liConnSettings.Add(csSqlite);
          }
 
          //----------------------------------------------------
-         // (.9) additional
+         // (.9) Additional
          Properties.Settings.Default.LowBandwidth = checkbox_LowBandwidth.Checked;
 
          //====================================================================
 
-
-         // (algorithm 20130622°0721)
-         // loop over the accumulated settings and actualize the ServerList
+         // Loop over the accumulated settings and actualize the ServerList [algorithm 20130622°0721]
          foreach (ConnSettingsGui csGui in liConnSettings)
          {
-            // find the respective ServerList entry
-            // todo : implement his algorithm inside ServerList as a service method like
+            // Find the respective ServerList entry
+            // Todo : implement his algorithm inside ServerList as a service method like
             //   'ConnectionSetting ServerList.findConnection(ConnectionSetting x)' [todo 20130622°0722]
             int iNdxHit = -1;
             for (int i = 0; i < MainForm.ServerList_.Items.Length; i++)
@@ -1244,20 +1182,20 @@ namespace QueryPonyGui
                string sConnFromSettings = csGui.ConnIdString();
                if (sConnFromServerList == sConnFromSettings)
                {
-                  // connection found
+                  // Connection found
                   iNdxHit = i;
                }
             }
 
-            // (.) is the connection setting a not-yet-existing one?
+            // (.) Is the connection setting a not-yet-existing one?
             if (iNdxHit < 0)
             {
-               // (.1) the connection has to be added
-               MainForm.ServerList_.Add(csGui); //// (location 20130725°1614) //// this seems to be doubled below? (finding 20130725°1614 for issue 20130725°1611)
+               // (.1) The connection has to be added
+               MainForm.ServerList_.Add(csGui);                                // Occurrence 20130725°1614`11
             }
             else
             {
-               // (.2) the connection has to be updated
+               // (.2) The connection has to be updated
 
                //----------------------------------------------
                // issue 20130701°1256
@@ -1268,7 +1206,7 @@ namespace QueryPonyGui
                // question : What is missing in the ConnectionList class to update one single item in the List?
                //----------------------------------------------
 
-               // brute force setting (sequence 20130701°125602) completely rebuild the list, this helps
+               // Brute force setting [seq 20130701°1256`02] Completely rebuild the list, this helps
                ServerList sl = new ServerList();
                for (int i = 0; i < MainForm.ServerList_.Items.Length; i++)
                {
@@ -1284,38 +1222,16 @@ namespace QueryPonyGui
                   sl.Add(csHlp);
                }
                MainForm.ServerList_ = sl;
-
             }
-
-            // maintain ConnectionList (20130714°1741 (20130623°1134))
-            // todo : Sequence appears redundantly, merge the various occurrences. (todo 20130714°1742)
-            //////~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            ////// (line empirically shutdown 20130725°1615) seems indeed to solve issue 20130725°1611
-            ////////MainForm.ServerList.Add(csGui); //// (location 20130725°1614) cleopatra 2
-            ////if (Glb.Debag.ShutdownForever)
-            ////{
-            ////   MainForm.ServerList.Add(csGui); // (line 20130725°161502) //// (location 20130725°1614) cleopatra 2
-            ////}
-            //////~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-            //////// (finally outcommented 20130809°1212)
-            ////// (sequence shifted below 20130807°1311)
-            ////if (Glb.Debag.ExecuteNo)
-            ////{
-            ////   QueryPonyGui.Properties.Settings.Default.ServerList = MainForm.ServerList_; // todo : this sequence should probably moved behind the foreach loop (20130731°0121)
-            ////   QueryPonyGui.Properties.Settings.Default.Save(); // (here strikes issue 20130731°0131) this does not save anything
-            ////}
          }
 
-         // (sequence shifted here from above 20130807°1311)
-         QueryPonyGui.Properties.Settings.Default.ServerList = MainForm.ServerList_; //// todo : this sequence should probably moved behind the foreach loop (20130731°0121) (DONE 20130807°1311)
-         QueryPonyGui.Properties.Settings.Default.Save(); //// (here strikes issue 20130731°0131) this does not save anything -- SOLVED 20130809°1221
+         // [seq 20130807°1311]
+         QueryPonyGui.Properties.Settings.Default.ServerList = MainForm.ServerList_;
+         QueryPonyGui.Properties.Settings.Default.Save();                      // Here stroke issue 20130731°0131, solved 20130809°1221
 
       }
 
-
-      /// <summary>This eventhandler processes the SaveSettings Button. (This button exists for debug purposes only.)</summary>
+      /// <summary>This eventhandler processes the SaveSettings Button. This button exists for debug purposes only.</summary>
       /// <remarks>id : 20130621°0921</remarks>
       /// <param name="sender">The sending object</param>
       /// <param name="e">The event object</param>
@@ -1323,7 +1239,6 @@ namespace QueryPonyGui
       {
          SettingsSave();
       }
-
 
       /// <summary>
       /// This eventhandler synchronizes the main connection combobox to what
@@ -1341,7 +1256,7 @@ namespace QueryPonyGui
          TabPage tbPrev = _previouslySelectedTabpage;
          _previouslySelectedTabpage = tcNew.SelectedTab;
 
-         // maintain Connect Form title (20130724°1112)
+         // Maintain Connect Form title (20130724°1112)
          maintainFormTitleText();
 
          // If the tabpage change is caused by connection deletion, ignore that values,
@@ -1352,13 +1267,11 @@ namespace QueryPonyGui
          }
 
          // Point the connection combobox to the newly selected tabpage if possible.
-         ////bool b1 = syncConnectionComboboxWith_NewlySelectedTabpage(tbNew);
          syncConnectionComboboxWith_NewlySelectedTabpage(tbNew);
 
          // See whether the left tabpage was edited, and possibly store that as new connection.
          bool bEdited = syncConnectionComboboxWith_PreviouslySelectedTabpage(tbPrev);
       }
-
 
       /// <summary>
       /// This method examines the newly selected TabPage and
@@ -1369,13 +1282,13 @@ namespace QueryPonyGui
       {
          string sConnIdFromTab = "";
 
-         // retrieve connnection ID string
+         // Retrieve connnection ID string
          sConnIdFromTab = getConnectionIdFromTabpage(tabpageNew);
 
-         // find the index of the wanted item in the connection combobox.
+         // Find the index of the wanted item in the connection combobox.
          int iNdxCombo = findConnectionInConnectionCombobox(sConnIdFromTab);
 
-         // tell the combobox's SelectionChanged eventhandler, that it shall not ignit
+         // Tell the combobox's SelectionChanged eventhandler, that it shall not ignit
          //  a vicious circle of events by trying to adjust the tabcontrol in turn.
          if (! _tabpageChange_WasInitiated_ByCombobox)
          {
@@ -1383,14 +1296,13 @@ namespace QueryPonyGui
          }
          _tabpageChange_WasInitiated_ByCombobox = false;
 
-         // finally select the wanted combobox item
+         // Finally select the wanted combobox item
          combobox_Connection.SelectedIndex = iNdxCombo;
 
          return;
       }
 
-
-      /// <summary>This method locates the given connection ID in the connection list (or in the Connection ComboBox?).</summary>
+      /// <summary>This method locates the given connection ID in the connection list (or in the Connection ComboBox?)</summary>
       /// <remarks>
       /// id : 20130623°1121
       /// issue : How do we garantee, that the internal connection list ('ServerList') and
@@ -1401,7 +1313,7 @@ namespace QueryPonyGui
       /// <returns>The index of the found connection or -1</returns>
       private int findConnectionInConnectionCombobox(string sConnId)
       {
-         // find the index of the wanted item in the connection combobox.
+         // Find the index of the wanted item in the connection combobox.
          int iNdxCombo = -1;
          bool bFound = false;
 
@@ -1423,8 +1335,7 @@ namespace QueryPonyGui
          return iNdxCombo;
       }
 
-
-      /// <summary>This method examines the previously selected TabPage and synchronizes the general connection combobox with it.</summary>
+      /// <summary>This method examines the previously selected TabPage and synchronizes the general connection combobox with it</summary>
       /// <remarks>
       /// id : 20130623°0921
       /// note : This method detects a new connection by comparing the tabpage values
@@ -1437,23 +1348,22 @@ namespace QueryPonyGui
       {
          bool bRet = true;
 
-         // retrieve connnection ID string
+         // Retrieve connnection ID string
          string sConnIdNew = getConnectionIdFromTabpage(tbPrev);
 
-         // if TabPage is just empty, it is considered not edited [20130624°094502]
+         // If TabPage is just empty, it is considered not edited [20130624°094502]
          if (sConnIdNew == "")
          {
             return true;
          }
 
-         // examine connection list whether such connection already exists
+         // Examine connection list whether such connection already exists
          int iNdx = findConnectionInConnectionCombobox(sConnIdNew);
 
-         // if connection does not yet exist, create it.
+         // If connection does not yet exist, create it.
          if (iNdx < 0)
          {
-
-            // dialogbox 'Connection Edited' confirmation
+            // Dialogbox 'Connection Edited' confirmation
             DialogResult dr = DialogResult.Yes;
             if (Glb.Behavior.Dialogbox_CreateNewConnection)
             {
@@ -1481,8 +1391,7 @@ namespace QueryPonyGui
          return bRet;
       }
 
-
-      /// <summary>This method creates a new connection.</summary>
+      /// <summary>This method creates a new connection</summary>
       /// <remarks>id : 20130623°1131</remarks>
       /// <returns>Success flag</returns>
       private bool createNewConnection(TabPage tabpage)
@@ -1507,7 +1416,7 @@ namespace QueryPonyGui
             cs.DatabaseName = combobox_Mssql_DatabaseName.Text;
             cs.LoginName = textbox_Mssql_LoginName.Text;
             cs.Password = textbox_Mssql_Password.Text;
-            cs.Trusted = radiobutton_Mssql_Trusted.Checked;                            // ? not sure
+            cs.Trusted = radiobutton_Mssql_Trusted.Checked;                    // Not sure?
          }
          else if (tabpage == tabpage_Mysql)
          {
@@ -1530,11 +1439,11 @@ namespace QueryPonyGui
          else if (tabpage == tabpage_Oracle)
          {
             cs.Type = ConnSettingsLib.ConnectionType.Oracle;
-            cs.DatabaseServerUrl = textbox_Oracle_DataSource.Text;                     // just on suspicion (20130717°122111)
-            cs.DatabaseName = combobox_Oracle_DatabaseName.Text;                       // just on suspicion (20130717°122112)
+            cs.DatabaseServerUrl = textbox_Oracle_DataSource.Text;             // Just on suspicion [line 20130717°1221`11]
+            cs.DatabaseName = combobox_Oracle_DatabaseName.Text;               // Just on suspicion [line 20130717°1221`12]
             cs.LoginName = textbox_Oracle_LoginName.Text;
             cs.Password = textbox_Oracle_Password.Text;
-            cs.Trusted = radiobutton_Oracle_Trusted.Checked;                           // ? not sure
+            cs.Trusted = radiobutton_Oracle_Trusted.Checked;                   // Not sure?
          }
          else if (tabpage == tabpage_Pgsql)
          {
@@ -1557,24 +1466,23 @@ namespace QueryPonyGui
             bRet = false;
          }
 
-
-         // maintain Connection ComboBox
+         // Maintain Connection ComboBox
          if (bRet)
          {
             //-----------------------------------------------------------------
-            // (issue 20130623°1142)
+            // issue 20130623°1142
             // symptoms : In the code, we have much maintaining the ComboBox Items.
             // proposal : Use ConnectionList as the DataSource for the ComboBox.
             // workaround : Leave it as it is.
             // status :
             //-----------------------------------------------------------------
 
-            // maintain Connection ComboBox
+            // Maintain Connection ComboBox
             combobox_Connection.Items.Add(cs);
 
             //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            // (empirically added 20130724°0912)
-            // note : About .
+            // Empirically added 20130724°0912
+            // Note : About .
             //    Line 20130624°1051 causes issue 20130724°0911, it causes the
             //    CouchDB's database combobox value to change from 'fruits' to
             //    '_replicator' unwanted. Why? Probably by igniting the Connection
@@ -1587,23 +1495,22 @@ namespace QueryPonyGui
             _tabpageHasChanged_AndCombobox_IsAlreadyAdjusted = true; // the solution for issue 20130724°0911
             //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-            // (empirically added 20130624°1051)
-            combobox_Connection.SelectedItem = cs; // the guildy line for issue 20130724°0911
+            // Empirically added 20130624°1051
+            combobox_Connection.SelectedItem = cs;                             // The guilty line for issue 20130724°0911
 
-            // maintain ConnectionList (20130623°1134) (see todo 20130714°1742)
-            MainForm.ServerList_.Add(cs); //// (location 20130725°1614) cleopatra
+            // Maintain ConnectionList [seq 20130623°1134]
+            MainForm.ServerList_.Add(cs);                                      // Cleopatra // Occurrence 20130725°1614`12
             QueryPonyGui.Properties.Settings.Default.ServerList = MainForm.ServerList_;
             QueryPonyGui.Properties.Settings.Default.Save();
 
-            // maintain TabPages
+            // Maintain TabPages
             tabcontrol_ServerTypes.SelectedTab = tabpage;
          }
 
          return bRet;
       }
 
-
-      /// <summary>This method builds the connection ID for the given TabPage.</summary>
+      /// <summary>This method builds the connection ID for the given TabPage</summary>
       /// <remarks>id : 20130623°1011</remarks>
       /// <param name="tb">The TabPage for which to build a connection ID</param>
       /// <returns>The wanted connection ID</returns>
@@ -1611,7 +1518,7 @@ namespace QueryPonyGui
       {
          string sRet = "";
 
-         // retrieve connnection ID string
+         // Retrieve connnection ID string
          ConnSettingsLib.ConnectionType cTyp = ConnSettingsLib.ConnectionType.NoType;
          string sEle1 = "", sEle2 = "";
          if (tabpage == tabpage_Couch)
@@ -1657,7 +1564,7 @@ namespace QueryPonyGui
          else if (tabpage == tabpage_Sqlite)
          {
             cTyp = ConnSettingsLib.ConnectionType.Sqlite;
-            sEle1 = textBox_SqliteFile.Text;                                           // (obsolet 20130702°142851)
+            sEle1 = textBox_SqliteFile.Text;                                           // [obsolet 20130702°1428`51]
             sEle1 = textbox_Sqlite_ServerAddress.Text;
             sEle2 = textBox_SqliteFile.Text;
          }
@@ -1667,7 +1574,7 @@ namespace QueryPonyGui
             MessageBox.Show(sErr);
          }
 
-         // determine IDs only for non-empty TabPage [experimental 20130624°0945]
+         // Determine IDs only for non-empty TabPage [experiment 20130624°0945]
          if (sEle1 != "" || sEle2 != "")
          {
             sRet = ConnSettingsGui.getConnectionId(cTyp, sEle1, sEle2);
@@ -1676,8 +1583,7 @@ namespace QueryPonyGui
          return sRet;
       }
 
-
-      /// <summary>This eventhandler processes the Click event to delete the selected connection.</summary>
+      /// <summary>This eventhandler processes the Click event to delete the selected connection</summary>
       /// <remarks>id : 20130623°0701</remarks>
       /// <param name="sender">The sending object</param>
       /// <param name="e">The event object</param>
@@ -1687,7 +1593,7 @@ namespace QueryPonyGui
          ConnSettingsGui csDel = combobox_Connection.SelectedItem as ConnSettingsGui;
          int iComboSelectedIndex = combobox_Connection.SelectedIndex;
 
-         // paranoia
+         // Paranoia
          if (combobox_Connection.Items.Count < 1)
          {
             string sErr = "Nothing to delete, connection list is empty.";
@@ -1706,8 +1612,8 @@ namespace QueryPonyGui
          }
          */
 
-         // user confirmation
-         if (csDel != null) // (added 20130702°1434)
+         // User confirmation
+         if (csDel != null)                                                    // [added 20130702°1434]
          {
             sMsg = "Connection:" + Glb.sCrCr + Glb.sTb + csDel.ConnIdString()
                   + Glb.sCrCr + "Delete this connection from the connections list?"
@@ -1727,13 +1633,11 @@ namespace QueryPonyGui
             return;
          }
 
-
-         // maintain TabPage (a place more below would also suit) [20130624°0933]
+         // Maintain TabPage (a place more below would also suit) [seq 20130624°0933]
          clearTabPage(_previouslySelectedTabpage);
          _tabpageSelectionChange_CausedByConnectionDeletion = true;
 
-
-         // locate item in connection list
+         // Locate item in connection list
          ServerList connList = MainForm.ServerList_;
          int iNdxFound = -1;
          for (int iNdx = 0; iNdx < connList.Items.Length; iNdx++)
@@ -1745,16 +1649,16 @@ namespace QueryPonyGui
             }
          }
 
-         // connection found?
+         // Connection found?
          if (iNdxFound < 0)
          {
-            // error - this should never happen
+            // Error — this should never happen
             string sErr = Glb.Errors.TheoreticallyNotPossible + Glb.sCr + "Connection not found.";
             MessageBox.Show(sErr);
             return;
          }
 
-         // (debug issue 20130623°0721)
+         // Debug issue 20130623°0721
          if (Glb.Debag.ShowDebugMessage_FALSE)
          {
             sMsg = "Connection list indices:" + Glb.sCr ;
@@ -1771,57 +1675,55 @@ namespace QueryPonyGui
             dr = MessageBox.Show(sMsg);
          }
 
-         // remove item from global connection list
+         // Remove item from global connection list
          if (! connList.Remove(iNdxFound))
          {
-            // error, e.g. the connection list was already empty
+            // Error, e.g. the connection list was already empty
             return;
          }
 
-         // remove item from combobox
+         // Remove item from combobox
          combobox_Connection.Items.RemoveAt(iComboSelectedIndex);
 
-         // postprocess combobox [seqence 20130623°0734]
+         // Postprocess combobox [seqence 20130623°0734]
          if (combobox_Connection.Items.Count < 1) // now the combobox is empty
          {
-            // experimentally shutdown 20130810°1141 shutdown permanently if possible -- not soo easy
+            // Experimentally shutdown 20130810°1141 shutdown permanently if possible — Not soo easy
             // The 'N/A' item is puzzling, best we get along without it.
-            if (Glb.Debag.ExecuteNo)
+            if (Glb.Debag.Execute_No)
             {
                ConnSettingsGui csPlaceholder = new ConnSettingsGui();
                csPlaceholder.Type = ConnSettingsLib.ConnectionType.NoType;
                combobox_Connection.Items.Add(csPlaceholder);
 
-               // now we should set _previouslySelected to avoid 'connection edited' dialog [20130624°0931]
+               // Now we should set _previouslySelected to avoid 'connection edited' dialog [line 20130624°0931]
                combobox_Connection.SelectedIndex = combobox_Connection.Items.Count - 1;
             }
-            combobox_Connection.Text = ""; // experimental 20130810°114102 seems to be fine
+            combobox_Connection.Text = "";                                     // Experiment 20130810°1141`02 seems to be fine
          }
-         else if (iComboSelectedIndex == combobox_Connection.Items.Count) // the highest item was deleted
+         else if (iComboSelectedIndex == combobox_Connection.Items.Count)      // The highest item was deleted
          {
             iComboSelectedIndex--;
 
-            // now we should set _previouslySelected to avoid 'connection edited' dialog [20130624°093102]
+            // Now we should set _previouslySelected to avoid 'connection edited' dialog [line 20130624°0931`02]
             combobox_Connection.SelectedIndex = iComboSelectedIndex;
          }
-         else // the normal case
+         else                                                                  // The normal case
          {
             combobox_Connection.SelectedIndex = iComboSelectedIndex;
          }
 
-         // postprocess TabPage
+         // Postprocess TabPage
          TabPage tbDummy2 = _previouslySelectedTabpage; //  null;
 
-         // maintain settings
+         // Maintain settings
          QueryPonyGui.Properties.Settings.Default.ServerList = connList;
          QueryPonyGui.Properties.Settings.Default.Save();
 
          return;
       }
 
-
-
-      /// <summary>This method empties all fields on a TabPage.</summary>
+      /// <summary>This method empties all fields on a TabPage</summary>
       /// <remarks>
       /// id : 20130623°1621
       /// todo : Write the lines to empty all fields on the given TabPage. This is
@@ -1831,7 +1733,6 @@ namespace QueryPonyGui
       /// <param name="tb">The TabPage to be cleared</param>
       private void clearTabPage(TabPage tb)
       {
-
          if (tb == tabpage_Couch)
          {
             textbox_Couch_ServerAddress.Text = "";
@@ -1843,8 +1744,8 @@ namespace QueryPonyGui
          {
             textbox_Mssql_ServerAddress.Text = "";
             combobox_Mssql_DatabaseName.SelectedText = "";
-            radiobutton_Mssql_Trusted.Checked = true; //// false;                      // the both radiobuttons false? o.k.?
-            radiobutton_Mssql_Untrusted.Checked = false;                               // the both radiobuttons false? o.k.?
+            radiobutton_Mssql_Trusted.Checked = true;                          // The both radiobuttons false? O.k.?
+            radiobutton_Mssql_Untrusted.Checked = false;                       // The both radiobuttons false? O.k.?
             textbox_Mssql_LoginName.Text = "";
             textbox_Mssql_Password.Text = "";
          }
@@ -1867,8 +1768,8 @@ namespace QueryPonyGui
          else if (tb == tabpage_Oracle)
          {
             textbox_Oracle_DataSource.Text = "";
-            radiobutton_Oracle_Trusted.Checked = false;                                // the both radiobuttons false? o.k.?
-            radiobutton_Oracle_Untrusted.Checked = false;                              // the both radiobuttons false? o.k.?
+            radiobutton_Oracle_Trusted.Checked = false;                        // The both radiobuttons false? O.k.?
+            radiobutton_Oracle_Untrusted.Checked = false;                      // The both radiobuttons false? O.k.?
             textbox_Oracle_LoginName.Text = "";
             textbox_Oracle_Password.Text = "";
          }
@@ -1890,15 +1791,14 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This eventhandler processes the LowBandwidth CheckedChanged event and saves the new value to the settings.</summary>
+      /// <summary>This eventhandler processes the LowBandwidth CheckedChanged event and saves the new value to the settings</summary>
       /// <remarks>id : 20130623°0841</remarks>
       /// <param name="sender">The sending object</param>
       /// <param name="e">The event object</param>
       private void checkbox_LowBandwidth_CheckedChanged(object sender, EventArgs e)
       {
          //----------------------------------------------------
-         // issue 20130714°1702
+         // issue 20130714°1702 ''
          // topic : Implement LowBandwidth
          // symptoms : Checkbox LowBandwidth exists but has no functionality yet.
          // todo : Find out what might have been the intention of this flag, then
@@ -1910,8 +1810,7 @@ namespace QueryPonyGui
          QueryPonyGui.Properties.Settings.Default.Save();
       }
 
-
-      /// <summary>This eventhandler ... (experiments for maintaining connection deletion).</summary>
+      /// <summary>This eventhandler ... (experiments for maintaining connection deletion)</summary>
       /// <remarks>id : 20130624°0941</remarks>
       /// <param name="sender">The sending object</param>
       /// <param name="e">The event object</param>
@@ -1920,7 +1819,7 @@ namespace QueryPonyGui
          TabControl tc = sender as TabControl;
          TabPage tb = tc.SelectedTab;
 
-         if (Glb.Debag.ExecuteNo)
+         if (Glb.Debag.Execute_No)
          {
             string sMsg = "Debug Enter"
                          + Glb.sCrCr + "TabControl" + Glb.sTb + " : " + tc.Name
@@ -1928,11 +1827,10 @@ namespace QueryPonyGui
                            ;
             MessageBox.Show(sMsg);
          }
-         // finding : This event does not detect the TabPage switching. [finding 20130624°0943]
+         // Finding : This event does not detect the TabPage switching. [finding 20130624°0943]
       }
 
-
-      /// <summary>This eventhandler ... (experiments for maintaining connection deletion).</summary>
+      /// <summary>This eventhandler ... (experiments for maintaining connection deletion)</summary>
       /// <remarks>id : 20130624°0942</remarks>
       /// <param name="sender">The sending object</param>
       /// <param name="e">The event object</param>
@@ -1941,7 +1839,7 @@ namespace QueryPonyGui
          TabControl tc = sender as TabControl;
          TabPage tb = tc.SelectedTab;
 
-         if (Glb.Debag.ExecuteNo)
+         if (Glb.Debag.Execute_No)
          {
             string sMsg = "Debug Leave"
                          + Glb.sCrCr + "TabControl" + Glb.sTb + " : " + tc.Name
@@ -1949,11 +1847,10 @@ namespace QueryPonyGui
                            ;
             MessageBox.Show(sMsg);
          }
-         // finding : This event does not detect the TabPage switching. [finding 20130624°0944]
+         // Finding : This event does not detect the TabPage switching. [finding 20130624°0944]
       }
 
-
-      /// <summary>This eventhandler processes the button 'Load Demo Connection Settings' click event.</summary>
+      /// <summary>This eventhandler processes the button 'Load Demo Connection Settings' click event</summary>
       /// <remarks>id : 20130624°1121</remarks>
       /// <param name="sender">The sending object</param>
       /// <param name="e">The event object</param>
@@ -1961,7 +1858,7 @@ namespace QueryPonyGui
       {
          DemoConnSettings dcs = new DemoConnSettings();
 
-         // the dialogbox message leading line(s)
+         // The dialogbox message leading line(s)
          string sMsg       = "Load Demo Connection Settings?";
          sMsg += Glb.sCrCr + "The Demo Connection Settings are examples, what kind of information you"
                + Glb.sCr   + "have to fill into the fields on the connection tabs. They will mostly"
@@ -1974,11 +1871,11 @@ namespace QueryPonyGui
                + Glb.sCr
                ;
 
-         // build list of demo connections which will be loaded
+         // Build list of demo connections which will be loaded
          for (int iNdx = 0; iNdx < dcs.Items.Count; iNdx++ )
          {
             ConnSettingsGui csGui = dcs.Items[iNdx];
-            sMsg += Glb.sCr + "   " + (iNdx + 1).ToString() + "  -  " + csGui.ConnIdString(); //// [new 20130724°092113]
+            sMsg += Glb.sCr + "   " + (iNdx + 1).ToString() + "  -  " + csGui.ConnIdString();
          }
          sMsg += Glb.sCrCr + "Load them?";
 
@@ -1990,40 +1887,38 @@ namespace QueryPonyGui
          }
 
          //--------------------------------------------------------------------
-         // sequence is possibly to be outsourced to a dedicated 'add' method
+         // Sequence is possibly to be outsourced to a dedicated 'add' method
 
          for (int iNdx = 0; iNdx < dcs.Items.Count; iNdx++)
          {
             ConnSettingsGui csGui = dcs.Items[iNdx];
 
-            // is connection already in the Connection List?
+            // Is connection already in the Connection List?
             string sDemoId = csGui.ConnIdString();
 
-            // is demo connectionsetting already in main connectionsettings list?
+            // Is demo connectionsetting already in main connectionsettings list?
             List<string> list = MainForm.ServerList_.Ids;
             if (list.Contains(sDemoId))
             {
                continue;
             }
 
-            // transfer this DemoConnectionSettings into the program
-            MainForm.ServerList_.Add(csGui); //// (location 20130725°1614)
+            // Transfer this DemoConnectionSettings into the program
+            MainForm.ServerList_.Add(csGui);                                   // Occurrence 20130725°1614`13
             combobox_Connection.Items.Add(csGui);
             tabpagePaint(csGui);
 
          }
-         combobox_Connection.SelectedIndex = 0; // just to have any selection at all
+         combobox_Connection.SelectedIndex = 0;                                // Just to have any selection at all
          //--------------------------------------------------------------------
       }
-
 
       // (ref 20130624°1132)
       // title : How to disable editing of elements in combobox for C#?
       // url : http://stackoverflow.com/questions/598447/how-to-disable-editing-of-elements-in-combobox-for-c
       // usage : In method 20130624°1132 combobox_Connection_KeyPress()
 
-
-      /// <summary>This eventhandler processes the Connection ComboBox KeyPress event to prevent editing it.</summary>
+      /// <summary>This eventhandler processes the Connection ComboBox KeyPress event to prevent editing it</summary>
       /// <remarks>id : 20130624°1131</remarks>
       /// <param name="sender">The sending object</param>
       /// <param name="e">The event object</param>
@@ -2031,7 +1926,6 @@ namespace QueryPonyGui
       {
          e.Handled = true;
       }
-
 
       //-------------------------------------------------------
       // [issue 20130622°1141]
@@ -2042,8 +1936,7 @@ namespace QueryPonyGui
       //    static helper field to method 20130604°0629 MainForm::FormClosed().
       //-------------------------------------------------------
 
-
-      /// <summary>This method maintains the main treeview.</summary>
+      /// <summary>This method maintains the main treeview</summary>
       /// <remarks>id : 20130701°1115</remarks>
       /// <returns>Success flag</returns>
       private bool maintainTreeviewMain()
@@ -2056,8 +1949,7 @@ namespace QueryPonyGui
          return true;
       }
 
-
-      /// <summary>This method retrieves a list of databases from the server of the given connection settings.</summary>
+      /// <summary>This method retrieves a list of databases from the server of the given connection settings</summary>
       /// <remarks>id : 20130713°0921</remarks>
       /// <param name="arDatabases">The wanted array with database names</param>
       /// <param name="csLib">The connection setting for which to retrieve a database list</param>
@@ -2067,46 +1959,34 @@ namespace QueryPonyGui
          bool bRet = false;
          arDatabases = null;
 
-         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-         // (sequence 20130713°0922) compare sequence 20130618°0351
+         // ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+         // Connect dbClient [seq 20130713°0922]
+         // See Todo 20130828°1522 'Combine 4 connect dbClient seqences into one method'
 
-         // get a the client object
+         // Get a the client object
          DbClient dbClient = DbClientFactory.GetDbClient(csLib);
 
-         // (compare issue 20130716°0622)
+         // Compare issue 20130716°0622
          dbClient.Error += new EventHandler<ErrorEventQeArgs>(dbClient_Error);
 
-         // waiting phase start
+         // Waiting phase start
          Cursor oldCursor = Cursor;
          Cursor = Cursors.WaitCursor;
-         ////SplashConnecting c = new SplashConnecting();
-         ////c.Show(this);
-         ////c.Refresh();
 
-         // make the connection
+         // Make the connection
          bRet = dbClient.Connect();
 
-         // waiting phase end
-         ////c.Close();
+         // Waiting phase end
          Cursor = oldCursor;
+         // ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
 
-         ////// all right?
-         ////if (! bSuccess)
-         ////{
-         ////   string s = "Unable to connect: " + _client.ErrorMessage;
-         ////   MessageBox.Show(s, "QueryPony", MessageBoxButtons.OK, MessageBoxIcon.Error);
-         ////   _client.Dispose();
-         ////   ////return;
-         ////}
-         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-         // connection failed?
+         // Connection failed?
          if (bRet)
          {
-            // to retrieve the database list, a DbBrowser is wanted
+            // To retrieve the database list, a DbBrowser is wanted
             IDbBrowser dbBrowser = DbClientFactory.GetBrowser(dbClient);
 
-            // do the actual job
+            // Do the actual job
             arDatabases = dbBrowser.GetDatabases();
          }
          else
@@ -2117,14 +1997,13 @@ namespace QueryPonyGui
             MainForm.outputStatusLine(sErr);
          }
 
-         // finish this connection - otherwise an orphaned process is left behind (issue 20130619°0551)
+         // Finish this connection - otherwise an orphaned process is left behind (issue 20130619°0551)
          dbClient.Dispose();
 
          return bRet;
       }
 
-
-      /// <summary>This eventhandler processes the Error event of a DbClient.</summary>
+      /// <summary>This eventhandler processes the Error event of a DbClient</summary>
       /// <remarks>
       /// id : 20130716°0625
       /// note : This eventhandler was introduced to solve issue 20130716°0622.
@@ -2135,10 +2014,10 @@ namespace QueryPonyGui
       /// <param name="e">The event object</param>
       private void dbClient_Error(object sender, ErrorEventQeArgs e)
       {
-         // (shutdown 20130716°0643)
-         if (IOBus.Gb.Debag.ShutdownArchived)
+         // Shutdown 20130716°0643
+         if (IOBus.Gb.Debag.Shutdown_Archived)
          {
-            // this line was automatically created by the VS wizzard when it created this eventhandler.
+            // This line was automatically created by the VS wizzard when it created this eventhandler.
             throw new NotImplementedException();
          }
 
@@ -2149,11 +2028,10 @@ namespace QueryPonyGui
          object[] aro = { e.ErrorMessage };
          this.BeginInvoke(this._outputStatusLino, aro);
 
-         return; // breakpoint
+         return;                                                               // Breakpoint
       }
 
-
-      /// <summary>This eventhandler processes the DropDown event of the MS-SQL databases combobox.</summary>
+      /// <summary>This eventhandler processes the DropDown event of the MS-SQL databases combobox</summary>
       /// <remarks>
       /// id : 20130714°1721
       /// note : (1) This method contains a minimalistic server connect and disconnect
@@ -2161,11 +2039,11 @@ namespace QueryPonyGui
       ///    Thus it serves as good location to study connecting. (2) Also, if something
       ///    goes wrong, this method is sensitive to the orphane-processes-leave-behind
       ///    issues. Thus it is a good starting point for studying and debugging the
-      ///    threading behaviour. (note 20130715°1134/1135)
+      ///    threading behaviour (note 20130715°1134/1135)
       /// todo : Outsource the functionality to a non-eventhandler method to be available
       ///    for callers in general. Or is getDatabaseList() already enough outsourced?
       ///    (todo 20130715°1136)
-      /// note : (note 20130714°1722) BTW, to see what the corresponding field above
+      /// note 20130714°1722 : BTW, to see what the corresponding field above
       ///    the old treeview does, inspect methods
       ///    - 20130604°2156 QueryForm.cs::comboboxDatabase_SelectedIndexChanged()
       ///    - 20130604°2157 QueryForm.cs::comboboxDatabase_Enter()
@@ -2177,7 +2055,7 @@ namespace QueryPonyGui
       {
          string s = "", sMsg = "";
 
-         // detect database type
+         // Detect database type
          ComboBox cb = sender as ComboBox;
          TabPage tb = cb.Parent as TabPage;
          if (tb == null)
@@ -2187,17 +2065,17 @@ namespace QueryPonyGui
             return;
          }
 
-         // prepare the controls to use
-         // note : This sequence will *much* be simplified, if we eliminate the tabs at
-         //    all. This sequence is also a preparation for such planned refactor, because
-         //    it tells how to condense the involved controls. (note 20130715°1133)
+         // Prepare the controls to use
+         // Note 20130715°1133 : This sequence will *much* be simplified, if we eliminate
+         //    the tabs at all. This sequence is also a preparation for such planned
+         //    refactor, because it tells how to condense the involved controls.
          TextBox textboxServerAddress = null;
          ComboBox comboboxDatabaseName = null;
          TextBox textboxLoginName = null;
          TextBox textboxPassword = null;
-         TextBox textboxServerAddress2 = new TextBox();                                // (new 20130723°1025) is this a good idea?
-         TextBox textboxServerPortnum = new TextBox();                                 // (new 20130723°102502) is this a good idea?
-         TextBox textboxServerProtocol = new TextBox();                                // (new 20130723°102503) is this a good idea?
+         TextBox textboxServerAddress2 = new TextBox();                        // Is this a good idea? [line 20130723°1025`11]
+         TextBox textboxServerPortnum = new TextBox();                         // Is this a good idea? [line 20130723°1025`12]
+         TextBox textboxServerProtocol = new TextBox();                        // Is this a good idea? [line 20130723°1025`13]
          ConnSettingsLib.ConnectionType connectionType = ConnSettingsLib.ConnectionType.NoType;
          bool bTrusted = false;
          if (tb == tabpage_Couch)
@@ -2205,9 +2083,9 @@ namespace QueryPonyGui
             connectionType = ConnSettingsLib.ConnectionType.Couch;
             textboxServerAddress = textbox_Couch_ServerAddress;
             comboboxDatabaseName = combobox_Couch_DatabaseName;
-            textboxServerAddress2.Text = textboxServerAddress.Text;                    ////
-            textboxServerPortnum.Text = "0";                                           ////
-            textboxServerProtocol.Text = "";                                           ////
+            textboxServerAddress2.Text = textboxServerAddress.Text;
+            textboxServerPortnum.Text = "0";
+            textboxServerProtocol.Text = "";
             textboxLoginName = textbox_Couch_LoginName;
             textboxPassword = textbox_Couch_Password;
          }
@@ -2253,17 +2131,16 @@ namespace QueryPonyGui
             return;
          }
 
-
-         // define connection settings
+         // Define connection settings
          ConnSettingsLib csLib = new ConnSettingsLib();
          csLib.Type = connectionType;
-         csLib.Timeout = 3;                                                            // hm ..
+         csLib.Timeout = 3;                                                    // Hm ..
          csLib.DatabaseServerUrl = textboxServerAddress.Text;
-         csLib.DatabaseName = "";                                                      // blank shall be interpreted as e.g. "master"
-         csLib.DatabaseServerAddress = textboxServerAddress.Text;                      // (new 20130723°1024) so far only used for CouchDB
-         try { csLib.DatabaseServerPortnum = int.Parse(textboxServerPortnum.Text); }   // (new 20130723°102402) so far only used for CouchDB
+         csLib.DatabaseName = "";                                              // Blank shall be interpreted as e.g. "master"
+         csLib.DatabaseServerAddress = textboxServerAddress.Text;              // So far only used for CouchDB [new 20130723°1024`01]
+         try { csLib.DatabaseServerPortnum = int.Parse(textboxServerPortnum.Text); }  // So far only used for CouchDB [new 20130723°1024`02]
          catch { csLib.DatabaseServerPortnum = 0; }
-         csLib.DatabaseServerProtocol = textboxServerProtocol.Text;                    // (new 20130723°102403) so far only used for CouchDB
+         csLib.DatabaseServerProtocol = textboxServerProtocol.Text;            // So far only used for CouchDB [new 20130723°1024`03]
          csLib.Trusted = bTrusted;
          if (! bTrusted)
          {
@@ -2271,38 +2148,38 @@ namespace QueryPonyGui
             csLib.Password = textboxPassword.Text;
          }
 
-         // switch signal on while retrieving list of databases
+         // Switch signal on while retrieving list of databases
          Color colOrginal = textboxServerAddress.BackColor;
          textboxServerAddress.BackColor = Color.Yellow;
          textboxServerAddress.Refresh();
          comboboxDatabaseName.BackColor = Color.Yellow;
          comboboxDatabaseName.Refresh();
 
-         // retrieve the wanted list
+         // Retrieve the wanted list
          string[] arDatabases = null;
          bool b = getDatabaseList(out arDatabases, csLib);
 
          //----------------------------------------------------
-         // (note 20130715°1152)
+         // note 20130715°1152 ''
          // About MySQL connecting. Even with no password set, getDatabaseList()
          //  delivers two databases: (1) 'information_schema' (2) 'test'. But if
          //  I want view one then, the credentials are required.
          //----------------------------------------------------
 
-         // fill combobox
-         // note : If it's null, isn't then something wrong? (note 20130714°1744)
+         // Fill combobox
+         // note : If it's null, isn't then something wrong? [note 20130714°1744]
          if (arDatabases != null)
          {
             comboboxDatabaseName.Items.Clear();
             for (int i = 0; i < arDatabases.Length; i++)
             {
                //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-               // paranoia (20130717°1211)
-               // note : This condition is introduced as quick'n'dirty fix for problem
+               // Paranoia [seq 20130717°1211]
+               // Note : This condition is introduced as quick'n'dirty fix for problem
                //    'database entry is null'. Debugging shows, the deeper reason is problem
                //    'cannot switch from CouchDB tab to any other tab'. This reason seems
                //    'cannot by adding lines 20130717°1213/1214.
-               // todo : Make sure above, that a database entry cannot be null. (todo 20130717°1212)
+               // Todo : Make sure above, that a database entry cannot be null. [todo 20130717°1212]
                if (arDatabases[i] == null)
                {
                   s = "Error : Database list entry no " + (i + 1).ToString() + " is null.";
@@ -2321,7 +2198,6 @@ namespace QueryPonyGui
          }
          MainForm.outputStatusLine(sMsg);
 
-
          // switch signal off
          textboxServerAddress.BackColor = colOrginal;
          textboxServerAddress.Refresh();
@@ -2331,11 +2207,10 @@ namespace QueryPonyGui
          return;
       }
 
-
-      /// <summary>This eventhandler processes the checkbox IntegratedSecurity's CheckedChanged event.</summary>
+      /// <summary>This eventhandler processes the checkbox IntegratedSecurity's CheckedChanged event</summary>
       /// <remarks>
       /// id : 20130715°1151
-      /// todo : Merge all 'IntegratedSecurity' and related flags eventhandlers to one. (todo 20130715°1301)
+      /// todo : Merge all 'IntegratedSecurity' and related flags eventhandlers to one. [todo 20130715°1301]
       /// </remarks>
       /// <param name="sender">The sending object</param>
       /// <param name="e">The event object</param>
@@ -2357,15 +2232,14 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This method maintains the Connect Form's title text 'Connect to ...'.</summary>
+      /// <summary>This method maintains the Connect Form's title text 'Connect to ...'</summary>
       /// <remarks>id : 20130724°1111</remarks>
       private void maintainFormTitleText()
       {
-         if (! IOBus.Gb.Debag.ShutdownAlternatively)
+         if (! IOBus.Gb.Debag.Shutdown_Alternatively)
          {
-            // fade in database type into main form's caption (seq 20130725.0911)
-            // note : It is not sure to be such good feature, it might be more puzzling than helpful.
+            // Fade in database type into main form's caption [seq 20130725°0911]
+            // Note : It is not sure to be such good feature, it might be more puzzling than helpful.
             TabPage tb = tabcontrol_ServerTypes.SelectedTab;
             string s = "";
             if (tb == tabpage_Couch) { s = EnumExtensions.Description(ConnSettingsLib.ConnectionType.Couch); }

@@ -1,0 +1,10 @@
+﻿
+
+   ref 20130719°0913 'devart → OracleConnectionStringBuilder Class'
+   URL : www.devart.com/dotconnect/oracle/docs/Devart.Data.Oracle~Devart.Data.Oracle.OracleConnectionStringBuilder.html
+   Title : Article ' OracleConnectionStringBuilder Class'
+   Usage : issue 20130719°0912 'Oracle Server/Port properties'
+   Status :
+   ⬞
+
+   [file 20200522°0931] ⬞Ω

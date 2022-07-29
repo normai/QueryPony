@@ -1,6 +1,7 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/MostRecentlyUsed/MruMenuItemClickEventHandler.cs from
-//                "Genghis v0.8.zip" at http://genghis.codeplex.com/releases/view/4954
+// file        : http://downtown.trilo.de/svn/queryponydev/trunk/QueryPony/QueryPonyGui/MostRecentlyUsed/MruMenuItemClickEventHandler.cs
+//                + https://github.com/normai/QueryPony/blob/master/QueryPonyGui/MostRecentlyUsed/MruMenuItemClickEventHandler.cs
+// origin      : "Genghis v0.8.zip" at http://genghis.codeplex.com/releases/view/4954
 // id          : 20130604°1721
 // summary     : This file stores Genghis class 'MRUSampleControlLibrary' to provide ...
 // license     : Custom License
@@ -20,5 +21,4 @@ namespace MRUSampleControlLibrary {
    /// <summary>This public field stores ...</summary>
    /// <remarks>id : 20130604°1722</remarks>
    public delegate void MruMenuItemClickEventHandler(object sender, MruMenuItemClickEventArgs e);
-
 }

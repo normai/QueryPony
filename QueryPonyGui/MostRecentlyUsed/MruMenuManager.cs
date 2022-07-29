@@ -1,6 +1,7 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/MostRecentlyUsed/MruMenuManager.cs from
-//                "Genghis v0.8.zip" at http://genghis.codeplex.com/releases/view/4954
+// file        : http://downtown.trilo.de/svn/queryponydev/trunk/QueryPony/QueryPonyGui/MostRecentlyUsed/MruMenuManager.cs
+//                + https://github.com/normai/QueryPony/blob/master/QueryPonyGui/MostRecentlyUsed/MruMenuManager.cs
+// origin      : "Genghis v0.8.zip" at http://genghis.codeplex.com/releases/view/4954
 // id          : 20130604°1811
 // summary     : This file stores Genghis class 'MruMenuManager' to provide ...
 // license     : Custom License
@@ -62,7 +63,6 @@ namespace MRUSampleControlLibrary {
          container.Add(this);
       }
 
-
       /// <summary>This property gets/sets ...</summary>
       /// <remarks>id : 20130604°1817</remarks>
       [CategoryAttribute("Appearance")]
@@ -80,7 +80,6 @@ namespace MRUSampleControlLibrary {
          }
       }
 
-
       /// <summary>This property gets/sets ...</summary>
       /// <remarks>id : 20130604°1818</remarks>
       [CategoryAttribute("Appearance")]
@@ -90,7 +89,6 @@ namespace MRUSampleControlLibrary {
          get { return displayMode; }
          set { displayMode = value; }
       }
-
 
       /// <summary>This property gets/sets ...</summary>
       /// <remarks>id : 20130604°1819</remarks>
@@ -107,7 +105,6 @@ namespace MRUSampleControlLibrary {
             textWidth = value;
          }
       }
-
 
       /// <summary>This property gets/sets ...</summary>
       /// <remarks>id : 20130604°1821</remarks>
@@ -153,13 +150,11 @@ namespace MRUSampleControlLibrary {
          mruMenuListItems.Add(filename);
       }
 
-
       /// <summary>This public field stores ...</summary>
       /// <remarks>id : 20130604°1824</remarks>
       [CategoryAttribute("Action")]
       [DescriptionAttribute("Occurs when a MRU menu item is clicked.")]
       public event MruMenuItemClickEventHandler MruMenuItemClick;
-
 
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130604°1845</remarks>
@@ -171,13 +166,11 @@ namespace MRUSampleControlLibrary {
          }
       }
 
-
       /// <summary>This public field stores ...</summary>
       /// <remarks>id : 20130604°1825</remarks>
       [CategoryAttribute("Action")]
       [DescriptionAttribute("Occurs when a file in the MRU Menu is missing.")]
       public event MruMenuItemFileMissingEventHandler MruMenuItemFileMissing;
-
 
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130604°1846</remarks>
@@ -186,7 +179,6 @@ namespace MRUSampleControlLibrary {
             MruMenuItemFileMissing(this, e);
          }
       }
-
 
       // Render mru menu list with Mru items
       /// <summary>This eventhandler ...</summary>
@@ -204,7 +196,6 @@ namespace MRUSampleControlLibrary {
             RenderInSubMenu();
          }
       }
-
 
       /// <summary>This eventhandler ...</summary>
       /// <remarks>id : 20130604°1827</remarks>
@@ -229,11 +220,9 @@ namespace MRUSampleControlLibrary {
          OnMruMenuItemClick(new MruMenuItemClickEventArgs(filename));
       }
 
-
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130604°1828</remarks>
       private void RenderInMenu() {
-
 
          // Clear existing menu items, if any
          ToolStripDropDownMenu rootMenu = (ToolStripDropDownMenu)mruListMenu.Owner;
@@ -291,7 +280,6 @@ namespace MRUSampleControlLibrary {
          base.Dispose(disposing);
       }
 
-
       #region IPersistComponentSettings Members
 
       /// <summary>This field stores ...</summary>
@@ -306,7 +294,6 @@ namespace MRUSampleControlLibrary {
       /// <remarks>id : 20130604°1834</remarks>
       private MruMenuManagerSettings settings;
 
-
       /// <summary>This property gets/sets ...</summary>
       /// <remarks>id : 20130604°1835</remarks>
       [Category("Behavior")]
@@ -316,7 +303,6 @@ namespace MRUSampleControlLibrary {
          get { return saveSettings; }
          set { saveSettings = value; }
       }
-
 
       /// <summary>This property gets/sets ...</summary>
       /// <remarks>id : 20130604°1836</remarks>
@@ -328,7 +314,6 @@ namespace MRUSampleControlLibrary {
          set { settingsKey = value; }
       }
 
-
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130604°1837</remarks>
       public void LoadComponentSettings() {
@@ -338,7 +323,6 @@ namespace MRUSampleControlLibrary {
          this.mruMenuListItems.AddRange((string[])this.Settings.MruListItems.ToArray(typeof(string)));
       }
 
-
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130604°1838</remarks>
       public void SaveComponentSettings() {
@@ -347,7 +331,6 @@ namespace MRUSampleControlLibrary {
          this.Settings.Save();
       }
 
-
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130604°1839</remarks>
       public void ResetComponentSettings() {
@@ -355,7 +338,6 @@ namespace MRUSampleControlLibrary {
          this.Settings.Reset();
          this.LoadComponentSettings();
       }
-
 
       /// <summary>This property gets ...</summary>
       /// <remarks>id : 20130604°1841</remarks>

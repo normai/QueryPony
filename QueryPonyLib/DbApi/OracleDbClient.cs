@@ -1,10 +1,9 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyLib/DbApi/OracleDbClient.cs
-// id          : 20130604°1041
-// summary     : This file stores class 'OracleDbClient' to constitute an implementation of DbClient for Oracle.
+// file        : 20130604°1041 /QueryPony/QueryPonyLib/DbApi/OracleDbClient.cs
+// summary     : Class 'OracleDbClient' constitutes an implementation of DbClient for Oracle
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 by Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2022 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable
 // note        :
@@ -12,91 +11,82 @@
 #endregion Fileinfo
 
 using System.Data;
-using System.Data.OracleClient;
+using OMDAC = Oracle.ManagedDataAccess.Client;                                 // Replaces former System.Data.OracleClient [evt 20200522°0911]
 
 namespace QueryPonyLib
 {
-
-   /// <summary>This class constitutes an implementation of DbClient for Oracle.</summary>
+   /// <summary>This class constitutes an implementation of DbClient for Oracle</summary>
    /// <remarks>id : 20130604°1042</remarks>
    class OracleDbClient: DbClient
    {
-
       /// <summary>This constructor ...</summary>
       /// <remarks>id : 20130604°1043</remarks>
       public OracleDbClient(ConnSettingsLib settings) : base(settings)
       {
       }
 
-
-      /// <summary>This method returns an Oracle database connection.</summary>
+      /// <summary>This method returns an Oracle database connection</summary>
       /// <remarks>id : 20130604°1044</remarks>
       /// <returns>The wanted Oracle database connection</returns>
       protected override IDbConnection GetDbConnection()
       {
-         OracleConnection con = new OracleConnection(GenerateConnectionString());
-         con.InfoMessage += new OracleInfoMessageEventHandler(con_InfoMessage);
+         OMDAC.OracleConnection con = new OMDAC.OracleConnection(GenerateConnectionString());
+         con.InfoMessage += new OMDAC.OracleInfoMessageEventHandler(con_InfoMessage);
          return con;
       }
 
-
-      /// <summary>This eventhandler processes the InfoMessage event of this Oracle connection.</summary>
-      /// <remarks>id : 20130604°1045</remarks>
-      void con_InfoMessage(object sender, OracleInfoMessageEventArgs e)
+      /// <summary>This eventhandler processes the InfoMessage event of this Oracle connection</summary>
+      /// <remarks>id 20130604°1045</remarks>
+      void con_InfoMessage(object sender, OMDAC.OracleInfoMessageEventArgs e)
       {
          OnInfoMessage(sender, new InfoMessageEventArgs(e.Message, e.Source));
       }
 
-
-      /// <summary>This method builds an Oracle connectionstring from the connection settings of this DbClient.</summary>
+      /// <summary>This method builds an Oracle connectionstring from the connection settings of this DbClient</summary>
       /// <remarks>
       /// id : 20130604°1046
-      /// note : Oracle connection strings are e.g.
-      ///    - 'Data Source=XE;User ID=joe;Password=joe' (20130719°0916)
+      /// note : Oracle connection strings are e.g. 'Data Source=XE;User ID=joe;Password=joe' [note 20130719°0916]
+      /// see : issue 20130719°0912 'Oracle Server/Port properties'
+      /// remember : issue 20130719°0912 'Oracle Server/Port properties'
+      /// remember : ref 20130719°0913 'devart → OracleConnectionStringBuilder Class'
       /// </remarks>
+
       /// <returns>The wanted connectionstring</returns>
       protected override string GenerateConnectionString()
       {
-         OracleConnectionStringBuilder csb = new OracleConnectionStringBuilder();
+         OMDAC.OracleConnectionStringBuilder csb = new OMDAC.OracleConnectionStringBuilder();
 
-         //----------------------------------------------------
-         // (issue 20130719°0912)
-         // title : Oracle Server/Port properties
-         // question : What about the OracleConnectionStringBuilder class Server and Port
-         //    properties? E.g. the Devart.Data.Oracle.OracleConnectionStringBuilder() has
-         //    them, why not the corresponding .NET class? What is the workaround?
-         // ref : Article ' OracleConnectionStringBuilder Class' on (20130719°0913)
-         //    http://www.devart.com/dotconnect/oracle/docs/Devart.Data.Oracle~Devart.Data.Oracle.OracleConnectionStringBuilder.html
-         //----------------------------------------------------
+         csb.DataSource = _connSettings.DatabaseName.Trim();                   // [line 20130719°0911]
 
-         ////csb.DataSource = _connSettings.OracleDataSourceELIMINATE.Trim();          // original line, shall be eliminated (20130719°091102)
-         csb.DataSource = _connSettings.DatabaseName.Trim();                           // (20130719°0911)
-
-         if (_connSettings.Trusted)
-         {
-            csb.IntegratedSecurity = true;
-         }
-         else
-         {
-            csb.UserID = _connSettings.LoginName.Trim();
-            csb.Password = _connSettings.Password.Trim();
-         }
+         // Sequence replaced. See issue 20200522°0921 'IntegratedSecurity missing with Oracle'.
+         // // ---------------------------
+         // if (_connSettings.Trusted)
+         // {
+         //    csb.IntegratedSecurity = true;
+         // }
+         // else
+         // {
+         //    csb.UserID = _connSettings.LoginName.Trim();
+         //    csb.Password = _connSettings.Password.Trim();
+         // }
+         // // ---------------------------
+         csb.UserID = _connSettings.LoginName.Trim();
+         csb.Password = _connSettings.Password.Trim();
+         // // ---------------------------
 
          return csb.ConnectionString;
       }
 
-
-      /// <summary>This method delivers an Oracle command object for a given command string.</summary>
+      /// <summary>This method delivers an Oracle command object for a given command string</summary>
       /// <remarks>id : 20130604°1047</remarks>
       /// <param name="sQuery">The command string for which to get a command object</param>
       /// <returns>The wanted command object</returns>
       protected override IDbCommand GetDbCommand(string sQuery)
       {
-         OracleCommand cmd = ((OracleConnection)_connection).CreateCommand();
+         OMDAC.OracleCommand cmd = ((OMDAC.OracleConnection)_connection).CreateCommand();
          cmd.CommandText = sQuery;
          return cmd;
       }
-
 
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130604°1048</remarks>
@@ -105,14 +95,12 @@ namespace QueryPonyLib
          return new OracleQueryOptions();
       }
 
-
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130604°1049</remarks>
       protected override IDbDataAdapter GetDataAdapter(IDbCommand command)
       {
-         return new OracleDataAdapter((OracleCommand)command);
+         return new OMDAC.OracleDataAdapter((OMDAC.OracleCommand)command);
       }
-
 
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130604°1050</remarks>
@@ -142,8 +130,6 @@ namespace QueryPonyLib
 
          ExecuteOnWorker(sb.ToString(), 5);
          */
-
       }
-
    }
 }

@@ -1,10 +1,9 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyLib/DatabaseApi/MysqlQueryOptions.cs
-// id          : 20130612°0931 (20130604°0731)
-// summary     : This file stores class 'MysqlQueryOptoins' to define the MySQL-specific query options.
+// file        : 20130612°0931 (20130604°0731) /QueryPony/QueryPonyLib/DatabaseApi/MysqlQueryOptions.cs
+// summary     : Class 'MysqlQueryOptoins' defines the MySQL-specific query options
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 by Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2022 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Experimental
 // note        : File cloned from MssqlQueryOptions.cs and modified (20130612°0931)
@@ -19,13 +18,11 @@ using System.Text;
 
 namespace QueryPonyLib
 {
-
-   /// <summary>This class serves as a helper class while refactoring.</summary>
+   /// <summary>This class serves as a helper class while refactoring</summary>
    /// <remarks>id : 20130619°1458</remarks>
    public class QueryOptionsForm_DUMMY : System.Windows.Forms.Form
    {
    }
-
 
    /// <summary>
    /// This class defines the MySQL-specific query options that can
@@ -34,7 +31,6 @@ namespace QueryPonyLib
    /// <remarks>id : 20130612°0932 (20130604°0732)</remarks>
    internal class MysqlQueryOptions : QueryOptions
    {
-
       #region Private Fields
 
       /// <summary>This field stores ...</summary>
@@ -118,7 +114,6 @@ namespace QueryPonyLib
       private bool _StatisticsIo = false;
 
       #endregion Private Fields
-
       #region Constructor
 
       /// <summary>This constructor ...</summary>
@@ -332,7 +327,6 @@ namespace QueryPonyLib
 
       }
 
-
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130612°1019 (20130604°0819)</remarks>
       /// <param name="connection">...</param>
@@ -361,7 +355,6 @@ namespace QueryPonyLib
 
          }
       }
-
 
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130612°1021 (20130604°0821)</remarks>
@@ -393,7 +386,6 @@ namespace QueryPonyLib
          }
       }
 
-
       /// <summary>This method ...</summary>
       /// <remarks>
       /// id : 20130612°1022 (20130604°0822)
@@ -403,9 +395,8 @@ namespace QueryPonyLib
       /// <returns>...</returns>
       public override System.Windows.Forms.DialogResult ShowForm()
       {
-         ////SqlQueryOptionsForm f = new SqlQueryOptionsForm(); // original line
          MysqlQueryOptionsForm_DUMMY f = new MysqlQueryOptionsForm_DUMMY();
-         FieldsToForm_Mysql(f);  //// debug 20130705°093103
+         FieldsToForm_Mysql(f);
 
          System.Windows.Forms.DialogResult res = ShowForm(f);
          if (res == System.Windows.Forms.DialogResult.OK)
@@ -414,7 +405,6 @@ namespace QueryPonyLib
          }
          return res;
       }
-
 
       /// <summary>This method ...</summary>
       /// <remarks>
@@ -428,8 +418,6 @@ namespace QueryPonyLib
       ///        The warning was gone after renaming the method. [20130623°0931]
       /// </remarks>
       /// <param name="f">...</param>
-      ////private void FormToFields(SqlQueryOptionsForm f)
-      ///private void FormToFields(MssqlQueryOptionsForm_DUMMY f)
       private void FormToFields_Mysql(MysqlQueryOptionsForm_DUMMY f) // rename
       {
          this.TextSize = (int)(f.txtTextSize.Value);
@@ -457,7 +445,6 @@ namespace QueryPonyLib
          this.Ansi_Nulls = f.chkAnsiNulls.Checked;
       }
 
-
       /// <summary>This method ...</summary>
       /// <remarks>
       /// id : 20130612°1024 (20130604°0824)
@@ -465,8 +452,6 @@ namespace QueryPonyLib
       /// note : About compiler warnings with method name, compare note 20130623°0931.
       /// </remarks>
       /// <param name="f">...</param>
-      ////private void FieldsToForm(SqlQueryOptionsForm f)
-      ///private void FieldsToForm(MssqlQueryOptionsForm_DUMMY f)
       private void FieldsToForm_Mysql(MysqlQueryOptionsForm_DUMMY f)
       {
          f.txtTextSize.Value = this.TextSize;
@@ -496,8 +481,7 @@ namespace QueryPonyLib
 
       #endregion Interface Definition
 
-
-      /// <summary>This method implements ... (experimental).</summary>
+      /// <summary>This method implements ... (experimental)</summary>
       /// <remarks>id : 20130705°1024</remarks>
       public override void LetOptionsPushFromGui()
       {
@@ -509,11 +493,9 @@ namespace QueryPonyLib
 
          return;
       }
-
    }
 
-
-   /// <summary>This class serves as (dummy) mediator between the library and the GUI.</summary>
+   /// <summary>This class serves as (dummy) mediator between the library and the GUI</summary>
    /// <remarks>
    /// id : 20130619°1331
    /// note : This class was introduced as a helper refactor 20130619°1311, so we
@@ -521,13 +503,9 @@ namespace QueryPonyLib
    ///    As well, when resuming the QueryOptions feature somewhen, this class may
    ///    serve as the wanted mediator between the library and the GUI.
    /// </remarks>
-   ////internal class MssqlQueryOptionsForm_DUMMY
-   ////protected class MssqlQueryOptionsForm_DUMMY
-   ////public class MssqlQueryOptionsForm_DUMMY : QueryOptionsForm_DUMMY
-   public class MysqlQueryOptionsForm_DUMMY : QueryOptionsForm_DUMMY //// QueryOptions //// debug 20130705°093104
+   public class MysqlQueryOptionsForm_DUMMY : QueryOptionsForm_DUMMY
    {
-
-      /// <summary>This subclass ... serves as a helper (during refactor 20130619°1311).</summary>
+      /// <summary>This subclass ... serves as a helper (during refactor 20130619°1311)</summary>
       /// <remarks>id : 20130619°1411</remarks>
       public class txtBatchSeparatorHelper
       {
@@ -536,13 +514,11 @@ namespace QueryPonyLib
          public string Text;
       }
 
-
-      /// <summary>This field ... (serves as dummy while refactoring).</summary>
+      /// <summary>This field ... (serves as dummy while refactoring)</summary>
       /// <remarks>id : 20130619°1412</remarks>
       public txtBatchSeparatorHelper txtBatchSeparator = new txtBatchSeparatorHelper();
 
-
-      /// <summary>This subclass ... serves as a helper (during refactor 20130619°1311).</summary>
+      /// <summary>This subclass ... serves as a helper (during refactor 20130619°1311)</summary>
       /// <remarks>id : 20130619°1413</remarks>
       public class txtExecutionTimeoutHelper
       {
@@ -551,13 +527,11 @@ namespace QueryPonyLib
          public int Value;
       }
 
-
-      /// <summary>This field ... (serves as dummy while refactoring).</summary>
+      /// <summary>This field ... (serves as dummy while refactoring)</summary>
       /// <remarks>id : 20130619°1414</remarks>
       public txtExecutionTimeoutHelper txtExecutionTimeout = new txtExecutionTimeoutHelper();
 
-
-      /// <summary>This subclass ... serves as a helper (during refactor 20130619°1311).</summary>
+      /// <summary>This subclass ... serves as a helper (during refactor 20130619°1311)</summary>
       /// <remarks>id : 20130619°1415</remarks>
       public class txtRowCountHelper
       {
@@ -566,14 +540,12 @@ namespace QueryPonyLib
          public int Value;
       }
 
-
-      /// <summary>This field ... (serves as dummy while refactoring).</summary>
+      /// <summary>This field ... (serves as dummy while refactoring)</summary>
       /// <remarks>id : 20130619°1416</remarks>
       public txtRowCountHelper txtRowcount = new txtRowCountHelper();
 
-
       //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      // the easy sequence - no, not really ... (archived sequence 20130619°1409)
+      // The easy sequence - no, not really ...  [archived sequence 20130619°1409]
       /*
       public int txtTextSize;                          // .Value;              // = this.TextSize;
 
@@ -602,8 +574,7 @@ namespace QueryPonyLib
       //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-
-      /// <summary>This subclass ... serves as a helper (while refactoring).</summary>
+      /// <summary>This subclass ... serves as a helper (while refactoring)</summary>
       /// <remarks>id : 20130619°1417</remarks>
       public class txtTextSize_Helper
       {
@@ -611,7 +582,7 @@ namespace QueryPonyLib
          /// <remarks>id : 20130619°1417 (20130705°1001)</remarks>
          public txtTextSize_Helper()
          {
-            this.Value = 123;  //// (debug 20130705°093113)
+            this.Value = 123;
          }
 
          /// <summary>This field ...</summary>
@@ -619,13 +590,11 @@ namespace QueryPonyLib
          public int Value;
       }
 
-
-      /// <summary>This field ... (serves as dummy while refactoring).</summary>
+      /// <summary>This field ... (serves as dummy while refactoring)</summary>
       /// <remarks>id : 20130619°1418</remarks>
-      public txtTextSize_Helper txtTextSize = new txtTextSize_Helper(); //// (debug 20130705°093115)
+      public txtTextSize_Helper txtTextSize = new txtTextSize_Helper();
 
-
-      /// <summary>This subclass ... serves as a helper (while refactoring).</summary>
+      /// <summary>This subclass ... serves as a helper (while refactoring)</summary>
       /// <remarks>id : 20130619°1419</remarks>
       public class chkNoCount_Helper
       {
@@ -634,13 +603,11 @@ namespace QueryPonyLib
          public bool Checked;
       }
 
-
-      /// <summary>This field ... (serves as dummy while refactoring).</summary>
+      /// <summary>This field ... (serves as dummy while refactoring)</summary>
       /// <remarks>id : 20130619°1420</remarks>
       public chkNoCount_Helper chkNoCount = new chkNoCount_Helper();
 
-
-      /// <summary>This subclass ... serves as a helper (while refactoring).</summary>
+      /// <summary>This subclass ... serves as a helper (while refactoring)</summary>
       /// <remarks>id : 20130619°1421</remarks>
       public class chkNoExec_Helper
       {
@@ -649,13 +616,11 @@ namespace QueryPonyLib
          public bool Checked;
       }
 
-
-      /// <summary>This field ... (serves as dummy while refactoring).</summary>
+      /// <summary>This field ... (serves as dummy while refactoring)</summary>
       /// <remarks>id : 20130619°1422</remarks>
       public chkNoExec_Helper chkNoExec = new chkNoExec_Helper();
 
-
-      /// <summary>This subclass ... serves as a helper (while refactoring).</summary>
+      /// <summary>This subclass ... serves as a helper (while refactoring)</summary>
       /// <remarks>id : 20130619°1423</remarks>
       public class chkParseOnly_Helper
       {
@@ -664,13 +629,11 @@ namespace QueryPonyLib
          public bool Checked;
       }
 
-
-      /// <summary>This field ... (serves as dummy while refactoring).</summary>
+      /// <summary>This field ... (serves as dummy while refactoring)</summary>
       /// <remarks>id : 20130619°1424</remarks>
       public chkParseOnly_Helper chkParseOnly = new chkParseOnly_Helper();
 
-
-      /// <summary>This subclass ... serves as a helper (while refactoring).</summary>
+      /// <summary>This subclass ... serves as a helper (while refactoring)</summary>
       /// <remarks>id : 20130619°1425</remarks>
       public class chkConcatNullYieldsNull_Helper
       {
@@ -679,13 +642,11 @@ namespace QueryPonyLib
          public bool Checked;
       }
 
-
-      /// <summary>This field ... (serves as dummy while refactoring).</summary>
+      /// <summary>This field ... (serves as dummy while refactoring)</summary>
       /// <remarks>id : 20130619°1426</remarks>
       public chkConcatNullYieldsNull_Helper chkConcatNullYieldsNull = new chkConcatNullYieldsNull_Helper();
 
-
-      /// <summary>This subclass ... serves as a helper (while refactoring).</summary>
+      /// <summary>This subclass ... serves as a helper (while refactoring)</summary>
       /// <remarks>id : 20130619°1427</remarks>
       public class chkArithAbort_Helper
       {
@@ -694,13 +655,11 @@ namespace QueryPonyLib
          public bool Checked;
       }
 
-
-      /// <summary>This field ... (serves as dummy while refactoring).</summary>
+      /// <summary>This field ... (serves as dummy while refactoring)</summary>
       /// <remarks>id : 20130619°1428</remarks>
       public chkArithAbort_Helper chkArithAbort = new chkArithAbort_Helper();
 
-
-      /// <summary>This subclass ... serves as a helper (while refactoring).</summary>
+      /// <summary>This subclass ... serves as a helper (while refactoring)</summary>
       /// <remarks>id : 20130619°1429</remarks>
       public class chkShowPlanText_Helper
       {
@@ -709,13 +668,11 @@ namespace QueryPonyLib
          public bool Checked;
       }
 
-
-      /// <summary>This field ... (serves as dummy while refactoring).</summary>
+      /// <summary>This field ... (serves as dummy while refactoring)</summary>
       /// <remarks>id : 20130619°1430</remarks>
       public chkShowPlanText_Helper chkShowPlanText = new chkShowPlanText_Helper();
 
-
-      /// <summary>This subclass ... serves as a helper (while refactoring).</summary>
+      /// <summary>This subclass ... serves as a helper (while refactoring)</summary>
       /// <remarks>id : 20130619°1431</remarks>
       public class chkStatisticsTime_Helper
       {
@@ -724,13 +681,11 @@ namespace QueryPonyLib
          public bool Checked;
       }
 
-
-      /// <summary>This field ... (serves as dummy while refactoring).</summary>
+      /// <summary>This field ... (serves as dummy while refactoring)</summary>
       /// <remarks>id : 20130619°1432</remarks>
       public chkStatisticsTime_Helper chkStatisticsTime = new chkStatisticsTime_Helper();
 
-
-      /// <summary>This subclass ... serves as a helper (while refactoring).</summary>
+      /// <summary>This subclass ... serves as a helper (while refactoring)</summary>
       /// <remarks>id : 20130619°1433</remarks>
       public class chkStatisticsIo_Helper
       {
@@ -739,13 +694,11 @@ namespace QueryPonyLib
          public bool Checked;
       }
 
-
-      /// <summary>This field ... (serves as dummy while refactoring).</summary>
+      /// <summary>This field ... (serves as dummy while refactoring)</summary>
       /// <remarks>id : 20130619°1434</remarks>
       public chkStatisticsIo_Helper chkStatisticsIo = new chkStatisticsIo_Helper();
 
-
-      /// <summary>This subclass ... serves as a helper (while refactoring).</summary>
+      /// <summary>This subclass ... serves as a helper (while refactoring)</summary>
       /// <remarks>id : 20130619°1435</remarks>
       public class cboTransactionIsolation_Helper
       {
@@ -754,13 +707,11 @@ namespace QueryPonyLib
          public string Text;
       }
 
-
-      /// <summary>This field ... (serves as dummy while refactoring).</summary>
+      /// <summary>This field ... (serves as dummy while refactoring)</summary>
       /// <remarks>id : 20130619°1436</remarks>
       public cboTransactionIsolation_Helper cboTransactionIsolation = new cboTransactionIsolation_Helper();
 
-
-      /// <summary>This subclass ... serves as a helper (while refactoring).</summary>
+      /// <summary>This subclass ... serves as a helper (while refactoring)</summary>
       /// <remarks>id : 20130619°1437</remarks>
       public class cboDeadlockPriority_Helper
       {
@@ -769,13 +720,11 @@ namespace QueryPonyLib
          public string Text;
       }
 
-
-      /// <summary>This field ... (serves as dummy while refactoring).</summary>
+      /// <summary>This field ... (serves as dummy while refactoring)</summary>
       /// <remarks>id : 20130619°1438</remarks>
       public cboDeadlockPriority_Helper cboDeadlockPriority = new cboDeadlockPriority_Helper();
 
-
-      /// <summary>This subclass ... serves as a helper (while refactoring).</summary>
+      /// <summary>This subclass ... serves as a helper (while refactoring)</summary>
       /// <remarks>id : 20130619°1439</remarks>
       public class txtLockTimeout_Helper
       {
@@ -784,13 +733,11 @@ namespace QueryPonyLib
          public int Value;
       }
 
-
-      /// <summary>This field ... (serves as dummy while refactoring).</summary>
+      /// <summary>This field ... (serves as dummy while refactoring)</summary>
       /// <remarks>id : 20130619°1440</remarks>
       public txtLockTimeout_Helper txtLockTimeout = new txtLockTimeout_Helper();
 
-
-      /// <summary>This subclass ... serves as a helper (while refactoring).</summary>
+      /// <summary>This subclass ... serves as a helper (while refactoring)</summary>
       /// <remarks>id : 20130619°1441</remarks>
       public class txtQueryGovernorCostLimit_Helper
       {
@@ -799,13 +746,11 @@ namespace QueryPonyLib
          public int Value;
       }
 
-
-      /// <summary>This field ... (serves as dummy while refactoring).</summary>
+      /// <summary>This field ... (serves as dummy while refactoring)</summary>
       /// <remarks>id : 20130619°1442</remarks>
       public txtQueryGovernorCostLimit_Helper txtQueryGovernorCostLimit = new txtQueryGovernorCostLimit_Helper();
 
-
-      /// <summary>This subclass ... serves as a helper (while refactoring).</summary>
+      /// <summary>This subclass ... serves as a helper (while refactoring)</summary>
       /// <remarks>id : 20130619°1443</remarks>
       public class chkQuotedIdentifier_Helper
       {
@@ -814,13 +759,11 @@ namespace QueryPonyLib
          public bool Checked;
       }
 
-
-      /// <summary>This field ... (serves as dummy while refactoring).</summary>
+      /// <summary>This field ... (serves as dummy while refactoring)</summary>
       /// <remarks>id : 20130619°1444</remarks>
       public chkQuotedIdentifier_Helper chkQuotedIdentifier = new chkQuotedIdentifier_Helper();
 
-
-      /// <summary>This subclass ... serves as a helper (while refactoring).</summary>
+      /// <summary>This subclass ... serves as a helper (while refactoring)</summary>
       /// <remarks>id : 20130619°1445</remarks>
       public class chkAnsiNullDflt_Helper
       {
@@ -829,13 +772,11 @@ namespace QueryPonyLib
          public bool Checked;
       }
 
-
-      /// <summary>This field ... (serves as dummy while refactoring).</summary>
+      /// <summary>This field ... (serves as dummy while refactoring)</summary>
       /// <remarks>id : 20130619°1446</remarks>
       public chkAnsiNullDflt_Helper chkAnsiNullDflt = new chkAnsiNullDflt_Helper();
 
-
-      /// <summary>This subclass ... serves as a helper (while refactoring).</summary>
+      /// <summary>This subclass ... serves as a helper (while refactoring)</summary>
       /// <remarks>id : 20130619°1447</remarks>
       public class chkImplicitTransactions_Helper
       {
@@ -844,13 +785,11 @@ namespace QueryPonyLib
          public bool Checked;
       }
 
-
-      /// <summary>This field ... (serves as dummy while refactoring).</summary>
+      /// <summary>This field ... (serves as dummy while refactoring)</summary>
       /// <remarks>id : 20130619°1448</remarks>
       public chkImplicitTransactions_Helper chkImplicitTransactions = new chkImplicitTransactions_Helper();
 
-
-      /// <summary>This subclass ... serves as a helper (while refactoring).</summary>
+      /// <summary>This subclass ... serves as a helper (while refactoring)</summary>
       /// <remarks>id : 20130619°1449</remarks>
       public class chkCursorCloseOnCommit_Helper
       {
@@ -859,13 +798,11 @@ namespace QueryPonyLib
          public bool Checked;
       }
 
-
-      /// <summary>This field ... (serves as dummy while refactoring).</summary>
+      /// <summary>This field ... (serves as dummy while refactoring)</summary>
       /// <remarks>id : 20130619°1450</remarks>
       public chkCursorCloseOnCommit_Helper chkCursorCloseOnCommit = new chkCursorCloseOnCommit_Helper();
 
-
-      /// <summary>This subclass ... serves as a helper (while refactoring).</summary>
+      /// <summary>This subclass ... serves as a helper (while refactoring)</summary>
       /// <remarks>id : 20130619°1451</remarks>
       public class chkAnsiPadding_Helper
       {
@@ -874,13 +811,11 @@ namespace QueryPonyLib
          public bool Checked;
       }
 
-
-      /// <summary>This field ... (serves as dummy while refactoring).</summary>
+      /// <summary>This field ... (serves as dummy while refactoring)</summary>
       /// <remarks>id : 20130619°1452</remarks>
       public chkAnsiPadding_Helper chkAnsiPadding = new chkAnsiPadding_Helper();
 
-
-      /// <summary>This subclass ... serves as a helper (while refactoring).</summary>
+      /// <summary>This subclass ... serves as a helper (while refactoring)</summary>
       /// <remarks>id : 20130619°1453</remarks>
       public class chkAnsiWarnings_Helper
       {
@@ -889,13 +824,11 @@ namespace QueryPonyLib
          public bool Checked;
       }
 
-
-      /// <summary>This field ... (serves as dummy while refactoring).</summary>
+      /// <summary>This field ... (serves as dummy while refactoring)</summary>
       /// <remarks>id : 20130619°1454</remarks>
       public chkAnsiWarnings_Helper chkAnsiWarnings = new chkAnsiWarnings_Helper();
 
-
-      /// <summary>This subclass ... serves as a helper (while refactoring).</summary>
+      /// <summary>This subclass ... serves as a helper (while refactoring)</summary>
       /// <remarks>id : 20130619°1455</remarks>
       public class chkAnsiNulls_Helper
       {
@@ -904,13 +837,11 @@ namespace QueryPonyLib
          public bool Checked;
       }
 
-
-      /// <summary>This field ... (serves as dummy while refactoring).</summary>
+      /// <summary>This field ... (serves as dummy while refactoring)</summary>
       /// <remarks>id : 20130619°1456</remarks>
       public chkAnsiNulls_Helper chkAnsiNulls = new chkAnsiNulls_Helper();
 
-
-      /// <summary>This method ... serves as a helper (while refactoring).</summary>
+      /// <summary>This method ... serves as a helper (while refactoring)</summary>
       /// <remarks>
       /// id : 20130619°1457
       /// note : When method name was 'ShowDialog', sometimes appeared compiler warning
@@ -921,14 +852,10 @@ namespace QueryPonyLib
       ///         replace this by a delegate passed from the client to the library on init.
       ///         [issue 20130623°0933]
       /// </remarks>
-      ////DialogResult res = optionsForm.ShowDialog();
-      ////public DialogResult ShowDialog()
       public System.Windows.Forms.DialogResult ShowDialog_Mysql()
       {
          System.Windows.Forms.DialogResult dr = new System.Windows.Forms.DialogResult();
          return dr;
       }
-
    }
-
 }

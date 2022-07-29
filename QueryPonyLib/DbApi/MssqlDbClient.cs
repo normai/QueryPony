@@ -1,10 +1,9 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyLib/DbApi/MssqlDbClient.cs
-// id          : 20130604°0721
-// summary     : This file stores class 'MssqlDbClient' to constitute an implementation of DbClient for MS-SQL.
+// file        : 20130604°0721 /QueryPony/QueryPonyLib/DbApi/MssqlDbClient.cs
+// summary     : Class 'MssqlDbClient' constitutes an implementation of DbClient for MS-SQL
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 by Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2022 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable
 // changes     : File/class renamed from SqlDBClient.cs to MssqlDbClient.cs (20130606°1342)
@@ -18,63 +17,29 @@ using System.Text;
 
 namespace QueryPonyLib
 {
-
-   /// <summary>This class constitutes an implementation of DbClient for MS-SQL.</summary>
+   /// <summary>This class constitutes an implementation of DbClient for MS-SQL</summary>
    /// <remarks>id : 20130604°0722</remarks>
    class MssqlDbClient : DbClient
    {
-
-      /// <summary>This constructor creates a new MS-SQL DbClient object.</summary>
+      /// <summary>This constructor creates a new MS-SQL DbClient object</summary>
       /// <remarks>id : 20130604°0723</remarks>
       /// <param name="settings">The ConnectionSettings to create the new DbClient with</param>
       public MssqlDbClient(ConnSettingsLib settings) : base(settings)
       {
       }
 
-
-      /// <summary>This method returns a MS-SQL database connection.</summary>
+      /// <summary>This method returns a MS-SQL database connection</summary>
       /// <remarks>id : 20130604°0724</remarks>
       /// <returns>The wanted MS-SQL database connection</returns>
       protected override IDbConnection GetDbConnection()
       {
-         /*
-         // set the timeout (sequence 20130713°0934)
-         // note : compare note 20130713°0933
-         if (_conSettings.Timeout < 1)
-         {
-            // looks like a default value
-            _conSettings.Timeout = 15;
-         }
-         */
-
-         ////// Is here the answer for question 20130714°1743 ?
-         ////////con.Database = _conSettings.AllDatabaseName;                          // this is read-only
-         ////if (! System.String.IsNullOrEmpty(_conSettings.AllDatabaseName))
-         ////{
-         ////   this.Database = _conSettings.AllDatabaseName;
-         ////}
-
          string s = GenerateConnectionString();
          SyDaSq.SqlConnection con = new SyDaSq.SqlConnection(s);
-
-         ////// (compare note 20130713°0933) timeout inseconds, it is e.g. 15
-         ///////con.ConnectionTimeout = 2;
-         //////con.s
-         ////int iDebug = con.ConnectionTimeout;
-
-         ////// Is here the answer for question 20130714°1743 ?
-         ////////con.Database = _conSettings.AllDatabaseName;                          // this is read-only
-         ////if (! System.String.IsNullOrEmpty(_conSettings.AllDatabaseName))
-         ////{
-         ////   this.Database = _conSettings.AllDatabaseName;
-         ////}
-
          con.InfoMessage += new SyDaSq.SqlInfoMessageEventHandler(con_InfoMessage);
          return con;
       }
 
-
-      /// <summary>This eventhandler processes the InfoMessage event of this MS-SQL connection.</summary>
+      /// <summary>This eventhandler processes the InfoMessage event of this MS-SQL connection</summary>
       /// <remarks>id : 20130604°0725</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -83,15 +48,18 @@ namespace QueryPonyLib
          OnInfoMessage(sender, new  InfoMessageEventArgs(e.Message, e.Source));
       }
 
-
-      /// <summary>This method builds a MS-SQL connectionstring from the connection settings of this DbClient.</summary>
-      /// <remarks>id : 20130604°0726</remarks>
+      /// <summary>This method builds a MS-SQL connectionstring from the connection settings of this DbClient</summary>
+      /// <remarks>
+      /// id : 20130604°0726
+      /// remember : question 20130714°1743 'how to select a database from the server'
+      /// </remarks>
       /// <returns>The wanted connectionstring</returns>
       protected override string GenerateConnectionString()
       {
          SyDaSq.SqlConnectionStringBuilder csb = new SyDaSq.SqlConnectionStringBuilder();
          csb.ApplicationName = Glb.Resources.AssemblyNameLib;
          csb.DataSource = _connSettings.DatabaseServerUrl.Trim();
+
          if (_connSettings.Trusted)
          {
             csb.IntegratedSecurity = true;
@@ -102,26 +70,20 @@ namespace QueryPonyLib
             csb.Password = _connSettings.Password.Trim();
          }
 
-         // (question 20130714°1743)
-         // question : Field DataSource describes the server. But how can we select the database?
-         // answer : With e.g. "DbClient.Database = comboboxDatabase.Text;"
-
-         // set the timeout (sequence 20130713°0934)
-         // note : compare note 20130713°0933
-         // ref : MSDN article 'SqlConnection.ConnectionTimeout-Eigenschaft' on (20130713°0943)
-         //    http://msdn.microsoft.com/de-de/library/system.data.sqlclient.sqlconnection.connectiontimeout%28v=vs.90%29.aspx
+         // Set the timeout [seq 20130713°0934]
+         // Note : compare note 20130713°0933
+         // Ref : MSDN article 'SqlConnection.ConnectionTimeout-Eigenschaft' on (20130713°0943)
+         //    msdn.microsoft.com/de-de/library/system.data.sqlclient.sqlconnection.connectiontimeout%28v=vs.90%29.aspx
          if (_connSettings.Timeout > 0)
          {
             // set value other than default (default is 15 seconds)
-            ////_conSettings.ConnectTimeout = 15;
             csb.ConnectTimeout = _connSettings.Timeout;
          }
 
-         return csb.ConnectionString;                                                  // connectString.ToString();
+         return csb.ConnectionString;                                          // connectString.ToString();
       }
 
-
-      /// <summary>This method delivers a MS-SQL command object for a given command string.</summary>
+      /// <summary>This method delivers a MS-SQL command object for a given command string</summary>
       /// <remarks>id : 20130604°0727</remarks>
       /// <param name="sQuery">The command string for which to get a command object</param>
       /// <returns>The wanted command object</returns>
@@ -132,7 +94,6 @@ namespace QueryPonyLib
          return cmd;
       }
 
-
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130604°0728</remarks>
       /// <returns>...</returns>
@@ -140,7 +101,6 @@ namespace QueryPonyLib
       {
          return new MssqlQueryOptions();
       }
-
 
       /// <summary>This method executes the SQL command and delivers the result</summary>
       /// <remarks>id : 20130604°0729</remarks>
@@ -151,14 +111,12 @@ namespace QueryPonyLib
          return new SyDaSq.SqlDataAdapter((SyDaSq.SqlCommand)command);
       }
 
-
-      /// <summary>This method builds a query options command and applies it to the connection via ExecuteOnWorker().</summary>
+      /// <summary>This method builds a query options command and applies it to the connection via ExecuteOnWorker()</summary>
       /// <remarks>
       /// id : 20130604°0730
-      /// about : This method is called only by
-      ///     - method 20130604°0336 DbClient::Connect() after the connection has been made
-      ///     - method 20130604°2111 QueryForm::ShowQueryOptions() after the QueryOptions modal dialog form was committed
-      ///     After having built the options string, it is given to ExecuteOnWorker(), which applies them to the connection.
+      /// callers : Only • method 20130604°0336 DbClient::Connect() after the connection has been made
+      ///     • method 20130705°1011 QueryForm::ShowQueryOptions() after the QueryOptions modal dialog form was committed
+      /// note : After having built the options string, it is given to ExecuteOnWorker(), which applies them to the connection.
       /// </remarks>
       public override void ApplyQueryOptions()
       {
@@ -183,6 +141,5 @@ namespace QueryPonyLib
 
          ExecuteOnWorker(sb.ToString(), 5);
       }
-
    }
 }

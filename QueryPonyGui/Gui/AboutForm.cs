@@ -1,10 +1,9 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/Gui/AboutForm.cs
-// id          : 20130604°0011
-// summary     : This file stores class 'AboutForm' to constitute the About Form.
+// file        : 20130604°0011 /QueryPony/QueryPonyGui/Gui/AboutForm.cs
+// summary     : Class 'AboutForm' constitutes the About Form
 // license     : GNU AGPL v3
-// copyright   : © 2013 Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2022 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable
 // note        :
@@ -16,17 +15,15 @@ using QueryPonyLib;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Reflection;
+using System.Reflection;                                                       // For Assembly
 
 namespace QueryPonyGui
 {
-
-   /// <summary>This class constitutes the About Form.</summary>
+   /// <summary>This class constitutes the About Form</summary>
    /// <remarks>id : 20130604°0012</remarks>
    public partial class AboutForm : Form
    {
-
-      /// <summary>This constructor creates an About Form.</summary>
+      /// <summary>This constructor creates an About Form</summary>
       /// <remarks>id : 20130604°0013</remarks>
       public AboutForm()
       {
@@ -40,8 +37,7 @@ namespace QueryPonyGui
          displayMachineInfo();
       }
 
-
-      /// <summary>This method puts the assembly infos into their textboxes.</summary>
+      /// <summary>This method puts the assembly infos into their textboxes</summary>
       /// <remarks>id : 20130619°0321</remarks>
       private void displayAssemblyInfo()
       {
@@ -54,50 +50,47 @@ namespace QueryPonyGui
          this.textbox_Company.Text = "This program came to you from " + AssemblyCompany;
       }
 
-
-      /// <summary>This method puts the textfiles contents into their textboxes.</summary>
+      /// <summary>This method puts the textfiles contents into their textboxes</summary>
       /// <remarks>id : 20130619°0322</remarks>
       private void displayTextfiles()
       {
-         // preparations
+         // Preparations
          Assembly asm = Assembly.GetExecutingAssembly();
 
-         // debug
-         if (Glb.Debag.ExecuteNo)
+         // Debug
+         if (Glb.Debag.Execute_No)
          {
-            // get miscellaneous values
+            // Get miscellaneous values
             AssemblyName asmName = asm.GetName();
-            string sAsmName = asmName.Name;                                            // this is "QueryPony", but we need "QueryPonyGui"
-            string sAsmFullname = asmName.FullName;                                    // e.g. = "QueryPony, Version=2.1.1.4689, Culture=neutral, PublicKeyToken=null"
+            string sAsmName = asmName.Name;                                    // This is "QueryPony", but we need "QueryPonyGui"
+            string sAsmFullname = asmName.FullName;                            // E.g. = "QueryPony, Version=2.1.1.4689, Culture=neutral, PublicKeyToken=null"
 
-            // get an assembly different from the executing one
-            Assembly asmLib = Assembly.Load(Glb.Resources.AssemblyNameLib);            // "QueryPonyLib"
+            // Get an assembly different from the executing one
+            Assembly asmLib = Assembly.Load(Glb.Resources.AssemblyNameLib);    // "QueryPonyLib"
             string[] arDbgLib = asmLib.GetManifestResourceNames();
 
-            // inspect list of available resources
+            // Inspect list of available resources
             string[] arDbg = asm.GetManifestResourceNames();
 
-            // retrieve the namespace (not directly possibly, but could be extracted from 'DeclaringType.FullName'
+            // Retrieve the namespace (not directly possibly, but could be extracted from 'DeclaringType.FullName'
             MethodBase mbCurMet2 = System.Reflection.MethodBase.GetCurrentMethod();
             string sFullMethodName = mbCurMet2.DeclaringType.FullName + "." + mbCurMet2.Name; // = "QueryPonyGui.AboutForm.displayTextfiles"
          }
 
-
-         // extract namespace from DeclaringType (sequence 20130620°1701)
-         // note : This method assumes, that the type name always ends in a method name
+         // Extract namespace from DeclaringType [seq 20130620°1701]
+         // Note : This method assumes, that the type name always ends in a method name
          //    without dots, means all components except the last one belong to the namespace.
          string sNamespace = "";
-         MethodBase mbCurMet = System.Reflection.MethodBase.GetCurrentMethod();        // = "displayTextfiles"
-         string sTypeName = mbCurMet.DeclaringType.FullName;                           // = "QueryPonyGui.AboutForm"
-         string[] ar = sTypeName.Split(Glb.cDot);                                      // '.'
+         MethodBase mbCurMet = System.Reflection.MethodBase.GetCurrentMethod();  // = "displayTextfiles"
+         string sTypeName = mbCurMet.DeclaringType.FullName;                   // = "QueryPonyGui.AboutForm"
+         string[] ar = sTypeName.Split(Glb.cDot);                              // '.'
          for (int i = 0; i < (ar.Length - 1); i++)
          {
-            if (i > 0) { sNamespace += Glb.sDot; }                                     // behind namespace use a dot (not testet, just concluded)
+            if (i > 0) { sNamespace += Glb.sDot; }                             // Behind namespace use a dot (not testet, just concluded)
             sNamespace += ar[i];
          }
 
-
-         // provide files list
+         // Provide files list
          Dictionary<TextBox, string> texts = new Dictionary<TextBox, string>();
          texts.Add(textbox_Agpl, Glb.Resources.Agpl);
          texts.Add(textbox_Authors, Glb.Resources.Authors);
@@ -107,24 +100,24 @@ namespace QueryPonyGui
          texts.Add(textbox_Summary, Glb.Resources.Summary);
          texts.Add(textbox_Thirdparty, Glb.Resources.Thirdparty);
 
-         // print files in texboxes
+         // Print files in texboxes
          foreach (KeyValuePair<TextBox, string> kvp in texts)
          {
             string[] arDebug = asm.GetManifestResourceNames();
             string sResourceFile = kvp.Value;
 
-            // use one of the two possible assemblies
+            // Use one of the two possible assemblies
             Assembly asmUse = null;
-            if (kvp.Value.StartsWith(Glb.Resources.AssemblyNameGui))                   // "QueryPonyGui"
+            if (kvp.Value.StartsWith(Glb.Resources.AssemblyNameGui))           // "QueryPonyGui"
             {
                asmUse = Assembly.GetExecutingAssembly();
             }
             else
             {
-               asmUse = Assembly.Load(Glb.Resources.AssemblyNameLib);                  // "QueryPonyLib"
+               asmUse = Assembly.Load(Glb.Resources.AssemblyNameLib);          // "QueryPonyLib"
             }
 
-            // read the wanted resource file
+            // Read the wanted resource file
             using (System.IO.Stream stream = asmUse.GetManifestResourceStream(sResourceFile))
             {
                using (System.IO.StreamReader reader = new System.IO.StreamReader(stream))
@@ -136,8 +129,7 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This method puts the machine infos into their textboxes.</summary>
+      /// <summary>This method puts the machine infos into their textboxes</summary>
       /// <remarks>
       /// id : 20130619°0323
       /// note : Compare Program.cs::initProperties() sequence 20130902°0642.
@@ -153,27 +145,26 @@ namespace QueryPonyGui
                            ).FilePath
                             ;
 
-         if (IOBus.Gb.Debag.ExecuteNO)
+         if (IOBus.Gb.Debag.Execute_No)
          {
-            // finding: Here we have filename '\user.config' attached as opposed to Program.PathConfigDirUser.
+            // Finding: Here we have filename '\user.config' attached as opposed to Program.PathConfigDirUser.
             string s = Program.PathConfigDirUser;
          }
 
          textbox_UserSettingsFolder.Text = sPathUser;
-         textbox_AppSettingsFolder.Text = sPathApp; // e.g. "G:\work\downtown\queryponydev\trunk\querypony\QueryPonyGui\bin\x86\Debug\QueryPony.exe.config"
+         textbox_AppSettingsFolder.Text = sPathApp;                            // E.g. "G:\work\downtown\queryponydev\trunk\querypony\QueryPonyGui\bin\x86\Debug\QueryPony.exe.config"
       }
-
 
       #region Assembly Attribute Accessors
 
-      /// <summary>This property gets the assembly attribute 'AssemblyTitle'.</summary>
+      /// <summary>This property gets the assembly attribute 'AssemblyTitle'</summary>
       /// <remarks>
       /// id : 20130604°0014
       /// note : What I do not yet understand about the attribute workings is the fact,
       ///    that in AssemblyInfo.cs the attribute is called 'AssemblyTitle'. But with
       ///    'Find All References', I cannot find this exact identifier anywhere. Just
       ///    similar names e.g. 'AssemblyTitleAttribute'. Does the compiler somehow
-      ///    mangle identifiers? (note 20130618°0532)
+      ///    mangle identifiers? [note 20130618°0532]
       /// </remarks>
       public static string AssemblyTitleo
       {
@@ -181,41 +172,38 @@ namespace QueryPonyGui
          {
             string sRet = "";
 
-            // get all title attributes on this assembly
+            // Get all title attributes on this assembly
             object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
 
-            // if there is at least one title attribute
+            // If there is at least one title attribute
             if (attributes.Length > 0)
             {
-               // select the first one
+               // Select the first one
                AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
 
-               // if it is not an empty string, return it
+               // If it is not an empty string, return it
                if (titleAttribute.Title != "")
                {
                   sRet = titleAttribute.Title;
                }
                else
                {
-                  // if there was no title attribute, or if the title attribute was the empty string, return the .exe name
+                  // If there was no title attribute, or if the title attribute was the empty string, return the .exe name
                   sRet = System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
                }
             }
-
             return sRet;
          }
       }
 
-
-      /// <summary>This property gets the assembly attribute 'AssemblyVersion'.</summary>
+      /// <summary>This property gets the assembly attribute 'AssemblyVersion'</summary>
       /// <remarks>id : 20130604°0015</remarks>
       public static string AssemblyVersion
       {
          get { return Assembly.GetExecutingAssembly().GetName().Version.ToString(); }
       }
 
-
-      /// <summary>This property gets the assembly attribute 'AssemblyFileVersion'.</summary>
+      /// <summary>This property gets the assembly attribute 'AssemblyFileVersion'</summary>
       /// <remarks>id : 20130613°1121</remarks>
       public static string AssemblyFileVersion
       {
@@ -235,8 +223,7 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This property gets the assembly attribute 'AssemblyDescription'.</summary>
+      /// <summary>This property gets the assembly attribute 'AssemblyDescription'</summary>
       /// <remarks>id : 20130604°0016</remarks>
       public static string AssemblyDescription
       {
@@ -252,8 +239,7 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This property gets the assembly attribute 'AssemblyProduct'.</summary>
+      /// <summary>This property gets the assembly attribute 'AssemblyProduct'</summary>
       /// <remarks>id : 20130604°0017</remarks>
       public static string AssemblyProduct
       {
@@ -269,8 +255,7 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This property gets the assembly attribute 'AssemblyCopyright'.</summary>
+      /// <summary>This property gets the assembly attribute 'AssemblyCopyright'</summary>
       /// <remarks>id : 20130604°0018</remarks>
       public static string AssemblyCopyright
       {
@@ -286,8 +271,7 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This property gets the assembly attribute 'AssemblyCompany'.</summary>
+      /// <summary>This property gets the assembly attribute 'AssemblyCompany'</summary>
       /// <remarks>id : 20130604°0019</remarks>
       public static string AssemblyCompany
       {
@@ -303,8 +287,7 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This property gets the custom assembly attribute 'CustomAuthorsAttribute'.</summary>
+      /// <summary>This property gets the custom assembly attribute 'CustomAuthorsAttribute'</summary>
       /// <remarks>id : 20130618°0531</remarks>
       public static string AssemblyAuthors
       {
@@ -322,8 +305,7 @@ namespace QueryPonyGui
 
       #endregion Assembly Attribute Accessors
 
-
-      /// <summary>This eventhandler processes the OK button Click event.</summary>
+      /// <summary>This eventhandler processes the OK button Click event</summary>
       /// <remarks>id : 20130604°0020</remarks>
       /// <param name="sender">The object which sent this event</param>
       /// <param name="e">The event object itself</param>
@@ -332,8 +314,7 @@ namespace QueryPonyGui
          this.Close(); // (supplemented 20130902°0631)
       }
 
-
-      /// <summary>This eventhandler processes the 'Open Settings Folder' buttons.</summary>
+      /// <summary>This eventhandler processes the 'Open Settings Folder' buttons</summary>
       /// <remarks>
       /// id : 20130619°0411
       /// todo : See todo 20130619°0431 'About dialogbox closes after any button usage'.
@@ -347,7 +328,7 @@ namespace QueryPonyGui
          string sControlName = control.Name;
          Button button = (Button)control;
 
-         // determine folder
+         // Determine folder
          string sPathFile = "";
          if (button == button_OpenAppSettingsFolder)
          {
@@ -363,7 +344,7 @@ namespace QueryPonyGui
             System.Diagnostics.Debugger.Break();
          }
 
-         // open Explorer
+         // Open Explorer
          string sPathDir = System.IO.Directory.GetParent(sPathFile).FullName;
          if (System.IO.Directory.Exists(sPathDir))
          {
@@ -380,18 +361,17 @@ namespace QueryPonyGui
          }
          else
          {
-            // fatal
+            // Fatal
          }
       }
 
-
-      /// <summary>This eventhandler processes button ViewLogfile's Click event to open the logfile in Notepad.</summary>
+      /// <summary>This eventhandler processes button ViewLogfile's Click event to open the logfile in Notepad</summary>
       /// <remarks>id : 20130625°0941</remarks>
       /// <param name="sender">The sending object</param>
       /// <param name="e">The event object</param>
       private void button_ViewLogfile_Click(object sender, EventArgs e)
       {
-         // open notepad.exe
+         // Open notepad.exe
          if (System.IO.File.Exists(InitLib.PathLogfile))
          {
             try
@@ -400,18 +380,17 @@ namespace QueryPonyGui
             }
             catch (Exception ex)
             {
-               // program flow error
+               // Program flow error
                string sErr = Glb.Errors.TheoreticallyNotPossible + Glb.sCr + ex.Message + Glb.sCr + "[Error 20130625°0943]";
                System.Diagnostics.Debugger.Break();
             }
          }
          else
          {
-            // fatal
+            // Fatal
             string sMsg = "No such logfile exists: " + Glb.sCrCr + "   " + InitLib.PathLogfile;
             MessageBox.Show(sMsg, "Notification");
          }
       }
-
    }
 }

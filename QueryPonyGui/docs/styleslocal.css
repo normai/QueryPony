@@ -1,26 +1,145 @@
-﻿/*
- **************************************************************
- * file        : http://downtown.trilo.de/svn/queryponydev/trunk/home/styleslocal.css
- *               + http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/docs/styleslocal.css
- * version     : 20130725°1321
+﻿/**
+ * file        : 20130725°1321 — QueryPony/QueryPonyGui/docs/styleslocal.css
  * license     : The MIT License
- * copyright   : © 2013 - 2018 Norbert C. Maier
+ * copyright   : © 2013 - 2022 Norbert C. Maier
  * authors     : ncm
  * status      : Applicable
  * encoding    : UTF-8-with-BOM
  * note        :
- **************************************************************
  */
 
-/* rule 20130725°1333 */
-body { background-color:#f0f0f0; }
+/* Rule 20130725°1333 (after 20080710°2311) Basic body, applying workaround 20100822°1323 'IE max-width' */
+body {
+       background-color:#f0f0f0; /* #f0f0f0 MintCream */
+       text-align:center; /* for workaround 20090208°2301 'make tables center work in IE' */
+       font-family: Verdana, Geneva, sans-serif; /* wide sans-serife stack */
+       line-height:1.59em; /* rule 20180413°1221 'adjust readability' */
+}
 
-/* rule 20130725°1334 */
-div.chapterapps {
-               background-color:#f8f8f8;
+/* ruleset 20140302°0621 for workaround 20090208°2301 counteract 'text-align:center' for IE in body */
+div    { text-align:left; }                                            /* [rule 20140302°0625] */
+li     { text-align:left; }                                            /* [rule 20140302°0622] */
+p      { text-align:left; }                                            /* [rule 20140302°0623] */
+td     { text-align:left; }                                            /* [rule 20140302°0624] */
+
+/* [ruleset 20100826°2131] */
+ol     { text-indent:0.0; text-align:left; }                           /* [rule 20100826°2132] */
+ul     { text-indent:0.0; text-align:left; }                           /* [rule 20100826°2133] */
+li     { margin-top:0.4em; margin-bottom:0.4em; }                      /* [rule 20100826°2134] */
+
+/* Rule 20130725°1334 */
+div.ChapterApps {
+               background-color:#fafafa; /* #f8f8f8 */
                 max-width:720px; width:80%;
                  padding:1em;
                   margin:0 auto; margin-top:1em; margin-bottom:3em;
 }
+
+/* Ruleset 20210524°0911 */
+p.TopTitleNaviCake { margin-top:-0.4em; }
+div.TopTitleNaviArrows { float:right; text-align:right; }
+
+/* Ruleset 20150321°0431 Alternative one for TopTitle */
+p.TopTitleCrumbs { text-align:center; font-size:1.2em; margin:0.2em 0 0.2em 0; } /* rule 20150321°0432 */
+p.TopTitleCrumbs a  { color:Green; margin-left:0.6em; margin-right:0.6em; } /* rule 20150321°0433 */
+
+/**
+ *  rule 20200314°0413
+ *  summary : Use a DIV for the top right logo
+ */
+div.TopLogoRightPlain { float:right; margin-right:1.7em; border:1px solid transparent; }
+
+/* ruleset 20080711°0511 General header cascade */
+h1 { text-align:center; color:#0000f0; line-height:1.23em; font-size:210%; }    /* [rule 20080711°0512] */
+h2 { text-align:center; color:#2000d0; line-height:1.23em; font-size:180%; }    /* [rule 20080711°0513] */
+h3 { text-align:center; color:#4000b0; line-height:1.23em; font-size:150%; }    /* [rule 20080711°0514] */
+h4 { text-align:center; color:#500090; line-height:1.23em; font-size:130%; }    /* [rule 20080711°0515] */
+h5 { text-align:center; color:#600070; line-height:1.23em; font-size:110%; }    /* [rule 20080711°0516] */
+
+/**
+ * Ruleset 20180909°0451 'Extern link with icon'
+ * Summary : The unspecific default 'Extern' class. Replace it's
+ *    code by the latest nice specific class, e.g. 'Extern2'
+ */
+a.Extern {
+   padding-left:14px;
+   /* background-image:url(./20141115o1731.extern.png); */
+   background-image:url(./img2/20181106o0138.arrow3right.v2.x0012y0012.png);
+   background-position:left center;
+   background-repeat:no-repeat;
+}
+a.Extern:hover {
+   background-color:LemonChiffon;
+}
+
+/**
+ * Ruleset 20140128°1341
+ * Note : Padding is not 0.1em but 0.09 em, otherwise e.g. an underline in the line
+ *         above will be covered means invisible [note 20140209°0551]
+ * Note : Compare rulesets 20140217°0611 and 20140128°1341, keep font-sizes in sync
+ * Todo : Check, what about note 20140209°0551
+ */
+.CodePlain   { font-family:monospace,monospace; padding:0 0.1em 0 0.1em; background:#fff0f0; } /* rule 20140128°1342 */
+.CodeLarge   { font-family:monospace,monospace; font-size:1.21em; padding:0 0.1em 0 0.1em; background:#fff0f0; } /* rule 20181028°0133 */
+.CodeMedium  { font-family:monospace,monospace; font-size:1.06em; padding:0 0.1em 0 0.1em; background:#fff0f0; } /* rule 20140128°1343 after http://code.stephenmorley.org/html-and-css/fixing-browsers-broken-monospace-font-handling [ref 20140128°1332] */
+.CodeSmall   { font-family:monospace,monospace; font-size:0.88em; padding:0 0.1em 0 0.1em; background:#fff0f0; } /* rule 20140128°1344 */
+.CodeTiny    { font-family:monospace,monospace; font-size:0.77em; padding:0 0.1em 0 0.1em; background:#fff0f0; } /* rule 20140128°1345 */
+
+/**
+ *  Ruleset 20150321°0341
+ *  Summary : General font properties
+ */
+.FontFat { font-weight:bold; }                         /* 20180518°1042 */
+.FontItalic { font-style:italic; }                     /* 20180518°1043 */
+.FontLarge { font-size:large; }                        /* 20150321°0342 (not for monospace styles) */
+.FontHuge { font-size:x-large; }                       /* 20150321°0344 (not for monospace styles) */
+.FontSmall { font-size:small; }                        /* 20150321°0346 (not for monospace styles) */
+.FontTiny { font-size:x-small; }                       /* 20150321°0347 (not for monospace styles) */
+
+/**
+ *  Ruleset 20140217°0611
+ *  Summary : Replacements for '<tt>', which tidy.exe complains as obsolet
+ *  Note : This set has applied workaround 20140128°1331 'Monospace size'
+ *  Note : Compare rulesets 20140217°0611 and 20140128°1341, keep font-sizes in sync
+ */
+.FontTty       { font-family:monospace,monospace; padding:0 0.1em 0 0.1em; }           /* ELIMINATE rule 20140217°061202 */
+.FontTtyPlain  { font-family:monospace,monospace; padding:0 0.1em 0 0.1em; }           /* rule 20140217°0612 */
+.FontTtySmall  { font-family:monospace,monospace; padding:0 0.1em 0 0.1em; font-size:0.88em; } /* rule 20140217°0613 */
+.FontTtyMedium { font-family:monospace,monospace; padding:0 0.1em 0 0.1em; font-size:1.06em; } /* rule 20140217°0614 */
+.FontTtyLarge  { font-family:monospace,monospace; padding:0 0.1em 0 0.1em; font-size:1.21em; } /* rule 20140217°0615 */
+
+/* ruleset 20100826°2113 usage e.g. : <p class="ImageCenter" style="max-width:444px;"> */
+p.ImageCenter  { text-align:center; margin-left:auto; margin-right:auto; color:DarkGreen; } /* rule 20100826°2111 */
+
+/**
+ *  Ruleset 20150321°0351 (after rule 20150221°0327 matrixLinkUndefined)
+ *  Note : With IE, it does not work as expected.
+ *  Note : The order matters (hoover after link and visited).
+ *  Note : Compare experimental ruleset 20180925°0826 in page 20060727o2337
+ */
+a.LinkDead { pointer-events:none; text-decoration:line-through; cursor:default; }      /* rule 20150321°0353  //// */
+
+/* Ruleset 20150317°0811 'Provide p for reference with icon' */
+/* Note : A paragraph seems easiest for this purpose, but then a div is more universal */
+p.ListIconFloatLeft2 { padding:0.4em; }                                                /* background-color:Pink; */
+p.ListIconFloatLeft2 > img { float:left; margin:1px 20px 20px 1px; }                   /* top right bottom left*/
+p.ListIconFloatLeft2 > a > img { float:left; margin:1px 20px 20px 1px; }               /* top right bottom left*/
+
+/* Footer paragraphs [ruleset 20150211°0511] */
+p.GoodBye      { font-family: ComicJensWeb, "Comic Sans MS", "Comic Sans", sans-serif; margin-top:2.1em; font-size:small; clear:both; } /* rule 20080710°2314 */
+p.FooterUpdate { color:Green; margin-bottom:-3.7em; margin-left:1.1em; margin-top:2.4em; text-align:left; font-family:ComicJensWeb, sans-serif; } /* rule 20180511°1541 optional */
+p.FooterImprint   { color:#808080; font-size:small; margin-bottom:-0.3em; margin-right:1.9em; margin-top:2.4em; text-align:right; } /* rule 20080710°2313 */
+p.FooterImprint a { color:#505050; margin-left:0.6em; margin-right:0.6em; }  /* rule 20141129°0511 Do not use padding here, it will interfere with rule 20100315°1943 'Extern', instead use margin */
+p.FooterReferer { border-top:1px solid; color:#505050; font-size:small; margin-bottom:2.1em; padding-top:0.2em; } /* rule 20080710°2312 */
+span.FooterCopyright { margin-left:0.6em; }                                            /* rule 20141116°0512 */
+span.FooterFileUrl    { font-family: 'Arial Narrow', Arial, sans-serif; margin-left:0.6em; }                                           /* rule 20141116°0511 */
+span.FooterFileUrl a  { color:#505050; }                                               /* rule 20141129°0512 */
+span.FooterLastUpdate  { font-family:ComicJensWeb, sans-serif; font-size:1.11em; margin-left:1.1em; margin-right:1.1em; color:green; } /* rule 20150210°1611 */
+span.FooterLicense { margin-left:0.6em; }                                              /* rule 20150211°0513 */
+span.FooterLicense a { color:#505050; }                                                /* rule 20150211°0514 */
+span.FooterPageId   { font-family: ComicJensWeb, sans-serif; font-size:x-small; margin-left:0.9em; font-style:italic; } /* rule 20141116°0513 */
+
+/* Rule 20150209°1351 E.g. for obsolete paragraphs */
+.Invisible { display:none; }
 
 /* eof */

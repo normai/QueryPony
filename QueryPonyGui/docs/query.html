@@ -1,45 +1,28 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-   <meta charset="UTF-8" /><!-- UTF-8-with-BOM -->
+   <meta charset="UTF-8" data-encoding="UTF-8-with-BOM">
    <title>QueryPony → Query</title>
-
-   <link rel="stylesheet" type="text/css" href="./daftari.css"/>
    <link rel="stylesheet" type="text/css" href="./styleslocal.css"/>
 </head>
 
-<body id="id20130725o0132">
+<body id="i20130725o0132">
 
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-<!-- Feature 20110826°1122 Typearea/Logo-Overlapper by André Motzel -->
-<!-- Original implementation see http://downtown.trilo.de/svn/app.apache1/trunk/htdocs/index.html -->
-<!-- todo : Adjust widths and heights -->
-<div id="id20110826o112202" style="position:absolute; right:20px; padding-top:20px">
-               <img id="id20110826o112203" src="./img/20130705o0812.mcol-chess-horse.v0.x0200y0200.png" width="160" height="160" alt="Logo 20130705°0812" />
+<div class="TopLogoRightPlain" id="i20110826o112202">
+               <img id="i20110826o112203" src="./img/20130705o0812.mcol-chess-horse.v0.x0200y0200.png" width="96" height="96" alt="Logo 20130705°0812" />
 </div>
 
-<p id="id20110826o112204"><!-- this image paragraph does shift the text to left instead to cover it over -->
-               <img id="id20110826o112205" src="./img/20110826o111902.transparent.png" alt="Invisible box" align="right" style="height:188px; width:188px; width:expression('0px');" />
-</p>
+<div class="ChapterApps">
 
-<!-- if 10% (because chapter is 80%) of the body width is less than [imagewidth] then set DIV-width to ([imagewidth] - [10% of bodywidth]) -->
-<div id="id20130724o1415" class="chapterapps" style="width:expression((document.body.clientWidth * 0.8) > 800 ? '800px': '80%'); overflow:expression('hidden');"><!-- id="id20110826o112206" -->
-
- <!-- todo : set a backgroundcolor for debugging -->
- <!-- div style="width:0px; float:right; background-color:#ff0000; height:162px;" -->
- <div id="id20110826o112207" style="width:0px; float:right; height:162px;
-                width:expression((document.body.clientWidth * 0.1) < 160 ? (160 - document.body.clientWidth * 0.1) + 'px' : '0px');">
- </div>
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
- <div id="id20130724o1416" align="right">
-   <span style="vertical-align:top;">Page 5 of 8</span> &nbsp;
-   <a href="./treeview.html" style="color:#404040;"><img src="./img/20081114o1721.left.png.gif" width="32" height="24" alt="Go to the previous page" style="border-style: none;" /></a> &nbsp;
-   <a href="./index.html" style="color:#404040;"><img src="./img/20081114o172303.up.png.gif" width="24" height="24" alt="Home" style="border-style: none;" /></a> &nbsp;
-   <a href="./options.html" style="color:#404040;"><img src="./img/20081114o1722.right.png.gif" width="32" height="24" alt="Go to the next page" style="border-style: none;" /></a>
+ <div class="TopTitleNaviArrows" id="i20130724o1416">
+               Page 5 of 8
+       <br>
+               <a href="./treeview.html" style="color:#404040;"><img src="./img/20081114o1721.left.png.gif" width="32" height="24" alt="Go to the previous page" style="border-style: none;" /></a> &nbsp;
+               <a href="./index.html" style="color:#404040;"><img src="./img/20081114o172303.up.png.gif" width="24" height="24" alt="Home" style="border-style: none;" /></a> &nbsp;
+               <a href="./options.html" style="color:#404040;"><img src="./img/20081114o1722.right.png.gif" width="32" height="24" alt="Go to the next page" style="border-style: none;" /></a>
  </div>
 
- <p id="id20130724o1417">
+ <p class="TopTitleNaviCake" id="i20130724o1417">
                <a href="./index.html">Start</a> &nbsp;
                <a href="./connect.html">Connect</a> &nbsp;
                <a href="./treeview.html">Treeview</a> &nbsp;
@@ -49,21 +32,21 @@
                <a href="./about.html">About</a> &nbsp;
  </p>
 
- <p class="topTitleCrumbs" id="id20180801o0735">
+ <p class="TopTitleCrumbs" id="i20180801o0735">
                <a href="./index.html">QueryPony User Manual</a> →
  </>
 
- <h1 id="id20130724o1418" style="margin-top:0.1em;">
+ <h1 id="i20130724o1418" style="margin-top:0.1em;">
                The Query Form
  </h1>
 
- <p id="id20130724o1419">
+ <p id="i20130724o1419">
                On the Query Form, you can input SQL statements and send them to the database.
                From the Objects Treeview's context menu (right-click), you may get
                proposals how to formulate the query.
  </p>
 
- <p id="id20130724.1634" class="image">
+ <p class="ImageCenter" id="i20130724.1634">
                <a href="./img/20130724o1622.querypony-connected.png">
                 <img src="./img/20130724o1622.querypony-connected.png" width="689" height="511" alt="Image 20130724°1622 The Treeview" data-imgdims="765 ∙ 567 * 0.9 = 689 ∙ 511" />
                 </a>
@@ -74,16 +57,16 @@
 
 </div>
 
-<p class="footerUpdate" id="id20130725o0133">
+<p class="FooterUpdate" id="i20130725o0133">
                Version : 2013-July-27
 </p>
-<p class="footerImprint" id="id20130724o1420">
-               Imprint : <a href="http://www.trilo.de/imprint.html" class="extern">www.trilo.de/imprint.html</a>
+<p class="FooterImprint" id="i20130724o1420">
+               Imprint : <a href="http://www.trilo.de/imprint.html" class="Extern">www.trilo.de/imprint.html</a>
 </p>
-<p class="footerReferer" id="id20130724o1411">
-               <span class="footerFileUrl">http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/docs/<a href="http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/docs/query.html">query.html</a></span>
-               <span class="footerCopyright">© 2013 - 2018 Norbert C. Maier</span>
-               <span class="footerPageId">20130725°0131</span>
+<p class="FooterReferer" id="i20130724o1411">
+               <span class="FooterFileUrl">http://downtown.trilo.de/svn/queryponydev/trunk/QueryPony/QueryPonyGui/docs/<a href="http://downtown.trilo.de/svn/queryponydev/trunk/QueryPony/QueryPonyGui/docs/query.html">query.html</a></span>
+               <span class="FooterCopyright">© 2013 - 2022 Norbert C. Maier</span>
+               <span class="FooterPageId">20130725°0131</span>
 </p>
 </body>
 </html>

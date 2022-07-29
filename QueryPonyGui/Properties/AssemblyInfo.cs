@@ -1,10 +1,9 @@
 #region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/Properties/AssemblyInfo.cs
-// id          : 20130604°0021
+// file        : 20130604°0021 QueryPony/QueryPonyGui/Properties/AssemblyInfo.cs
 // summary     : This file stores the project attribute definitions.
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2022 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable
 // note        :
@@ -14,19 +13,18 @@ using GlobalCustomAttributes;
 using System;
 using System.Reflection;
 
-//using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
+//  set of attributes. Change these attribute values to modify the information
+//  associated with an assembly.
 [assembly: AssemblyTitle ("QueryPonyGui")]
 [assembly: AssemblyDescription ("QueryPony is a Simple Generic Database Query Tool and API")]
 [assembly: AssemblyConfiguration ("")]
-[assembly: AssemblyCompany ("www.trilo.de")]
+[assembly: AssemblyCompany ("www.trekta.biz")]
 // used as config folder name (20130807°1321) - better use "www.trilo.de" or "QueryPony"?
-[assembly: AssemblyProduct ("QueryPony")]
-[assembly: AssemblyCopyright ("© 2013 - 2018 by Norbert C. Maier")]
+[assembly: AssemblyProduct("QueryPonyGui")]
+[assembly: AssemblyCopyright("© 2013 - 2022 Norbert C. Maier")]
 [assembly: AssemblyTrademark ("Trekta®")]
 [assembly: AssemblyCulture ("")]
 // Setting ComVisible to false makes the types in this assembly not visible

@@ -3,11 +3,46 @@
    Issues, Bugs and Todos
    **********************
 
+
+   issue 20200928°1321 'con.GetSchema() exception'
+   symptom : exception "ERROR [HYC00] [Microsoft][ODBC Paradox Driver]Optional feature not implemented"
+      in line 'tab = con.GetSchema("Columns", new string[] { null, ((OdbcNode)node)._owner, ((OdbcNode)node)._name });'
+   location : file OdbcDbBrowser.cs method 20130604°0845 GetSubObjectHierarchy
+   finding : "((OdbcNode)node)._owner" is an empty string. It it is null, then the line works.
+   workaround : Set "((OdbcNode)node)._owner" null.
+   note : I have no idea, what exactly the Paradox user shall be. I tried 'Joe',
+           the name mentioned in the ODBC setup, but this does not work.
+   ref : https://social.msdn.microsoft.com/Forums/vstudio/en-US/492218ad-df28-473b-818f-6271f447ce49/error-hyc00-microsoftodbc-microsoft-access-driveroptional-feature-not-implemented [ref 20200928°1242]
+   ref : https://docs.microsoft.com/en-us/dotnet/api/system.data.odbc.odbcconnection.getschema?view=netframework-4.8 [ref 20200928°1243]
+   ref : https://docs.microsoft.com/en-us/sql/odbc/microsoft/sqlconfigdatasource-paradox-driver?view=sql-server-ver15 [ref 20200928°1244]
+   status : workaround
+   ⬞
+
+   issue 20200928°1311 'IsDigit throws if sTok is empty'
+   location : Utils.cs method 20130719°0932 SqlTokenTicks
+   note : The issue itself was fixed easily. But there remains the question, why now
+      this happens, that blank tokens shall be processed. Formerly this never was the
+      case. Has it to do with issue 20200928°1321 'con.GetSchema() exception'?
+   status : Solved, but may be watched
+   ⬞
+
+   issue 20180820°0451 sharpdev tools 15.0 unrecognized
+   matter : After projects have been edited with Visual Studio 2017,
+ SharpDevelop 5.1 complains 'The tools version "15.0" is unrecognized'
+   ref : https://stackoverflow.com/questions/41666798/the-tools-version-15-0-is-unrecognized [20180820°0452]
+   note : In 20180820°0452, Scott Chamberlain recommends, to manually edit
+ the version number in the project file(s). This will be helpful for SharpDevelop,
+ but I want a solution, where the both (VS and SD) work interchangably without
+ manipulating the project files, and without an update procedure on each switch.
+ Not sure, whether this is possible at all.
+   status : open
+   ⬞
+
    issue 20180815°0211 'sqlite mismatch'
    symptom : Connection to SQLite database fails
    ref : http://downtown.trilo.de/svn/stacks3dev/trunk/querypony/20180815o0212.querypony--sqlite-error.png
    status : finished
-   ʘ
+   ⬞
 
    issue 20130828°1531 'restoring connections works only partially'
    title : Restoring connections on startup works only partially
@@ -31,7 +66,7 @@
       -
    workaround : None. Live with only some connections being restored.
    status : Open
-   ʘ
+   ⬞
 
    issue 20130819°0822 'InvokeEx() in IOBusProvider for WinForms'
    title : InvokeEx() with lambda expression not possible in WinForm class.
@@ -47,7 +82,7 @@
    solution :
    status : Open
    priority :
-   ʘ
+   ⬞
 
    issue 20130819°0821 'ScrollToEnd() in IOBusProvider for WinForms'
    title : 'TextBox.ScrollToEnd() does not exist in WinForms'
@@ -56,7 +91,7 @@
    workaround : The issue seems not to be a problem anyway.
    status : Open but no real problem
    priority : Low
-   ʘ
+   ⬞
 
    issue 20130816°0601
    title : TreeView Tables node not actualized
@@ -67,7 +102,7 @@
    workaround : Close the connection and connect newly.
    status : Open
    priority :
-   ʘ
+   ⬞
 
    issue 20130812°1321 'start with exception OnConfigRemoved'
    title : Program starts with ConfigurationErrorsException exception after
@@ -87,13 +122,13 @@
    note : Curiously, the identical file, when it had a QueryPony.exe.config beside
       it, run also fine (file 20130812°1326).
    workaround : Do not rename the settings path.
-   solution : I have wrapped the very first Settings access in a try loop (sequence
+   solution : I have wrapped the very first Settings access in a try loop (seq
        20130812°1331 in Program.cs. But that is not tested, because after inserting
        the sequence, the config path was different, and the issue gone (see details
        there in Program.cs).
    priority : Low
    status : Open
-   ʘ
+   ⬞
 
    issue 20130811°0901 'No context menu'
    title : Context menu Edit items not always available
@@ -105,7 +140,7 @@
    solution :
    status : Open
    note :
-   ʘ
+   ⬞
 
    issue 20130810°1901 'edit menu items fail'
    title : ToolStripMenuItem 'Edit' submenu items do not work
@@ -122,7 +157,7 @@
    solution :
    status : Open
    note :
-   ʘ
+   ⬞
 
    issue 20130702°1502 'Best way to tag objects for interconnection'
    title : What were the best way to tag various objects for their interconnection?
@@ -137,7 +172,7 @@
    status : For now, leave it as it grew. But if later any masterplan becomes
       apparent, then refactor.
    note :
-   ʘ
+   ⬞
 
    issue 20130624°1011 'menu items gray'
    title : Keyboard Shortcuts broken, e.g. CTRL-C grayed out
@@ -145,7 +180,7 @@
       but context menu Rightclick-Paste works. In some situations, the context menu
       works, but the corresponding main menu items are not active.
    descript :
-   note : Mark involved lines with " //// (debug 20130810°1602 'menu items gray')"
+   note : This involved lines with mark 20130810°1602`xx 'debug menu items gray'
    finding : (finding 20130810°1603)
      (1) A first method to inspect seems to be 20130604°0532 EnableControls().
      (2) On program start, the 'Copy' menu item runs through the same procedurs
@@ -167,7 +202,7 @@
       Let's see what remained.
    note : In case of re-introducing the MDI feature, the issue has to be touched again.
    note :
-   ʘ
+   ⬞
 
    issue 20130620°1411
    title : Broken Up/Down-Key in combobox 'Server'
@@ -178,7 +213,7 @@
    status : Unsolved
    workaround : Use the mouse
    note :
-   ʘ
+   ⬞
 
    todo 20130619°0431 'About dialogbox closes after any button usage'
    symptom : In the About Form, in the Machine Textbox, when opening a settings
@@ -187,7 +222,7 @@
    location : Method 20130619°0411 AboutForm.cs::buttons_OpenSettingsFolder_Click().
    status : open
    priority : low
-   ʘ
+   ⬞
 
    issue 20130616°1711 'TabControl DrawItem border missing black line'
    descript : Method tabcontrol_ServerTypes_DrawItem() works fine except one
@@ -204,9 +239,9 @@
    prioritiy : Low
    estimation : Unknown
    note :
-   ʘ
+   ⬞
 
-   issue 20130607°1311 'the connection InfoMessage event availability'
+   issue 20130607°1311 'The connection InfoMessage event availability'
    subject : Sorrily, unlike all the other connections, SQLiteConnection seems not
       to have an InfoMessage event. So this line cannot be translated to SQLite:
       'con.InfoMessage += new OleDbInfoMessageEventHandler(con_InfoMessage);'
@@ -219,43 +254,43 @@
    status : Open
    priority : Medium
    note :
-   ʘ
+   ⬞
 
    todo 20101004°1236
-   title : Export Result to xml beside Export to csv
+   title : Export Result to XML beside Export to CSV
    note : Entry from QueryExPlus-ReadMe.txt v2.0.3.1 (r75)
    status : Open
-   ʘ
+   ⬞
 
    todo 20101004°1235
    title : Cmdline options visible in Messagebox
    note : Entry from QueryExPlus-ReadMe.txt v2.0.3.1 (r75)
    status : Open
-   ʘ
+   ⬞
 
    todo 20101004°1234
    title : Document known file-extensions *.udl, ???
    note : Entry from QueryExPlus-ReadMe.txt v2.0.3.1 (r75)
    status : Open
-   ʘ
+   ⬞
 
    todo 20101004°1233
    title : Provide templates for *.mdb (oledb-msaccess), *.db/*.db3 (odbc-sqlight)
    note : Entry from QueryExPlus-ReadMe.txt v2.0.3.1 (r75)
    status : Open
-   ʘ
+   ⬞
 
    todo 20101004°1232
    title : Add more tree-context-menue-items
    note : Entry from QueryExPlus-ReadMe.txt v2.0.3.1 (r75)
    status : Open
-   ʘ
+   ⬞
 
    todo 20101004°1231
    title : Allow ";" or "go" as SQL-command-seperator
    note : Entry from QueryExPlus-ReadMe.txt v2.0.3.1 (r75)
    status : Open
-   ʘ
+   ⬞
 
-   ——————————————————————
-   [file 20130615°1553] Ω
+   ———————————————————————
+   [file 20130615°1553] ⬞Ω

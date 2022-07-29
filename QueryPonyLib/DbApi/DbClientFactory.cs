@@ -1,11 +1,9 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyLib/DbApi/DbClientFactory.cs
-// id          : 20130604°0031
-// summary     : This file stores class 'DbClientFactory' to provide
-//                methods to open the connection to a Database.
+// file        : 20130604°0031 /QueryPony/QueryPonyLib/DbApi/DbClientFactory.cs
+// summary     : Class 'DbClientFactory' provides methods to open the connection to a Database
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 by Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2022 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable
 // note        :
@@ -16,16 +14,14 @@ using System;
 
 namespace QueryPonyLib
 {
-
-   /// <summary>This class provides methods to open the connection to a Database.</summary>
+   /// <summary>This class provides methods to open the connection to a Database</summary>
    /// <remarks>
    /// id : 20130604°0032
    /// note : Access modifier set 'public' to make it available for other projects (20130604°1427)
    /// </remarks>
    public static class DbClientFactory
    {
-
-      /// <summary>This method validates the given connection settings.</summary>
+      /// <summary>This method validates the given connection settings</summary>
       /// <remarks>
       /// id : 20130604°0033
       /// todo : This should not be in the factory since that is against Objcet Oriented
@@ -44,16 +40,14 @@ namespace QueryPonyLib
                bRet = true;
                if (String.IsNullOrEmpty(conSettings.DatabaseServerUrl))
                {
-                  // todo : Possibly implement console output. (todo 20130723°1411)
+                  // Todo 20130723°1411 : Possibly implement console output.
                   sErr = "Field 'ServerAddress' must not be empty.";
-                  ////throw new Exception(sErr);
                   bRet = false;
                }
                if (String.IsNullOrEmpty(conSettings.DatabaseName))
                {
-                  // todo : Possibly implement console output. (todo 20130723°141102)
+                  // Todo 20130723°1411`02 : Possibly implement console output.
                   sErr = "Field 'DatabaseName' must not be empty.";
-                  ////throw new Exception(sErr);
                   bRet = false;
                }
                break;
@@ -84,7 +78,7 @@ namespace QueryPonyLib
 
             case ConnSettingsLib.ConnectionType.Sqlite:
 
-               // (sequence 20130703°1512) (see issue 20130703°1511)
+               // [seq 20130703°1512] See issue 20130703°1511
                string sFileFullname = Utils.CombineServerAndDatabaseToFullfilename(conSettings.DatabaseServerUrl, conSettings.DatabaseName);
                bRet = System.IO.File.Exists(sFileFullname);
                if (! bRet)
@@ -93,7 +87,6 @@ namespace QueryPonyLib
                   System.Windows.Forms.MessageBox.Show(sMsg);
                }
                break;
-
 
             case ConnSettingsLib.ConnectionType.NoType:
 
@@ -113,8 +106,7 @@ namespace QueryPonyLib
          return bRet;
       }
 
-
-      /// <summary>This method creates and returns a DbClient object for the given connection settings.</summary>
+      /// <summary>This method creates and returns a DbClient object for the given connection settings</summary>
       /// <remarks>id : 20130604°0034</remarks>
       /// <param name="conSettings">The connection settings for which a DbClient is wanted</param>
       /// <returns>The wanted DbClient matching the given connection settings</returns>
@@ -123,7 +115,7 @@ namespace QueryPonyLib
          string sErr = "";
          DbClient client = null;
 
-         switch (conSettings.Type) // (breakpoint 20140126°1631)
+         switch (conSettings.Type)                                             // Breakpoint [brkpt 20140126°1631]
          {
             case ConnSettingsLib.ConnectionType.Couch:
                client = new CouchDbClient(conSettings);
@@ -175,8 +167,7 @@ namespace QueryPonyLib
          return client;
       }
 
-
-      /// <summary>This method retrieves a DbBrowser object matching the given DbClient object.</summary>
+      /// <summary>This method retrieves a DbBrowser object matching the given DbClient object</summary>
       /// <remarks>id : 20130604°0035</remarks>
       /// <param name="client">The DbClient object for which the DbBrowser is wanted</param>
       /// <returns>The wanted DbBrowser object matching the given DbClient type.</returns>
@@ -224,6 +215,5 @@ namespace QueryPonyLib
 
          return ibRet;
       }
-
    }
 }

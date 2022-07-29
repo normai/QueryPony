@@ -1,10 +1,9 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/CommandLine.cs
-// id          : 20130604°0041
-// summary     : This file stores class 'CommandLineParams' to process commandline parameters.
+// file        : 20130604°0041 /QueryPony/QueryPonyGui/CommandLine.cs
+// summary     : Class 'CommandLineParams' processes commandline parameters
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2022 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable
 // note        :
@@ -17,29 +16,25 @@ using System.Text.RegularExpressions;
 
 namespace QueryPonyGui
 {
-
-   /// <summary>This class processes commandline parameters.</summary>
+   /// <summary>This class processes commandline parameters</summary>
    /// <remarks>id : 20130604°0042</remarks>
    internal class CommandLineParams : IEnumerable
    {
-
       /// <summary>This field stores ...</summary>
       /// <remarks>id : 20130604°0043</remarks>
       private StringDictionary Parameters = new StringDictionary ();
-
 
       /// <summary>This constructor ...</summary>
       /// <remarks>id : 20130604°0044</remarks>
       /// <param name="Args">The commandline arguments array</param>
       public CommandLineParams (string[] Args)
       {
-
          Regex Spliter = new Regex (@"^-{1,2}|^/|=|:", RegexOptions.IgnoreCase | RegexOptions.Compiled);
          Regex Remover = new Regex (@"^['""]?(.*?)['""]?$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
          string Parameter = null;
          string[] Parts;
 
-         // note : Valid parameter forms are:
+         // Note : Valid parameter forms are:
          //    - {-,/,--}param{ ,=,:}((",')value(",'))
          // examples :
          //    -param1 value1
@@ -48,14 +43,14 @@ namespace QueryPonyGui
          //    '--=nice=--'
          foreach (string Txt in Args)
          {
-            // look for new parameters (-,/ or --) and a possible enclosed value (=,:)
+            // Look for new parameters (-,/ or --) and a possible enclosed value (=,:)
             Parts = Spliter.Split (Txt, 3);
 
             switch (Parts.Length)
             {
                case 1:
 
-                  // found a value (for the last parameter found (space separator))
+                  // Found a value (for the last parameter found (space separator))
                   if (Parameter != null)
                   {
                      if (! Parameters.ContainsKey (Parameter))
@@ -71,7 +66,7 @@ namespace QueryPonyGui
 
                case 2:
 
-                  // found just a parameter, the last parameter is
+                  // Found just a parameter, the last parameter is
                   //  still waiting, with no value, set it to true
                   if (Parameter != null)
                   {
@@ -86,7 +81,7 @@ namespace QueryPonyGui
 
                case 3:
 
-                  // parameter with enclosed value, the last parameter is
+                  // Parameter with enclosed value, the last parameter is
                   //  still waiting, with no value, set it to true
                   if (Parameter != null)
                   {
@@ -98,7 +93,7 @@ namespace QueryPonyGui
 
                   Parameter = Parts[1];
 
-                  // remove possible enclosing characters (",')
+                  // Remove possible enclosing characters (",')
                   if (! Parameters.ContainsKey (Parameter))
                   {
                      Parts[2] = Remover.Replace (Parts[2], "$1");
@@ -110,7 +105,7 @@ namespace QueryPonyGui
             }
          }
 
-         // in case a parameter is still waiting
+         // In case a parameter is still waiting
          if (Parameter != null)
          {
             if (! Parameters.ContainsKey(Parameter))
@@ -120,24 +115,21 @@ namespace QueryPonyGui
          }
       }
 
-
-      /// <summary>This method provides the parameter enumerator. This exists to satisfy the IEnumerable interface.</summary>
+      /// <summary>This method provides the parameter enumerator. This exists to satisfy the IEnumerable interface</summary>
       /// <remarks>id : 20130604°0045</remarks>
       public IEnumerator GetEnumerator ()
       {
          return Parameters.GetEnumerator ();
       }
 
-
-      /// <summary>This property provides a read-only indexer on the commandline parameters.</summary>
+      /// <summary>This property provides a read-only indexer on the commandline parameters</summary>
       /// <remarks>id : 20130604°0046</remarks>
       public string this [string key]
       {
          get { return Parameters[key]; }
       }
 
-
-      /// <summary>This method tells whether a given parameter key exists or not.</summary>
+      /// <summary>This method tells whether a given parameter key exists or not</summary>
       /// <remarks>id : 20130604°0047</remarks>
       public bool ContainsKey(string value)
       {

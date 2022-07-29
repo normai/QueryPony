@@ -1,7 +1,7 @@
 ﻿
    QueryPony — A Simple Generic Database Query Tool and API.
 
-   Copyright © 2013 - 2018 Norbert C. Maier
+   Copyright © 2013 - 2022 Norbert C. Maier
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU Affero General Public License as published
@@ -22,4 +22,4 @@
    their supply sources please see file thirdparty.txt.
 
    ———————————————————————
-   [file 20130615°1554] ʘΩ
+   [file 20130615°1554] ⬞Ω

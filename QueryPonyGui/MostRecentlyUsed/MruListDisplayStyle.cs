@@ -1,6 +1,7 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/MostRecentlyUsed/MruListDisplayStlye.cs from
-//                "Genghis v0.8.zip" at http://genghis.codeplex.com/releases/view/4954
+// file        : http://downtown.trilo.de/svn/queryponydev/trunk/QueryPony/QueryPonyGui/MostRecentlyUsed/MruListDisplayStlye.cs
+//                + https://github.com/normai/QueryPony/blob/master/QueryPonyGui/MostRecentlyUsed/MruListDisplayStlye.cs
+// origin      : "Genghis v0.8.zip" at http://genghis.codeplex.com/releases/view/4954
 // id          : 20130604°1651
 // summary     : This file stores Genghis class 'MruListDisplayStyle' to provide ...
 // license     : Custom License
@@ -29,5 +30,4 @@ namespace MRUSampleControlLibrary {
       /// <remarks>id : 20130604°1654</remarks>
       InSubMenu
    }
-
 }

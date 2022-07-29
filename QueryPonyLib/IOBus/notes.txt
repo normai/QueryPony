@@ -1,0 +1,10 @@
+﻿
+   reference 20111001°1941 'Reiff: Access control from other thread'
+   url : http://www.andreas-reiff.de/2011/06/accessing-a-winformwpf-control-from-another-thread-through-invoke
+   title : Article 'Accessing a WinForm/WPF control from another thread through invoke'
+   usage : Class 20111001°1951 IOBus_ISynchronizeInvokeExtensions
+   note :
+   ⬞
+
+   ———————————————————————
+   [file 20130901°0613] ⬞Ω

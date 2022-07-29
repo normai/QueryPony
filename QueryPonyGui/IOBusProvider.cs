@@ -1,9 +1,8 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/IOBus/IOBusProvider.cs
-// id          : 20130819°0811 (20130114°1531 20111105°1731)
-// summary     : This file stores partial class 'MainForm' with methods to provide basic I/O for external modules.
+// file        : 20130819°0811 (20130114°1531 20111105°1731) /QueryPony/QueryPonyGui/IOBus/IOBusProvider.cs
+// summary     : This file stores partial class 'MainForm' with methods to provide basic I/O for external modules
 // license     : GNU AGPL v3
-// copyright   : © 2011 - 2018 by Norbert C. Maier
+// copyright   : © 2011 - 2022 Norbert C. Maier
 // authors     :
 // encoding    : UTF-8-with-BOM
 // status      :
@@ -17,11 +16,10 @@
 // note        :
 #endregion
 
-
 namespace QueryPonyGui // adjust this to the namespace of the local form (20130819°0802)
 {
 
-   /// <summary>This partial class provides basic I/O for external modules via delegates.</summary>
+   /// <summary>This partial class provides basic I/O for external modules via delegates</summary>
    /// <remarks>
    /// id : 20130819°0812 (20130114°1532 20111105°1732)
    /// note : Nice were a class name like 'static IO', but this seems much more
@@ -29,13 +27,11 @@ namespace QueryPonyGui // adjust this to the namespace of the local form (201308
    /// </remarks>
    public partial class MainForm : System.Windows.Forms.Form // adjust this to a partial class of the local form (20130819°0801)
    {
-
-      /// <summary>This field stores an internal helper variable.</summary>
+      /// <summary>This field stores an internal helper variable</summary>
       /// <remarks>id : 20130819°0813 (20130114°1533)</remarks>
       private static string _sKeyboardReadHelper = ""; // volatile?
 
-
-      /// <summary>This method provides the local character output facility.</summary>
+      /// <summary>This method provides the local character output facility</summary>
       /// <remarks>id : 20130821°0935</remarks>
       /// <param name="sMsg">The text to be output</param>
       public void writeChar(string sMsg)
@@ -44,8 +40,7 @@ namespace QueryPonyGui // adjust this to the namespace of the local form (201308
          return;
       }
 
-
-      /// <summary>This method provides the local output facility.</summary>
+      /// <summary>This method provides the local output facility</summary>
       /// <remarks>id : 20130819°0814 (20130114°1534 20110920°1722)</remarks>
       /// <param name="sMsg">The text to be output</param>
       public void writeLine(string sMsg)
@@ -54,8 +49,7 @@ namespace QueryPonyGui // adjust this to the namespace of the local form (201308
          return;
       }
 
-
-      /// <summary>This method provides the I/O-delegate implementation for character output (without newline).</summary>
+      /// <summary>This method provides the I/O-delegate implementation for character output (without newline)</summary>
       /// <remarks>id : 20130821°0934</remarks>
       /// <param name="sMsg">The text to be output</param>
       public void webreaderguiWriteCharDelegateImplementation(string sMsg)
@@ -74,8 +68,7 @@ namespace QueryPonyGui // adjust this to the namespace of the local form (201308
          return;
       }
 
-
-      /// <summary>This method provides the I/O-delegate implementation for line output.</summary>
+      /// <summary>This method provides the I/O-delegate implementation for line output</summary>
       /// <remarks>
       /// id : 20130819°0815 (20130114°1535 20111002°1221)
       /// todo : Explain why exactly we need or need not the InvokeEx method here. (todo 20130114°153502)
@@ -87,30 +80,26 @@ namespace QueryPonyGui // adjust this to the namespace of the local form (201308
       public void webreaderguiWriteLineDelegateImplementation(string sMsg)
       {
          /*
-                  ////this.InvokeEx(f => f.textbox_Console.AppendText(Gb.sCr + sMsg));
-                  ////this.InvokeEx(f => f.textbox_Console.ScrollToEnd());
-
-                  this.InvokeEx(f => f.textboxStatus.AppendText(Gb.sCr + sMsg));
-                  this.InvokeEx(f => f.textboxStatus.ScrollToEnd()); // ScrollToEnd()does not exist for a WinForms TextBox
+         this.InvokeEx(f => f.textboxStatus.AppendText(Gb.sCr + sMsg));
+         this.InvokeEx(f => f.textboxStatus.ScrollToEnd()); // ScrollToEnd()does not exist for a WinForms TextBox
          */
 
-         // original line, not accepted due to issue 20130819°0822
+         // Original line, not accepted due to issue 20130819°0822
          /*
          this.InvokeEx(f => f.textboxStatus.AppendText(Gb.sCr + sMsg));
          */
 
-
-         // handle requirements for different situations (seq 20121215°2112)
-         // note : This sequence replaces the original line
+         // Handle requirements for different situations [seq 20121215°2112]
+         // Note : This sequence replaces the original line
          //    'this.InvokeEx(f => f.textboxStatus.AppendText("\r\n" + sMsg));
          //    This replacement may have to do with the fact, that we want use this
          //    class from WinForms projects and from WPF projects in the same way.
-         // note : Compare issue 20130716°0626.
-         // note : Though practical, it is not nice to solve the different calling situations
+         // Note : Compare issue 20130716°0626.
+         // Note : Though practical, it is not nice to solve the different calling situations
          //    by a try envelope. Better were to detect the differrent situations and react
-         //    with the appropriate flavour without guessing. (note 20130821°0814)
-         // note : Remember issue 20130819°0821 'ScrollToEnd() in IOBusProvider for WinForms'
-         // note : Consider issue 20130819°0822 'InvokeEx() in IOBusProvider for WinForms'
+         //    with the appropriate flavour without guessing. [note 20130821°0814]
+         // Note : Remember issue 20130819°0821 'ScrollToEnd() in IOBusProvider for WinForms'
+         // Note : Consider issue 20130819°0822 'InvokeEx() in IOBusProvider for WinForms'
          try
          {
             // Probably during program start, this throws InvalidOperationException
@@ -141,7 +130,6 @@ namespace QueryPonyGui // adjust this to the namespace of the local form (201308
 
          return;
       }
-
 
       /// <summary>
       /// This method provides the I/O-delegate implementation to retrieve a keypress from
@@ -184,8 +172,7 @@ namespace QueryPonyGui // adjust this to the namespace of the local form (201308
          return sKey;
       }
 
-
-      /// <summary>This method is helper method 1 for readKey(), setting sKeyboardReadHelper.</summary>
+      /// <summary>This method is helper method 1 for readKey(), setting sKeyboardReadHelper</summary>
       /// <remarks>
       /// id : 20130819°0817 (20130114°1537 20111001°2011)
       /// note : Using System.Windows.Input needs a reference to assembly PresentationCore.
@@ -199,8 +186,7 @@ namespace QueryPonyGui // adjust this to the namespace of the local form (201308
          return;
       }
 
-
-      /// <summary>This method is helper method 2 for readKey() unsetting sKeyboardReadHelper.</summary>
+      /// <summary>This method is helper method 2 for readKey() unsetting sKeyboardReadHelper</summary>
       /// <remarks>
       /// id : 20130819°0818 (20130114°1538 20111001°2012)
       /// note :
@@ -213,8 +199,7 @@ namespace QueryPonyGui // adjust this to the namespace of the local form (201308
          return;
       }
 
-
-      /// <summary>This method provides the I/O-delegate implementation to read one line.</summary>
+      /// <summary>This method provides the I/O-delegate implementation to read one line</summary>
       /// <remarks>
       /// id : 20130819°0819 (20130114°1539 20111109°1024)
       /// status : works

@@ -1,7 +1,6 @@
-﻿                                                [project 20130610°0741]
+﻿                                                [folder 20130610°0741]
 
-   This is project /querypony/QueryPonyLib/DbApi/
-
+   This is folder /QueryPony/QueryPonyLib/DbApi/
 
    ———————————————————————
-   [file 20130610°0742] ʘΩ
+   [file 20130610°0742] ⬞Ω

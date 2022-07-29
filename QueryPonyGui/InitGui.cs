@@ -1,23 +1,17 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyGui/InitGui.cs
-// id          : 20130707°0901
-// summary     : This file stores class 'Inits' to perform some initialisation tasks.
+// file        : 20130707°0901 QueryPony/QueryPonyGui/InitGui.cs
+// summary     : Class 'Inits' performs some initialisation tasks
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2022 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
-// versions    :
-// status      :
-// note        :
-// callers     :
 #endregion Fileinfo
 
 using QueryPonyLib;
 
 namespace QueryPonyGui
 {
-
-   /// <summary>This class performs some initialisation tasks.</summary>
+   /// <summary>This class performs some initialisation tasks</summary>
    /// <remarks>
    /// id : 20130707°0902
    /// note : This class was created to home lines which shall be shifted away from the
@@ -27,40 +21,37 @@ namespace QueryPonyGui
    /// </remarks>
    internal class Inits
    {
-
-      /// <summary>This method performs possible initialization tasks.</summary>
-      /// <remarks>id : 20130707°0903 (20130604°1913)</remarks>
+      /// <summary>This method performs possible initialization tasks</summary>
+      /// <remarks>id : 20130707°0903 (after 20130604°1913)</remarks>
       /// <returns>Success flag (proforma?)</returns>
       internal bool DoInitialization()
       {
-
-         // finetune application window title (20130715°1011)
+         // Finetune application window title (20130715°1011)
          string sVersion = AboutForm.AssemblyVersion;
          MainForm._mainform.Text = "QueryPony" + " (" + sVersion + ")";
 
-         //----------------------------------------------------
-         // (note 20130726°1431) (around debugging issue 20130726°1231)
-         // title : Considerations about the chronology of the assembly loading
-         // (1) Below 'InitLib lib = new InitLib' seems to be the first moment, the
-         //      library is wanted. How can I proof this?
-         //----------------------------------------------------
+         /*
+         ////Note 20130726°1431 ''
+         Location : Around debugging issue 20130726°1231
+         Title : Considerations about the chronology of the assembly loading
+         Finding : Below 'InitLib lib = new InitLib' seems to be the first moment,
+                    the library is wanted. How can I proof this?
+         */
 
-         // provide the basic console character output delegate for library (line 20130821°0940)
-         IOBus.IOBus_OutputLine webriOutputCharDelegate = new IOBus.IOBus_OutputLine(MainForm._mainform.writeChar);
+         // Provide the basic console character output delegate for library (line 20130821°0940)
+         IOBus_OutputChars webriOutputCharDelegate = new IOBus_OutputChars(MainForm._mainform.writeChar); //// chg 20210522°1031`xx
 
-         // provide the basic console lnie output delegate for library (line 20130819°0902)
-         IOBus.IOBus_OutputLine webriOutputDelegate = new IOBus.IOBus_OutputLine(MainForm._mainform.writeLine);
+         // Provide the basic console lnie output delegate for library (line 20130819°0902)
+         IOBus_OutputLine webriOutputDelegate = new IOBus_OutputLine(MainForm._mainform.writeLine);
 
-         // initialize library (line 20130819°0904)
-         // note : Or should this better be done behind Settings.Default.Upgrade(),
-         //    like the first log line output? [note 20130625°0934]
-         InitLib lib = new InitLib ( Program.PathConfigDirUser
-                                    , webriOutputCharDelegate
-                                     , webriOutputDelegate
+         // Initialize library [line 20130819°0904]
+         var quPoLib = new QueryPonyLib.InitLib ( Program.PathConfigDirUser                 // Possibly useless after refactoring 2021
+                                    , webriOutputCharDelegate                  // Character writing facility
+                                     , webriOutputDelegate                     // Line writing facility
                                       );
 
-         // output very first log message (sequence 20130707°0906)
-         //-------------------------------------------------
+         // Output very first log message [seq 20130707°0906]
+         //------------------------------------------------
          // note : Utils.outputLine() must only be done behind Settings.Default.Upgrade().
          //    outputLine() seems not allowed here yet (DirectoryNotFoundException). Try to
          //    reactivate outputLine() later, after the issues has settled, to find out the exact
@@ -70,8 +61,8 @@ namespace QueryPonyGui
          //    fact not when running from the build folder, where libraries may lurk around,
          //    but from any folder, where no libraries exist, so it is garanteed, the
          //    built-in libraries are to be used. (20130711°0913)
-         //-------------------------------------------------
-         if (Glb.Debag.ExecuteNo)
+         //------------------------------------------------
+         if (Glb.Debag.Execute_No)
          {
             string sOut = "[Debug]" + " " + Glb.Resources.AssemblyNameLib + Glb.sBlnk + "was initialized (one) (debug 20130707°0906).";
             Utils.outputLine(sOut);
@@ -79,6 +70,5 @@ namespace QueryPonyGui
 
          return true;
       }
-
    }
 }

@@ -1,10 +1,9 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyLib/InitLib.cs
-// id          : 20130619°1221
-// summary     : This file stores class 'Init' to provide initialization methods for this library.
+// file        : 20130619°1221 /QueryPony/QueryPonyLib/InitLib.cs
+// summary     : Class 'Init' provides initialization methods for this library
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 by Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2022 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // versions    : 20130619°1211 project QueryPonyLib split off from project QueryPony
 // status      :
@@ -13,64 +12,104 @@
 #endregion Fileinfo
 
 using System;
+using SyIo = System.IO;
 
 namespace QueryPonyLib
 {
-
-   /// <summary>This class provides initialization methods for this library.</summary>
+   /// <summary>This class provides initialization methods for this library</summary>
    /// <remarks>
    /// id : 20130619°1222
-   /// note : Calling single-file-delivery here is useless (see finding 20130726°1411).
+   /// note : Calling single-file-delivery here is useless (see finding 20130726°1411)
    /// </remarks>
    public class InitLib
    {
+      /// <summary>This property gets/sets the User Settings Directory (where e.g. the logfile file is located)</summary>
+      /// <remarks>id : 20210522°1313</remarks>
+      public static string Settings2Dir { get; set; }
 
-      /// <summary>This property gets/sets the User Settings Directory (where e.g. the logfile file is located).</summary>
-      /// <remarks>id : 20130625°0903</remarks>
-      public static string SettingsDir { get; set; }
+      /// <summary>This property gets/sets the User Settings Directory (where e.g. the logfile file is located)</summary>
+      /// <remarks>
+      /// id : 20130625°0903
+      /// Check : Misleading identifyer name!</remarks>
+      public static string Settings1Dir { get; set; }
 
-
-      /// <summary>This property gets the logfile path.</summary>
+      /// <summary>This property gets the logfile path</summary>
       /// <remarks>id : 20130625°0904</remarks>
       public static string PathLogfile
       {
          get
          {
-            ////string sRet = InitLib.SettingsDir + Glb.sDelim_PathBkslsh + "logfile.txt";
-            string sRet = InitLib.SettingsDir + IOBus.Gb.Bricks.PathBkslsh + "logfile.txt";
-            ////string sRet = InitLib.SettingsDir + "\\" + "logfile.txt";
+            string sRet = InitLib.Settings1Dir + IOBus.Gb.Bricks.PathBkslsh + "logfile.txt";
             return sRet;
          }
       }
 
-
-      /// <summary>This constructor initializes this library.</summary>
-      /// <remarks>id : 20130620°0911</remarks>
+      /// <summary>This constructor initializes this library</summary>
+      /// <remarks>
+      /// id : 20130620°0911
+      /// note : A static method for initialization will not do it, because this
+      ///    library may be used by multiple clients at the same time, e.g. QuPpCmd
+      ///    plus QuPpGui, and those have different output facilities.
+      /// </remarks>
+      /// <param name="sOutputDir">Directory for some use -- Probably useless</param>
+      /// <param name="writeHostChar">Delegate for a character writing facility</param>
+      /// <param name="writeHostLine">Delegate for a line writing facility<param>
       public InitLib ( string sOutputDir
-                      , IOBus.IOBus_OutputLine writeHostChar // (added 20130821°0938)
-                       , IOBus.IOBus_OutputLine writeHostLine // (added 20130819°0901)
+                      , IOBus_OutputChars writeHostChar
+                       , IOBus_OutputLine writeHostLine
                         )
       {
-
-         // (seq 20130819°0903)
-         IOBusConsumer._writeHostChar = writeHostChar; // (added 20130821°0937)
+         // Provide communication facilities [seq 20130819°0903]
+         IOBusConsumer._writeHostChar = writeHostChar;
          IOBusConsumer._writeHostLine = writeHostLine;
-         IOBusConsumer.dlgtInputLinei = null; // avoid compiler warning 'never set' (20130828°1421)
-         IOBusConsumer.dlgtKeypressi = null; // avoid compiler warning 'never set' (20130828°142102)
+         IOBusConsumer.dlgtInputLinei = null;                                  // Avoid compiler warning 'never set' [line 20130828°1421]
+         IOBusConsumer.dlgtKeypressi = null;                                   // Avoid compiler warning 'never set' [line 20130828°1421`02]
 
-         // make debug output folder available program-wide
-         SettingsDir = sOutputDir;
+         // Make debug output folder available program-wide
+         InitLib.Settings1Dir = sOutputDir;
 
-         string s = "[Debug] QueryPonyLib initializes.";
+         // Prime single file deployment [seq 20210523°1321]
+         Resolver.Register();
+
+         // Set user folder [seq 20210522°1313 (after 20210520°1241, 20130902°0642)]
+         // CHECK — Redundant seq 20210520°1241 in Resolver.cs must possibly be adjusted
+         string sFil = System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath;
+         string sDir = System.IO.Path.GetDirectoryName(sFil);
+         if (! SyIo.Directory.Exists(sDir))
+         {
+            SyIo.Directory.CreateDirectory(sDir);
+         }
+         InitLib.Settings2Dir = sDir;
+
+         string s = "QueryPonyLib is initializing ...";
          IOBusConsumer.writeHost(s);
 
-         // (sequence 20130709°1341) restore joespostbox.sqlite availability
-         if (IOBus.Gb.Debag.ExecuteNO)
-         {
-            string sMsg = "Settings Folder = " + IOBus.Gb.Bricks.Sp + SettingsDir + IOBus.Gb.Bricks.CrCr + "(Debug 20130709°1342)";
-            System.Windows.Forms.MessageBox.Show(sMsg);
-         }
+         // Trigger SQLite demo database extraction [seq 20210522°1411]
+         this.ExtractRessources();
       }
 
+      /// <summary>
+      ///  This method shall extract the ressources on library initialization
+      /// </summary>
+      /// <remarks>
+      /// id : 20210522°1421
+      /// </remarks>
+      private void ExtractRessources() {
+
+         // For more details how to do, compare
+         //  ConnSettingsGui.cs seq 20130709°1351 'Guarantee SQLite demo database files'
+
+         // Prepare ingredients
+         System.Reflection.Assembly asmSource1 = System.Reflection.Assembly.GetExecutingAssembly();
+         string sAsmResourceName2 = Glb.Resources.JoespostboxSqliteResourcename;  // "QueryPonyLib.docs.joespostbox.201307031243.sqlite3"
+
+         // Prepare extraction list
+         IOBus.Utils.Resofile[] resos = {
+            new IOBus.Utils.Resofile(asmSource1, sAsmResourceName2, InitLib.Settings2Dir, "joespostbox.201307031243.sqlite3")
+         };
+
+         // Perform extraction
+         IOBus.Utils.provideResourceFiles(resos);
+      }
    }
 }

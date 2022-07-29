@@ -1,10 +1,9 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/QueryPonyLib/DbApi/PgsqlQueryOptions.cs
-// id          : 20130616°1551 (20130605°1751)
-// summary     : This file stores class 'PgsqlQueryOptions' to define PostgreSQL-specific query options.
+// file        : 20130616°1551 (20130605°1751) /QueryPony/QueryPonyLib/DbApi/PgsqlQueryOptions.cs
+// summary     : Class 'PgsqlQueryOptions' defines PostgreSQL-specific query options
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2018 by Norbert C. Maier
-// authors     : See /querypony/QueryPonyGui/docs/authors.txt
+// copyright   : © 2013 - 2022 Norbert C. Maier
+// authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Experimental
 // note        : File cloned from SqliteQueryOptions.cs and modified (20130616°1551)
@@ -20,7 +19,6 @@ using System.Windows.Forms;
 
 namespace QueryPonyLib
 {
-
    /// <summary>
    /// This class defines PostgreSQL-specific query options to be
    ///  connection-globally applied. (Possibly nothing yet implemented.)
@@ -28,7 +26,6 @@ namespace QueryPonyLib
    /// <remarks>id : 20130616°1552 (20130605°1752)</remarks>
    class PgsqlQueryOptions : QueryOptions
    {
-
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130616°1553 (20130605°1753)</remarks>
       /// <param name="connection">...</param>
@@ -36,7 +33,6 @@ namespace QueryPonyLib
       {
          return;
       }
-
 
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130616°1554 (20130605°1754)</remarks>
@@ -46,7 +42,6 @@ namespace QueryPonyLib
          return;
       }
 
-
       /// <summary>This method ...</summary>
       /// <remarks>id : 20130616°1555 (20130605°1755)</remarks>
       /// <param name="connection">...</param>
@@ -55,21 +50,18 @@ namespace QueryPonyLib
          return;
       }
 
-
       /// <summary>This method ...</summary>
       /// <remarks>
-      /// id : 20130616°1556 (20130605°1756)
+      /// id : 20130616°1556 [sibling 20130604°1016`14]
       /// note : This method is involved in refactor 20130619°1311
       /// </remarks>
       /// <returns>...</returns>
       public override DialogResult ShowForm()
       {
-         ////return ShowForm(new QueryOptionsForm()); // original line
          return ShowForm(new MysqlQueryOptionsForm_DUMMY());
       }
 
-
-      /// <summary>This method implements ... (experimental).</summary>
+      /// <summary>This method implements ... (experimental)</summary>
       /// <remarks>id : 20130705°1028</remarks>
       public override void LetOptionsPushFromGui()
       {
@@ -79,9 +71,7 @@ namespace QueryPonyLib
                         ;
          System.Windows.Forms.MessageBox.Show(sMsg);
 
-
          return;
       }
-
    }
 }
