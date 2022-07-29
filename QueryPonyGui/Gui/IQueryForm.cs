@@ -2,7 +2,7 @@
 // file        : 20130604°0501 /QueryPony/QueryPonyGui/Gui/IQueryForm.cs
 // summary     : This file stores interface 'IQueryForm' and class 'MRUFileAddedEventArgs' to provide ...
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable

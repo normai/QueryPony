@@ -1,8 +1,9 @@
 ﻿#region Fileinfo
 // file        : 20130812°0811 /QueryPony/QueryPonyGui/Gui/MainForm_WndProc.cs
-// summary     : This file stores partial class 'MainForm' to constitute the Main Form's Windows message pipe hook part.
+// summary     : This file stores partial class 'MainForm' to constitute
+//                the Main Form's Windows message pipe hook part
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable

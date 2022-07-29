@@ -1,9 +1,8 @@
 ﻿#region Fileinfo
 // file        : 20130612°0901 (20130604°0701) /QueryPony/QueryPonyLib/DatabaseApi/MysqlDbBrowser.cs
-// summary     : This file stores class 'MysqlDbBrowser' to constitute
-//                an implementation of IDbBrowser for MySQL.
+// summary     : Class 'MysqlDbBrowser' constitutes an implementation of IDbBrowser for MySQL
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // encoding    : UTF-8-with-BOM
 // authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // status      : Experimental

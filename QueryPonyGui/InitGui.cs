@@ -1,8 +1,8 @@
 ﻿#region Fileinfo
 // file        : 20130707°0901 QueryPony/QueryPonyGui/InitGui.cs
-// summary     : This file stores class 'Inits' to perform some initialisation tasks.
+// summary     : Class 'Inits' performs some initialisation tasks
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 #endregion Fileinfo

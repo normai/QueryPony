@@ -1,9 +1,8 @@
 ﻿#region Fileinfo
 // file        : 20130605°1731 (20130604°1001) /QueryPony/QueryPonyLib/DbApi/SqliteDbClient.cs
-// summary     : This file stores class 'SqliteDbClient' to constitute
-//                an implementation of DbClient for SQLite.
+// summary     : Class 'SqliteDbClient' constitutes an implementation of DbClient for SQLite
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Experimental

@@ -1,9 +1,8 @@
 ﻿#region Fileinfo
 // file        : 20130604°0831 /QueryPony/QueryPonyLib/DbApi/OdbcDbBrowser.cs
-// summary     : This file stores class 'OdbcDbBrowser' to constitute
-//                an implementation of IDbBrowser.
+// summary     : Class 'OdbcDbBrowser' constitutes an implementation of IDbBrowser
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // encoding    : UTF-8-with-BOM
 // authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // status      : Applicable

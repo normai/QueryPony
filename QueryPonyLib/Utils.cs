@@ -1,8 +1,8 @@
 ﻿#region Fileinfo
 // file        : 20130625°0911 (20130604°0351) /QueryPony/QueryPonyLib/Utils.cs
-// summary     : This file stores class 'Utils' to provide file processing and other methods.
+// summary     : Class 'Utils' provides file processing and other methods
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable

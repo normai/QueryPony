@@ -2,7 +2,7 @@
 // file        : 20200523°0311 /QueryPony/QueryPonyLib/Resolver.cs
 // summary     : Load embedded assemblies on demand
 // license     : GNU AGPL v3
-// copyright   : © 2020 - 2021 Norbert C. Maier
+// copyright   : © 2020 - 2022 Norbert C. Maier
 // authors     :
 // encoding    : UTF-8-with-BOM
 // status      :

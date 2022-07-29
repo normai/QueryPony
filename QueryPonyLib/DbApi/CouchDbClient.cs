@@ -1,9 +1,9 @@
 ﻿#region Fileinfo
 // file        : 20130616°1631 (20130605°1731) /QueryPony/QueryPonyLib/DbApi/CouchDbClient.cs
 // summary     : This file homes class 'CouchDbClient' to constitute an
-//                experimental implementation of DbClient for CouchDB.
+//                experimental implementation of DbClient for CouchDB
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : ncm
 // encoding    : UTF-8-with-BOM
 // status      : Experimental

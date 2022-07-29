@@ -2,7 +2,7 @@
 // file        : 20130604°1921 /QueryPony/QueryPonyGui/Settings_ServerList.cs
 // summary     : This file stores one part of partial class 'Settings' to provide the ServerList custom type Setting.
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable

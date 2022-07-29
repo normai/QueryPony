@@ -1,8 +1,8 @@
 ﻿#region Fileinfo
 // file        : 20130613°1201 /QueryPony/QueryPonyLib/Globals.cs
-// summary     : This file stores class 'Glb' and it's subclasses to provide some global constants.
+// summary     : Class 'Glb' and it's subclasses provide some global constants
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // versions    : 20130613°1201 file newly created

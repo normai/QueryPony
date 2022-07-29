@@ -1,9 +1,8 @@
 ﻿#region Fileinfo
 // file        : 20130616°1531 (20130605°1731) /QueryPony/QueryPonyLib/DbApi/PgsqlDbClient.cs
-// summary     : This file stores class 'PgsqlDbClient' to constitute an
-//                implementation of DbClient for PostgreSQL.
+// summary     : Class 'PgsqlDbClient' constitutes an implementation of DbClient for PostgreSQL
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : ncm
 // encoding    : UTF-8-with-BOM
 // status      : Experimental

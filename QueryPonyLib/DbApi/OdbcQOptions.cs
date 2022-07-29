@@ -1,8 +1,8 @@
 ﻿#region Fileinfo
 // file        : 20130604°0921 /QueryPony/QueryPonyLib/DbApi/OdbcQOptions.cs
-// summary     : This file stores class 'ODBCQueryOptions' to define ODBC-specific query options.
+// summary     : Class 'ODBCQueryOptions' defines ODBC-specific query options
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable

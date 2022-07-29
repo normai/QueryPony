@@ -1,8 +1,8 @@
 ﻿#region Fileinfo
 // file        : 20130819°1101 /QueryPony/QueryPonyLib/Nodes.cs
-// summary     : This file stores nodes class 'Nodes' with subclasses to define various treeview node types.
+// summary     : This file stores nodes class 'Nodes' with subclasses to define various treeview node types
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Infant

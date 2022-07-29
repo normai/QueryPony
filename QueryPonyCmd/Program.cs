@@ -1,8 +1,8 @@
 ﻿#region Fileinfo
 // id          : 20190410°0611 QueryPony/QueryPonyLib/Program.cs
-// summary     : This file stores class 'Program' to constitute the program entry point.
+// summary     : Class 'Program' constitutes the program entry point
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable

@@ -1,8 +1,8 @@
 ﻿#region Fileinfo
 // file        : 20130818°1611 /QueryPony/QueryPonyLib/DbApi/DbCreate.cs
-// summary     : This file stores class DbCreate to create a new database for the given connection settings.
+// summary     : Class DbCreate creates a new database for the given connection settings.
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Experimental

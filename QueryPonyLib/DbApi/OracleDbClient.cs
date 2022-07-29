@@ -1,8 +1,8 @@
 ﻿#region Fileinfo
 // file        : 20130604°1041 /QueryPony/QueryPonyLib/DbApi/OracleDbClient.cs
-// summary     : This file stores class 'OracleDbClient' to constitute an implementation of DbClient for Oracle.
+// summary     : Class 'OracleDbClient' constitutes an implementation of DbClient for Oracle
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable

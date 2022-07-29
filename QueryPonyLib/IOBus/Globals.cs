@@ -1,8 +1,8 @@
 ﻿#region FileInfo
 // file        : 20111109°1041 /QueryPony/IOBus/Globals.cs
-// function    : This file stores class 'Gb' to define cross-project global constants.
+// summary     : Class 'Gb' defines cross-project global constants
 // license     : GNU AGPL v3
-// copyright   : © 2011 - 2021 Norbert C. Maier
+// copyright   : © 2011 - 2022 Norbert C. Maier
 // authors     : ncm
 // encoding    : UTF-8-with-BOM
 // status      :

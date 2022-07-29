@@ -1,8 +1,8 @@
 ﻿#region Fileinfo
 // file        : 20130831°1611 /QueryPony/QueryPonyGui/SingleFileDeployment.cs
-// summary     : This file stores class 'SingleFileDeployment' to provide the single-file-deployment feature.
+// summary     : Class 'SingleFileDeployment' provides the single-file-deployment feature
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // encoding    : UTF-8-with-BOM
 // authors     : ncm
 // status      : Applicable

@@ -1,8 +1,8 @@
 ﻿#region Fileinfo
 // file        : 20130709°0921 /QueryPony/QueryPonyGui/Globs.cs
-// summary     : This file stores class 'Globs' to provide some project specific constants.
+// summary     : Class 'Globs' provides some project specific constants
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : ncm
 // encoding    : UTF-8-with-BOM
 // status      :

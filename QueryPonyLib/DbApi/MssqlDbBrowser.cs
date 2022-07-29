@@ -1,9 +1,8 @@
 ﻿#region Fileinfo
 // file        : 20130604°0701 /QueryPony/QueryPonyLib/DbApi/MssqlDbBrowser.cs
-// summary     : This file stores class 'MssqlDbBrowser' to constitute
-//                an implementation of IDbBrowser for MS-SQL.
+// summary     : Class 'MssqlDbBrowser' constitutes an implementation of IDbBrowser for MS-SQL
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable

@@ -1,8 +1,8 @@
 ﻿#region Fileinfo
 // file        : 20130604°0111 /QueryPony/QueryPonyGui/Gui/SplashConnecting.cs
-// summary     : This file stores class 'SplashConnecting' to constitute a splash message form used while connecting.
+// summary     : Class 'SplashConnecting' constitutes a splash message form used while connecting
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : ncm
 // encoding    : UTF-8-with-BOM
 // status      : Applicable

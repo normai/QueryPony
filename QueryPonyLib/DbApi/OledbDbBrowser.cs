@@ -1,10 +1,9 @@
 ﻿#region Fileinfo
 // file        : 20130604°0931 (20130605°1701) /QueryPony/QueryPonyLib/DbApi/OledbDbBrowser.cs
-// summary     : This file stores class 'OleDbBrowser' to constitute
-//                an implementation of IBrowser for OleDb.
+// summary     : Class 'OleDbBrowser' to constitutes an implementation of IBrowser for OleDb.
 // license     : GNU AGPL v3
 // copyright   : © 2013 dl3bak@qsl.net
-// copyright   : © 2013 - 2021 Norbert C. Maier, dl3bak@qsl.net
+// copyright   : © 2013 - 2022 Norbert C. Maier, dl3bak@qsl.net
 // authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable

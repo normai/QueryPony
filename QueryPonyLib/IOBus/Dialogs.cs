@@ -1,8 +1,8 @@
 ﻿#region Fileinfo
 // file        : 20130216°1121 /QueryPony/IOBus/Dialogs.cs
-// summary     : This file stores class 'Dialogs' to provide some standard dialogboxes
+// summary     : Class 'Dialogs' provides some standard dialogboxes
 // license     : GNU AGPL v3
-// copyright   : © 2011 - 2021 Norbert C. Maier
+// copyright   : © 2011 - 2022 Norbert C. Maier
 // authors     : ncm
 // encoding    : UTF-8-with-BOM
 // status      :

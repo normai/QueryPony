@@ -1,8 +1,8 @@
 ﻿#region Fileinfo
 // file        : 20130604°0011 /QueryPony/QueryPonyGui/Gui/AboutForm.cs
-// summary     : This file stores class 'AboutForm' to constitute the About Form.
+// summary     : Class 'AboutForm' constitutes the About Form
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable

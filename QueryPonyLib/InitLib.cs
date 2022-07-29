@@ -1,8 +1,8 @@
 ﻿#region Fileinfo
 // file        : 20130619°1221 /QueryPony/QueryPonyLib/InitLib.cs
-// summary     : This file stores class 'Init' to provide initialization methods for this library.
+// summary     : Class 'Init' provides initialization methods for this library
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // versions    : 20130619°1211 project QueryPonyLib split off from project QueryPony

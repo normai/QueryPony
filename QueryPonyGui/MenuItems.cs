@@ -1,8 +1,8 @@
 ﻿#region Fileinfo
 // file        : 20130707°1831 /QueryPony/QueryPonyGui/MenuItems.cs
-// summary     : This file stores class 'MenuItems' to provide methods to process menu items.
+// summary     : Class 'MenuItems' provides methods to process menu items
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      :

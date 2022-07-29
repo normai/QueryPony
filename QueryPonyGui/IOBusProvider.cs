@@ -1,8 +1,8 @@
 ﻿#region Fileinfo
 // file        : 20130819°0811 (20130114°1531 20111105°1731) /QueryPony/QueryPonyGui/IOBus/IOBusProvider.cs
-// summary     : This file stores partial class 'MainForm' with methods to provide basic I/O for external modules.
+// summary     : This file stores partial class 'MainForm' with methods to provide basic I/O for external modules
 // license     : GNU AGPL v3
-// copyright   : © 2011 - 2021 Norbert C. Maier
+// copyright   : © 2011 - 2022 Norbert C. Maier
 // authors     :
 // encoding    : UTF-8-with-BOM
 // status      :

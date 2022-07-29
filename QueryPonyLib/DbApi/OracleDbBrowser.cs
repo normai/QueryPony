@@ -1,9 +1,8 @@
 ﻿#region Fileinfo
 // file        : 20130604°1021 /QueryPony/QueryPonyLib/DbApi/OracleDbBrowser.cs
-// summary     : This file stores class 'OracleDbBrowser' to constitute
-//                a simple implementation of IDbBrowser for Oracle.
+// summary     : Class 'OracleDbBrowser' constitutes a simple implementation of IDbBrowser for Oracle
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable

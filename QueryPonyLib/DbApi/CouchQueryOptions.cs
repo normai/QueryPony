@@ -1,8 +1,8 @@
 ﻿#region Fileinfo
 // file        : 20130616°1651 (20130605°1751) /QueryPony/QueryPonyLib/DbApi/CouchQueryOptions.cs
-// summary     : This file stores class 'CouchQOptions' to definie CouchDB-specific query options.
+// summary     : Class 'CouchQOptions' defines CouchDB-specific query options
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : ncm
 // encoding    : UTF-8-with-BOM
 // status      : Experimental

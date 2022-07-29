@@ -1,9 +1,8 @@
 ﻿#region Fileinfo
 // file        : 20130605°1701 (20130604°0931) /QueryPony/QueryPonyLib/DbApi/SqliteDbBrowser.cs
-// summary     : This file stores class 'SqliteDbBrowser' to constitute
-//                an implementation of IDbBrowser for SQLite.
+// summary     : Class 'SqliteDbBrowser' constitutes an implementation of IDbBrowser for SQLite
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Experimental

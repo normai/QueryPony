@@ -2,7 +2,7 @@
 // id          : 20130819°0851 (after 20130102°1712 20121215°2101 20111105°1801) /QueryPony/IOBus/IOBus.cs
 // summary     : Class 'IOBus' to constitutes glue for I/O delegate mechanism between the engine and UI
 // license     : GNU AGPL v3
-// copyright   : © 2011 - 2021 Norbert C. Maier
+// copyright   : © 2011 - 2022 Norbert C. Maier
 // authors     : ncm
 // encoding    : UTF-8-with-BOM
 // status      :

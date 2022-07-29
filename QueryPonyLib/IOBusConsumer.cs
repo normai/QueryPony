@@ -1,8 +1,8 @@
 ﻿#region Fileinfo
 // file        : 20130819°0831 (20130115°0911 20111105°1751) /QueryPony/QueryPonyLib/IOBusConsumer.cs
-// summary     : This file stores class 'IOConsumer' to provide I/O facilities as the calleé, means as the delegates consumer.
+// summary     : Class 'IOConsumer' provides I/O facilities as the calleé, means as the delegates consumer
 // license     : GNU AGPL v3
-// copyright   : © 2011 - 2021 Norbert C. Maier
+// copyright   : © 2011 - 2022 Norbert C. Maier
 // authors     :
 // encoding    : UTF-8-with-BOM
 // status      :

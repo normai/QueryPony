@@ -2,7 +2,7 @@
 // file        : 20200522°0211 /QueryPonyLib/Selftest.cs
 // summary     : Provide some selftest facility
 // license     : GNU AGPL v3
-// copyright   : © 2020 - 2021 Norbert C. Maier
+// copyright   : © 2020 - 2022 Norbert C. Maier
 // authors     : ncm
 // encoding    : UTF-8-with-BOM
 // status      : Under construction

@@ -1,9 +1,9 @@
 ﻿#region Fileinfo
 // file        : 20130604°2221 /QueryPony/QueryPonyLib/DbApi/QueryOptions.cs
-// summary     : This file stores class 'QueryOptions' to provide query options
-//                that can be globally applied to commands and/or connections.
+// summary     : Class 'QueryOptions' provides query options that can be
+//                globally applied to commands and/or connections.
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable

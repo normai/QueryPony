@@ -1,8 +1,8 @@
 ﻿#region Fileinfo
 // file        : 20130818°1531 /QueryPony/QueryPonyLib/CloneDb.cs
-// summary     : This file stores class 'CloneDb' to facilitate a database cloning.
+// summary     : Class 'CloneDb' facilitates a database cloning
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      :

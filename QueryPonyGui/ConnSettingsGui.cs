@@ -1,8 +1,8 @@
 ﻿#region Fileinfo
 // file        : 20130604°0121 /QueryPony/QueryPonyGui/ConnectionSettingsGui.cs
-// summary     : This file stores classes 'ConnectionSettingsGui', 'ServerList'/'ConnectionSettingsList' and 'DemoConnectionSettings' to maintain the settings.
+// summary     : Classes 'ConnectionSettingsGui', 'ServerList'/'ConnectionSettingsList' and 'DemoConnectionSettings' maintain the settings.
 // license     : GNU AGPL v3
-// copyright   : © 2013 - 2021 Norbert C. Maier
+// copyright   : © 2013 - 2022 Norbert C. Maier
 // authors     : See /QueryPony/QueryPonyGui/docs/authors.txt
 // encoding    : UTF-8-with-BOM
 // status      : Applicable
