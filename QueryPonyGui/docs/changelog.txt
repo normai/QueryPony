@@ -1,5 +1,7 @@
 ﻿
-   chg 20220729°1121 Switch Cmd/Gui/Lib from .NET 4.6 to 4.8
+   chg 20220729°1121 Cmd/Gui/Lib
+   - Switch from .NET 4.6 to 4.8
+   - Switch Platform target from build x86 to AnyCPU
 
    build 2018-08-19`01:33 QueryPony 0.3.4 Refresh
    - Executable for Windows 32-bit .NET 3.5

@@ -1,10 +1,8 @@
-﻿# QueryPony
+﻿<img src="./QueryPonyGui/docs/img/20130705o0812.mcol-chess-horse.v0.x0200y0200.png" align="right" width="128" height="128" alt="Logo 20130705°0812">
+
+# QueryPony &nbsp; <sup><sub><sup>*v0.3.5 disrupted*</sup></sub></sup>
 
 **Slogan** : A Simple Generic Database Query Tool and API
-
-**Places** : [Homepage](http://downtown.trilo.de/svn/queryponydev/trunk/home/index.html)
- — [Downloads](http://downtown.trilo.de/svn/queryponydev/downloads/)
- — [UserGuide](http://downtown.trilo.de/svn/queryponydev/trunk/QueryPony/QueryPonyGui/docs/index.html)
 
 **Status** : Under overhaul — Disrupted
 
@@ -12,7 +10,7 @@
 
 ## Quickstart
 
-[Download](http://downtown.trilo.de/svn/queryponydev/downloads/) the executable and start it.
+<del>[Download](http://downtown.trilo.de/svn/queryponydev/downloads/) the executable and start it.</del>
 
 Select the 'SQLite' tab. Press 'Local Demo Connection'. Nod the turning up dialog.
 
@@ -73,7 +71,7 @@ Now you also have found the two folders, which you must delete, once you get
 
 Have fun!
 
-*2018-Aug-19 ~~*
+*2022-Jul-29* &nbsp; <del>*2018-Aug-19*</del>
 
 ---
 
