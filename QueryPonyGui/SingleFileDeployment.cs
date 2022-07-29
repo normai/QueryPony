@@ -11,9 +11,9 @@
 #endregion Fileinfo
 
 using System;
-using System.Reflection;                                                       // For Assembly
+using System.Reflection;                               // For Assembly
 using System.Windows.Forms;
-using QueryPonyLib;                                                            // For Glb.Debag.Execute_No — Seems not possible (log 20190410°0751) compare issue 20130706°2221
+using QueryPonyLib;                                    // For Glb.Debag.Execute_No — Seems not possible (log 20190410°0751) compare issue 20130706°2221
 
 namespace QueryPonyGui
 {
@@ -81,7 +81,7 @@ namespace QueryPonyGui
             // For debugging, see what's available
             // This is fine, one of about 21 resources is 'QueryPonyGui.QueryPonyLib.exe' [note 20130707°1002]
             string[] arDbg = listAvailableResources("");
-            if (Globs.Debag.Execute_No)                                        // Glb.Debag.Execute_No seems not possible here
+            if (Globs.Debag.Execute_Yes)                                       // Glb.Debag.Execute_No seems not possible here
             {
                // This is evil, it causes endless recursion. [note 20130707°100202]
                string[] arDbg2 = listAvailableResources(Globs.Resources.AssemblyNameLib);
@@ -123,10 +123,13 @@ namespace QueryPonyGui
                else if (sResourceName == "QueryPonyGui.Npgsql.dll")             { sResourceName = "QueryPonyGui.libs.Npgsql.dll"; }
                else if (sResourceName == "QueryPonyGui.QueryPonyLib.exe")       { sResourceName = "QueryPonyGui.libs.QueryPonyLib.exe"; }
                else if (sResourceName == "QueryPonyGui.System.Data.SQLite.dll") { sResourceName = "QueryPonyGui.libs32bit.System.Data.SQLite.dll"; }
-
                else
                {
-                  // Fatal — Program flow error, theroretically not possible
+                  // Fatal
+                  string sMsg = "[Fatal 20220729°1211] Program flow error, theroretically not possible"
+                               + Glb.sCrCr + "sResourceName = " + sResourceName
+                                ;
+                  MessageBox.Show(sMsg, "Notification");
                }
             }
             else
@@ -140,12 +143,12 @@ namespace QueryPonyGui
             }
 
             // Fetch the wanted library
-            // Note : E.g. sResourceName = "QueryPonyLib.MySql.Data.dll" maybe wrong.
+            // note : E.g. sResourceName = "QueryPonyLib.MySql.Data.dll" maybe wrong.
             using (var stream = asmUse.GetManifestResourceStream(sResourceName))
             {
                // Experiment [seq 20130707°1036]
-               // Note : Find out about issue 20130707°1011 'Who is requesting XmlSerializers.dll'
-               // Ref : 20130707°1032 'How to list all loaded assemblies'
+               // note : Find out about issue 20130707°1011 'Who is requesting XmlSerializers.dll'
+               // nef : Article 'How to list all loaded assemblies' [ref 20130707°1032]
                if (sResourceName == "QueryPonyGui.QueryPony.XmlSerializers.dll")
                {
                   // Note : Block shutdown 20130808°1553 while debugging exception 20130808°1552
@@ -163,7 +166,7 @@ namespace QueryPonyGui
 
                // Finally the actual job — Load assembly
                Assembly asm = null;
-               if (sResourceName != "QueryPonyLib.libs32bit.System.Data.SQLite.dll")
+               if (sResourceName != "QueryPonyLib.libs32bit.System.Data.SQLite.dll") // e.g. sResourceName = "QueryPonyGui.QueryPony.resources.dll" [note 20220729°1141]
                {
                   // Option 1 — load straight forward
                   Byte[] assemblyData = new Byte[stream.Length];

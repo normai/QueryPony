@@ -52,6 +52,10 @@ namespace QueryPonyGui
          /// <remarks>id : 20130707°0924 (after 20130608°0122)</remarks>
          public static bool Execute_No = false;
 
+         /// <summary>This const 'true' tells whether to execute a debug/test sequence or not (toggle Yes/No on demand)</summary>
+         /// <remarks>id : 20130707°20220729°1151 (after 20130608°0123)</remarks>
+         public static bool Execute_Yes = true;
+
          /// <summary>This const 'false' tells to skip a sequence because it is temporarily shutdown</summary>
          /// <remarks>id : 20130707°0937</remarks>
          public static bool ShutdownTemporarily = false;
