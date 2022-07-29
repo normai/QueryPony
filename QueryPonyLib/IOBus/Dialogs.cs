@@ -1,9 +1,8 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/querypony/IOBus/Dialogs.cs
-// id          : 20130216°1121
-// summary     : This file stores class 'Dialogs' to provide some standard dialogboxes.
+// file        : 20130216°1121 /QueryPony/IOBus/Dialogs.cs
+// summary     : This file stores class 'Dialogs' to provide some standard dialogboxes
 // license     : GNU AGPL v3
-// copyright   : © 2011 - 2018 by Norbert C. Maier
+// copyright   : © 2011 - 2021 Norbert C. Maier
 // authors     : ncm
 // encoding    : UTF-8-with-BOM
 // status      :
@@ -15,12 +14,11 @@ using System;
 
 namespace IOBus
 {
-   /// <summary>This class provides some standard dialogboxes.</summary>
+   /// <summary>This class provides some standard dialogboxes</summary>
    /// <remarks>id : 20130216°1122</remarks>
    public static class Dialogs
    {
-
-      /// <summary>This method provides a dialogbox for immediate messages.</summary>
+      /// <summary>This method provides a dialogbox for immediate messages</summary>
       /// <remarks>
       /// id : 20130215°0131
       /// note : This should never be used from a pure library. Use it
@@ -34,15 +32,14 @@ namespace IOBus
          System.Windows.Forms.MessageBoxIcon icon = System.Windows.Forms.MessageBoxIcon.Information;
          System.Windows.Forms.DialogResult dr = System.Windows.Forms.MessageBox.Show
                                                ( sMsg
-                                                , sTitle                               // e.g. "Warnung"
-                                                 , button                              // e.g. .YesNo
-                                                  , icon                               // e.g. .Warning
+                                                , sTitle                       // E.g. "Warnung"
+                                                 , button                      // E.g. .YesNo
+                                                  , icon                       // E.g. .Warning
                                                    );
          return;
       }
 
-
-      /// <summary>This method executes the dialogbox. </summary>
+      /// <summary>This method executes the dialogbox</summary>
       /// <remarks>
       /// id : 20130203°1421
       /// note : This method is not part of the IOBus system, just it
@@ -61,12 +58,12 @@ namespace IOBus
 
          System.Windows.Forms.DialogResult dr = System.Windows.Forms.MessageBox.Show
                                                ( sMsg
-                                                , sTitle                               // e.g. "Warnung"
-                                                 , button                              // e.g. .YesNo
-                                                  , icon                               // e.g. .Warning
+                                                , sTitle                       // E.g. "Warnung"
+                                                 , button                      // E.g. .YesNo
+                                                  , icon                       // E.g. .Warning
                                                    );
 
-         // just a template sequence
+         // Just a template sequence
          switch (dr)
          {
             case System.Windows.Forms.DialogResult.Abort  : break;
@@ -83,8 +80,7 @@ namespace IOBus
          return dr;
       }
 
-
-      /// <summary>This method provides a dialogbox with the title 'Error'. </summary>
+      /// <summary>This method provides a dialogbox with the title 'Error'</summary>
       /// <remarks>id : 20130218°1401</remarks>
       /// <param name="sMsg">The message to display to the user</param>
       public static void dialogErr(string sMsg)
@@ -94,11 +90,10 @@ namespace IOBus
          return;
       }
 
-
-      /// <summary>This method provides a dialogbox for immediate messages. </summary>
+      /// <summary>This method provides a dialogbox for immediate messages</summary>
       /// <remarks>
       /// id : 20130203°1422
-      /// note : This method should never be used from a library. Use it only as provisory quick-shot during development. 
+      /// note : This method should never be used from a library. Use it only as provisory quick-shot during development.
       /// </remarks>
       /// <param name="sMsg">The message to display to the user</param>
       public static void dialogOk(string sMsg)
@@ -108,8 +103,7 @@ namespace IOBus
          return;
       }
 
-
-      /// <summary>This method provides a standard yes/no-question dialogbox and returns true for 'OK' and false for 'Cancel'.</summary>
+      /// <summary>This method provides a standard yes/no-question dialogbox and returns true for 'OK' and false for 'Cancel'</summary>
       /// <remarks>id : 20130216°1123</remarks>
       /// <param name="sMsg">The message to display to the user</param>
       /// <returns>Success flag</returns>
@@ -129,8 +123,7 @@ namespace IOBus
          return true;
       }
 
-
-      /// <summary>This method provides a standard yes/no-question dialogbox and returns true for 'Yes' and false for 'No'.</summary>
+      /// <summary>This method provides a standard yes/no-question dialogbox and returns true for 'Yes' and false for 'No'</summary>
       /// <remarks>id : 20130216°1124</remarks>
       /// <param name="sMsg">The message to display to the user</param>
       /// <returns>Success flag</returns>
@@ -140,8 +133,7 @@ namespace IOBus
          return bAnswer;
       }
 
-
-      /// <summary>This method provides a standard yes/no-question dialogbox and returns true for 'Yes' and false for 'No'.</summary>
+      /// <summary>This method provides a standard yes/no-question dialogbox and returns true for 'Yes' and false for 'No'</summary>
       /// <remarks>id : 20131121°0901 (20130216°1124)</remarks>
       /// <param name="sCaption">The caption string to show in the title bar of the dialog box</param>
       /// <param name="sMsg">The message to display to the user in the dialog box</param>
@@ -158,7 +150,6 @@ namespace IOBus
          {
             return false;
          }
-
          return true;
       }
    }
