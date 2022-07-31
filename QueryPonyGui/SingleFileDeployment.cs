@@ -79,12 +79,14 @@ namespace QueryPonyGui
          AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
          {
             // For debugging, see what's available
-            // This is fine, one of about 21 resources is 'QueryPonyGui.QueryPonyLib.exe' [note 20130707°1002]
+            //// // This is fine, one of about 21 resources is 'QueryPonyGui.QueryPonyLib.exe' [note 20130707°1002]  // [note 20220731°0912] No. This are 44 and no 'QueryPonyGui.QueryPonyLib.exe'
             string[] arDbg = listAvailableResources("");
+            Array.Sort(arDbg);
             if (Globs.Debag.Execute_Yes)                                       // Glb.Debag.Execute_No seems not possible here
             {
                // This is evil, it causes endless recursion. [note 20130707°100202]
                string[] arDbg2 = listAvailableResources(Globs.Resources.AssemblyNameLib);
+               Array.Sort(arDbg2);
             }
 
             // Comfort
@@ -125,7 +127,11 @@ namespace QueryPonyGui
                else if (sResourceName == "QueryPonyGui.System.Data.SQLite.dll") { sResourceName = "QueryPonyGui.libs32bit.System.Data.SQLite.dll"; }
                else
                {
-                  // Fatal
+                  // Fatal error
+                  // [note 20220731°0921] This fires
+                  //   • Before form is visible 2 * with QueryPonyGui.QueryPony.resources.dll
+                  //   • Before form is visible 2 * with QueryPonyGui.QueryPony.XmlSerializers.dll
+                  //   • After  form is visible 2 * with QueryPonyGui.QueryPony.resources.dll
                   string sMsg = "[Fatal 20220729°1211] Program flow error, theroretically not possible"
                                + Glb.sCrCr + "sResourceName = " + sResourceName
                                 ;
@@ -166,7 +172,7 @@ namespace QueryPonyGui
 
                // Finally the actual job — Load assembly
                Assembly asm = null;
-               if (sResourceName != "QueryPonyLib.libs32bit.System.Data.SQLite.dll") // e.g. sResourceName = "QueryPonyGui.QueryPony.resources.dll" [note 20220729°1141]
+               if (sResourceName != "QueryPonyLib.libs32bit.System.Data.SQLite.dll") // E.g. sResourceName = "QueryPonyGui.QueryPony.resources.dll" [note 20220729°1141]
                {
                   // Option 1 — load straight forward
                   Byte[] assemblyData = new Byte[stream.Length];

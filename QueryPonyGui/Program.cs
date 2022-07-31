@@ -23,7 +23,6 @@ namespace QueryPonyGui
    /// </remarks>
    public static class Program
    {
-
       /// <summary>This property stores the path for the User Configuration Folder</summary>
       /// <remarks>id : 20130707°0911</remarks>
       public static string PathConfigDirUser { get; set; }
@@ -57,7 +56,7 @@ namespace QueryPonyGui
          // Preparation set properties
          initProperties();
 
-         SingleFileDeployment.provideSingleFileDeployment();
+         ////SingleFileDeployment.provideSingleFileDeployment(); // [shutdown 20220731°0911 Just a try]
 
          // Install single-file-deployment facility [line 20130706°1053]
          SingleFileDeployment.provideSingleFileDeployment();
