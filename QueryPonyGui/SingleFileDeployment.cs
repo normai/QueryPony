@@ -84,10 +84,10 @@ namespace QueryPonyGui
             string[] arDbg = listAvailableResources("");
             Array.Sort(arDbg);
             String sIgniter = new StackFrame(1).GetMethod().Name;              // Not so helpful [added 20220731°0931] sIgniter = "OnAssemblyResolveEvent"
-            if (Globs.Debag.Execute_No)                                        //
+            if (Globs.Debag.Execute_Yes)                                        // Toggle Yes/No
             {
                // This is evil, it causes endless recursion. [note 20130707°100202]
-               string[] arDbg2 = listAvailableResources(Globs.Resources.AssemblyNameLib);
+               string[] arDbg2 = listAvailableResources(Globs.Resources.AssemblyNameLib); // This contains e.g. 'QueryPonyLib.libs.System.Data.SQLite.dll' [note 20220731°1213]
                Array.Sort(arDbg2);
             }
 
@@ -108,7 +108,7 @@ namespace QueryPonyGui
             // Debug [seq 20190410°0741]
             if (sResourceName.Contains("System.Data.SQLite"))
             {
-               MessageBox.Show("Debug 20190410°0741", "Debug");                // Never
+               MessageBox.Show("Debug 20190410°0741", "Debug");                // Never?
             }
 
             // Use one of the two possible assemblies [supplement 20130706°1055]
@@ -120,13 +120,14 @@ namespace QueryPonyGui
                // Provisory manipulation [seq 20130707°1921]
                // Note : Deal with issue 20130708°0711 'MySql.Data.dll assembly name spelling'
                // Todo : Implement a more intelligent generic algorithm [todo 20130708°0911]
-               if      (sResourceName == "QueryPonyGui.iobus.dll")              { sResourceName = "QueryPonyGui.libs.iobus.dll"; }
-               else if (sResourceName == "QueryPonyGui.MySql.Data.dll")         { sResourceName = "QueryPonyGui.libs.mysql.data.dll"; } // note the cases a la 20130708°0711
+               if      (sResourceName == "QueryPonyGui.iobus.dll")              { sResourceName = "QueryPonyGui.libs.iobus.dll"; }  //// Should be superfluous [note 20220731°1212]
+               else if (sResourceName == "QueryPonyGui.MySql.Data.dll")         { sResourceName = "QueryPonyGui.libs.mysql.data.dll"; }  // Note the cases a la 20130708°0711
                else if (sResourceName == "QueryPonyGui.Mono.Security.dll")      { sResourceName = "QueryPonyGui.libs.Mono.Security.dll"; }
                else if (sResourceName == "QueryPonyGui.Newtonsoft.Json.dll")    { sResourceName = "QueryPonyGui.libs.Newtonsoft.Json.dll"; }
                else if (sResourceName == "QueryPonyGui.Npgsql.dll")             { sResourceName = "QueryPonyGui.libs.Npgsql.dll"; }
                else if (sResourceName == "QueryPonyGui.QueryPonyLib.exe")       { sResourceName = "QueryPonyGui.libs.QueryPonyLib.exe"; }
-               else if (sResourceName == "QueryPonyGui.System.Data.SQLite.dll") { sResourceName = "QueryPonyGui.libs32bit.System.Data.SQLite.dll"; }
+               ////else if (sResourceName == "QueryPonyGui.System.Data.SQLite.dll") { sResourceName = "QueryPonyGui.libs32bit.System.Data.SQLite.dll"; }
+               else if (sResourceName == "QueryPonyGui.System.Data.SQLite.dll") { sResourceName = "QueryPonyLib.libs.System.Data.SQLite.dll"; }  // [adjust 20220731°1211]
                else
                {
                   // Fatal error

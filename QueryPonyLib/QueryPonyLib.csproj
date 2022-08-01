@@ -116,6 +116,7 @@
     <Reference Include="System.Data.SQLite, Version=1.0.112.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libs\System.Data.SQLite.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <!-- Reference Include="System.Data.SQLite, Version=1.0.109.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -206,12 +207,13 @@
     <Content Include="docs\joespostbox.20130702o1241.mysql.sql" />
     <Content Include="docs\joespostbox.20130703o1242.sqlite3.sql" />
     <Content Include="docs\notes.txt" />
-    <EmbeddedResource Include="libs32bit\System.Data.SQLite.dll" />
     <EmbeddedResource Include="libs\System.Data.SQLite.dll" />
     <!-- manually added 20190410°0731`01 -->
     <!-- manually added 20190410°0731`02 -->
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="libs32bit\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

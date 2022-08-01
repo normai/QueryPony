@@ -355,6 +355,7 @@
   <ItemGroup>
     <Content Include="docs\img\20140126o1847.querypony--connect-via-tcpip.png" />
     <Content Include="docs\img\20181106o0138.arrow3right.v2.x0012y0012.png" />
+    <EmbeddedResource Include="libs\QueryPonyLib.dll" />
     <EmbeddedResource Include="docs\img\20130724o1621.querypony-connect.png" />
     <EmbeddedResource Include="docs\img\20130724o162102.querypony-connect.png" />
     <EmbeddedResource Include="docs\img\20130724o1622.querypony-connected.png" />
@@ -368,6 +369,7 @@
     <ProjectReference Include="..\QueryPonyLib\QueryPonyLib.csproj">
       <Project>{6895d15c-4ac8-4d77-a77b-b599f73dab38}</Project>
       <Name>QueryPonyLib</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -388,7 +390,6 @@
     <Zip Files="@(Compile);@(None);@(EmbeddedResource);@(Content);$(ProjectFileName);$(SolutionFileName)" ZipFileName="$(TargetName)_Source_$(Major)_$(Minor)_$(Build)_$(Revision).zip" Condition=" '$(Configuration)' == 'Release' " />
   </Target>
   <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
+    <PreBuildEvent>$(ProjectDir)prebuild.bat</PreBuildEvent>
   </PropertyGroup>
 </Project>

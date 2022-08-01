@@ -3,7 +3,6 @@
    Issues, Bugs and Todos in QueryPonyLib
    **************************************
 
-
    Issue 20200523°0411 'Attempt to load an unverifiable executable'
    Slogan2 : 'Assembly.Load() impossible with mixed mode assemblies'
    Slogan3 : 'Resource-based library policy check fail'
@@ -131,4 +130,4 @@
    Status : ?
    ⬞
 
-   [file ~20131205°0227] ⬞Ω
+   [file 20131205°0227] ⬞Ω
