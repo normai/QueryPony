@@ -59,6 +59,7 @@ namespace QueryPonyLib
          catch (Exception ex)
          {
             string sMsg = ex.Message;
+            System.Windows.Forms.MessageBox.Show(sMsg, "Notification"); // Quick-n-dirty [line 20220731°1121] — Todo: Replace this by some Output-Delegate
          }
 
          con.ConnectionString = sCon;                                          // "Data Source=" + dataSource;

@@ -179,7 +179,8 @@ namespace QueryPonyGui
                // Finally the actual job — Load assembly
                Assembly asm = null;
                ////if (sResourceName != "QueryPonyLib.libs32bit.System.Data.SQLite.dll") // E.g. sResourceName = "QueryPonyGui.QueryPony.resources.dll" [note 20220729°1141]
-               if (sResourceName != "QueryPonyGui.libs32bit.System.Data.SQLite.dll") // [fix 20220731°0953] // E.g. sResourceName = "QueryPonyGui.QueryPony.resources.dll" [note 20220729°1141]
+               ////if (sResourceName != "QueryPonyGui.libs32bit.System.Data.SQLite.dll") // [fix 20220731°0953] // E.g. sResourceName = "QueryPonyGui.QueryPony.resources.dll" [note 20220729°1141]
+               if (sResourceName != "QueryPonyGui.libs.System.Data.SQLite.dll") // [fix 20220731°1141] // E.g. sResourceName = "QueryPonyGui.QueryPony.resources.dll" [note 20220729°1141]
                {
                   // Option 1 — Load straight forward
                   Byte[] assemblyData = new Byte[stream.Length];
