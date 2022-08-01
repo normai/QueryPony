@@ -19,7 +19,7 @@ namespace QueryPonyCmd
    /// <summary>
    /// Provide some selftest facilities
    /// </summary>
-   /// <remarks>id 20200522°0221</remarks>
+   /// <remarks>id : class 20200522°0221</remarks>
    public static class Selftest
    {
       /// <summary>This field stores the DbClient ... (for this ConnectForm or for what exactly?)</summary>
@@ -29,7 +29,7 @@ namespace QueryPonyCmd
       /// <summary>
       /// Execute initial self test — Establish connection to the on-board SQLite demo database
       /// </summary>
-      /// <remarks>id 20200522°0231</remarks>
+      /// <remarks>id : method 20200522°0231</remarks>
       public static int SelfTestOne()
       {
 
@@ -46,7 +46,8 @@ namespace QueryPonyCmd
          Console.WriteLine(" - This is file \"" + sThisExe + "\"");
 
          // Quick'n'dirty [line 20210522°1441]
-         string sSqliteFulfilnam = SyIo.Path.Combine(QuPoLib.InitLib.Settings2Dir, "joespostbox.201307031243.sqlite3");
+         ////string sSqliteFulfilnam = SyIo.Path.Combine(QuPoLib.InitLib.Settings2Dir, "joespostbox.201307031243.sqlite3");
+         string sSqliteFulfilnam = SyIo.Path.Combine(QuPoLib.InitLib.Settings2Dir, "joespostbox.20130703o1243.sqlite3"); // [try fix 20220731°0951`03]
 
          // Is some database available? [seq 20200522°0315]
          if (! SyIo.File.Exists(sSqliteFulfilnam))
@@ -84,7 +85,7 @@ namespace QueryPonyCmd
          conn.Open();
 
          // Paranoia [seq 20210523°1011]
-         // E.g. • conn.ConnectionString = "Data Source=C:\Users\Joe\AppData\Local\www.trekta.biz\QueryPonyCmd.exe_Url_it5gbzlvr3ib2bxw4yg3rgqejejzev0a\0.3.4.25984\joespostbox.201307031243.sqlite3; Version = 3;"
+         // E.g. • conn.ConnectionString = "Data Source=C:\Users\Joe\AppData\Local\www.trekta.biz\QueryPonyCmd.exe_Url_it5gbzlvr3ib2bxw4yg3rgqejejzev0a\0.3.4.25984\joespostbox.20130703o1243.sqlite3; Version = 3;"
          //  • conn.FileName "threw an exception of type 'System.InvalidOperationException'"
          if (conn.DataSource == null) {
             string s34 = " - Connection attempt returned with DataSource is null. Test run aborted.";
@@ -112,7 +113,7 @@ namespace QueryPonyCmd
       /// Perform more tests — Do something with the on-board SQLite demo database
       /// </summary>
       /// <remarks>
-      /// Ident 20210524°1211
+      /// id : method 20210524°1211
       /// </remarks>
       /// <returns></returns>
       public static int SelfTestTwo()

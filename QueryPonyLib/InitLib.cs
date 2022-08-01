@@ -18,23 +18,23 @@ namespace QueryPonyLib
 {
    /// <summary>This class provides initialization methods for this library</summary>
    /// <remarks>
-   /// id : 20130619°1222
+   /// id : class 20130619°1222
    /// note : Calling single-file-delivery here is useless (see finding 20130726°1411)
    /// </remarks>
    public class InitLib
    {
       /// <summary>This property gets/sets the User Settings Directory (where e.g. the logfile file is located)</summary>
-      /// <remarks>id : 20210522°1313</remarks>
+      /// <remarks>id : property 20210522°1313</remarks>
       public static string Settings2Dir { get; set; }
 
       /// <summary>This property gets/sets the User Settings Directory (where e.g. the logfile file is located)</summary>
       /// <remarks>
-      /// id : 20130625°0903
+      /// id : property 20130625°0903
       /// Check : Misleading identifyer name!</remarks>
       public static string Settings1Dir { get; set; }
 
       /// <summary>This property gets the logfile path</summary>
-      /// <remarks>id : 20130625°0904</remarks>
+      /// <remarks>id : property 20130625°0904</remarks>
       public static string PathLogfile
       {
          get
@@ -46,7 +46,7 @@ namespace QueryPonyLib
 
       /// <summary>This constructor initializes this library</summary>
       /// <remarks>
-      /// id : 20130620°0911
+      /// id : ctor 20130620°0911
       /// note : A static method for initialization will not do it, because this
       ///    library may be used by multiple clients at the same time, e.g. QuPpCmd
       ///    plus QuPpGui, and those have different output facilities.
@@ -92,7 +92,7 @@ namespace QueryPonyLib
       ///  This method shall extract the ressources on library initialization
       /// </summary>
       /// <remarks>
-      /// id : 20210522°1421
+      /// id : method 20210522°1421
       /// </remarks>
       private void ExtractRessources() {
 
@@ -101,11 +101,12 @@ namespace QueryPonyLib
 
          // Prepare ingredients
          System.Reflection.Assembly asmSource1 = System.Reflection.Assembly.GetExecutingAssembly();
-         string sAsmResourceName2 = Glb.Resources.JoespostboxSqliteResourcename;  // "QueryPonyLib.docs.joespostbox.201307031243.sqlite3"
+         string sAsmResourceName2 = Glb.Resources.JoespostboxSqliteResourcename;  // "QueryPonyLib.docs.joespostbox.20130703o1243.sqlite3"
 
          // Prepare extraction list
          IOBus.Utils.Resofile[] resos = {
-            new IOBus.Utils.Resofile(asmSource1, sAsmResourceName2, InitLib.Settings2Dir, "joespostbox.201307031243.sqlite3")
+            ////new IOBus.Utils.Resofile(asmSource1, sAsmResourceName2, InitLib.Settings2Dir, "joespostbox.201307031243.sqlite3")
+            new IOBus.Utils.Resofile(asmSource1, sAsmResourceName2, InitLib.Settings2Dir, "joespostbox.20130703o1243.sqlite3") // [try fix 20220731°0951`02]
          };
 
          // Perform extraction

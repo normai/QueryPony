@@ -17,7 +17,7 @@ using SyRe = System.Reflection;
 namespace QueryPonyLib
 {
    /// <summary>
-   /// This class provides the mechanism to have embedded files extracted at runtime.
+   /// This class provides the mechanism to have embedded files extracted at runtime
    /// Compare file 20130831°1611 /QueryPony/QueryPonyGui/SingleFileDeployment.cs
    /// </summary>
    /// <remarks>class 20200523°0321</remarks>
@@ -27,13 +27,12 @@ namespace QueryPonyLib
       /// This method registers the AssemblyResolve event handler
       /// </summary>
       /// <remarks>
-      /// Ident 20200523°0331
-      /// See docs.microsoft.com/en-us/archive/blogs/microsoft_press/jeffrey-richter-excerpt-2-from-clr-via-c-third-edition [ref 20200522°0516]
-      /// See stackoverflow.com/questions/21637830/getmanifestresourcestream-returns-null [ref 20200523°0351]
+      /// id : method 20200523°0331
+      /// note : See docs.microsoft.com/en-us/archive/blogs/microsoft_press/jeffrey-richter-excerpt-2-from-clr-via-c-third-edition [ref 20200522°0516]
+      /// note : See stackoverflow.com/questions/21637830/getmanifestresourcestream-returns-null [ref 20200523°0351]
       /// </remarks>
       internal static void Register()
       {
-
          // The working horse for single-file-delivery feature [seq 20200523°0341]
          // Compare seq 20130706°1051`02 in SingleFileDeployment.cs
          AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
@@ -101,7 +100,7 @@ namespace QueryPonyLib
       ///  workaound for issue 20200523°0411 'FileLoadException unverifiable executable'.
       /// </summary>
       /// <remarks>
-      /// ID 20210520°1231
+      /// id : method 20210520°1231
       /// Compare file 20130831°1611 SingleFileDeployment.cs, seq 20130706°1034
       /// </remarks>
       private static SyRe.Assembly LoadAroundTheCorner(System.IO.Stream stream, Byte[] asmData)

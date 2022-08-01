@@ -883,10 +883,10 @@ namespace QueryPonyGui
          System.Reflection.Assembly asmSource1 = System.Reflection.Assembly.GetExecutingAssembly();
          System.Reflection.Assembly asmSource2 = System.Reflection.Assembly.Load(Glb.Resources.AssemblyNameLib);
          string sAsmResourceName1 = Glb.Resources.JoesgarageSqliteResourcename;  // "QueryPonyGui.docs.joesgarage.sqlite3"
-////     string sAsmResourceName2 = Glb.Resources.JoespostboxSqliteResourcename;  // "QueryPonyLib.docs.joespostbox.201307031243.sqlite3"
+////     string sAsmResourceName2 = Glb.Resources.JoespostboxSqliteResourcename;  // "QueryPonyLib.docs.joespostbox.20130703o1243.sqlite3"
          string sTargetFolder = Program.PathConfigDirUser + "\\" + "docs";
          string sTargetFilename1 = Glb.Resources.JoesgarageSqliteFilename;     // "joesgarage.sqlite3"
-////     string sTargetFilename2 = Glb.Resources.JoespostboxSqliteFilename;    // "joespostbox.201307031243.sqlite3";
+////     string sTargetFilename2 = Glb.Resources.JoespostboxSqliteFilename;    // "joespostbox.20130703o1243.sqlite3";
          string sFullfilename1 = System.IO.Path.Combine(sTargetFolder, sTargetFilename1);
 ////     string sFullfilename2 = System.IO.Path.Combine(sTargetFolder, sTargetFilename2);
 

@@ -170,7 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="docs\joespostbox.20130703o1243.sqlite3" />
+    <EmbeddedResource Include="docs\joespostbox.20130703o1243.sqlite3" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="docs\changelog2.txt" />
@@ -178,6 +178,8 @@
     <Content Include="docs\joespostbox.20130702o1241.mysql.sql" />
     <Content Include="docs\joespostbox.20130703o1242.sqlite3.sql" />
     <Content Include="docs\notes.txt" />
+    <EmbeddedResource Include="libs32bit\System.Data.SQLite.dll" />
+    <EmbeddedResource Include="libs\System.Data.SQLite.dll" />
     <!-- manually added 20190410°0731`01 -->
     <!-- manually added 20190410°0731`02 -->
   </ItemGroup>

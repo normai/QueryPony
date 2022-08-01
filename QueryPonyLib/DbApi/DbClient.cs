@@ -528,7 +528,7 @@ namespace QueryPonyLib
       /// <summary>This method applies QueryOptions to this connection</summary>
       /// <remarks>
       /// id : 20130604°0310
-      /// todo : Find out, who exactly shall call this method and try to call it. [todo 20130714°1811]
+      /// todo : Find out, who exactly shall call this method and try to call it [todo 20130714°1811]
       /// </remarks>
       protected void DoApplyOptionsToConnection_NOTYETCALLED()
       {
@@ -1013,7 +1013,7 @@ namespace QueryPonyLib
          }
 
          // Even though we're connecting synchronously, we have to marshal the call
-         //  onto the worker thread, otherwise if the connection object will be locked
+         //  onto the worker thread, otherwise the connection object will be locked
          //  into the main thread's apartment
          RunOnWorker(new MethodInvoker(DoConnect), true);
 

@@ -11,6 +11,7 @@
 #endregion Fileinfo
 
 using System;
+using System.Diagnostics;                              // class StackFrame
 using System.Reflection;                               // For Assembly
 using System.Windows.Forms;
 using QueryPonyLib;                                    // For Glb.Debag.Execute_No — Seems not possible (log 20190410°0751) compare issue 20130706°2221
@@ -82,7 +83,8 @@ namespace QueryPonyGui
             //// // This is fine, one of about 21 resources is 'QueryPonyGui.QueryPonyLib.exe' [note 20130707°1002]  // [note 20220731°0912] No. This are 44 and no 'QueryPonyGui.QueryPonyLib.exe'
             string[] arDbg = listAvailableResources("");
             Array.Sort(arDbg);
-            if (Globs.Debag.Execute_Yes)                                       // Glb.Debag.Execute_No seems not possible here
+            String sIgniter = new StackFrame(1).GetMethod().Name;              // Not so helpful [added 20220731°0931] sIgniter = "OnAssemblyResolveEvent"
+            if (Globs.Debag.Execute_No)                                        //
             {
                // This is evil, it causes endless recursion. [note 20130707°100202]
                string[] arDbg2 = listAvailableResources(Globs.Resources.AssemblyNameLib);
@@ -128,14 +130,18 @@ namespace QueryPonyGui
                else
                {
                   // Fatal error
-                  // [note 20220731°0921] This fires
+                  // [note 20220731°0921] This sequence executes
                   //   • Before form is visible 2 * with QueryPonyGui.QueryPony.resources.dll
                   //   • Before form is visible 2 * with QueryPonyGui.QueryPony.XmlSerializers.dll
                   //   • After  form is visible 2 * with QueryPonyGui.QueryPony.resources.dll
-                  string sMsg = "[Fatal 20220729°1211] Program flow error, theroretically not possible"
-                               + Glb.sCrCr + "sResourceName = " + sResourceName
-                                ;
-                  MessageBox.Show(sMsg, "Notification");
+                  if (Globs.Debag.Execute_No)                                        //
+                  {
+                     string sMsg = "[Fatal 20220729°1211] Program flow error, theroretically not possible"
+                                  + Glb.sCrCr + "sResourceName = " + sResourceName
+                                   ;
+                     MessageBox.Show(sMsg, "Notification");
+                  }
+                  return null; // Experimental [line 20220731°0941]
                }
             }
             else
@@ -172,9 +178,10 @@ namespace QueryPonyGui
 
                // Finally the actual job — Load assembly
                Assembly asm = null;
-               if (sResourceName != "QueryPonyLib.libs32bit.System.Data.SQLite.dll") // E.g. sResourceName = "QueryPonyGui.QueryPony.resources.dll" [note 20220729°1141]
+               ////if (sResourceName != "QueryPonyLib.libs32bit.System.Data.SQLite.dll") // E.g. sResourceName = "QueryPonyGui.QueryPony.resources.dll" [note 20220729°1141]
+               if (sResourceName != "QueryPonyGui.libs32bit.System.Data.SQLite.dll") // [fix 20220731°0953] // E.g. sResourceName = "QueryPonyGui.QueryPony.resources.dll" [note 20220729°1141]
                {
-                  // Option 1 — load straight forward
+                  // Option 1 — Load straight forward
                   Byte[] assemblyData = new Byte[stream.Length];
                   stream.Read(assemblyData, 0, assemblyData.Length);
                   asm = Assembly.Load(assemblyData);
