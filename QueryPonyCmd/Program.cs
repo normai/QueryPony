@@ -20,15 +20,15 @@ namespace QueryPonyCmd
    public static class Program
    {
       /// <summary>
-      /// Delegate to be passed in QueryPonyLib initialization
+      /// Delegate to be passed into QueryPonyLib initialization
       /// </summary>
-      /// <remarks>Ident 20210522°1111</remarks>
+      /// <remarks>id: delegate 20210522°1111</remarks>
       private static QuPoLi.IOBus_OutputChars WritChars = QueryPonyCmd.Program.OutputChars;
 
       /// <summary>
-      /// Delegate to be passed in QueryPonyLib initialization
+      /// Delegate to be passed into QueryPonyLib initialization
       /// </summary>
-      /// <remarks>Ident 20210522°1121</remarks>
+      /// <remarks>id: delegate 20210522°1121</remarks>
       private static QuPoLi.IOBus_OutputLine WritLin = QueryPonyCmd.Program.OutputLine;
 
       /// <summary>Main entry point for the application</summary>
@@ -72,7 +72,7 @@ namespace QueryPonyCmd
       ///  This method provides the character output device
       /// </summary>
       /// <remarks>
-      /// id : 20210522°1113
+      /// id : method 20210522°1113
       /// </remarks>
       /// <param name="sMsg">The characters to be written</param>
       public static void OutputChars(string sMsg)
@@ -84,7 +84,7 @@ namespace QueryPonyCmd
       ///  This method provides the line output device
       /// </summary>
       /// <remarks>
-      /// id : 20210522°1123
+      /// id : method 20210522°1123
       /// </remarks>
       /// <param name="sMsg">The line to be written</param>
       public static void OutputLine(string sLine)

@@ -69,14 +69,14 @@ namespace QueryPonyGui
       /// <remarks>id : 20130604°0534</remarks>
       private EditManager _editManager1 = EditManager.GetEditManager();
 
-      /// <summary>This constructor creates the new MainForm</summary>
-      /// <remarks>id : 20130604°0535</remarks>
+      /// <summary>This constructor forwards to the other constructor</summary>
+      /// <remarks>id : ctor 20130604°0535</remarks>
       public MainForm() : this(new string[0])
       {
       }
 
       /// <summary>This constructor creates the new MainForm</summary>
-      /// <remarks>id : 20130604°0536</remarks>
+      /// <remarks>id : ctor 20130604°0536</remarks>
       /// <param name="args">The arguments from the commandline starting this program.</param>
       public MainForm(string[] args)
       {

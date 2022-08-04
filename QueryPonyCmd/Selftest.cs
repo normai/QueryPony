@@ -23,7 +23,7 @@ namespace QueryPonyCmd
    public static class Selftest
    {
       /// <summary>This field stores the DbClient ... (for this ConnectForm or for what exactly?)</summary>
-      /// <remarks>Ident 20200522°0331 (after 20130604°0053)</remarks>
+      /// <remarks>id : field 20200522°0331 (after 20130604°0053)</remarks>
       private static QuPoLib.DbClient _client = null;
 
       /// <summary>
@@ -46,8 +46,7 @@ namespace QueryPonyCmd
          Console.WriteLine(" - This is file \"" + sThisExe + "\"");
 
          // Quick'n'dirty [line 20210522°1441]
-         ////string sSqliteFulfilnam = SyIo.Path.Combine(QuPoLib.InitLib.Settings2Dir, "joespostbox.201307031243.sqlite3");
-         string sSqliteFulfilnam = SyIo.Path.Combine(QuPoLib.InitLib.Settings2Dir, "joespostbox.20130703o1243.sqlite3"); // [try fix 20220731°0951`03]
+         string sSqliteFulfilnam = SyIo.Path.Combine(QuPoLib.InitLib.Settings2Dir, "joespostbox.20130703o1243.sqlite3"); // [fix 20220731°0951`03]
 
          // Is some database available? [seq 20200522°0315]
          if (! SyIo.File.Exists(sSqliteFulfilnam))

@@ -32,6 +32,7 @@ namespace QueryPonyGui
       /// </remarks>
       internal static void provideSingleFileDeployment()
       {
+
          // Set event handler to log assembly loadings [seq 20130726°1421]
          //  This satisfies curiosity with debugging issues like 20130707°1011 and 20130726°1231.
          AppDomain.CurrentDomain.AssemblyLoad += (sender, args) =>
@@ -41,7 +42,7 @@ namespace QueryPonyGui
             String sAsmName = asm.FullName;
 
             // Log loaded assemblies [seq 20130727°0901] higher level file write methods seem not yet available
-            string sTime = " " + DateTime.Now.ToString(QueryPonyLib.Glb.sFormat_Timestamp); //// [chg 20210522°1031`xx]
+            string sTime = " " + DateTime.Now.ToString(QueryPonyLib.Glb.sFormat_Timestamp); //// [chg 20210522°1031`04]
             string sLine = sTime + "  " + "[Debug]" + " " + "Assembly loading: " + sAsmName;
             string sFile = System.IO.Path.Combine(Program.PathConfigDirUser, "logfile.txt");
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(sFile, true))
@@ -75,6 +76,7 @@ namespace QueryPonyGui
             return;
          };
 
+
          // Attach the crucial AssemblyResolve eventhandler [seq 20130706°1051`02]
          //  This is the working horse for the single-file-delivery feature
          AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
@@ -84,9 +86,9 @@ namespace QueryPonyGui
             string[] arDbg = listAvailableResources("");
             Array.Sort(arDbg);
             String sIgniter = new StackFrame(1).GetMethod().Name;              // Not so helpful [added 20220731°0931] sIgniter = "OnAssemblyResolveEvent"
-            if (Globs.Debag.Execute_Yes)                                        // Toggle Yes/No
+            if (Globs.Debag.Execute_No)                                        // Toggle Yes/No
             {
-               // This is evil, it causes endless recursion. [note 20130707°100202]
+               // Evil. This sometimes causes endless recursion, means stack overflow [note 20130707°100202]
                string[] arDbg2 = listAvailableResources(Globs.Resources.AssemblyNameLib); // This contains e.g. 'QueryPonyLib.libs.System.Data.SQLite.dll' [note 20220731°1213]
                Array.Sort(arDbg2);
             }
@@ -100,15 +102,18 @@ namespace QueryPonyGui
             // Complete filename [seq 20190410°0633]
             // Blanket name manipulation, e.g. "QueryPonyLib.System.Data.SQLite.dll"
             switch (sResourceName) {
-               case "QueryPonyLib": sResourceName += ".exe"; break;            // Library inside an executable
-               default : sResourceName += ".dll"; break;
+               ////case "QueryPonyLib": sResourceName += ".exe"; break;        // Library inside an executable
+               case "QueryPonyLib": sResourceName += ".dll"; break;            // Fix 20220804°0923
+               default: sResourceName += ".dll"; break;
             }
             sResourceName = "QueryPonyGui" + "." + sResourceName;              // Supplement namespace
 
             // Debug [seq 20190410°0741]
-            if (sResourceName.Contains("System.Data.SQLite"))
-            {
-               MessageBox.Show("Debug 20190410°0741", "Debug");                // Never?
+            if (IOBus.Gb.Debag.Execute_Yes) {                                   // Toggle flag on demand
+               if (sResourceName.Contains("System.Data.SQLite"))
+               {
+                  MessageBox.Show("Debug 20190410°0741", "Debug");             // Never?
+               }
             }
 
             // Use one of the two possible assemblies [supplement 20130706°1055]
@@ -125,9 +130,20 @@ namespace QueryPonyGui
                else if (sResourceName == "QueryPonyGui.Mono.Security.dll")      { sResourceName = "QueryPonyGui.libs.Mono.Security.dll"; }
                else if (sResourceName == "QueryPonyGui.Newtonsoft.Json.dll")    { sResourceName = "QueryPonyGui.libs.Newtonsoft.Json.dll"; }
                else if (sResourceName == "QueryPonyGui.Npgsql.dll")             { sResourceName = "QueryPonyGui.libs.Npgsql.dll"; }
-               else if (sResourceName == "QueryPonyGui.QueryPonyLib.exe")       { sResourceName = "QueryPonyGui.libs.QueryPonyLib.exe"; }
+               ////else if (sResourceName == "QueryPonyGui.QueryPonyLib.exe")       { sResourceName = "QueryPonyGui.libs.QueryPonyLib.exe"; } /// Shutdown 20220804°0921
+               else if (sResourceName == "QueryPonyGui.QueryPonyLib.dll")       { sResourceName = "QueryPonyGui.libs.QueryPonyLib.dll"; } /// Try fix 20220804°0922
                ////else if (sResourceName == "QueryPonyGui.System.Data.SQLite.dll") { sResourceName = "QueryPonyGui.libs32bit.System.Data.SQLite.dll"; }
-               else if (sResourceName == "QueryPonyGui.System.Data.SQLite.dll") { sResourceName = "QueryPonyLib.libs.System.Data.SQLite.dll"; }  // [adjust 20220731°1211]
+               else if (sResourceName == "QueryPonyGui.System.Data.SQLite.dll") {
+                  ////sResourceName = "QueryPonyLib.libs.System.Data.SQLite.dll";  // Adjust 20220731°1211
+                  return null; // Experiment 20220804°0924 Heureka — Then QueryPonyLib.Resolver.cs will take over.
+
+                  //-----------------------------------
+                  //   todo 20220804°0925 'Handle SQLite inside QueryPonyLib only'
+                  //   do : Remove all SQLite handling below in this file, and possibly
+                  //        above, because this is handled now in QueryPonyLib.Resolver.cs
+                  //   ⬞
+                  //-----------------------------------
+               }
                else
                {
                   // Fatal error
@@ -164,7 +180,7 @@ namespace QueryPonyGui
                // nef : Article 'How to list all loaded assemblies' [ref 20130707°1032]
                if (sResourceName == "QueryPonyGui.QueryPony.XmlSerializers.dll")
                {
-                  // Note : Block shutdown 20130808°1553 while debugging exception 20130808°1552
+                  // Note : Block shutdown 20130808°1553 while debugging exception QueryPonyLib.exe20130808°1552
                   if (Globs.Debag.Execute_No)                                  // Glb.Debag.Execute_No seems not possible here
                   {
                      // [line 20130707°1033] Compare method 20210523°1331 listLoadedAssemblies

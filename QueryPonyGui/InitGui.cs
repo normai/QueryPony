@@ -31,15 +31,15 @@ namespace QueryPonyGui
          MainForm._mainform.Text = "QueryPony" + " (" + sVersion + ")";
 
          /*
-         ////Note 20130726°1431 ''
-         Location : Around debugging issue 20130726°1231
-         Title : Considerations about the chronology of the assembly loading
-         Finding : Below 'InitLib lib = new InitLib' seems to be the first moment,
+         note 20130726°1431 'on assembly loading order'
+         location : Around debugging issue 20130726°1231
+         title : Considerations about the chronology of the assembly loading
+         finding : Below 'InitLib lib = new InitLib' seems to be the first moment,
                     the library is wanted. How can I proof this?
          */
 
          // Provide the basic console character output delegate for library (line 20130821°0940)
-         IOBus_OutputChars webriOutputCharDelegate = new IOBus_OutputChars(MainForm._mainform.writeChar); //// chg 20210522°1031`xx
+         IOBus_OutputChars webriOutputCharDelegate = new IOBus_OutputChars(MainForm._mainform.writeChar); //// chg 20210522°1031`03
 
          // Provide the basic console lnie output delegate for library (line 20130819°0902)
          IOBus_OutputLine webriOutputDelegate = new IOBus_OutputLine(MainForm._mainform.writeLine);

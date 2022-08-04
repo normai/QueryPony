@@ -54,7 +54,7 @@ namespace QueryPonyGui
          }
 
          // Preparation set properties
-         initProperties();
+         InitProperties();
 
          ////SingleFileDeployment.provideSingleFileDeployment(); // [shutdown 20220731°0911 Just a try]
 
@@ -151,11 +151,12 @@ namespace QueryPonyGui
          Application.EnableVisualStyles();
          Application.SetCompatibleTextRenderingDefault(false);
 
-         // 'Exceptions ..' [line 20130726°1402]
-         // Text : Here is the typical line for seeing 'StackOverflow exception
-         //    was unhandled', e.g. while debugging issue 20130726°1231 when e.g.
-         //    iobus.dll was missing and with other single-file-delivery issues.
-         Application.Run(new MainForm(args));
+         // line 20130726°1402 'Exception StackOverflow'
+         // note : Here is the typical line seeing 'StackOverflow exception was unhandled',
+         //    e.g. while debugging issue 20130726°1231 e.g. with single-file-delivery issues.
+         //Application.Run(new MainForm(args));
+         var x = new MainForm(args); // issue 20220804°0931 'stack overflow before form constructor' — If reference QueryPonyLib is set 'CopyLocal = true' this works, if not then StackOverflow. This means, extracting the QueryPonyLib resource fails, or is wanted too early.
+         Application.Run(x);
       }
 
       /// <summary>This method initializes the Program properties</summary>
@@ -163,7 +164,7 @@ namespace QueryPonyGui
       /// id : 20130902°0641
       /// note : Remember finished issue 20130902°0621 'Properties left unset if started from a host'.
       /// </remarks>
-      public static void initProperties()
+      public static void InitProperties()
       {
          // [seq 20130902°0642]
          // note : Compare method 20130619°0323 AboutForm.cs::displayMachineInfo()

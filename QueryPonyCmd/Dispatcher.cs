@@ -10,14 +10,14 @@ namespace QueryPonyCmd
    /// This class hosts the dispatching loop
    /// </summary>
    /// <remarks>
-   /// Ident : 20210523°1411
+   /// id : class 20210523°1411
    /// </remarks>
    class Dispatcher
    {
       /// <summary>
       /// This static method performs the dispatcher loop
       /// </summary>
-      /// <remarks>Ident 20200522°0153</remarks>
+      /// <remarks>id : method 20200522°0153</remarks>
       /// <param name="sCmdLin">Optional autostart commandline</param>
       /// <returns>Errorcode, 0 is success, >0 is error, <0 is avoided</returns>
       internal static int Loop(Queue<string> lCmdLins = null)

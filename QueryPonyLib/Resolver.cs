@@ -56,18 +56,19 @@ namespace QueryPonyLib
             {
                Byte[] assemblyData = new Byte[stream.Length];
                string sGetName = "N/A";
-               SyRe.Assembly x = null;
+               SyRe.Assembly asmLoaded = null;
                try
                {
+                  // See issue 20200523°0411 'FileLoadException unverifiable executable'.
                   if (sResoName != "System.Data.SQLite.dll") {
                      stream.Read(assemblyData, 0, assemblyData.Length);
-                     x = SyRe.Assembly.Load(assemblyData);                     // Issue 20200523°0411 'FileLoadException unverifiable executable'
+                     asmLoaded = SyRe.Assembly.Load(assemblyData);     // Will not work with System.Data.SQLite.dll
                   }
                   else {
-                     x = LoadAroundTheCorner(stream, assemblyData);            // Issue 20200523°0411 'FileLoadException unverifiable executable'
+                     asmLoaded = LoadAroundTheCorner(stream, assemblyData);
                   }
-                  sGetName = x.GetName().Name;
-                  return x;
+                  sGetName = asmLoaded.GetName().Name;
+                  return asmLoaded;
                }
                catch (Exception excpt)
                {
