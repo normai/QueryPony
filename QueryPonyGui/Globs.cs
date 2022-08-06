@@ -6,7 +6,7 @@
 // authors     : ncm
 // encoding    : UTF-8-with-BOM
 // status      :
-// note        :
+// note        : This file is only wanted, because QueryPonyLib.IOBus.Globals.cs is not accessible from everywhere(?)
 // callers     :
 #endregion Fileinfo
 

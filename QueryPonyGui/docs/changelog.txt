@@ -1,4 +1,12 @@
 ﻿
+   ********************
+   Changes and versions
+   ********************
+
+   version 20220806°0931 v0.4.1 — On-the-road-again
+   • Cleanup from refactoring
+   • Fix SQLite demo finding
+
    version 20220805°1511 QueryPony.exe v0.4.0 — Restored
    • Platform DotNet-4.8, x64-only
    • Single-file-delivery restored. Heureka — Restored proof-of-concept again

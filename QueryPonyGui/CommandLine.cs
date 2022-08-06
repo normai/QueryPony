@@ -17,15 +17,15 @@ using System.Text.RegularExpressions;
 namespace QueryPonyGui
 {
    /// <summary>This class processes commandline parameters</summary>
-   /// <remarks>id : 20130604°0042</remarks>
+   /// <remarks>id : class 20130604°0042</remarks>
    internal class CommandLineParams : IEnumerable
    {
       /// <summary>This field stores ...</summary>
-      /// <remarks>id : 20130604°0043</remarks>
-      private StringDictionary Parameters = new StringDictionary ();
+      /// <remarks>id : field 20130604°0043</remarks>
+      private readonly StringDictionary Parameters = new StringDictionary ();
 
       /// <summary>This constructor ...</summary>
-      /// <remarks>id : 20130604°0044</remarks>
+      /// <remarks>id : ctor 20130604°0044</remarks>
       /// <param name="Args">The commandline arguments array</param>
       public CommandLineParams (string[] Args)
       {
@@ -116,21 +116,21 @@ namespace QueryPonyGui
       }
 
       /// <summary>This method provides the parameter enumerator. This exists to satisfy the IEnumerable interface</summary>
-      /// <remarks>id : 20130604°0045</remarks>
+      /// <remarks>id : method 20130604°0045</remarks>
       public IEnumerator GetEnumerator ()
       {
          return Parameters.GetEnumerator ();
       }
 
       /// <summary>This property provides a read-only indexer on the commandline parameters</summary>
-      /// <remarks>id : 20130604°0046</remarks>
+      /// <remarks>id : property 20130604°0046</remarks>
       public string this [string key]
       {
          get { return Parameters[key]; }
       }
 
       /// <summary>This method tells whether a given parameter key exists or not</summary>
-      /// <remarks>id : 20130604°0047</remarks>
+      /// <remarks>id : method 20130604°0047</remarks>
       public bool ContainsKey(string value)
       {
           return Parameters.ContainsKey(value);

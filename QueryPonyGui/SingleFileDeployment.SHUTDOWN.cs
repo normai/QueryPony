@@ -1,4 +1,6 @@
 ﻿#region Fileinfo
+// File shutdown 20220806°0921
+
 // file        : 20130831°1611 /QueryPony/QueryPonyGui/SingleFileDeployment.cs
 // summary     : Class 'SingleFileDeployment' provides the single-file-deployment feature
 // license     : GNU AGPL v3
@@ -39,7 +41,8 @@ namespace QueryPonyGui
          {
             string s = "";
             Assembly asm = args.LoadedAssembly;
-            String sAsmName = asm.FullName;
+            String sAsmName = asm.FullName;         //       String sFullyQuali = System.Reflection.AssemblyName.GetAssemblyName(@"G:\work\downtown\queryponydev\trunk\QueryPony\QueryPonyLib\bin\x64\Debug\QueryPonyLib.dll").FullName;
+
 
             // Log loaded assemblies [seq 20130727°0901] higher level file write methods seem not yet available
             string sTime = " " + DateTime.Now.ToString(QueryPonyLib.Glb.sFormat_Timestamp); //// [chg 20210522°1031`04]
@@ -109,7 +112,7 @@ namespace QueryPonyGui
             sResourceName = "QueryPonyGui" + "." + sResourceName;              // Supplement namespace
 
             // Debug [seq 20190410°0741]
-            if (IOBus.Gb.Debag.Execute_Yes) {                                   // Toggle flag on demand
+            if (IOBus.Gb.Debag.Execute_Yes) {                                  // Toggle flag on demand
                if (sResourceName.Contains("System.Data.SQLite"))
                {
                   MessageBox.Show("Debug 20190410°0741", "Debug");             // Never?

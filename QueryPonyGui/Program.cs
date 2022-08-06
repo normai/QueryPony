@@ -13,7 +13,6 @@
 using System;
 using System.Linq;                                     // Where
 using System.Windows.Forms;
-using QueryPonyLib;
 
 namespace QueryPonyGui
 {
@@ -58,11 +57,7 @@ namespace QueryPonyGui
          InitProperties();
 
          // Install single-file-deployment facility [line 20130706°1053]
-         ////SingleFileDeployment.provideSingleFileDeployment(); // [shutdown 20220731°0911 Just a try]
-if (Globs.Debag.Execute_No)
-{
-            SingleFileDeployment.provideSingleFileDeployment();
-}
+         ////SingleFileDeployment.provideSingleFileDeployment();  // [shutdown 20220806°0921 Finally]
 
          // Detect first run [seq 20130812°1331]
          // Wrap in try loop against issue 20130812°1321 'Start with exception OnConfigRemoved'
@@ -154,34 +149,26 @@ if (Globs.Debag.Execute_No)
          Application.EnableVisualStyles();
          Application.SetCompatibleTextRenderingDefault(false);
 
-
-
-
          // Set up event handler after Paul Rohde 2011-Jul-13 [line 20220805°1312`xx]
          AppDomain.CurrentDomain.AssemblyResolve += OnResolveAssembly;
 
-         // Debug below issue 20220804°0931 'stack overflow before form constructor' [seq 20220805°1211]
-         // Look whether assembly QueryPonyLib is available -- Yes, QueryPonyGui.libs.QueryPonyLib.dll is in the list
-         string[] arDbg = SingleFileDeployment.listAvailableResources("");
-         Array.Sort(arDbg);
-         ////Assembly a = Assembly.Load("SampleAssembly, Version=1.0.2004.0, Culture=neutral, PublicKeyToken=8744b20f8da049e3");
-         ////System.Reflection.Assembly a = System.Reflection.Assembly.Load("SampleAssembly, Version=1.0.2004.0, Culture=neutral, PublicKeyToken=8744b20f8da049e3");
-         ////string sAsm = "SampleAssembly, Version=1.0.2004.0, Culture=neutral, PublicKeyToken=8744b20f8da049e3";
-         ////string sAsm = Globs.Resources.AssemblyNameLib; // "QueryPonyLib"
-         //System.Reflection.Assembly a = System.Reflection.Assembly.Load(sAsm); // => StackOverflowException
-         //       String sFullyQuali = System.Reflection.AssemblyName.GetAssemblyName(@"G:\work\downtown\queryponydev\trunk\QueryPony\QueryPonyLib\bin\x64\Debug\QueryPonyLib.dll").FullName;
-         //System.Reflection.Assembly a = System.Reflection.Assembly.Load(sFullyQuali); // => StackOverflowException
-         //       String sFullFileNam = @"G:\work\downtown\queryponydev\trunk\QueryPony\QueryPonyLib\bin\x64\Debug\QueryPonyLib.dll";
-         //       System.Reflection.Assembly a = System.Reflection.Assembly.LoadFrom(sFullFileNam); // FullName = "QueryPonyLib, Version=0.3.4.23799, Culture=neutral, PublicKeyToken=null"
+         // Debug below issue 20220804°0931 'StackOverflow while form creation' [seq 20220805°1211]
+         // Look whether assembly QueryPonyLib is available
+         string[] arDbg = Program.listAvailableResources("");
+         if (Globs.Debag.Execute_No)                                           // Eliminate sequence on later cleanup [seq 20220805°1243]
+         {
+            // Try/inspect Assembly.LoadFrom [seq 20220805°1242]
+            String sFullFileNam = @"G:\work\downtown\queryponydev\trunk\QueryPony\QueryPonyLib\bin\x64\Debug\QueryPonyLib.dll";
+            System.Reflection.Assembly a1 = System.Reflection.Assembly.LoadFrom(sFullFileNam);
 
-         ////a.LoadModule();
-         //////a.l
-         //         String sPing = InitLib.PingLib(); // Debug 20220805°1222
-         //         InitLib il = new InitLib();
-
+            // Try/inspect Assembly.Load [seq 20220805°1243]
+            String sDbgFullQuali1 = System.Reflection.AssemblyName.GetAssemblyName(sFullFileNam).FullName;
+            String sDbgFullQuali2 = "SampleAssembly, Version=1.0.2004.0, Culture=neutral, PublicKeyToken=8744b20f8da049e3";
+            System.Reflection.Assembly a2 = System.Reflection.Assembly.Load(sDbgFullQuali2);  // => StackOverflowException
+         }
 
          // Start GUI [line 20130726°1402]
-         // Remember issue 20220804°0931 'StackOverflow while form creation' and issue 20130726°1231 with single-file-delivery
+         // Remember issue 20220804°0931 'StackOverflow while form creation'
          var fm = new MainForm(args);
          Application.Run(fm);
       }
@@ -244,7 +231,7 @@ if (Globs.Debag.Execute_No)
 
 
       /// <summary>
-      ///  Possible lean alternative to provideSingleFileDeployment()
+      ///  Possible lean alternative to former file 20130831°1611 with method provideSingleFileDeployment()
       /// </summary>
       /// <remarks>
       ///  id : method 20220805°1311
@@ -298,6 +285,49 @@ if (Globs.Debag.Execute_No)
          return null;
       }
 
+      /// <summary>This method is a debug sequence to list all available resources in an assembly</summary>
+      /// <remarks>
+      /// id : method 20130706°1052
+      /// note : Compare nearly identical method 20130707°1844 in QueryPonyLib/IOBus/Utils.cs.
+      ///    Just that in the library does not help, we need the method before the library is loaded.
+      /// callers : • method 20130604°1913 Main()
+      /// </remarks>
+      /// <param name="sAssemblyname">The assembly of which we want list the resources</param>
+      /// <returns>The wanted array with ressouce name strings</returns>
+      private static string[] listAvailableResources(string sAssemblyname)
+      {
+         System.Reflection.Assembly thisExe = null;
+         if (sAssemblyname == "")
+         {
+            thisExe = System.Reflection.Assembly.GetExecutingAssembly();
+         }
+         else
+         {
+            // Try envelop to find out about curious recursion (experiment 20130707°1001)
+            try
+            {
+               thisExe = System.Reflection.Assembly.Load(sAssemblyname);
+            }
+            catch (Exception ex)
+            {
+               string sErr = ex.Message;
+            }
+         }
+         string[] resources = thisExe.GetManifestResourceNames();
 
+         // Recycle sequence if output is wanted as string instead array
+         if (Globs.Debag.ShutdownTemporarily)                                  // Shutdown to recycle
+         {
+            string list = "";
+            foreach (string resource in resources)
+            {
+               list += resource + Globs.sCr;
+            }
+            string s = new System.Reflection.AssemblyName(sAssemblyname).Name;
+            // E.g. s = "EnumProgs.enumprogslib.dll\r\nEnumProgs.Properties.Resources.resources\r\nEnumProgs.Form1.resources\r\n"
+         }
+         Array.Sort(resources);
+         return resources;
+      }
    }
 }

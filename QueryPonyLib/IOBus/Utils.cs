@@ -268,6 +268,7 @@ namespace IOBus
             // List e.g. = "EnumProgs.enumprogslib.dll\r\nEnumProgs.Properties.Resources.resources\r\nEnumProgs.Form1.resources\r\n"
          }
 
+         Array.Sort(resources);
          return resources;
       }
 

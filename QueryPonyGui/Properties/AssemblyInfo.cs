@@ -43,7 +43,7 @@ using System.Runtime.InteropServices;
 //[assembly: AssemblyVersion("2.0.3.1")]
 //...
 //[assembly: AssemblyVersion("0.3.4.*")]
-[assembly: AssemblyVersion("0.4.0.*")]
+[assembly: AssemblyVersion("0.4.1.*")]
 
 // Manually set versions
 //[assembly: AssemblyFileVersion("2.0.3.1")]   // QueryExPlus r75 (20130603°1731)
@@ -59,5 +59,5 @@ using System.Runtime.InteropServices;
 //[assembly: AssemblyFileVersion("0.3.1.0")]   // Version 0.3.1.42329 Alpha Release (20130810°1956)
 //[assembly: AssemblyFileVersion("0.3.2.1")]   // Intermediate (20130912°2121)
 //[assembly: AssemblyFileVersion("0.3.4.0")]   // Last before refactoring to NET4.8/x64
-[assembly: AssemblyFileVersion("0.4.0.0")]     // version 20220805°1511 Restored
-// Intermediate Beta (20160318°1311)
+//[assembly: AssemblyFileVersion("0.4.0.0")]   // version 20220805°1511 Restored
+[assembly: AssemblyFileVersion("0.4.1.0")]     // version 20220806°0931 On-the-road-again

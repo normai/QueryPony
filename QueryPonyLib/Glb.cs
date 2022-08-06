@@ -328,21 +328,24 @@ namespace QueryPonyLib
          /// <remarks>id : 20130619°0304</remarks>
          public const string Issues = "QueryPonyGui.docs.issues.txt";
 
-         /// <summary>This const "joesgarage.sqlite3" tells a resource file name</summary>
+         /// <summary>This const ~~"joesgarage.sqlite3" tells a resource file name</summary>
          /// <remarks>id : 20130704°1321</remarks>
-         public const string JoesgarageSqliteFilename = "joesgarage.sqlite3";
+         ////public const string JoesgarageSqliteFilename = "joesgarage.sqlite3";
+         public const string JoesgarageSqliteFilename = "joespostbox.20130703o1243.sqlite3";
 
-         /// <summary>This const "QueryPonyGui.docs.joesgarage.sqlite3" tells a resource file name</summary>
+         /// <summary>This const ~~"QueryPonyGui.docs.joesgarage.sqlite3" tells a resource file name</summary>
          /// <remarks>id : 20130704°1312</remarks>
-         public const string JoesgarageSqliteResourcename = "QueryPonyGui.docs." + JoesgarageSqliteFilename;
+         ////public const string JoesgarageSqliteResourcename = "QueryPonyGui.docs." + JoesgarageSqliteFilename;
+         public const string JoesgarageSqliteResourcename = "QueryPonyLib.docs." + JoesgarageSqliteFilename;
 
          /// <summary>This const "QueryPonyLib.docs.joespostbox.20130703o1243.sqlite3" tells a resource file name</summary>
          /// <remarks>id : 20130704°1322</remarks>
          ////public const string JoespostboxSqliteFilename = "joespostbox.201307031243.sqlite3";
-         public const string JoespostboxSqliteFilename = "joespostbox.20130703o1243.sqlite3"; // [fix 20220731°0951`01]
+         public const string JoespostboxSqliteFilename = "joespostbox.20130703o1243.sqlite3"; // [adjust 20220731°0951`01]
 
          /// <summary>This const ~"QueryPonyLib.docs.joespostbox.20130703o1243.sqlite3" tells a resource file name</summary>
          /// <remarks>id : 20130704°1311</remarks>
+         ////public const string JoespostboxSqliteResourcename = "QueryPonyLib.docs." + JoespostboxSqliteFilename;
          public const string JoespostboxSqliteResourcename = "QueryPonyLib.docs." + JoespostboxSqliteFilename;
 
          /// <summary>This const "docs.license.txt" tells a resource file name</summary>

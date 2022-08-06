@@ -1,8 +1,6 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/QueryPony/QueryPonyGui/MostRecentlyUsed/MruMenuItemClickEventArgs.cs
-//                + https://github.com/normai/QueryPony/blob/master/QueryPonyGui/MostRecentlyUsed/MruMenuItemClickEventArgs.cs
+// file        : 20130604°1711 github.com/normai/QueryPony/blob/main/QueryPonyGui/MostRecentlyUsed/MruMenuItemClickEventArgs.cs
 // origin      : "Genghis v0.8.zip" at http://genghis.codeplex.com/releases/view/4954
-// id          : 20130604°1711
 // summary     : This file stores Genghis class 'MruMenuItemClickEventArgs' to provide ...
 // license     : Custom License
 // copyright   : Copyright 2002-2004 The Genghis Group http://genghis.codeplex.com

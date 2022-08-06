@@ -86,12 +86,6 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Cfg64Test|AnyCPU'">
-    <OutputPath>bin\Cfg64Test\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Cfg64Test|x86'">
-    <OutputPath>bin\x86\Cfg64Test\</OutputPath>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
@@ -113,10 +107,6 @@
     <PlatformTarget>x64</PlatformTarget>
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Cfg64Test|x64'">
-    <OutputPath>bin\x64\Cfg64Test\</OutputPath>
-    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
@@ -301,7 +291,6 @@
     </Compile>
     <Compile Include="Properties\Settings.cs" />
     <Compile Include="Settings_ServerList.cs" />
-    <Compile Include="SingleFileDeployment.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="docs\changelog.txt" />

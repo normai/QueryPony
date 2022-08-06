@@ -1,8 +1,6 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/QueryPony/QueryPonyGui/MostRecentlyUsed/MruMenuItemFileMissingEventArgs.cs
-//                + https://github.com/normai/QueryPony/blob/master/QueryPonyGui/MostRecentlyUsed/MruMenuItemFileMissingEventArgs.cs
+// file        : 20130604°1731 github.com/normai/QueryPony/blob/main/QueryPonyGui/MostRecentlyUsed/MruMenuItemFileMissingEventArgs.cs
 // origin      : "Genghis v0.8.zip" at http://genghis.codeplex.com/releases/view/4954
-// id          : 20130604°1731
 // summary     : This file stores Genghis class 'MruMenuItemFileMissingEventArgs' to provide ...
 // license     : Custom License
 // copyright   : Copyright 2002-2004 The Genghis Group http://genghis.codeplex.com

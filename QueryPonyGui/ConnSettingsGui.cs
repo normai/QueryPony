@@ -882,18 +882,22 @@ namespace QueryPonyGui
          // Note : This is the first time using of provideResourceFiles() with a mixed-assembly-list
          System.Reflection.Assembly asmSource1 = System.Reflection.Assembly.GetExecutingAssembly();
          System.Reflection.Assembly asmSource2 = System.Reflection.Assembly.Load(Glb.Resources.AssemblyNameLib);
-         string sAsmResourceName1 = Glb.Resources.JoesgarageSqliteResourcename;  // "QueryPonyGui.docs.joesgarage.sqlite3"
-////     string sAsmResourceName2 = Glb.Resources.JoespostboxSqliteResourcename;  // "QueryPonyLib.docs.joespostbox.20130703o1243.sqlite3"
-         string sTargetFolder = Program.PathConfigDirUser + "\\" + "docs";
-         string sTargetFilename1 = Glb.Resources.JoesgarageSqliteFilename;     // "joesgarage.sqlite3"
-////     string sTargetFilename2 = Glb.Resources.JoespostboxSqliteFilename;    // "joespostbox.20130703o1243.sqlite3";
-         string sFullfilename1 = System.IO.Path.Combine(sTargetFolder, sTargetFilename1);
-////     string sFullfilename2 = System.IO.Path.Combine(sTargetFolder, sTargetFilename2);
+         //string sAsmResourceName1 = Glb.Resources.JoesgarageSqliteResourcename;  // "QueryPonyGui.docs.joesgarage.sqlite3"
+         string sAsmResourceName2 = Glb.Resources.JoespostboxSqliteResourcename;  // "QueryPonyLib.docs.joespostbox.20130703o1243.sqlite3"
+
+         ////string sTargetFolder = Program.PathConfigDirUser + "\\" + "docs";
+         string sTargetFolder = Program.PathConfigDirUser;                     // [chg 20220806°0931] Adjust(!?)
+
+//       string sTargetFilename1 = Glb.Resources.JoesgarageSqliteFilename;     // "joesgarage.sqlite3"
+         string sTargetFilename2 = Glb.Resources.JoespostboxSqliteFilename;    // "joespostbox.20130703o1243.sqlite3";
+         string sFullfilename2 = System.IO.Path.Combine(sTargetFolder, sTargetFilename2);
+         ////     string sFullfilename2 = System.IO.Path.Combine(sTargetFolder, sTargetFilename2);
 
          // Prepare extraction list
-         IOBus.Utils.Resofile[] resos = { new IOBus.Utils.Resofile(asmSource1, sAsmResourceName1, sTargetFolder, sTargetFilename1)
-                                        //// , new IOBus.Utils.Resofile(asmSource2, sAsmResourceName2, sTargetFolder, sTargetFilename2)
-                                        };
+         ////IOBus.Utils.Resofile[] resos = { new IOBus.Utils.Resofile(asmSource1, sAsmResourceName1, sTargetFolder, sTargetFilename1)
+         ////                                };
+         IOBus.Utils.Resofile[] resos = { new IOBus.Utils.Resofile(asmSource2, sAsmResourceName2, sTargetFolder, sTargetFilename2)
+                                         };
 
          // Determine assembly from which to extract files
          System.Reflection.Assembly asm = System.Reflection.Assembly.GetEntryAssembly(); // First occasion I use this method [line 20130709°1352]
@@ -902,7 +906,7 @@ namespace QueryPonyGui
          IOBus.Utils.provideResourceFiles(resos);
 
          // Paranoia
-         if (! System.IO.File.Exists(sFullfilename1))
+         if (! System.IO.File.Exists(sFullfilename2))
          {
             // Fatal
             // Todo : Provide error handling [issue 20130709°1354]
@@ -912,8 +916,8 @@ namespace QueryPonyGui
          ////   // Fatal
          ////   // Todo : Provide error handling [issue 20130709°1355]
          ////}
-         Program.SqliteDemoJoesgarage = sFullfilename1;
-         ////Program.SqliteDemoJoespostbox = sFullfilename2;
+         ////Program.SqliteDemoJoesgarage = sFullfilename1;
+         Program.SqliteDemoJoespostbox = sFullfilename2;
          //----------------------------------------------------
 
          cs = new ConnSettingsGui();

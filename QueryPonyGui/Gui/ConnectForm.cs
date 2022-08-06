@@ -1915,7 +1915,7 @@ namespace QueryPonyGui
 
       // (ref 20130624°1132)
       // title : How to disable editing of elements in combobox for C#?
-      // url : http://stackoverflow.com/questions/598447/how-to-disable-editing-of-elements-in-combobox-for-c
+      // url : stackoverflow.com/questions/598447/how-to-disable-editing-of-elements-in-combobox-for-c
       // usage : In method 20130624°1132 combobox_Connection_KeyPress()
 
       /// <summary>This eventhandler processes the Connection ComboBox KeyPress event to prevent editing it</summary>

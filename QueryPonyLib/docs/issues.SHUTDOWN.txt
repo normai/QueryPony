@@ -1,0 +1,136 @@
+﻿
+   ////**************************************
+   ////Issues, Bugs and Todos in QueryPonyLib
+   ////**************************************
+
+   ////issue 20200523°0411 'Attempt to load an unverifiable executable'
+   ////slogan2 : 'Assembly.Load() impossible with mixed mode assemblies'
+   ////slogan3 : 'Resource-based library policy check fail'
+   ////chain : Issue 20130706°1031 'Resource-based library policy check fail'
+   ////matter : Assembly System.Data.SQLite is not loaded, exception thrown: { "Attempt
+   ////    to load an unverifiable executable with fixups (IAT with more than 2 sections
+   ////    or a TLS section.) (Exception from HRESULT: 0x80131019)":null }
+   ////location : QueryPonyLib method 20200523°0331 Resolver.Register()
+   ////exception : ".. Attempt to load an unverifiable executable with fixups (IAT with
+   ////   more than 2 sections or a TLS section.) .."
+   ////chain : Screenshot 20200523o0413.queryponylib--unverifyable-assembly.png
+   ////chain : https://stackoverflow.com/questions/5005409/exception-with-resolving-assemblies-attempt-to-load-an-unverifiable-executable [ref 20200523°0425, ref 20210520°1222]
+   ////chain : https://stackoverflow.com/questions/2945080/how-do-i-dynamically-load-raw-assemblies-that-contains-unmanaged-codebypassing [ref 20200523°0427, ref 20210520°1223]
+   ////chain : https://web.archive.org/web/20130906220206/https://connect.microsoft.com/VisualStudio/feedback/details/97801/loading-mixed-assembly-with-assembly-load-byte-throw-exception-changed-behaviour [ref 20200523°0428, ref 20210520°1224]
+   ////finding : ref 20200523°0427 tells 'Loading assemblies with Assembly.Load(byte[])
+   ////   that contain unmanaged code is not supported.' and ref 20200523°0427 tells, MS will
+   ////   not provide such feature due to security concerns. So the Assembly.Load(bytes) will
+   ////   never work. No workaround.
+   ////proposal : We could write the bytes to a file, then load the file with Assembly.LoadFrom().
+   ////chain : https://docs.microsoft.com/en-us/dotnet/api/system.io.file.writeallbytes [ref 20200523°0431]
+   ////location : QueryPonyLib
+   ////status : Open
+   ////⬞
+
+   ////issue 20200522°1011 'IntegratedSecurity missing with Oracle'
+   ////matter : Compiler-Warning ".. mismatch between the processor architecture .."
+   ////finding : PS script http://www.trekta.biz/svn/demosps/trunk/scripts/tell-dotnet-framework-version.ps1
+   ////   [script 20200523°0111] tells framework versions, but not for e.g. System.Data.SQLite.dll.
+   ////suspect : The warning says processor architecture, not framework version.
+   ////   It might have to do with the fact QueryPonyLib is build for 'Any CPU', not explicitly
+   ////   for 'x86'. I have not yet found out how to switch that to something other than 'Any CPU'.
+   ////chain : Screenshot 20200522o1013.vs--queryponylib--warning--mismatch.png
+   ////chain : https://stackoverflow.com/questions/2310701/determine-framework-clr-version-of-assembly
+   ////  [ref 20200522°0952]
+   ////location : QueryPonyLib
+   ////solution :
+   ////priority : Not a real bug, but annoying.
+   ////status : open
+   ////⬞
+
+   ////issue 20200522°0921 'IntegratedSecurity missing with Oracle'
+   ////matter : When switching from System.Data.OracleClient to Oracle.ManagedDataAccess.Client,
+   ////   property csb.IntegratedSecurity seems no more available.
+   ////finding : MsSql, MySQL and Oracle were the only databases, with this property,
+   ////   all others don't have anyway. So it seems fine to just skip this property.
+   ////location : QueryPonyLib
+   ////solution : Skipped
+   ////status : Done
+   ////⬞
+
+   ////issue 20200522°0731 oracle
+   ////warnings : OracleConnection obsolete
+   ////summary : Types in System.Data.OracleClient be removed in future .NET version. Use third-party-provider.
+   ////location : QueryPonyLib OracleDbClient
+   ////chain : ref 20200522°0733 https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/oracle-and-adonet
+   ////chain : dld 20200522°0811 ODP 19.7.0
+   ////status : Done (with evt 20200522°0911 Oracle.ManagedDataAccess.dll)
+   ////⬞
+
+   ////issue 20131201°0833 'Find a DateTime null value for SQLite'
+   ////descript : System.DateTime is a non-nullable value. To find some 'zero'
+   ////   datetime, use DateTime.MinValue, yielding '0001-01-01 00:00:00.000'.
+   ////   Or use '1970-01-01 00:00:00' UTC, the begin of UNIX time, which
+   ////   translates to zero for the SQLite Integer storage flavour.
+   ////location : QueryPonyLib method 20130823°1552 getSqlValueFromObject()
+   ////solution :
+   ////status :
+   ////note :
+   ////⬞
+
+   ////issue 20131201°0811 'SQLite String not recognized as DateTime'
+   ////symptoms : When reading a table containing a Data row datatable.Load(datarow) throws
+   ////   a System.FormatException telling "String was not recognized as a valid DateTime.".
+   ////note : The same table can be opened by Firefox SQLite Manager without problem,
+   ////   just those Date fields show funny values like "36471.0576388889".
+   ////note : This table was cloned from a OleDb/Paradox table.
+   ////location : The place where the corrupt entry is produced: method 20130823°1552
+   ////   getSqlValueFromObject() seq 20130823°1611 QueryPonyLib.
+   ////location : A place where the System.FormatException is thrown when trying to read such
+   ////   record: e.g. method 20130604°2121 DisplayGrid() line 20130604°2311 "dt.Load(dr);".
+   ////locatation : A place which can read such corrupt entry anyway: Firefox SQLite Manager.
+   ////question : What can be done, that with the C# System.Data.SQLite library such
+   ////   record can be read anyway?
+   ////workaround :
+   ////solution : Write field value properly formattet (like with seq 20131201°0831).
+   ////status : Finished (seq 20131201°0831)
+   ////note :
+   ////⬞
+
+   ////issue 20130719°1441 'IOBus output to status line'
+   ////title : How can IOBus itself output to the status line?
+   ////descript : Outputting to the status line is not so easy from
+   ////   inside IOBus. Nor can IOBus use it's own delegate, nor has
+   ////   it a reference back to the GUI, which could do the output.
+   ////workaround : Retreat to the unloved MessageBox.Show().
+   ////location : File 20130707°1841 QueryPonyLib.Utils.cs, seq 20130719°0937
+   ////priority : Low
+   ////status : Solved reasonable
+   ////⬞
+
+   ////issue 20130719°0912 'Oracle Server/Port properties'
+   ////title : Oracle Server/Port properties
+   ////question : What about the OracleConnectionStringBuilder class Server and Port
+   ////   properties? E.g. the Devart.Data.Oracle.OracleConnectionStringBuilder() has
+   ////   them, why not the corresponding .NET class? What is the workaround?
+   ////ref 20130719°0913 'devart → OracleConnectionStringBuilder Class'
+   ////location : File QueryPonyLib.OracleDbClient.cs method 20130604°1046 GenerateConnectionString
+   ////status :
+   ////⬞
+
+   ////question 20130714°1743 'how to select a database from the server'
+   ////question : Field DataSource describes the server. But how can we select the database?
+   ////answer : With e.g. "DbClient.Database = comboboxDatabase.Text;"
+   ////see : seq 20130714°1745 'set the database'
+   ////location : QueryPonyLib.MssqlDbClient.cs
+   ////⬞
+
+   ////todo 20130707°1855 'Shorter sequence with .NET 4.0'
+   ////Text : The following even shorter sequence does not work here because
+   ////   Stream.CopyTo() exists in .NET 4.0, not yet 3.5 (seq 20130116°1624):
+   ////   ⁞ //------------------------------------------------
+   ////   ⁞ using (Stream stream = new FileStream(sTarget, FileMode.Create))
+   ////   ⁞ {
+   ////   ⁞    Assembly.GetExecutingAssembly().GetManifestResourceStream("[Project].[File]").CopyTo(stream);
+   ////   ⁞ }
+   ////   ⁞ //------------------------------------------------
+   ////Location : QueryPonyLib.Utils.cs method 20130707°1843 provideResourceFiles
+   ////Status : ?
+   ////⬞
+
+   ////[file 20131205°0227] ⬞Ω

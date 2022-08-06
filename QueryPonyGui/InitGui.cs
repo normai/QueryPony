@@ -7,7 +7,6 @@
 // encoding    : UTF-8-with-BOM
 #endregion Fileinfo
 
-using System;
 using QueryPonyLib;
 
 namespace QueryPonyGui
@@ -27,21 +26,9 @@ namespace QueryPonyGui
       /// <returns>Success flag proforma</returns>
       internal bool DoInitialization()
       {
-//         // Set up event handler after Paul Rohde 2011-Jul-13 [line 20220805°1312`xx]
-//       AppDomain.CurrentDomain.AssemblyResolve += Program.OnResolveAssembly;
-
-
          // Finetune application window title (20130715°1011)
          string sVersion = AboutForm.AssemblyVersion;
          MainForm._mainform.Text = "QueryPony" + " (" + sVersion + ")";
-
-         /*
-         note 20130726°1431 'on assembly loading order'
-         location : Around debugging issue 20130726°1231
-         title : Considerations about the chronology of the assembly loading
-         finding : Below 'InitLib lib = new InitLib' seems to be the first moment,
-                    the library is wanted. How can I proof this?
-         */
 
          // Provide the basic console character output delegate for library (line 20130821°0940)
          IOBus_OutputChars webriOutputCharDelegate = new IOBus_OutputChars(MainForm._mainform.writeChar); //// chg 20210522°1031`03
@@ -49,13 +36,22 @@ namespace QueryPonyGui
          // Provide the basic console lnie output delegate for library (line 20130819°0902)
          IOBus_OutputLine webriOutputDelegate = new IOBus_OutputLine(MainForm._mainform.writeLine);
 
+         /*
+         note 20130726°1431 'Assembly loading order'
+         location : Around debugging issue 20130726°1231
+         title : Considerations about the chronology of the assembly loading
+         finding : Below 'InitLib lib = new InitLib' seems to be the first moment,
+                    the library is wanted. How can I proof this?
+         status : Open
+         */
+
          // Initialize library [line 20130819°0904]
          var quPoLib = new QueryPonyLib.InitLib ( Program.PathConfigDirUser    // Possibly useless after refactoring 2021
                                     , webriOutputCharDelegate                  // Character writing facility
                                      , webriOutputDelegate                     // Line writing facility
                                       );
 
-         // Output very first log message [seq 20130707°0906]
+         // Output the very first log message [seq 20130707°0906]
          //------------------------------------------------
          // note : Utils.outputLine() must only be done behind Settings.Default.Upgrade().
          //    outputLine() seems not allowed here yet (DirectoryNotFoundException). Try to
@@ -69,7 +65,7 @@ namespace QueryPonyGui
          //------------------------------------------------
          if (Glb.Debag.Execute_No)
          {
-            string sOut = "[Debug]" + " " + Glb.Resources.AssemblyNameLib + Glb.sBlnk + "was initialized (one) (debug 20130707°0906).";
+            string sOut = " [Debug 20130707°0906]" + " " + Glb.Resources.AssemblyNameLib + Glb.sBlnk + "was initialized (one).";
             Utils.outputLine(sOut);
          }
 

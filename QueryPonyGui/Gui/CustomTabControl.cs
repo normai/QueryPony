@@ -1,7 +1,5 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/QueryPony/QueryPonyGui/Gui/CustomTabControl.cs
-//                + https://github.com/normai/QueryPony/blob/master/QueryPonyGui/Gui/CustomTabControl.cs
-// id          : 20130723°1201
+// file        : 20130723°1201 github.com/normai/QueryPony/blob/main/QueryPonyGui/Gui/CustomTabControl.cs
 // summary     : This file stores class 'CSharpCustomTabControl' to constitute a custom tabcontrol.
 // license     : The Code Project Open License (CPOL) 1.02
 // copyright   :

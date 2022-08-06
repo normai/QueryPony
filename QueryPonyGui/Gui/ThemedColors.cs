@@ -1,7 +1,5 @@
 ﻿#region Fileinfo
-// file        : http://downtown.trilo.de/svn/queryponydev/trunk/QueryPony/QueryPonyGui/Gui/ThemedColors.cs
-//                + https://github.com/normai/QueryPony/blob/master/QueryPonyGui/Gui/ThemedColors.cs
-// id          : 20130723°1231
+// file        : 20130723°1231 github.com/normai/QueryPony/blob/main/QueryPonyGui/Gui/ThemedColors.cs
 // summary     : This file stores class 'ThemedColors' to supplement the CustomTabControl class.
 // license     : The Code Project Open License (CPOL) 1.02
 // copyright   :
