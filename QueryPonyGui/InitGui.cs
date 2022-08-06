@@ -7,6 +7,7 @@
 // encoding    : UTF-8-with-BOM
 #endregion Fileinfo
 
+using System;
 using QueryPonyLib;
 
 namespace QueryPonyGui
@@ -23,9 +24,13 @@ namespace QueryPonyGui
    {
       /// <summary>This method performs possible initialization tasks</summary>
       /// <remarks>id : 20130707°0903 (after 20130604°1913)</remarks>
-      /// <returns>Success flag (proforma?)</returns>
+      /// <returns>Success flag proforma</returns>
       internal bool DoInitialization()
       {
+//         // Set up event handler after Paul Rohde 2011-Jul-13 [line 20220805°1312`xx]
+//       AppDomain.CurrentDomain.AssemblyResolve += Program.OnResolveAssembly;
+
+
          // Finetune application window title (20130715°1011)
          string sVersion = AboutForm.AssemblyVersion;
          MainForm._mainform.Text = "QueryPony" + " (" + sVersion + ")";
@@ -45,7 +50,7 @@ namespace QueryPonyGui
          IOBus_OutputLine webriOutputDelegate = new IOBus_OutputLine(MainForm._mainform.writeLine);
 
          // Initialize library [line 20130819°0904]
-         var quPoLib = new QueryPonyLib.InitLib ( Program.PathConfigDirUser                 // Possibly useless after refactoring 2021
+         var quPoLib = new QueryPonyLib.InitLib ( Program.PathConfigDirUser    // Possibly useless after refactoring 2021
                                     , webriOutputCharDelegate                  // Character writing facility
                                      , webriOutputDelegate                     // Line writing facility
                                       );

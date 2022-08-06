@@ -20,7 +20,9 @@ namespace QueryPonyLib
    /// This class provides the mechanism to have embedded files extracted at runtime
    /// Compare file 20130831°1611 /QueryPony/QueryPonyGui/SingleFileDeployment.cs
    /// </summary>
-   /// <remarks>class 20200523°0321</remarks>
+   /// <remarks>
+   /// id : class 20200523°0321
+   /// </remarks>
    internal static class Resolver
    {
       /// <summary>

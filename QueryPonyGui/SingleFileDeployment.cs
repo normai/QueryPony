@@ -20,7 +20,7 @@ namespace QueryPonyGui
 {
    /// <summary>This class holds the single-file-deployment feature</summary>
    /// <remarks>
-   /// id : 20130831°1612
+   /// id : class 20130831°1612
    /// </remarks>
    internal static class SingleFileDeployment
    {

@@ -112,5 +112,16 @@ namespace QueryPonyLib
          // Perform extraction
          IOBus.Utils.provideResourceFiles(resos);
       }
+
+      /// <summary>
+      ///  Debug facility to see the library loaded even before it is initialized
+      /// </summary>
+      /// <remarks>id : method 20220805°1221</remarks>
+      /// <returns>String as the ping answer</returns>
+      public static String PingLib()
+      {
+         String sRet = "Hallo QueryPonyLib ..";
+         return sRet;
+      }
    }
 }

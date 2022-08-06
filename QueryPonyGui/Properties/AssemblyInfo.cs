@@ -40,17 +40,12 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-//[assembly: AssemblyVersion("2.0.3.1")]       // QueryExPlus r75 (20130603°1731)
-//[assembly: AssemblyVersion("2.1.1.*")]       // Tag 20130624°1331
-//[assembly: AssemblyVersion("2.1.2.*")]       // Tag 20130630°2000
-//[assembly: AssemblyVersion("0.1.0.*")]       // Tag 20130707°1717
-//[assembly: AssemblyVersion("0.2.0.*")]       // Version 0.2.0 Crashtest Release (20130710°0123)
-//[assembly: AssemblyVersion("0.2.1.*")]       // Intermediate
-//[assembly: AssemblyVersion("0.3.0.*")]       // Version 0.3.0.40616 Alpha Release (20130726°1221)
-//[assembly: AssemblyVersion("0.3.1.*")]       // Intermediate
-//[assembly: AssemblyVersion("0.3.1.*")]       // Version 0.3.1.42329 Alpha Release (20130810°1956)
-[assembly: AssemblyVersion ("0.3.4.*")]
-// Intermediate
+//[assembly: AssemblyVersion("2.0.3.1")]
+//...
+//[assembly: AssemblyVersion("0.3.4.*")]
+[assembly: AssemblyVersion("0.4.0.*")]
+
+// Manually set versions
 //[assembly: AssemblyFileVersion("2.0.3.1")]   // QueryExPlus r75 (20130603°1731)
 //[assembly: AssemblyFileVersion("2.1.1")]     // Tag 20130624°1331
 //[assembly: AssemblyFileVersion("2.1.1.1")]   // Intermediate
@@ -63,5 +58,6 @@ using System.Runtime.InteropServices;
 //[assembly: AssemblyFileVersion("0.3.1.0")]   // Intermediate
 //[assembly: AssemblyFileVersion("0.3.1.0")]   // Version 0.3.1.42329 Alpha Release (20130810°1956)
 //[assembly: AssemblyFileVersion("0.3.2.1")]   // Intermediate (20130912°2121)
-[assembly: AssemblyFileVersion ("0.3.4.0")]
+//[assembly: AssemblyFileVersion("0.3.4.0")]   // Last before refactoring to NET4.8/x64
+[assembly: AssemblyFileVersion("0.4.0.0")]     // version 20220805°1511 Restored
 // Intermediate Beta (20160318°1311)

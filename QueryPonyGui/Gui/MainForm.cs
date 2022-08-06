@@ -26,7 +26,7 @@ namespace QueryPonyGui
    public partial class MainForm : Form
    {
 
-      /// <summary>This static field provides an instance of the MenuItems class</summary>
+      /// <summary>This static field stores an instance of the MenuItems class</summary>
       /// <remarks>id : 20130707°1833</remarks>
       internal static MenuItems _MenuItems = new MenuItems();
 
@@ -40,7 +40,7 @@ namespace QueryPonyGui
 
       /// <summary>This static field stores this MainForm's instance to be available for other classes</summary>
       /// <remarks>id : 20130619°0441</remarks>
-      // note : Access level switched 'public', so other assemblies can use assembly 'QueryPonyGui' (20130814°091102).
+      // note : Access level switched 'public', so other assemblies can use assembly 'QueryPonyGui' [chg 20130814°091102]
       public static MainForm _mainform = null;
 
       /// <summary>This static field stores an array of the opened QueryForms</summary>
@@ -892,11 +892,11 @@ namespace QueryPonyGui
 
       /// <summary>This static field represents the main tabcontrol, where the Connect Form and the Connection Forms are placed</summary>
       /// <remarks>
-      /// id : 20130618°0415
+      /// id : field 20130618°0415
       /// note : This exists as workaround(?) because the delegate implementation seems to must be static,
-      ///    and thus there is no direct access to the tabcontrol from there. (workaround 20130618°0416)
+      ///    and thus there is no direct access to the tabcontrol from there [workaround 20130618°0416]
       /// </remarks>
-      internal static TabControl _maintabcontrol = null;
+      internal static TabControl _maintabcontrol = null; //// Now here happens the exception ~'Could not load file or assembly' is fired [note 20220805°1331`02, issue 20220804°0931]
 
       /// <summary>This method creates a new tab on the main tabcontrol and places the given connection on it</summary>
       /// <remarks>
@@ -1107,13 +1107,15 @@ namespace QueryPonyGui
          MainTv.AfterSelect(tv, tn);
       }
 
+
       /// <summary>This field stores a helper variable to count the output lines</summary>
       /// <remarks>
-      /// id : 20130715°1311
+      /// id : field 20130715°1311
       /// note : The output line number serves just to reduce confusion of the
       ///    user in case identical output messages come one after the other.
       /// </remarks>
-      private static int _iOutputLineCounter = 0;
+      private static int _iOutputLineCounter = 0; //// Here exception ~'Could not load file or assembly' is fired [note 20220805°1331`01, issue 20220804°0931]
+
 
       /// <summary>This method outputs to the status textbox without a newline</summary>
       /// <remarks>id : 20130821°0931</remarks>

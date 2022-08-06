@@ -11,6 +11,7 @@
 #endregion Fileinfo
 
 using System;
+using System.Linq;                                     // Where
 using System.Windows.Forms;
 using QueryPonyLib;
 
@@ -56,10 +57,12 @@ namespace QueryPonyGui
          // Preparation set properties
          InitProperties();
 
-         ////SingleFileDeployment.provideSingleFileDeployment(); // [shutdown 20220731°0911 Just a try]
-
          // Install single-file-deployment facility [line 20130706°1053]
-         SingleFileDeployment.provideSingleFileDeployment();
+         ////SingleFileDeployment.provideSingleFileDeployment(); // [shutdown 20220731°0911 Just a try]
+if (Globs.Debag.Execute_No)
+{
+            SingleFileDeployment.provideSingleFileDeployment();
+}
 
          // Detect first run [seq 20130812°1331]
          // Wrap in try loop against issue 20130812°1321 'Start with exception OnConfigRemoved'
@@ -151,11 +154,47 @@ namespace QueryPonyGui
          Application.EnableVisualStyles();
          Application.SetCompatibleTextRenderingDefault(false);
 
+
+
+
+         // Set up event handler after Paul Rohde 2011-Jul-13 [line 20220805°1312`xx]
+         AppDomain.CurrentDomain.AssemblyResolve += OnResolveAssembly;
+
+         // Debug below issue 20220804°0931 'stack overflow before form constructor' [seq 20220805°1211]
+         // Look whether assembly QueryPonyLib is available -- Yes, QueryPonyGui.libs.QueryPonyLib.dll is in the list
+         string[] arDbg = SingleFileDeployment.listAvailableResources("");
+         Array.Sort(arDbg);
+         ////Assembly a = Assembly.Load("SampleAssembly, Version=1.0.2004.0, Culture=neutral, PublicKeyToken=8744b20f8da049e3");
+         ////System.Reflection.Assembly a = System.Reflection.Assembly.Load("SampleAssembly, Version=1.0.2004.0, Culture=neutral, PublicKeyToken=8744b20f8da049e3");
+         ////string sAsm = "SampleAssembly, Version=1.0.2004.0, Culture=neutral, PublicKeyToken=8744b20f8da049e3";
+         ////string sAsm = Globs.Resources.AssemblyNameLib; // "QueryPonyLib"
+         //System.Reflection.Assembly a = System.Reflection.Assembly.Load(sAsm); // => StackOverflowException
+         //       String sFullyQuali = System.Reflection.AssemblyName.GetAssemblyName(@"G:\work\downtown\queryponydev\trunk\QueryPony\QueryPonyLib\bin\x64\Debug\QueryPonyLib.dll").FullName;
+         //System.Reflection.Assembly a = System.Reflection.Assembly.Load(sFullyQuali); // => StackOverflowException
+         //       String sFullFileNam = @"G:\work\downtown\queryponydev\trunk\QueryPony\QueryPonyLib\bin\x64\Debug\QueryPonyLib.dll";
+         //       System.Reflection.Assembly a = System.Reflection.Assembly.LoadFrom(sFullFileNam); // FullName = "QueryPonyLib, Version=0.3.4.23799, Culture=neutral, PublicKeyToken=null"
+
+         ////a.LoadModule();
+         //////a.l
+         //         String sPing = InitLib.PingLib(); // Debug 20220805°1222
+         //         InitLib il = new InitLib();
+
+
+         /*
+         issue 20220804°0931 'StackOverflowException before the forms constructor'
+         problem : Inside new MainForm(args) StackOverflow occurres
+         finding : It has to do with the exact calling order of library loading things
+         finding : If reference QueryPonyLib is set 'CopyLocal = true' this works, if not then happens
+            StackOverflow. This means, extracting the QueryPonyLib resource fails, or is wanted too early.
+         status : Solved for now in version 20220805°1341, but could occur again
+         */
+
+
          // line 20130726°1402 'Exception StackOverflow'
          // note : Here is the typical line seeing 'StackOverflow exception was unhandled',
          //    e.g. while debugging issue 20130726°1231 e.g. with single-file-delivery issues.
          //Application.Run(new MainForm(args));
-         var x = new MainForm(args); // issue 20220804°0931 'stack overflow before form constructor' — If reference QueryPonyLib is set 'CopyLocal = true' this works, if not then StackOverflow. This means, extracting the QueryPonyLib resource fails, or is wanted too early.
+         var x = new MainForm(args); // issue 20220804°0931 'StackOverflowException before calling the forms constructor' — If reference QueryPonyLib is set 'CopyLocal = true' this works, if not then StackOverflow. This means, extracting the QueryPonyLib resource fails, or is wanted too early.
          Application.Run(x);
       }
 
@@ -214,5 +253,63 @@ namespace QueryPonyGui
          }
          return bRet;
       }
+
+
+      /// <summary>
+      ///  Possible lean alternative to provideSingleFileDeployment()
+      /// </summary>
+      /// <remarks>
+      ///  id : method 20220805°1311
+      ///  ref : blogs.interknowlogy.com/2011/07/13/merging-a-wpf-application-into-a-single-exe/ [ref 20220805°1232]
+      ///  note : Just a try while debugging issue 20220804°0931 'StackOverflowException'
+      /// </remarks>
+      /// <param name="sender"></param>
+      /// <param name="e"></param>
+      /// <returns>The wanted assembly or null</returns>
+      ////private static System.Reflection.Assembly OnResolveAssembly(object sender, ResolveEventArgs e)
+      public static System.Reflection.Assembly OnResolveAssembly(object sender, ResolveEventArgs e)
+      {
+         var thisAssembly = System.Reflection.Assembly.GetExecutingAssembly();
+
+         // Get the Name of the AssemblyFile
+         var assemblyName = new System.Reflection.AssemblyName(e.Name);
+         var dllName = assemblyName.Name + ".dll";
+
+         // Load from Embedded Resources — This function is not called if the assembly
+         //  is already in the same folder as the app.
+         var resources = thisAssembly.GetManifestResourceNames().Where(s => s.EndsWith(dllName));
+         if (resources.Any())
+         {
+
+            // Ninetynine percent of cases will only have one matching item, but if
+            //  you don't, you will have to change the logic to handle those cases.
+            var resourceName = resources.First();
+            using (var stream = thisAssembly.GetManifestResourceStream(resourceName))
+            {
+               if (stream == null) return null;
+               var block = new byte[stream.Length];
+
+               // Safely try to load the assembly.
+               try
+               {
+                  stream.Read(block, 0, block.Length);
+                  return System.Reflection.Assembly.Load(block);
+               }
+               catch (System.IO.IOException)
+               {
+                  return null;
+               }
+               catch (BadImageFormatException)
+               {
+                  return null;
+               }
+            }
+         }
+
+         // In the case the resource doesn't exist, return null.
+         return null;
+      }
+
+
    }
 }

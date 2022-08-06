@@ -339,7 +339,7 @@ namespace QueryPonyLib
          /// <summary>This const "QueryPonyLib.docs.joespostbox.20130703o1243.sqlite3" tells a resource file name</summary>
          /// <remarks>id : 20130704°1322</remarks>
          ////public const string JoespostboxSqliteFilename = "joespostbox.201307031243.sqlite3";
-         public const string JoespostboxSqliteFilename = "joespostbox.20130703o1243.sqlite3"; // [try fix 20220731°0951`01]
+         public const string JoespostboxSqliteFilename = "joespostbox.20130703o1243.sqlite3"; // [fix 20220731°0951`01]
 
          /// <summary>This const ~"QueryPonyLib.docs.joespostbox.20130703o1243.sqlite3" tells a resource file name</summary>
          /// <remarks>id : 20130704°1311</remarks>
