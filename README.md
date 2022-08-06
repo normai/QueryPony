@@ -1,6 +1,6 @@
 ﻿<img src="./QueryPonyGui/docs/img/20130705o0812.mcol-chess-horse.v0.x0200y0200.png" align="right" width="128" height="128" alt="Logo 20130705°0812">
 
-# QueryPony &nbsp; <sup><sub><sup>*v0.4.0.. — Proof-of-concept*</sup></sub></sup>
+# QueryPony &nbsp; <sup><sub><sup>*v0.4.1 — On-the-road-again*</sup></sub></sup>
 
 **Slogan** : A Simple Generic Database Query Tool and API
 
