@@ -11,15 +11,16 @@
 #endregion Fileinfo
 
 using System;
-using System.Reflection;                                                       // For Assembly
+using System.Diagnostics;                              // class StackFrame
+using System.Reflection;                               // For Assembly
 using System.Windows.Forms;
-using QueryPonyLib;                                                            // For Glb.Debag.Execute_No — Seems not possible (log 20190410°0751) compare issue 20130706°2221
+using QueryPonyLib;                                    // For Glb.Debag.Execute_No — Seems not possible (log 20190410°0751) compare issue 20130706°2221
 
 namespace QueryPonyGui
 {
    /// <summary>This class holds the single-file-deployment feature</summary>
    /// <remarks>
-   /// id : 20130831°1612
+   /// id : class 20130831°1612
    /// </remarks>
    internal static class SingleFileDeployment
    {
@@ -31,6 +32,7 @@ namespace QueryPonyGui
       /// </remarks>
       internal static void provideSingleFileDeployment()
       {
+
          // Set event handler to log assembly loadings [seq 20130726°1421]
          //  This satisfies curiosity with debugging issues like 20130707°1011 and 20130726°1231.
          AppDomain.CurrentDomain.AssemblyLoad += (sender, args) =>
@@ -40,7 +42,7 @@ namespace QueryPonyGui
             String sAsmName = asm.FullName;
 
             // Log loaded assemblies [seq 20130727°0901] higher level file write methods seem not yet available
-            string sTime = " " + DateTime.Now.ToString(QueryPonyLib.Glb.sFormat_Timestamp); //// [chg 20210522°1031`xx]
+            string sTime = " " + DateTime.Now.ToString(QueryPonyLib.Glb.sFormat_Timestamp); //// [chg 20210522°1031`04]
             string sLine = sTime + "  " + "[Debug]" + " " + "Assembly loading: " + sAsmName;
             string sFile = System.IO.Path.Combine(Program.PathConfigDirUser, "logfile.txt");
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(sFile, true))
@@ -74,17 +76,21 @@ namespace QueryPonyGui
             return;
          };
 
+
          // Attach the crucial AssemblyResolve eventhandler [seq 20130706°1051`02]
          //  This is the working horse for the single-file-delivery feature
          AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
          {
             // For debugging, see what's available
-            // This is fine, one of about 21 resources is 'QueryPonyGui.QueryPonyLib.exe' [note 20130707°1002]
+            //// // This is fine, one of about 21 resources is 'QueryPonyGui.QueryPonyLib.exe' [note 20130707°1002]  // [note 20220731°0912] No. This are 44 and no 'QueryPonyGui.QueryPonyLib.exe'
             string[] arDbg = listAvailableResources("");
-            if (Globs.Debag.Execute_No)                                        // Glb.Debag.Execute_No seems not possible here
+            Array.Sort(arDbg);
+            String sIgniter = new StackFrame(1).GetMethod().Name;              // Not so helpful [added 20220731°0931] sIgniter = "OnAssemblyResolveEvent"
+            if (Globs.Debag.Execute_No)                                        // Toggle Yes/No
             {
-               // This is evil, it causes endless recursion. [note 20130707°100202]
-               string[] arDbg2 = listAvailableResources(Globs.Resources.AssemblyNameLib);
+               // Evil. This sometimes causes endless recursion, means stack overflow [note 20130707°100202]
+               string[] arDbg2 = listAvailableResources(Globs.Resources.AssemblyNameLib); // This contains e.g. 'QueryPonyLib.libs.System.Data.SQLite.dll' [note 20220731°1213]
+               Array.Sort(arDbg2);
             }
 
             // Comfort
@@ -96,15 +102,18 @@ namespace QueryPonyGui
             // Complete filename [seq 20190410°0633]
             // Blanket name manipulation, e.g. "QueryPonyLib.System.Data.SQLite.dll"
             switch (sResourceName) {
-               case "QueryPonyLib": sResourceName += ".exe"; break;            // Library inside an executable
-               default : sResourceName += ".dll"; break;
+               ////case "QueryPonyLib": sResourceName += ".exe"; break;        // Library inside an executable
+               case "QueryPonyLib": sResourceName += ".dll"; break;            // Fix 20220804°0923
+               default: sResourceName += ".dll"; break;
             }
             sResourceName = "QueryPonyGui" + "." + sResourceName;              // Supplement namespace
 
             // Debug [seq 20190410°0741]
-            if (sResourceName.Contains("System.Data.SQLite"))
-            {
-               MessageBox.Show("Debug 20190410°0741", "Debug");                // Never
+            if (IOBus.Gb.Debag.Execute_Yes) {                                   // Toggle flag on demand
+               if (sResourceName.Contains("System.Data.SQLite"))
+               {
+                  MessageBox.Show("Debug 20190410°0741", "Debug");             // Never?
+               }
             }
 
             // Use one of the two possible assemblies [supplement 20130706°1055]
@@ -116,17 +125,40 @@ namespace QueryPonyGui
                // Provisory manipulation [seq 20130707°1921]
                // Note : Deal with issue 20130708°0711 'MySql.Data.dll assembly name spelling'
                // Todo : Implement a more intelligent generic algorithm [todo 20130708°0911]
-               if      (sResourceName == "QueryPonyGui.iobus.dll")              { sResourceName = "QueryPonyGui.libs.iobus.dll"; }
-               else if (sResourceName == "QueryPonyGui.MySql.Data.dll")         { sResourceName = "QueryPonyGui.libs.mysql.data.dll"; } // note the cases a la 20130708°0711
+               if      (sResourceName == "QueryPonyGui.iobus.dll")              { sResourceName = "QueryPonyGui.libs.iobus.dll"; }  //// Should be superfluous [note 20220731°1212]
+               else if (sResourceName == "QueryPonyGui.MySql.Data.dll")         { sResourceName = "QueryPonyGui.libs.mysql.data.dll"; }  // Note the cases a la 20130708°0711
                else if (sResourceName == "QueryPonyGui.Mono.Security.dll")      { sResourceName = "QueryPonyGui.libs.Mono.Security.dll"; }
                else if (sResourceName == "QueryPonyGui.Newtonsoft.Json.dll")    { sResourceName = "QueryPonyGui.libs.Newtonsoft.Json.dll"; }
                else if (sResourceName == "QueryPonyGui.Npgsql.dll")             { sResourceName = "QueryPonyGui.libs.Npgsql.dll"; }
-               else if (sResourceName == "QueryPonyGui.QueryPonyLib.exe")       { sResourceName = "QueryPonyGui.libs.QueryPonyLib.exe"; }
-               else if (sResourceName == "QueryPonyGui.System.Data.SQLite.dll") { sResourceName = "QueryPonyGui.libs32bit.System.Data.SQLite.dll"; }
+               ////else if (sResourceName == "QueryPonyGui.QueryPonyLib.exe")       { sResourceName = "QueryPonyGui.libs.QueryPonyLib.exe"; } /// Shutdown 20220804°0921
+               else if (sResourceName == "QueryPonyGui.QueryPonyLib.dll")       { sResourceName = "QueryPonyGui.libs.QueryPonyLib.dll"; } /// Try fix 20220804°0922
+               ////else if (sResourceName == "QueryPonyGui.System.Data.SQLite.dll") { sResourceName = "QueryPonyGui.libs32bit.System.Data.SQLite.dll"; }
+               else if (sResourceName == "QueryPonyGui.System.Data.SQLite.dll") {
+                  ////sResourceName = "QueryPonyLib.libs.System.Data.SQLite.dll";  // Adjust 20220731°1211
+                  return null; // Experiment 20220804°0924 Heureka — Then QueryPonyLib.Resolver.cs will take over.
 
+                  //-----------------------------------
+                  //   todo 20220804°0925 'Handle SQLite inside QueryPonyLib only'
+                  //   do : Remove all SQLite handling below in this file, and possibly
+                  //        above, because this is handled now in QueryPonyLib.Resolver.cs
+                  //   ⬞
+                  //-----------------------------------
+               }
                else
                {
-                  // Fatal — Program flow error, theroretically not possible
+                  // Fatal error
+                  // [note 20220731°0921] This sequence executes
+                  //   • Before form is visible 2 * with QueryPonyGui.QueryPony.resources.dll
+                  //   • Before form is visible 2 * with QueryPonyGui.QueryPony.XmlSerializers.dll
+                  //   • After  form is visible 2 * with QueryPonyGui.QueryPony.resources.dll
+                  if (Globs.Debag.Execute_No)                                        //
+                  {
+                     string sMsg = "[Fatal 20220729°1211] Program flow error, theroretically not possible"
+                                  + Glb.sCrCr + "sResourceName = " + sResourceName
+                                   ;
+                     MessageBox.Show(sMsg, "Notification");
+                  }
+                  return null; // Experimental [line 20220731°0941]
                }
             }
             else
@@ -140,15 +172,15 @@ namespace QueryPonyGui
             }
 
             // Fetch the wanted library
-            // Note : E.g. sResourceName = "QueryPonyLib.MySql.Data.dll" maybe wrong.
+            // note : E.g. sResourceName = "QueryPonyLib.MySql.Data.dll" maybe wrong.
             using (var stream = asmUse.GetManifestResourceStream(sResourceName))
             {
                // Experiment [seq 20130707°1036]
-               // Note : Find out about issue 20130707°1011 'Who is requesting XmlSerializers.dll'
-               // Ref : 20130707°1032 'How to list all loaded assemblies'
+               // note : Find out about issue 20130707°1011 'Who is requesting XmlSerializers.dll'
+               // nef : Article 'How to list all loaded assemblies' [ref 20130707°1032]
                if (sResourceName == "QueryPonyGui.QueryPony.XmlSerializers.dll")
                {
-                  // Note : Block shutdown 20130808°1553 while debugging exception 20130808°1552
+                  // Note : Block shutdown 20130808°1553 while debugging exception QueryPonyLib.exe20130808°1552
                   if (Globs.Debag.Execute_No)                                  // Glb.Debag.Execute_No seems not possible here
                   {
                      // [line 20130707°1033] Compare method 20210523°1331 listLoadedAssemblies
@@ -163,9 +195,11 @@ namespace QueryPonyGui
 
                // Finally the actual job — Load assembly
                Assembly asm = null;
-               if (sResourceName != "QueryPonyLib.libs32bit.System.Data.SQLite.dll")
+               ////if (sResourceName != "QueryPonyLib.libs32bit.System.Data.SQLite.dll") // E.g. sResourceName = "QueryPonyGui.QueryPony.resources.dll" [note 20220729°1141]
+               ////if (sResourceName != "QueryPonyGui.libs32bit.System.Data.SQLite.dll") // [fix 20220731°0953] // E.g. sResourceName = "QueryPonyGui.QueryPony.resources.dll" [note 20220729°1141]
+               if (sResourceName != "QueryPonyGui.libs.System.Data.SQLite.dll") // [fix 20220731°1141] // E.g. sResourceName = "QueryPonyGui.QueryPony.resources.dll" [note 20220729°1141]
                {
-                  // Option 1 — load straight forward
+                  // Option 1 — Load straight forward
                   Byte[] assemblyData = new Byte[stream.Length];
                   stream.Read(assemblyData, 0, assemblyData.Length);
                   asm = Assembly.Load(assemblyData);

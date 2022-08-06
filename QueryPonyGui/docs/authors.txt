@@ -9,33 +9,31 @@
 
    Big thanks go to the authors and contributors of Query ExPlus:
 
-   - Joseph Albahari   has originally written Query Express and published
+   - Joseph Albahari   Has originally written Query Express and published
                        it on www.albahari.com/queryexpress.html. Special
                        thanks go to him for publishing Query Express and
                        Query ExPlus under a permissive license.
 
-   - Klaus Evers       has written the OleDb Browser in Query Express
+   - Klaus Evers       Has written the OleDb Browser in Query Express
                        and contributed otherwise to Query ExPlus.
 
-   - Timor Fanshteyn   developed and maintained Query ExPlus on
+   - Timor Fanshteyn   Developed and maintained Query ExPlus on
                        http://sourceforge.net/projects/queryexplus.
 
-   - Christian S.      develops and maintains Query ExPlus today on
+   - Christian S.      Develops and maintains Query ExPlus today on
                        http://sourceforge.net/projects/queryexplus.
 
-   - Andreas Kleffel   contributed Query ExPlus.
+   - Andreas Kleffel   Contributed Query ExPlus.
 
-   - dl3bak            contributed to Query ExPlus.
+   - dl3bak            Contributed to Query ExPlus.
 
-   - emonk72           contributed to Query ExPlus.
+   - emonk72           Contributed to Query ExPlus.
 
-   Big thanks go as well to the authors and contributors of the third
+   Much thanks go as well to the authors and contributors of the third
    party products, QueryPony has incorporated. You find them listed in
    file thirdparty.txt.
 
-   Thanks again,
    Norbert
-
 
    ———————————————————————
    [file 20130618°1821] ⬞Ω

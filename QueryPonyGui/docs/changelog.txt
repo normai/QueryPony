@@ -1,7 +1,28 @@
 ﻿
+   version 20220805°1511 QueryPony.exe v0.4.0 — Restored
+   • Platform DotNet-4.8, x64-only
+   • Single-file-delivery restored. Heureka — Restored proof-of-concept again
+   • Code left in a refactoring mess
+   • Tested with SQLite only
+
    chg 20220729°1121 Cmd/Gui/Lib
-   - Switch from .NET 4.6 to 4.8
-   - Switch Platform target from build x86 to AnyCPU
+   • Switch from .NET 4.6 to 4.8
+   • Switch Platform target from build x86 to AnyCPU to x64
+   • Disrupted, single-file-delivery no more working
+
+   chg 20200522°0911 Oracle.ManagedDataAccess.dll
+   In OracleDbClient.cs replace namespace System.Data.OracleClient by Oracle.ManagedDataAccess.Client.
+   ⬞
+
+   log 20200522°0151 Start providing interactivity (seq 20200522°0153)
+
+   chg 20190410°0533 Switch QueryPonyLib from DLL to EXE
+
+   chg 20190410°0531 'Switch from .NET 3.5 to .NET 4.0'
+
+   chg 20190410°0444 'shutdown Divan'
+   • Shutdown and delete folder trunk\QueryPony\QueryPonyLib\libs2\
+
 
    build 2018-08-19`01:33 QueryPony 0.3.4 Refresh
    - Executable for Windows 32-bit .NET 3.5

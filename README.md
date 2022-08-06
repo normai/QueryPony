@@ -1,10 +1,10 @@
 ﻿<img src="./QueryPonyGui/docs/img/20130705o0812.mcol-chess-horse.v0.x0200y0200.png" align="right" width="128" height="128" alt="Logo 20130705°0812">
 
-# QueryPony &nbsp; <sup><sub><sup>*v0.3.5 disrupted*</sup></sub></sup>
+# QueryPony &nbsp; <sup><sub><sup>*v0.4.0 — Proof-of-concept*</sup></sub></sup>
 
 **Slogan** : A Simple Generic Database Query Tool and API
 
-**Status** : Under overhaul — Disrupted
+**Status** : Under overhaul
 
 **Highlight** : Database agnostic API utilizable from any .NET program
 
@@ -69,9 +69,9 @@ To resolve this riddle, seek some hint from the 'About' dialog.
 Now you also have found the two folders, which you must delete, once you get
  tired of QueryPony and want purge it from your machine without any residues.
 
-Have fun!
+Bye
 
-*2022-Jul-29* &nbsp; <del>*2018-Aug-19*</del>
+*2022-Aug-05* &nbsp; <del>*2022-Jul-29*</del> &nbsp; <del>*2018-Aug-19*</del>
 
 ---
 

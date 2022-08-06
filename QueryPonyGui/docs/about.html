@@ -63,40 +63,45 @@
                Below pane is faded in from file <a href="./authors.txt" target="_blank">authors.txt</a>.
  </p>
 
-<pre class="CodeMedium">
-
+<pre class="CodeSmall" style="line-height:1.5em;">
    Authors
 
-   The starting point for QueryPony was Query ExPlus 2.0.3.1.
-   The code making the difference from Query ExPlus to QueryPony
-   is written by Norbert C. Maier.
+   The starting point for QueryPony was Query ExPlus 2.0.3.1
+   by Joseph Albahari and Timor Fanshteyn.
 
-   Huge thanks go to the authors and contributors of Query Express
-   and Query ExPlus.
+   The code making the difference from Query ExPlus 2.0.3.1 to
+   QueryPony is written by Norbert C. Maier.
 
-   - Joseph Albahari   has originally written Query Express and published
+   Big thanks go to the authors and contributors of Query ExPlus:
+
+   - Joseph Albahari   Has originally written Query Express and published
                        it on www.albahari.com/queryexpress.html. Special
-                       thanks to him for publishing Query Express under
-                       a permissive license.
+                       thanks go to him for publishing Query Express and
+                       Query ExPlus under a permissive license.
 
-   - Klaus Evers       has written the OleDb Browser in Query Express
+   - Klaus Evers       Has written the OleDb Browser in Query Express
                        and contributed otherwise to Query ExPlus.
 
-   - Timor Fanshteyn   developed and maintained Query ExPlus on
+   - Timor Fanshteyn   Developed and maintained Query ExPlus on
                        http://sourceforge.net/projects/queryexplus.
 
-   - Christian S.      develops and maintains Query ExPlus today on
+   - Christian S.      Develops and maintains Query ExPlus today on
                        http://sourceforge.net/projects/queryexplus.
 
-   - Andreas Kleffel   contributed Query ExPlus.
+   - Andreas Kleffel   Contributed Query ExPlus.
 
-   - dl3bak            contributed to Query ExPlus.
+   - dl3bak            Contributed to Query ExPlus.
 
-   - emonk72           contributed to Query ExPlus.
+   - emonk72           Contributed to Query ExPlus.
 
-   Thanks again from Bavaria,
+   Much thanks go as well to the authors and contributors of the third
+   party products, which QueryPony has incorporated. You find them listed
+   in file thirdparty.txt.
+
    Norbert
 
+   ———————————————————————
+   [file 20130618°1821] ⬞Ω
 </pre>
 
  <a name="20130724o1714"></a>
@@ -112,7 +117,7 @@
                :
  </p>
 
-<pre class="CodeMedium">
+<pre class="CodeSmall" style="line-height:1.5em;">
 
    Third party products
 
@@ -224,16 +229,63 @@
                Below pane is faded in from file <a href="./changelog.txt" target="_blank">changelog.txt</a>.
  </p>
 
-<pre class="CodeSmall">
+<pre class="CodeTiny" style="line-height:1.3em;">
 
-   2013-07-26 QueryPony 0.3.0 Alpha Release
+   version 20220805°1511 QueryPony.exe v0.4.0 — Restored
+   • Platform DotNet-4.8, x64-only
+   • Single-file-delivery restored. Heureka — Restored proof-of-concept again
+   • Code left in a refactoring mess
+   • Tested with SQLite only
+
+   chg 20220729°1121 Cmd/Gui/Lib
+   • Switch from .NET 4.6 to 4.8
+   • Switch Platform target from build x86 to AnyCPU to x64
+   • Disrupted, single-file-delivery no more working
+
+   chg 20200522°0911 Oracle.ManagedDataAccess.dll
+   In OracleDbClient.cs replace namespace System.Data.OracleClient by Oracle.ManagedDataAccess.Client.
+   ⬞
+
+   log 20200522°0151 Start providing interactivity (seq 20200522°0153)
+
+   chg 20190410°0533 Switch QueryPonyLib from DLL to EXE
+
+   chg 20190410°0531 'Switch from .NET 3.5 to .NET 4.0'
+
+   chg 20190410°0444 'shutdown Divan'
+   • Shutdown and delete folder trunk\QueryPony\QueryPonyLib\libs2\
+
+
+   build 2018-08-19`01:33 QueryPony 0.3.4 Refresh
+   - Executable for Windows 32-bit .NET 3.5
+   - Build on Windows 10 with SharpDevelop 5.1
+   ⬞
+
+   build 20180817°1717 QueryPony 0.3.3.0 Refresh
+   - Build on Windows 10, .NET 3.5 with SharpDevelop 5.1
+   ⬞
+
+   build 20160318°1311 QueryPony 0.3.2.2 Beta intermediate
+   - Implement 'DbClone' from OleDb to SQLite
+   - Implement 'DbCreate' for SQLite
+   - Minor changes
+   - Remove trailing spaces
+   ⬞
+
+   build 2013-08-11 QueryPony 0.3.1 Alpha
+   - Settings saving fixed
+   - Edit menu issues partially fixed
+   - Miscellaneous minor bugs fixed
+   ⬞
+
+   build 2013-07-26 QueryPony 0.3.0 Alpha Release
    - Outlined database types shall all be accessible
    - Missing treeview nodes labeling supplemented
    - Divan for CouchDB integrated (not much utilized yet)
    - Various bugs fixed
+   ⬞
 
-
-   2013-07-10 QueryPony 0.2.0 Crashtest Version
+   build 2013-07-10 QueryPony 0.2.0 Crashtest Version
    This are the differences as compared with Query ExPlus 2.0.3.1:
    Feature changes (from the user's point of view)
    - It requires .NET 3.5, no more .NET 2
@@ -256,18 +308,20 @@
    - Additional helper project 'IOBus'
    - Shake up code formatting (sorry for this)
    - License changed from Public Domain to GNU AGPL v3
+   ⬞
 
-
-   2013-06-04 Spawn project QueryPony from Query ExPlus 2.0.3.1 (r75)
-   The history entries from QueryExPlus-ReadMe.txt:
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   2010-10-04  k3b         Created this Readme; Upgrade from vs2005 to vs2010. Compiled for dotnet2.0
+   log 2013-06-04 Spawn project QueryPony from Query ExPlus 2.0.3.1 (r75)
+   This are the history entries from QueryExPlus-ReadMe.txt :
+   ⁞
+   2010-10-04  k3b         Created this Readme; Upgrade from vs2005 to vs2010.  Compiled for dotnet2.0
    2008-01-12  guessmann   Version 2.0.2.8
    2008-11-27  k3b         Added OleDB-Browsing support
    2006-10-14  guessmann   Version 2.0
    2006-09-14  guessmann   Version 1.01 Created fork from www.albahari.com/queryexpress.html
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   ⬞
 
+   ———————————————————————
+   [file 20130615°1551] ⬞Ω
 </pre>
 
  <a name="20130724o1718"></a>
@@ -314,7 +368,7 @@
                Here the AGPL license fineprint, faded in from file <a href="./agpl-3.0.txt" target="_blank">agpl-3.0.txt</a>.
  </p>
 
-<pre class="CodeSmall">
+<pre class="CodeSmall" style="line-height:1.4em;">
 
                     GNU AFFERO GENERAL PUBLIC LICENSE
                        Version 3, 19 November 2007

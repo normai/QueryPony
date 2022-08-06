@@ -32,7 +32,7 @@ namespace QueryPonyLib
    {
       /// <summary>This field stores the IDataReader of this DataReaderAvailableEventArgs object</summary>
       /// <remarks>id : 20130604°0203</remarks>
-      private IDataReader _dr;
+      private readonly IDataReader _dr;                        // Add readonly keyword [chg 20220731°1131`01]
 
       /// <summary>This field stores the SkipResults flag of this DataReaderAvailableEventArgs object</summary>
       /// <remarks>id : 20130604°0204</remarks>
@@ -109,7 +109,7 @@ namespace QueryPonyLib
    {
       /// <summary>This field stores the number of affected rows of the executed SQL command</summary>
       /// <remarks>id : 20130604°0216</remarks>
-      private int _recordsAffected;
+      private readonly int _recordsAffected;                   // Add readonly keyword [chg 20220731°1131`02]
 
       /// <summary>This property gets the number of affected rows of the executed SQL command</summary>
       /// <remarks>id : 20130604°0217</remarks>
@@ -133,11 +133,11 @@ namespace QueryPonyLib
    {
       /// <summary>This field stores the value of the Message property</summary>
       /// <remarks>id : 20130604°0220</remarks>
-      private string _message;
+      private readonly string _message;                        // Add readonly keyword [chg 20220731°1131`03]
 
       /// <summary>This field stores the value of the Source property</summary>
       /// <remarks>id : 20130604°0221</remarks>
-      private string _source;
+      private readonly string _source;                         // Add readonly keyword [chg 20220731°1131`04]
 
       /// <summary>This property gets this InfoMessageEventArgs' message</summary>
       /// <remarks>id : 20130604°0222</remarks>
@@ -172,11 +172,11 @@ namespace QueryPonyLib
    {
       /// <summary>This field stores the value of the ErrorMessage property</summary>
       /// <remarks>id : 20130604°0226</remarks>
-      private string _errorMessage;
+      private readonly string _errorMessage;                   // Add readonly keyword [chg 20220731°1131`05]
 
       /// <summary>This field stores the value of the Ex propery</summary>
       /// <remarks>id : 20130604°0227</remarks>
-      private Exception _ex;
+      private readonly Exception _ex;                          // Add readonly keyword [chg 20220731°1131`06]
 
       /// <summary>This field stores the value of the Cancel property</summary>
       /// <remarks>id : 20130604°0228</remarks>
@@ -528,7 +528,7 @@ namespace QueryPonyLib
       /// <summary>This method applies QueryOptions to this connection</summary>
       /// <remarks>
       /// id : 20130604°0310
-      /// todo : Find out, who exactly shall call this method and try to call it. [todo 20130714°1811]
+      /// todo : Find out, who exactly shall call this method and try to call it [todo 20130714°1811]
       /// </remarks>
       protected void DoApplyOptionsToConnection_NOTYETCALLED()
       {
@@ -1013,7 +1013,7 @@ namespace QueryPonyLib
          }
 
          // Even though we're connecting synchronously, we have to marshal the call
-         //  onto the worker thread, otherwise if the connection object will be locked
+         //  onto the worker thread, otherwise the connection object will be locked
          //  into the main thread's apartment
          RunOnWorker(new MethodInvoker(DoConnect), true);
 

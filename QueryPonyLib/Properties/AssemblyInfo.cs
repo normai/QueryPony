@@ -41,17 +41,13 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 //[assembly: AssemblyVersion("1.0.*")]
-//[assembly: AssemblyVersion("1.0.0.0")]       // New VS project
-//[assembly: AssemblyVersion("2.1.1.*")]       // Tag 20130624°1331
-//[assembly: AssemblyVersion("2.1.2.*")]       // Tag 20130630°2000
-//[assembly: AssemblyVersion("0.1.0.*")]       // Tag 20130707°1717
-//[assembly: AssemblyVersion("0.2.0.*")]       // Version 0.2.0 Crashtest Release (20130710°0123)
-//[assembly: AssemblyVersion("0.2.1.*")]       // Intermediate
-//[assembly: AssemblyVersion("0.3.0.*")]       // Version 0.3.0.40616 Alpha Release (20130726°1551)
-//[assembly: AssemblyVersion("0.3.1.*")]       // Intermediate
-//[assembly: AssemblyVersion("0.3.1.*")]       // Version 0.3.1.42329 Alpha Release (20130810°1956)
-[assembly: AssemblyVersion ("0.3.4.*")]
-// Intermediate
+//[assembly: AssemblyVersion("1.0.0.0")]
+//[assembly: AssemblyVersion("2.1.1.*")]
+// ..
+//[assembly: AssemblyVersion("0.3.4.*")]
+[assembly: AssemblyVersion("0.4.0.*")]
+
+// Manually set versions
 //[assembly: AssemblyFileVersion("1.0.0.0")]   // New VS project
 //[assembly: AssemblyFileVersion("2.1.1")]     // Tag 20130624°1331
 //[assembly: AssemblyFileVersion("2.1.1.1")]   // Intermediate
@@ -64,7 +60,8 @@ using System.Runtime.InteropServices;
 //[assembly: AssemblyFileVersion("0.3.1.0")]   // Intermediate
 //[assembly: AssemblyFileVersion("0.3.1.0")]   // Version 0.3.1.42329 Alpha Release (20130810°1956)
 //[assembly: AssemblyFileVersion("0.3.2.1")]   // Intermediate (20130912°2121)
-[assembly: AssemblyFileVersion ("0.3.4.0")]
+//[assembly: AssemblyFileVersion("0.3.4.0")]   // Last before refactoring to NET4.8/x64
+[assembly: AssemblyFileVersion("0.4.0.0")]     // version 20220805°1511 Restored
 
 // Custom attributes — Intermediate [seq 20160318°1311]
 [assembly: GlobalCustomAttributes.AssemblyPluginTestAttribute (GlobalCustomAttributes.AssemblyPluginTestType.Library)]
