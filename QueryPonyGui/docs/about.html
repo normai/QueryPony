@@ -60,45 +60,44 @@
  </h2>
 
  <p id="i20130724o1713">
-               Below pane is faded in from file <a href="./authors.txt" target="_blank">authors.txt</a>.
+               Below pane is faded-in from file <a href="./authors.txt" target="_blank">authors.txt</a>:
  </p>
 
-<pre class="CodeSmall" style="line-height:1.5em;">
+<pre class="CodeSmall" style="line-height:1.4em;">
+
    Authors
+   =======
 
    The starting point for QueryPony was Query ExPlus 2.0.3.1
-   by Joseph Albahari and Timor Fanshteyn.
+   by Joseph Albahari and Timor Fanshteyn. The code making the
+   difference from there to QueryPony is written by Norbert C. Maier.
 
-   The code making the difference from Query ExPlus 2.0.3.1 to
-   QueryPony is written by Norbert C. Maier.
+   Many thanks go to the authors and contributors of Query ExPlus:
 
-   Big thanks go to the authors and contributors of Query ExPlus:
-
-   - Joseph Albahari   Has originally written Query Express and published
-                       it on www.albahari.com/queryexpress.html. Special
+   - Joseph Albahari   Has written Query Express and published it 2007
+                       on www.albahari.com/queryexpress.html. Special
                        thanks go to him for publishing Query Express and
-                       Query ExPlus under a permissive license.
-
-   - Klaus Evers       Has written the OleDb Browser in Query Express
-                       and contributed otherwise to Query ExPlus.
+                       Query ExPlus under a permissive license
 
    - Timor Fanshteyn   Developed and maintained Query ExPlus on
-                       http://sourceforge.net/projects/queryexplus.
+                       http://sourceforge.net/projects/queryexplus
+                       under the Public Domain license
+
+   - Klaus Evers       Has written the OleDb Browser in Query Express
+                       and contributed otherwise to Query ExPlus
 
    - Christian S.      Develops and maintains Query ExPlus today on
-                       http://sourceforge.net/projects/queryexplus.
+                       http://sourceforge.net/projects/queryexplus
 
-   - Andreas Kleffel   Contributed Query ExPlus.
+   - Andreas Kleffel   Contributed Query ExPlus
 
-   - dl3bak            Contributed to Query ExPlus.
+   - dl3bak            Contributed to Query ExPlus
 
-   - emonk72           Contributed to Query ExPlus.
+   - emonk72           Contributed to Query ExPlus
 
    Much thanks go as well to the authors and contributors of the third
-   party products, which QueryPony has incorporated. You find them listed
-   in file thirdparty.txt.
-
-   Norbert
+   party products, QueryPony has incorporated. You find them listed in
+   file thirdparty.txt.
 
    ———————————————————————
    [file 20130618°1821] ⬞Ω
@@ -112,28 +111,29 @@
  <p id="i20130724o1715">
                Here the list of the third party products, which are incorporated in Query Pony,
                 with their authors, licenses and supply sources.
-               The pane is faded in from file
+               The pane is faded-in from file
                <a href="./thirdparty.txt" target="_blank">thirdparty.txt</a>
                :
  </p>
 
-<pre class="CodeSmall" style="line-height:1.5em;">
+<pre class="CodeTiny" style="line-height:1.4em;">
 
    Third party products
+   ====================
 
-   Big thanks go to the people and organisations who provide their
-   products under licenses allowing them to be integrated into QueryPony
-   as third party products. This are:
+   Many thanks go to the people and organisations, who provide
+   their products under licenses, allowing them to be integrated
+   into QueryPony. Those products are:
 
 
-   title       : Genghis v0.8 by 'The Genghis Project' (some files from it)
+   title       : Genghis v0.8 (some files from it)
    slogan      : A set of .NET extensions to provide application-level services
    homepage    : http://genghis.codeplex.com
-   download    : http://genghis.codeplex.com/releases/view/4954
+   download    : http://genghis.codeplex.com/releases/view/4954 [20130612°1721]
    license     : Custom License (http://genghis.codeplex.com/license)
    copyright   : (C) 2002 - 2004 The Genghis Group
    authors     : Shawn Wildermuth and 'The Genghis Project'
-   usage       : For the 'Recent Files' functionality in the Files menu.
+   usage       : For the 'Recent Files' functionality in the Files menu
 
 
    title       : ADO.NET Data Provider for SQLite ('System.Data.SQLite')
@@ -141,12 +141,12 @@
    homepage    : http://www.sqlite.org and
                   http://system.data.sqlite.org/index.html/doc/trunk/www/index.wiki
    download    : http://system.data.sqlite.org/index.html/doc/trunk/www/downloads.wiki
-                  - sqlite-netFx35-binary-bundle-Win32-2008-1.0.85.0.zip (binaries)
-                  - sqlite-netFx-source-1.0.85.0.zip (sources)
+                  - sqlite-netFx35-binary-bundle-Win32-2008-1.0.109.0 (binaries)
    license     : Public Domain ("Released to the public domain, use at your own risk.")
    copyright   : None
    authors     : The SQLite Consortium for ADO.NET Data Provider for SQLite,
                   originally written by Robert Simpson
+   note        : Downloads v1.0.85.0 20130513°0911, v1.0.109.0 20180815°0221
 
 
    title       : ADO.NET Data Provider for PostgreSQL ('Npgsql')
@@ -163,33 +163,36 @@
    title       : MySQL .NET Connector 'mysql.data.dll'
    slogan      : A fully-managed ADO.NET driver for MySQL
    homepage    : http://dev.mysql.com/downloads/connector/net
-   download    : on the homepage the files:
+   download    : on the homepage the following files:
                   - mysql-connector-net-6.6.5-noinstall.zip (binaries)
                      from the extraction, use the binary /v2/mysql.data.dll
                   - mysql-connector-net-6.6.5-src.zip (sources)
    license     : GNU GPL v2
-   copyright   : Copyright (C) 2004, 2011, Oracle and/or its affiliates
+   copyright   : Copyright (c) 2004, 2011, Oracle and/or its affiliates
    authors     :
-   note        : This library is not always part of QueryPony. If your version
+   note        : [[This library is not always part of QueryPony. If your version
                  of QueryPony is missing mysql.data.dll, please dowonload it
                  on your own and put it in the same directory as QueryPony
-                 Then QueryPony will attempt to talk to it
+                 Then QueryPony will attempt to talk to it.]]
+                 The MySQL driver my be included in QueryPony due to
+                 http://www.mysql.com/about/legal/licensing/foss-exception/
+                   [ws 20180911°0228]
 
 
    title       : The QueryPony Logo
    slogan      : Chess Horse
    homepage    : http://openclipart.org/detail/6163/chess-horse-by-mcol
-   download    : on the homepage
+   download    : http://openclipart.org/detail/6163/chess-horse-by-mcol
    license     : 'Free'
    copyright   : (none)
    authors     : mcol
-   note        : The logo is based on a SVG file created by mcol
+   note        : The QueryPony logo is based on this SVG file by mcol.
 
 
    title       : Divan (2012-Nov-11)
    slogan      : A C# library for CouchDB
    homepage    : https://github.com/foretagsplatsen/Divan
-   download    : on the homepage
+   download    : https://github.com/foretagsplatsen/Divan
    license     : MIT License
    copyright   : Företagsplatsen AB
    authors     : Företagsplatsen AB
@@ -199,25 +202,24 @@
    title       : Json.NET 5.0 Release 6
    slogan      : Json.NET is a popular high-performance JSON framework for .NET
    homepage    : http://json.codeplex.com
-   download    : on the homepage
+   download    : http://json.codeplex.com
    license     : The MIT License
-   copyright   : Copyright (C) 2007 James Newton-King
+   copyright   : Copyright (c) 2007 James Newton-King
    authors     : James Newton-King and contributors
 
 
    title       : The CustomTabControl Class
    slogan      : Painting Your Own Tabs
    homepage    : http://www.codeproject.com/Articles/13305/Painting-Your-Own-Tabs
-   download    : on the homepage
+   download    : http://www.codeproject.com/Articles/13305/Painting-Your-Own-Tabs
    license     : The Code Project Open License (CPOL) 1.02
                   (http://www.codeproject.com/info/cpol10.aspx)
    copyright   : Mark Jackson
    authors     : Mark Jackson (The Man from U.N.C.L.E.)
 
 
-   From Bavaria thanks again,
-   Norbert C. Maier
-
+   ———————————————————————
+   [file 20130615°1557] ⬞Ω
 </pre>
 
  <a name="20130724o1716"></a>
@@ -226,10 +228,10 @@
  </h2>
 
  <p id="i20130724o1717">
-               Below pane is faded in from file <a href="./changelog.txt" target="_blank">changelog.txt</a>.
+               Below pane is faded-in from file <a href="./changelog.txt" target="_blank">changelog.txt</a>:
  </p>
 
-<pre class="CodeTiny" style="line-height:1.3em;">
+<pre class="CodeTiny" style="line-height:1.4em;">
 
    version 20220805°1511 QueryPony.exe v0.4.0 — Restored
    • Platform DotNet-4.8, x64-only
@@ -330,22 +332,24 @@
  </h2>
 
  <p id="i20130724o1719">
-               Below pane is faded in from file <a href="./license.txt" target="_blank">license.txt</a>.
+               Below pane is faded-in from file <a href="./license.txt" target="_blank">license.txt</a>:
  </p>
 
 <pre class="CodeMedium">
+   License
+   =======
 
    QueryPony — A Simple Generic Database Query Tool and API.
 
    Copyright © 2013 - 2022 Norbert C. Maier
 
-   This program is free software: you can redistribute it and/or modify
+   This program is free software. You can redistribute it and/or modify
    it under the terms of the GNU Affero General Public License as published
    by the Free Software Foundation.
 
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License along
@@ -355,8 +359,10 @@
 
    QueryPony incorporates various third party products, which run each
    under it's own license. About those products, their legal states and
-   their supply sources please see file thirdparty.txt
+   their supply sources see file thirdparty.txt.
 
+   ———————————————————————
+   [file 20130615°1554] ⬞Ω
 </pre>
 
  <a name="20130724o1720"></a>
@@ -365,7 +371,7 @@
  </h2>
 
  <p id="i20130724o1721">
-               Here the AGPL license fineprint, faded in from file <a href="./agpl-3.0.txt" target="_blank">agpl-3.0.txt</a>.
+               Here the AGPL license fineprint, faded-in from file <a href="./agpl-3.0.txt" target="_blank">agpl-3.0.txt</a>:
  </p>
 
 <pre class="CodeSmall" style="line-height:1.4em;">

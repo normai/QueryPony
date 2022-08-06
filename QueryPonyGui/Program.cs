@@ -180,22 +180,10 @@ if (Globs.Debag.Execute_No)
          //         InitLib il = new InitLib();
 
 
-         /*
-         issue 20220804°0931 'StackOverflowException before the forms constructor'
-         problem : Inside new MainForm(args) StackOverflow occurres
-         finding : It has to do with the exact calling order of library loading things
-         finding : If reference QueryPonyLib is set 'CopyLocal = true' this works, if not then happens
-            StackOverflow. This means, extracting the QueryPonyLib resource fails, or is wanted too early.
-         status : Solved for now in version 20220805°1341, but could occur again
-         */
-
-
-         // line 20130726°1402 'Exception StackOverflow'
-         // note : Here is the typical line seeing 'StackOverflow exception was unhandled',
-         //    e.g. while debugging issue 20130726°1231 e.g. with single-file-delivery issues.
-         //Application.Run(new MainForm(args));
-         var x = new MainForm(args); // issue 20220804°0931 'StackOverflowException before calling the forms constructor' — If reference QueryPonyLib is set 'CopyLocal = true' this works, if not then StackOverflow. This means, extracting the QueryPonyLib resource fails, or is wanted too early.
-         Application.Run(x);
+         // Start GUI [line 20130726°1402]
+         // Remember issue 20220804°0931 'StackOverflow while form creation' and issue 20130726°1231 with single-file-delivery
+         var fm = new MainForm(args);
+         Application.Run(fm);
       }
 
       /// <summary>This method initializes the Program properties</summary>

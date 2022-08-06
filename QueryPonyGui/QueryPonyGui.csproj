@@ -81,7 +81,7 @@
     <Optimize>true</Optimize>
     <FileAlignment>4096</FileAlignment>
     <DebugType>PdbOnly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
     <Prefer32Bit>false</Prefer32Bit>
@@ -377,19 +377,20 @@
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets. -->
   <Target Name="BeforeBuild" Condition=" '$(Configuration)' == 'Release' ">
-    <Version VersionFile="version.txt" RevisionType="">
+    <!-- *** Tasks below shutdown 20220806°0911 to avoid build error 'The Version task was not found ..' and 'The AssemblyInfo task was not found ..' etc. *** -->
+    <!-- Version VersionFile="version.txt" RevisionType="">
       <Output TaskParameter="Major" PropertyName="Major" />
       <Output TaskParameter="Minor" PropertyName="Minor" />
       <Output TaskParameter="Build" PropertyName="Build" />
       <Output TaskParameter="Revision" PropertyName="Revision" />
-    </Version>
-    <AssemblyInfo CodeLanguage="CS" OutputFile="AssemblyVersion.cs" AssemblyVersion="$(Major).$(Minor).$(Build).$(Revision)" AssemblyFileVersion="$(Major).$(Minor).$(Build).$(Revision)" />
+    </Version -->
+    <!-- AssemblyInfo CodeLanguage="CS" OutputFile="AssemblyVersion.cs" AssemblyVersion="$(Major).$(Minor).$(Build).$(Revision)" AssemblyFileVersion="$(Major).$(Minor).$(Build).$(Revision)" / -->
   </Target>
   <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Release' ">
-    <Zip Files="$(TargetDir)/$(TargetFileName)" ZipFileName="$(TargetFileName)_$(Major)_$(Minor)_$(Build)_$(Revision).zip" Flatten="true" Condition=" '$(Configuration)' == 'Release' " />
-    <Zip Files="@(Compile);@(None);@(EmbeddedResource);@(Content);$(ProjectFileName);$(SolutionFileName)" ZipFileName="$(TargetName)_Source_$(Major)_$(Minor)_$(Build)_$(Revision).zip" Condition=" '$(Configuration)' == 'Release' " />
+    <!-- Zip Files="$(TargetDir)/$(TargetFileName)" ZipFileName="$(TargetFileName)_$(Major)_$(Minor)_$(Build)_$(Revision).zip" Flatten="true" Condition=" '$(Configuration)' == 'Release' " / -->
+    <!-- Zip Files="@(Compile);@(None);@(EmbeddedResource);@(Content);$(ProjectFileName);$(SolutionFileName)" ZipFileName="$(TargetName)_Source_$(Major)_$(Minor)_$(Build)_$(Revision).zip" Condition=" '$(Configuration)' == 'Release' " / -->
   </Target>
   <PropertyGroup>
-    <PreBuildEvent>$(ProjectDir)prebuild.bat</PreBuildEvent>
+    <PreBuildEvent>$(ProjectDir)prebuild.bat $(ConfigurationName)</PreBuildEvent>
   </PropertyGroup>
 </Project>

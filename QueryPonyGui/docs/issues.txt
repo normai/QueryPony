@@ -3,6 +3,15 @@
    Issues, Bugs and Todos
    **********************
 
+   issue 20220804°0931 'StackOverflow while form creation'
+   location : file 20130604°1911 QueryPonyGui/Program.cs
+   problem : Inside new MainForm(args) StackOverflow occurres
+   finding : It has to do with the exact calling order of library loading things
+   finding : If reference QueryPonyLib is set 'CopyLocal = true' this works, if not then happens
+      StackOverflow. This means, extracting the QueryPonyLib resource fails, or is wanted too early.
+   chain : issue 20130726°1231 'StackOverflow with single-file-delivery'
+   status : Solved for now in version 20220805°1341, but could occur again
+   ⬞
 
    issue 20200928°1321 'con.GetSchema() exception'
    symptom : exception "ERROR [HYC00] [Microsoft][ODBC Paradox Driver]Optional feature not implemented"
@@ -157,6 +166,10 @@
    solution :
    status : Open
    note :
+   ⬞
+
+   issue 20130726°1231 'StackOverflow with single-file-delivery'
+   chain : issue 20220804°0931 'StackOverflow while form creation'
    ⬞
 
    issue 20130702°1502 'Best way to tag objects for interconnection'

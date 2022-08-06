@@ -10,14 +10,13 @@ rem chg 20220731`1151 : Reaktivate this file. It looks like the singel-file-deli
 rem                      will not work without such batchfile
 
 echo **************** QueryPonyGui/prebuild.bat ****************
-echo Summary: QueryPonyGui depends on QueryPonyLib.dll. This batchfile
-echo  fetches a freshly QueryPonyLib.dll physically into the QueryPonyGui
-echo  project. This is wanted for the single-file-delivery feature.
-echo  This batchfile is called from the project's Build Options Prebuild
-echo  Event. Do not call it manually -- though that should not hurt.
+echo Summary: This fetches a fresh QueryPonyLib.dll physically into the QueryPonyGui/libs/ folder.
+echo This is called from the project's Pre-build event, wanted by the single-file-delivery feature.
+echo Parameter = %1
 echo ***********************************************************
 @echo on
 
-copy %~dp0..\QueryPonyLib\bin\x64\Debug\QueryPonyLib.dll %~dp0libs\QueryPonyLib.dll
+echo Copying library from QueryPony/QueryPonyLib/bin/x64/%1/
+copy %~dp0..\QueryPonyLib\bin\x64\%1\QueryPonyLib.dll %~dp0libs\QueryPonyLib.dll
 
 rem pause

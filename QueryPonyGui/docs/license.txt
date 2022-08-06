@@ -1,9 +1,11 @@
-﻿
+﻿   License
+   =======
+
    QueryPony — A Simple Generic Database Query Tool and API.
 
    Copyright © 2013 - 2022 Norbert C. Maier
 
-   This program is free software: you can redistribute it and/or modify
+   This program is free software. You can redistribute it and/or modify
    it under the terms of the GNU Affero General Public License as published
    by the Free Software Foundation.
 
@@ -19,7 +21,7 @@
 
    QueryPony incorporates various third party products, which run each
    under it's own license. About those products, their legal states and
-   their supply sources please see file thirdparty.txt.
+   their supply sources see file thirdparty.txt.
 
    ———————————————————————
    [file 20130615°1554] ⬞Ω
