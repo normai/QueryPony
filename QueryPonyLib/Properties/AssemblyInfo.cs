@@ -62,7 +62,8 @@ using System.Runtime.InteropServices;
 //[assembly: AssemblyFileVersion("0.3.2.1")]   // Intermediate (20130912°2121)
 //[assembly: AssemblyFileVersion("0.3.4.0")]   // Last before refactoring to NET4.8/x64
 //[assembly: AssemblyFileVersion("0.4.0.0")]   // version 20220805°1511 Restored
-[assembly: AssemblyFileVersion("0.4.1.0")]     // version 20220806°0931 On-the-road-again
+//[assembly: AssemblyFileVersion("0.4.1.0")]   // version 20220806°0931 On-the-road-again
+[assembly: AssemblyFileVersion("0.4.1.2")]     // ..
 
 // Custom attributes — Intermediate [seq 20160318°1311]
 [assembly: GlobalCustomAttributes.AssemblyPluginTestAttribute (GlobalCustomAttributes.AssemblyPluginTestType.Library)]

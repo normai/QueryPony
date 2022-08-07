@@ -1,6 +1,6 @@
 ﻿<img src="./QueryPonyGui/docs/img/20130705o0812.mcol-chess-horse.v0.x0200y0200.png" align="right" width="128" height="128" alt="Logo 20130705°0812">
 
-# QueryPony &nbsp; <sup><sub><sup>*v0.4.1 — On-the-road-again*</sup></sub></sup>
+# QueryPony &nbsp; <sup><sub><sup>*v0.4.1.2 — Adjust pages*</sup></sub></sup>
 
 **Slogan** : A Simple Generic Database Query Tool and API
 
@@ -73,7 +73,7 @@ Now you also have found the two folders, which you must delete, once you get
 
 Bye
 
-*2022-Aug-05* &nbsp; <del>*2022-Jul-29*</del> &nbsp; <del>*2018-Aug-19*</del>
+*2022-Aug-06* &nbsp; <small><del>*2022-Aug-05*</del> &nbsp; <del>*2022-Jul-29*</del> &nbsp; <del>*2018-Aug-19*</del></small>
 
 ---
 

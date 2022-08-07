@@ -342,8 +342,36 @@
     <EmbeddedResource Include="docs\treeview.html" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="docs\img\20140126o1847.querypony--connect-via-tcpip.png" />
-    <Content Include="docs\img\20181106o0138.arrow3right.v2.x0012y0012.png" />
+    <EmbeddedResource Include="docs\img2\20181106o0138.arrow3right.v2.x0012y0012.png" />
+    <EmbeddedResource Include="docs\img2\cancel.gif" />
+    <EmbeddedResource Include="docs\img2\connect.gif" />
+    <EmbeddedResource Include="docs\img2\disconnect.gif" />
+    <EmbeddedResource Include="docs\img2\execute.gif" />
+    <EmbeddedResource Include="docs\img2\gridresults.gif" />
+    <EmbeddedResource Include="docs\img2\hidebrowser.gif" />
+    <EmbeddedResource Include="docs\img2\hideresults.gif" />
+    <EmbeddedResource Include="docs\img2\new.gif" />
+    <EmbeddedResource Include="docs\img2\open.gif" />
+    <EmbeddedResource Include="docs\img2\save.gif" />
+    <EmbeddedResource Include="docs\img2\textresults.gif" />
+    <EmbeddedResource Include="docs\img\20140126o1522.querypony--test-mssql-over-tcp--error.png" />
+    <EmbeddedResource Include="docs\img\20140126o1821.comp-man--sqlexpress--protocols.png" />
+    <EmbeddedResource Include="docs\img\20140126o1822.comp-man--sqlexpress--restart.png" />
+    <EmbeddedResource Include="docs\img\20140126o1824.comp-man-sqlexpress--protocols--tcp-enabled.png" />
+    <EmbeddedResource Include="docs\img\20140126o1825.comp-man-sqlexpress--protocols--tcp--props.png" />
+    <EmbeddedResource Include="docs\img\20140126o1841.control-panel--services--sql-server-browser.png" />
+    <EmbeddedResource Include="docs\img\20140126o1845.querypony--connect-via-tcpip--heureka.png" />
+    <EmbeddedResource Include="docs\img\20140126o1847.querypony--connect-via-tcpip.png" />
+    <EmbeddedResource Include="docs\img\20180819o0212.querypony-started.v0.png" />
+    <EmbeddedResource Include="docs\img\20180819o0213.querypony-select.v0.png" />
+    <EmbeddedResource Include="docs\img\20180819o0213.querypony-select.v1.png" />
+    <EmbeddedResource Include="docs\img\20180819o0214.querypony-execute.v0.png" />
+    <EmbeddedResource Include="docs\img\20180819o0214.querypony-execute.v1.png" />
+    <EmbeddedResource Include="docs\img\20180819o0215.querypony-result.v0.png" />
+    <EmbeddedResource Include="docs\img\20180819o0216.querypony-helpmenu.v0.png" />
+    <EmbeddedResource Include="docs\img\20180819o0217.querypony-userguide.v0.png" />
+    <EmbeddedResource Include="docs\img\20180819o0218.querypony-aboutbox.v0.png" />
+    <EmbeddedResource Include="docs\img\20181106o0138.arrow3right.v2.x0012y0012.png" />
     <EmbeddedResource Include="libs\QueryPonyLib.dll" />
     <EmbeddedResource Include="docs\img\20130724o1621.querypony-connect.png" />
     <EmbeddedResource Include="docs\img\20130724o162102.querypony-connect.png" />
@@ -360,6 +388,18 @@
       <Name>QueryPonyLib</Name>
       <Private>False</Private>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="docs\icos\20220806o0953.sqlserverbuilds.v2.x0048y0048.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="docs\icos\20200616o0738.microsoft.v2.x0048y0048.png" />
+    <EmbeddedResource Include="docs\icos\20211208o1843.msdn-microsoft.v2.x0048y0048.png" />
+    <EmbeddedResource Include="docs\icos\20220806o1023.linglom.v2.x0048y0048.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="docs\img\20140126o1833.blogs-msdn-com---configure--remote-connections.mht.png" />
+    <EmbeddedResource Include="docs\img\20220806o1012.chrome--20140126--system-data-sqlclient.v1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" Condition=" '$(Configuration)' == 'Release' " / -->

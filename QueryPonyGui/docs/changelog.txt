@@ -3,6 +3,8 @@
    Changes and versions
    ********************
 
+   version 20220806°1100 v0.4.1.2 — Adjust pages
+
    version 20220806°0931 v0.4.1 — On-the-road-again
    • Cleanup from refactoring
    • Fix SQLite demo finding

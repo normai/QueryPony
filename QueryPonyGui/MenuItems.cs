@@ -33,7 +33,9 @@ namespace QueryPonyGui
 
          // Determine target files
          IOBus.Utils.Resofile[] resos = { new IOBus.Utils.Resofile(asmSource, sAsmResourceName, sTargetFolder, "")
+                                         , new IOBus.Utils.Resofile(asmSource, "QueryPonyGui.docs.icos.*", sTargetFolder + "\\" + "icos", "")
                                          , new IOBus.Utils.Resofile(asmSource, "QueryPonyGui.docs.img.*", sTargetFolder + "\\" + "img", "")
+                                         , new IOBus.Utils.Resofile(asmSource, "QueryPonyGui.docs.img2.*", sTargetFolder + "\\" + "img2", "")
                                           };
 
          // Determine assembly from which to extract files
