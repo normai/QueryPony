@@ -61,14 +61,14 @@ h5 { text-align:center; color:#600070; line-height:1.23em; font-size:110%; }    
  * Summary : The unspecific default 'Extern' class. Replace it's
  *    code by the latest nice specific class, e.g. 'Extern2'
  */
-a.Extern {
+a.LnkExtern {
    padding-left:14px;
    /* background-image:url(./20141115o1731.extern.png); */
    background-image:url(./img2/20181106o0138.arrow3right.v2.x0012y0012.png);
    background-position:left center;
    background-repeat:no-repeat;
 }
-a.Extern:hover {
+a.LnkExtern:hover {
    background-color:LemonChiffon;
 }
 
@@ -128,6 +128,7 @@ p.ListIconFloatLeft2 > a > img { float:left; margin:1px 20px 20px 1px; }        
 /* Footer paragraphs [ruleset 20150211°0511] */
 p.GoodBye      { font-family: ComicJensWeb, "Comic Sans MS", "Comic Sans", sans-serif; margin-top:2.1em; font-size:small; clear:both; } /* rule 20080710°2314 */
 p.FooterUpdate { color:Green; margin-bottom:-3.7em; margin-left:1.1em; margin-top:2.4em; text-align:left; font-family:ComicJensWeb, sans-serif; } /* rule 20180511°1541 optional */
+span.FooterUpdOld { text-decoration:line-through; font-size:small; color:Gray; } /* rule 20220806°0941 */
 p.FooterImprint   { color:#808080; font-size:small; margin-bottom:-0.3em; margin-right:1.9em; margin-top:2.4em; text-align:right; } /* rule 20080710°2313 */
 p.FooterImprint a { color:#505050; margin-left:0.6em; margin-right:0.6em; }  /* rule 20141129°0511 Do not use padding here, it will interfere with rule 20100315°1943 'Extern', instead use margin */
 p.FooterReferer { border-top:1px solid; color:#505050; font-size:small; margin-bottom:2.1em; padding-top:0.2em; } /* rule 20080710°2312 */
